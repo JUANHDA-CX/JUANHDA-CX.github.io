@@ -1,3 +1,9 @@
+<style>
+  *margin {
+  25%;
+  }
+</style>
+
 **Privacy Policy**
 
 MCX Develop built the Ked Icon Pack app as a Commercial app. This SERVICE is provided by MCX Develop and is intended for use as is.
