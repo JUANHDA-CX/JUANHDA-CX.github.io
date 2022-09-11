@@ -1,11 +1,24 @@
-*margin {
-25%;
+body {
+  margin: 1% 20%;
 }
 
 body {
-    color: blue;
+  color: black;
 }
 
 h1 {
-    color:red;
+  color: red;
+}
+
+p,
+li {
+  font-weight: 600;
+}
+
+p > strong {
+  color: rgb(255, 94, 0);
+}
+
+a {
+  color: blueviolet;
 }
