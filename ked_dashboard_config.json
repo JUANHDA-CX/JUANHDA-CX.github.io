@@ -5,11 +5,11 @@
   "releaseNotes": [
     "This is the text which will be shown on update changelog",
     "Another release note4",
-    "You can use <b>text</b> <i>formatting</i> <u>here</u>"
-    "First launch!"
-    "500 Icons"
-    "Fixed Activities"
-    "Redesigned Icons"
+    "You can use <b>text</b> <i>formatting</i> <u>here</u>",
+    "First launch!",
+    "500 Icons",
+    "Fixed Activities",
+    "Redesigned Icons",
     "Updated to CandyBar 3.15.0"
   ]
 }
