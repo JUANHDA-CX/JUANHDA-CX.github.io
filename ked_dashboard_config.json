@@ -1,10 +1,15 @@
 {
-  "latestVersion": "1.046",
-  "latestVersionCode": 3,
+  "latestVersion": "1.047",
+  "latestVersionCode": 4,
   "url": "https://play.google.com/store/apps/details?id=com.megacx.ked",
   "releaseNotes": [
     "This is the text which will be shown on update changelog",
     "Another release note4",
     "You can use <b>text</b> <i>formatting</i> <u>here</u>"
+    First launch!
+    500 Icons
+        <item>Fixed Activities</item>
+        <item>Redesigned Icons</item>
+        <item>Updated to CandyBar 3.15.0</item>
   ]
 }
