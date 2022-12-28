@@ -1,13 +1,11 @@
 {
-  "latestVersion": "1.049",
-  "latestVersionCode": 6,
+  "latestVersion": "1.050",
+  "latestVersionCode": 7,
   "url": "https://play.google.com/store/apps/details?id=com.megacx.ked",
   "releaseNotes": [
-    "Soon last update for this year",
-    "16 New Icons, 566 in Total",
+    "34 New Icons, 600 in Total",
     "Fixed Activities",
-    "Fixed Request on Android 12+",
     "Redesigned Icons",
-    "Updated to CandyBar <u>3.16.1</u>"
+    "Support me by sharing the app"
   ]
 }
