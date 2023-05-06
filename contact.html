@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="Styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
+    <script src="main.js"></script>
+    <script src="https://kit.fontawesome.com/ae03bf6f9c.js"></script>
+  </head>
+  <body>
+      <header>
+          <div id="menuAlt1"></div>
+          <div id="menu2Alt1"></div>
+          <div id="TittlecxAlt2">Mega CX</div>
+          <div id="searchAlt2">
+            <div id="search-box"><input placeholder="Search" type="text" name="search" value="" autocomplete="off" onkeyup="searchFunction()"/> </div>
+            <div id="search-bottom"><span style="color: rgb(216, 216, 216)"><i class="fas fa-search"></i></span></div>
+          </div>
+          <nav id="nav2">
+            <ul>
+              <li>
+                <a href="index.html">
+                  <img id="iconS" src="icons/homeMv2.svg"> Inicio</a></li>
+              <li><img id="iconS" src="icons/build1.svg">
+                <a href="build.html">Build</a>
+                  <ul href="#">
+                   <li id="submenuNULL"><a>null</a></li>
+                    <li><a href="menusub.html">Programas</a></li>
+                    <li><a href="menusub.html">Videojuegos</a></li>
+                    <li><a href="menusub.html">Peliculas</a></li>
+                    <li><a href="menusub.html">Diseño</a></li>
+                    <li><a href="menusub.html">Modelado 3D</a></li>
+                    <li><a href="menusub.html">Ultilidades</a></li>
+                    <li><a href="menusub.html">Edicion Fotografica</a></li>
+                    <li><a href="menusub.html">Edicion de Video</a></li>
+                  </ul>
+              </li>
+              <li>
+                <a href="gallery.html">
+                  <img id="iconS" src="icons/img1.svg"> Galeria</a></li>
+              <li>
+                <a href="contact.html">
+                  <img id="iconS" src="icons/contactMv2.svg"> Contacto</a></li>
+            </ul>
+          </nav>
+        </header>
+    <span id="infoForm">
+      <strong><p>Rellena el formulario</p></strong></br>
+      <p>Si necesitas algun servicio por favor rellena el formulario con tu mensaje y tus datos y nos pondremos en contacto con tigo.</p></br>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum nobis enim odit possimus optio, doloribus vel, vero voluptatum facilis atque, debitis eligendi deserunt. Corporis reiciendis iure pariatur voluptate repudiandae excepturi.</p></br>
+      
+      <div class="iconshare">
+        <table>
+          <tr>
+            <td width="200px"><a href="https://www.artstation.com/juanhda-cx"><img src="icons/img1.svg"></a></td>
+            <td width="200px"><a href="https://dribbble.com/MegaCX/buckets"><img src="icons/img1.svg"></a></td>
+            <td width="200px"><a href="https://www.deviantart.com/juanhda"><img src="icons/img1.svg"></a></td>
+            <td width="200px"><a href="https://www.instagram.com/mega.cx/"><img src="icons/img1.svg"></a></td>
+            <td width="200px"><a href="https://twitter.com/Mega_CX"><img src="icons/img1.svg"></a></td>
+          </tr>
+          <tr>
+            <td><a href="https://www.artstation.com/juanhda-cx">ArtStation</a></td>
+            <td><a href="https://dribbble.com/MegaCX/buckets">dribbble</a></td>
+            <td><a href="https://www.deviantart.com/juanhda">DeviantArt</a></td>
+            <td><a href="https://www.instagram.com/mega.cx/">Instagram</a></td>
+            <td><a href="https://twitter.com/Mega_CX">Twitter</a></td>
+          </tr>
+        </table>
+      </div>
+    </span>
+
+    
+</a>
+
+    <div>
+      <form method="POST" action="enviar2.php">
+        <input
+          class="formulario1"
+          type="text"
+          name="nombre"
+          placeholder="Nombre completo"
+          required
+        />
+        <input
+          class="formulario1"
+          type="email"
+          name="email"
+          placeholder="Correo electronico"
+          value=""
+          required
+        />
+        <select id="formulario2">
+          <option class="form2-1" value="1">Programas</option>
+          <option class="form2-1" value="2">Peliculas</option>
+          <option class="form2-1" value="3">Juegos</option>
+          <option class="form2-1" value="4">Diseño</option>
+        </select>
+        <textarea
+          placeholder="Escribe tu peticion...";
+          id="textarea"
+          name="mensaje"
+          cols="40"
+          rows="15"
+          value="Escribe tu mensaje"
+          required
+        ></textarea>
+        <a href="#"><input id="formulario3" type="submit" onclick="alert('Enviado')" /></a>
+        <a><input id="formulario3-1" type="reset"/></a>
+      </form></br>
+    </div>
+    <footer id="footerI">
+      <p id="FT">All rights reserved @2019</p></br></br>
+      <p id="FT" class="FTmake">Make by Mega CX</p>
+      <p id="Gmail-ico"><i class="fas fa-envelope" style="font-size: 20px color: white"></i><a href="#" id="Gmail-A">Juan153v0@outlook.com</a></p>
+    </footer>
+  </body>
+</html>

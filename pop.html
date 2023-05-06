@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #foto {
+        height: 100px;
+        width: 100px;
+        background: red;
+      }
+
+      #foto:hover, #pop:hover{
+        display: block;
+      }
+
+      #pop:hover {
+        display: block;
+      }
+
+      #pop {
+        display: none;
+        height: 50px;
+        width: 50px;
+        background: blue;
+        float: right;
+      }
+
+/*--------------------------------*/
+
+.w3-container:after,.w3-container:before,.w3-panel:after,.w3-panel:before,.w3-row:after,.w3-row:before,.w3-row-padding:after,.w3-row-padding:before,
+.w3-container,.w3-panel{padding:0.01em 16px}.w3-panel{margin-top:16px;margin-bottom:16px}
+@media (min-width:993px){.w3-modal-content{width:900px}.w3-hide-large{display:none!important}.w3-sidebar.w3-collapse{display:block!important}}
+.w3-modal-content{margin:auto;background-color:#fff;position:relative;padding:0;outline:0;width:600px}
+
+.w3-modal {
+  z-index:7;
+  display:none;
+  padding-top:50px;
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  overflow:auto;
+  background-color:rgb(0,0,0);
+  background-color:rgba(0,0,0,0.4)
+  }
+.w3-modal-content {
+  margin:auto;
+  background-color:rgb(180, 66, 66);
+  position:relative;
+  padding:0;
+  outline:0;
+  width:600px}
+.w3-black,.w3-hover-black:hover{color:#fff!important;background-color:#000!important}
+
+
+.w3-btn,.w3-button {
+  border:none;
+  display:inline-block;
+  padding:8px 16px;
+  vertical-align:middle;
+  overflow:hidden;
+  text-decoration:none;
+  color:inherit;
+  background-color:inherit;
+  text-align:center;
+  cursor:pointer;
+  white-space:nowrap
+}
+.w3-btn:hover{box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)}
+.w3-btn,.w3-button{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}   
+.w3-disabled,.w3-btn:disabled,.w3-button:disabled{cursor:not-allowed;opacity:0.3}.w3-disabled *,:disabled *{pointer-events:none}
+.w3-btn.w3-disabled:hover,.w3-btn:disabled:hover{box-shadow:none}
+.w3-button:hover {
+  color:#000!important;
+  background-color:#ccc!important
+  }
+.w3-display-topleft{position:absolute;left:0;top:0}
+
+.w3-display-topright{position:absolute;right:0;top:0}
+
+/*
+button {
+   /* -webkit-appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: rgb(22, 206, 38);
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: rgb(118, 118, 118);
+    border-image: initial;
+    border-radius: 2px;
+}*/
+.bd {
+  background-color: red;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  color: white;
+  font-size: 48px;
+  font-weight: 900;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  vertical-align: middle;
+  margin: 0 auto;
+}
+
+.more {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  position: relative;
+  left: 50%;
+  top: 48%;
+  transform: translate(-27%, -50%);
+  cursor: pointer;
+}
+
+h2 {
+  color: transparent;
+  text-shadow: 0 0 5px black;
+}
+    </style>
+  </head>
+
+  
+
+  <body>
+    <div id="foto"><div id="pop"></div></div>
+
+
+    <div class="w3-container">
+      <h2 id="id02">W3.CSS Modal</h2>
+      <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Open Modal</button>
+      <div class="bd" onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black"><div class="more">+</div></div>
+    
+      <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+          <div class="w3-container">
+            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <img src="images/assassin-s-creed-iv-black-flag-island.jpg" height="300px">
+            <p>Some text. Some text. Some text.</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea minima.</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea minima.</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea minima.</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea minima.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div id="noise"></div>
+
+      
+  </body>
+</html>
