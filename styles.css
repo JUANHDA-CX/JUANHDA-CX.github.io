@@ -48,7 +48,7 @@ a {
 }
 
 .parallax {
-  background-image: url("images/back-index-v3-100.png");
+  /*background-image: url("images/back-index-v3-100.png");*/
   height: 300pt;
   width: 100%;
   background-attachment: fixed;
@@ -120,7 +120,9 @@ body {
   position: absolute;
   font-size: 120px;
   top: 25px;
-  margin-left: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
   width: 550px;
 }
 
@@ -1535,4 +1537,3 @@ img[alt="www.000webhost.com"] {
 table tr td {
   border: 0px solid rgb(51, 255, 0);
 }
-
