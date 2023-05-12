@@ -61,7 +61,7 @@ a {
 
 @media only screen and (max-width: 600px) {
   .parallax {
-    background-image: url("images/back-index-v3-100.png");
+    background-image: url("images/back-index-v4-100.png");
     height: 300px;
   }
 }
@@ -87,11 +87,11 @@ a {
 }
 
 body {
-  background-image: linear-gradient(rgb(0, 0, 0), rgb(49, 23, 23));
+  background-image: linear-gradient(rgb(0, 0, 0), rgb(35, 35, 35));
   color: white;
   font-family: Shadeerah;
   width: auto;
-  height: 1000pt;
+  height: 850pt;
 }
 
 @media only screen and (max-width: 600px) {
@@ -119,11 +119,12 @@ body {
 #Tittlecx {
   position: absolute;
   font-size: 120px;
+  line-height: 70pt;
   top: 25px;
   left: 0;
   right: 0;
   margin: auto;
-  width: 550px;
+  width: 650px;
   text-align: center;
 }
 
@@ -144,7 +145,7 @@ body {
   font-weight: bold;
 }
 
-#Tittlecx a:hover {
+#Tittlecx a:hover:first-child {
   text-shadow: -1px -1px 5px rgba(255, 255, 255, 0.25),
     1px -1px 5px rgba(255, 255, 255, 0.25),
     -1px 1px 5px rgba(255, 255, 255, 0.25),
@@ -218,9 +219,9 @@ li a:hover {
   margin-left: 50px;
   margin-right: 75px;
   margin-top: 0pt;
-  background-color: rgb(165, 117, 255);
+  background-color: rgb(255, 255, 255);
   height: 22px;
-  width: 150px;
+  width: 100px;
   position: relative;
   float: right;
   border-radius: 15px;
@@ -235,6 +236,7 @@ li a:hover {
   color: black;
   position: relative;
   text-align: center;
+  font-weight: bold;
 }
 
 #search:hover {
@@ -472,6 +474,7 @@ li a:hover {
   height: 50px;
   width: 50px;
   display: flex;
+  display: none;
   border-radius: 50%;
   border: none;
   box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.479);
@@ -504,12 +507,7 @@ li a:hover {
 }
 
 footer {
-  background-image: linear-gradient(
-    360deg,
-    rgb(82, 10, 10),
-    10%,
-    rgba(24, 24, 24)
-  );
+  background-image: linear-gradient(180deg, rgb(0, 0, 0), 80%, rgb(0, 0, 0));
   color: white;
   height: 100px;
   width: auto;
@@ -530,7 +528,16 @@ footer {
   top: 60vh;
 }
 
-@media only screen and (max-width: 600px) {
+#footerI a {
+  text-decoration: none;
+  text-decoration: underline;
+  color: #fff;
+}
+
+#footerI a:hover {
+  color: #860000;
+}
+rgb(255, 0, 0) @media only screen and (max-width: 600px) {
   #footerI {
     position: relative;
     top: 33.5vh;
@@ -1415,24 +1422,22 @@ input[name="r"] {
 
 .loader {
   position: fixed;
-  z-index: 99;
-  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 9999;
+  pointer-events: none;
 }
 
-.loader > img {
-  width: 100px;
+.loader {
+  /* Aquí puedes agregar tus reglas de estilo para la pantalla de carga */
+  transition: opacity 1s ease-in-out;
 }
 
-.loader.hidden {
-  animation: fadeOut 1;
-  animation-fill-mode: forwards;
-}
-
-@keyframes fadeOut {
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
+.hidden {
+  opacity: 0;
 }
 
 .SlidersG {
@@ -1537,4 +1542,25 @@ img[alt="www.000webhost.com"] {
 
 table tr td {
   border: 0px solid rgb(51, 255, 0);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(150px, auto); /*
+  grid-gap: 10px;*/
+}
+
+.grid-item {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid green;
+}
+
+@media (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

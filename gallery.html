@@ -2,25 +2,82 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Soluciones informaticas de todo tipo a pedido"/>
+    <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs"/>
+    <meta name="author" content="Mega CX">
     <title>Gallery</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="Styles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+    <link rel="icon" href="images/favicon1.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="images/favicon1.ico" type="image/x-icon"/>
     <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
     <script src="/Scripts/search-box.js"></script>
     <script src="https://kit.fontawesome.com/ae03bf6f9c.js"></script>
+    <script type="text/javascript">
+      window.addEventListener("load", function () {
+          const loader = document.querySelector(".loader");
+          loader.className += " hidden";
+      });
+    </script>
+
+<!--Boton de desplazamiento-->
+<script type="text/javascript">
+  function scrollWin() {
+  window.scrollTo({
+  top: 0,
+  behavior: "smooth"
+  });
+  }
+  </script>
+
+    <script>
+window.addEventListener("scroll", function() {
+  var Fbutton = document.getElementById("Fbutton");
+  if (window.pageYOffset > 300) {
+    Fbutton.style.display = "block";
+  } else {
+    Fbutton.style.display = "none";
+  }
+});
+    </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  function init() {
+    function scrollToTop() {
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+    }
+
+    var Fbutton = document.getElementById("Fbutton");
+    Fbutton.addEventListener("click", scrollToTop);
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+</script>
+
+
+    <script>
+var words = ["▾DISEÑO▾", "▾ASCESORIA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICION▾", "▾INSTALACION▾"];
+var startIndex = Math.floor(Math.random() * words.length);
+var i = startIndex;
+setInterval(function() {
+  document.querySelector('.tittle-one').textContent = words[i];
+  i++;
+  if (i == words.length) {
+    i = 0;
+  }
+}, 2000);
+    </script>
   </head>
   <body>
       <header>
           <div id="menuAlt1"></div>
           <div id="menu2Alt1"></div>
           <div id="TittlecxAlt2" onclick="window.location.href = 'index.html';">Mega CX</div>
-          <div id="searchAlt2">
-            <div id="search-box"><input placeholder="Search" type="text" name="search" value="" autocomplete="off" onkeyup="searchFunction()"/> </div>
-            <div id="search-bottom"><span style="color: rgb(216, 216, 216)"><i class="fas fa-search"></i></span></div>
-          </div>
+          
           <nav id="nav2">
             <ul>
               <li>
@@ -38,6 +95,8 @@
             </ul>
           </nav>
         </header>
+
+        <!--
       <div id="galleryM">
         <div class="slidershow middle">
             
@@ -80,58 +139,10 @@
         </div>
       </div>
       <div id="LinG"></div>
-<div class="SlidersG">
-    <div class="SlidersG1">
-        <div id="filaG1">
-            <img id="PhotoG" src="images/746325.jpg">
-            <img id="PhotoG" src="images/sandeep-swarnkar-232582-unsplash.jpg">
-            <img id="PhotoG" src="images/942034.jpg">
-            <img id="PhotoG" src="images/563080.jpg">
-          </div>
-    </div>
-    <strong id="moreTT"><a href="external-gallery.html">More Here</a></strong>
-    <div class="SlidersG2">
-        <div id="filaG1">
-            <img id="PhotoG" src="images/sandeep-swarnkar-232582-unsplash.jpg">
-            <img id="PhotoG" src="images/746325.jpg">
-            <img id="PhotoG" src="images/942034.jpg">
-            <img id="PhotoG" src="images/563080.jpg">
-          </div>
-    </div>
-</div>
-
-<div class="SlidersGM">
-  <div class="SlidersG1">
-      <div id="filaG1">
-          <img id="PhotoG" src="images/746325.jpg">
-          <img id="PhotoG" src="images/746325.jpg">
-      </div>
-  </div>
-  <div class="SlidersG2">
-    <div id="filaG1">
-        <img id="PhotoG" src="images/746325.jpg">
-        <img id="PhotoG" src="images/746325.jpg">
-    </div>
-</div>
-  <strong id="moreTT"><a href="external-gallery.html">More Here</a></strong>
-    <div class="SlidersG2">
-      <div id="filaG1">
-          <img id="PhotoG" src="images/746325.jpg">
-          <img id="PhotoG" src="images/746325.jpg">
-      </div>
-  </div>
-  <div class="SlidersG2">
-    <div id="filaG1">
-        <img id="PhotoG" src="images/746325.jpg">
-        <img id="PhotoG" src="images/746325.jpg">
-    </div>
-  </div>
-</div>
-
 
 <div id="degG"></div>
 
-
+-->
 <section id="textN1">
   <article>
     <p>
@@ -143,11 +154,36 @@
   </article>
 </section>
 
-        <img id="pt1" src="images/patternsV1.svg"></img>
-        <footer id="footerI">
-          <p id="FT">All rights reserved @2019</p></br></br>
-          <p id="FT" class="FTmake">Make by Mega CX</p>
-          <p id="Gmail-ico"><i class="fas fa-envelope" style="font-size: 20px color: white"></i><a href="#" id="Gmail-A">Juan153v0@outlook.com</a></p>
-        </footer>
+<div class="grid-container">
+  <img class="grid-item" src="/images/image1.jpg" alt="image1" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image2.jpg" alt="image2 title="Descripción de la imagen 1"">
+  <img class="grid-item" src="/images/image3.jpg" alt="image3 title="Descripción de la imagen 1"">
+  <img class="grid-item" src="/images/image4.jpg" alt="image4" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image1.jpg" alt="image5" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image2.jpg" alt="image6" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image3.jpg" alt="image7" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image4.jpg" alt="image8" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1">
+  <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1">
+</div>
+
+    <footer id="footerI">
+      <p id="FT">All rights reserved @2019</p></br>
+      <p id="FT" class="FTmake">Make by Mega CX</p></br>
+      <p id="FT"><a href="mailto:juan153v0@outlook.com">Juan153v0@outlook.com</a></p>
+    </footer>
+
   </body>
+  <button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
+  <div class="loader"></div>
 </html>
