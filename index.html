@@ -5,84 +5,106 @@
     <meta name="description" content="Soluciones informaticas de todo tipo a pedido"/>
     <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs"/>
     <meta name="author" content="Mega CX">
-    <title>Mega CX W - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home</title>
     <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
     <link rel="icon" href="images/favicon1.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="images/favicon1.ico" type="image/x-icon"/>
     <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
-    <script src="/Scripts/search-box.js"></script>
     <script src="https://kit.fontawesome.com/ae03bf6f9c.js"></script>
+
+    <!--Pantalla de carga-->
     <script type="text/javascript">
       window.addEventListener("load", function () {
-          const loader = document.querySelector(".loader");
-          loader.className += " hidden";
+        const loader = document.querySelector(".loader");
+        loader.className += " hidden";
       });
     </script>
 
-<!--Boton de desplazamiento-->
-<script type="text/javascript">
-  function scrollWin() {
-  window.scrollTo({
-  top: 0,
-  behavior: "smooth"
-  });
-  }
-  </script>
-
-    <script>
-window.addEventListener("scroll", function() {
-  var Fbutton = document.getElementById("Fbutton");
-  if (window.pageYOffset > 300) {
-    Fbutton.style.display = "block";
-  } else {
-    Fbutton.style.display = "none";
-  }
-});
+    <!--Boton de desplazamiento-->
+    <script type="text/javascript">
+      function scrollWin() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
     </script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--Ocultar Boton de desplazamiento-->
+    <script>
+      window.addEventListener("scroll", function() {
+        var Fbutton = document.getElementById("Fbutton");
+        if (window.pageYOffset > 300) {
+          Fbutton.style.display = "block";
+          } else {
+            Fbutton.style.display = "none";
+          }
+      });
+    </script>
 
-<script>
-  function init() {
-    function scrollToTop() {
-      $("html, body").animate({ scrollTop: 0 }, "slow");
-    }
+    <!--Animacion Boton de desplazamiento-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function init() {
+        function scrollToTop() {
+          $("html, body").animate({ scrollTop: 0 }, "slow");
+        }
+        var Fbutton = document.getElementById("Fbutton");
+        Fbutton.addEventListener("click", scrollToTop);
+      }
 
-    var Fbutton = document.getElementById("Fbutton");
-    Fbutton.addEventListener("click", scrollToTop);
-  }
+      document.addEventListener("DOMContentLoaded", init);
+    </script>
 
-  document.addEventListener("DOMContentLoaded", init);
-</script>
-
+    <!--Texto dinamico animado-->
+    <script>
+      var words = ["▾DISEÑO▾", "▾ASCESORIA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICION▾", "▾INSTALACION▾"];
+      var startIndex = Math.floor(Math.random() * words.length);
+      var i = startIndex;
+      setInterval(function() {
+        document.querySelector('.tittle-one').textContent = words[i];
+        i++;
+        if (i == words.length) {
+          i = 0;
+        }
+      }, 2000);
+    </script>
 
     <script>
-var words = ["▾DISEÑO▾", "▾ASCESORIA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICION▾", "▾INSTALACION▾"];
-var startIndex = Math.floor(Math.random() * words.length);
-var i = startIndex;
-setInterval(function() {
-  document.querySelector('.tittle-one').textContent = words[i];
-  i++;
-  if (i == words.length) {
-    i = 0;
-  }
-}, 2000);
+      document.addEventListener("DOMContentLoaded", () => {
+        const hexeBG = document.querySelector("#hexeBG");
+        console.log(hexeBG); // Debería mostrar el elemento #hexeBG en la consola
+        const flex = document.querySelector("#flex");
+        console.log(flex); // Debería mostrar el elemento #flex en la consola
+
+    
+        hexeBG.addEventListener("click", () => {
+        console.log("Clicked on #hexeBG"); // Debería mostrar este mensaje en la consola cuando haga clic en #hexeBG
+        flex.classList.toggle("expand");
+        });
+      });
     </script>
+
   </head>
   <body>
     <div id="scroll"></div>
     <header>
-      <!--<img id="img2" src="images/SpaceRed1.png">-->
       <div class="parallax"></div>
-      <div id="Tittlecx"><a href="index.html">Mega CX<br><a style="font-size: 40pt;">-Studios-</a></div>
-      <div id="search">
-        <a href="external-gallery.html" id="textPP">Porfolio</a>
-        <div id="search-bottom"><i class="fas fa-search"></i></div>
+      <div id="Tittlecx"><a href="index.html">Mega CX<br><a style="font-size: 40pt;">-Studios-</a><div>
+      <div id="emergent">
+        <div id="hexeBG"></div>
+        <div id="flex">
+          <div id="site1" class="siteicons"></div>
+          <div id="site2" class="siteicons"></div>
+          <div id="site3" class="siteicons"></div>
+          <div id="site4" class="siteicons"></div>
+          <div id="site5" class="siteicons"></div>
+        </div>
       </div>
-      <nav>
+      <nav id="primary">
         <ul>
           <li>
            <a href="index.html">
@@ -99,69 +121,85 @@ setInterval(function() {
         </ul>
       </nav>
     </header>
-    <table>
-    <tr>
-  <img class="logocx" src="images/megav3.11080notCX.png"></br></br></br></br></br></br>
-</tr>
-    <tr>
-  <div class="tittle-one"><strong><a></a></strong>
-  </div></br></br>
-</tr>
-    <tr>
-      <article id="art1">
-        <p>
-        Lorem quas voluptatibus deserunt quibusdam
-      </p>
-    </article></br>
-  </tr>
-<tr>
-<div class="Line1"></span></div>
-</tr>
-<tr>
-    <article id="art2">
-      <p>
-        
-        Loart2 ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-        recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-        distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-        eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-        recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-        distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-        eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-        recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-        distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-        eos nisi animi libero?
-        </p>
-    </article></br>
-</tr>
-<tr>
-<div class="Line2"></span></div>
-</tr>
-<tr>
-    <article id="art3">
-      <p>
-        Lorem3 ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-        recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-        distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-        eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-        recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-        distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-        eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-        recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-        distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-        eos nisi animi libero?
-      </p>
-    </article>
-    </tr>
-  </table>
+
+    <table id="tableHome">
+      <tr> <!--Fila 1-->
+        <td>
+          <img class="logocx" src="images/megav3.11080notCX.png">
+        </td>
+      </tr>
+      <tr> <!--Fila 2-->
+        <td>
+          <div class="tittle-one"><strong><a></a></strong> <!--INTRODUCCION-->
+          </div>
+        </td>
+      </tr>
+      <tr> <!--Fila 3-->
+        <td>
+          <article id="art1">
+            <p>
+            Loart1 ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+            recusandae.
+            </p>
+          </article>
+        </td>
+      </tr>
+      <tr> <!--Fila 4-->
+        <td>
+          <div class="Line1"></span></div>
+        </td>
+      </tr>
+      <tr> <!--Fila 5-->
+        <td>
+          <article id="art2">
+            <p>
+            Loart2 ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+            eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+            eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+            eos nisi animi libero?
+            </p>
+          </article>
+        </td>
+      </tr>
+      <tr> <!--Fila 6-->
+        <td>
+          <div class="Line2"></span></div>
+        </td>
+      </tr>
+      <tr> <!--Fila 7-->
+        <td>
+          <article id="art3">
+            <p>
+            Lorem3 ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+            eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+            eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+            eos nisi animi libero?
+            </p>
+          </article>
+        </td>
+      </tr>
+    </table>
   </body>
+  
   <button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
 
-    <footer id="footerI">
-      <p id="FT">All rights reserved @2019</p></br>
-      <p id="FT" class="FTmake">Make by Mega CX</p></br>
-      <p id="FT"><a href="mailto:juan153v0@outlook.com">Juan153v0@outlook.com</a></p>
-    </footer>
+  <footer id="footerI">
+    <p id="FT">All rights reserved @2019</p></br>
+    <p id="FT" class="FTmake">Make by Mega CX</p></br>
+    <p id="FT"><a href="mailto:juan153v0@outlook.com">Juan153v0@outlook.com</a></p>
+  </footer>
 
-    <div class="loader"></div>
+  <div class="loader"></div>
 </html>

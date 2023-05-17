@@ -2,25 +2,99 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Contact</title>
+    <meta name="description" content="Soluciones informaticas de todo tipo a pedido"/>
+    <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs"/>
+    <meta name="author" content="Mega CX">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="Styles.css" />
+    <title>Contact</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+    <link rel="icon" href="images/favicon1.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="images/favicon1.ico" type="image/x-icon"/>
     <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
-    <script src="main.js"></script>
     <script src="https://kit.fontawesome.com/ae03bf6f9c.js"></script>
+
+    <!--Pantalla de carga-->
+    <script type="text/javascript">
+      window.addEventListener("load", function () {
+        const loader = document.querySelector(".loader");
+        loader.className += " hidden";
+      });
+    </script>
+
+    <!--Boton de desplazamiento-->
+    <script type="text/javascript">
+      function scrollWin() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+    </script>
+
+    <!--Ocultar Boton de desplazamiento-->
+    <script>
+      window.addEventListener("scroll", function() {
+        var Fbutton = document.getElementById("Fbutton");
+        if (window.pageYOffset > 300) {
+          Fbutton.style.display = "block";
+          } else {
+            Fbutton.style.display = "none";
+          }
+      });
+    </script>
+
+    <!--Animacion Boton de desplazamiento-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function init() {
+        function scrollToTop() {
+          $("html, body").animate({ scrollTop: 0 }, "slow");
+        }
+        var Fbutton = document.getElementById("Fbutton");
+        Fbutton.addEventListener("click", scrollToTop);
+      }
+
+      document.addEventListener("DOMContentLoaded", init);
+    </script>
+
+    <!--Texto dinamico animado-->
+    <script>
+      var words = ["▾DISEÑO▾", "▾ASCESORIA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICION▾", "▾INSTALACION▾"];
+      var startIndex = Math.floor(Math.random() * words.length);
+      var i = startIndex;
+      setInterval(function() {
+        document.querySelector('.tittle-one').textContent = words[i];
+        i++;
+        if (i == words.length) {
+          i = 0;
+        }
+      }, 2000);
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const hexeBG = document.querySelector("#hexeBG");
+        console.log(hexeBG); // Debería mostrar el elemento #hexeBG en la consola
+        const flex = document.querySelector("#flex");
+        console.log(flex); // Debería mostrar el elemento #flex en la consola
+
+    
+        hexeBG.addEventListener("click", () => {
+        console.log("Clicked on #hexeBG"); // Debería mostrar este mensaje en la consola cuando haga clic en #hexeBG
+        flex.classList.toggle("expand");
+        });
+      });
+    </script>
   </head>
   <body>
+    <div id="scroll"></div>
       <header>
           <div id="menuAlt1"></div>
           <div id="menu2Alt1"></div>
           <div id="TittlecxAlt2">Mega CX</div>
-          <div id="searchAlt2">
-            <div id="search-box"><input placeholder="Search" type="text" name="search" value="" autocomplete="off" onkeyup="searchFunction()"/> </div>
-            <div id="search-bottom"><span style="color: rgb(216, 216, 216)"><i class="fas fa-search"></i></span></div>
-          </div>
+
           <nav id="nav2">
             <ul>
               <li>
@@ -113,10 +187,15 @@
         <a><input id="formulario3-1" type="reset"/></a>
       </form></br>
     </div>
+  
+    <button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
+
     <footer id="footerI">
-      <p id="FT">All rights reserved @2019</p></br></br>
-      <p id="FT" class="FTmake">Make by Mega CX</p>
-      <p id="Gmail-ico"><i class="fas fa-envelope" style="font-size: 20px color: white"></i><a href="#" id="Gmail-A">Juan153v0@outlook.com</a></p>
+      <p id="FT">All rights reserved @2019</p></br>
+      <p id="FT" class="FTmake">Make by Mega CX</p></br>
+      <p id="FT"><a href="mailto:juan153v0@outlook.com">Juan153v0@outlook.com</a></p>
     </footer>
+  
+    <div class="loader"></div>
   </body>
 </html>
