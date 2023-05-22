@@ -23,16 +23,6 @@
       });
     </script>
 
-    <!--Boton de desplazamiento-->
-    <script type="text/javascript">
-      function scrollWin() {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-      }
-    </script>
-
     <!--Ocultar Boton de desplazamiento-->
     <script>
       window.addEventListener("scroll", function() {
@@ -90,101 +80,124 @@
   </head>
   <body>
     <div id="scroll"></div>
-      <header>
-          <div id="menuAlt1"></div>
-          <div id="menu2Alt1"></div>
-          <div id="TittlecxAlt2">Mega CX</div>
-
-          <nav id="secondary">
-            <ul>
-              <li>
-               <a href="index.html">
-                <i class="fa-solid fa-house"></i> Inicio</a></li>
-              <li>
-               <a href="build.html">
-                <i class="fa-solid fa-desktop"></i> Build</a></li>
-              <li>
-                <a href="gallery.html">
-                  <i class="fa-regular fa-image"></i> Galeria</a></li>
-              <li>
-                <a href="contact.html">
-                  <i class="fa-solid fa-envelope"></i> Contacto</a></li>
-            </ul>
-          </nav>
-
-        </header>
-    <div id="infoForm">
-      <strong><p>Rellena el formulario</p></strong></br>
-      <p>Si necesitas algun servicio por favor rellena el formulario con tu mensaje y tus datos y nos pondremos en contacto con tigo.</p></br>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum nobis enim odit possimus optio, doloribus vel, vero voluptatum facilis atque, debitis eligendi deserunt. Corporis reiciendis iure pariatur voluptate repudiandae excepturi.</p></br>
-      
-      <div class="iconshare">
-        <table>
-          <tr>
-            <td><a href="https://www.artstation.com/juanhda-cx"><i class="fa-brands fa-artstation"></i></a></td>
-            <td><a href="https://dribbble.com/MegaCX/buckets"><i class="fa-brands fa-dribbble"></i></a></td>
-            <td><a href="https://www.deviantart.com/juanhda"><i class="fa-brands fa-deviantart"></i></a></td>
-            <td><a href="https://www.instagram.com/mega.cx/"><i class="fa-brands fa-instagram"></i></a></td>
-            <td><a href="https://twitter.com/Mega_CX"><i class="fa-brands fa-twitter"></i></a></td>
-          </tr>
-          <tr>
-            <td><a href="https://www.artstation.com/juanhda-cx" >ArtStation</a></td>
-            <td><a href="https://dribbble.com/MegaCX/buckets">dribbble</a></td>
-            <td><a href="https://www.deviantart.com/juanhda">DeviantArt</a></td>
-            <td><a href="https://www.instagram.com/mega.cx/">Instagram</a></td>
-            <td><a href="https://twitter.com/Mega_CX">Twitter</a></td>
-          </tr>
-        </table>
-      </div>
-    </div>
+    <header>
+      <div id="menuAlt1"></div>
+      <div id="menu2Alt1"></div>
+      <div id="TittlecxAlt2">Mega CX</div>
+      <nav id="secondary">
+        <ul>
+          <li>
+            <a href="index.html">
+            <i class="fa-solid fa-house"></i> Inicio</a></li>
+          <li>
+            <a href="build.html">
+            <i class="fa-solid fa-desktop"></i> Build</a></li>
+          <li>
+            <a href="gallery.html">
+              <i class="fa-regular fa-image"></i> Galeria</a></li>
+          <li>
+            <a href="contact.html">
+              <i class="fa-solid fa-envelope"></i> Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
 
 <!--Formulario inicio-->
-    <div>
-      <form method="POST" action="enviar2.php">
-        <input
-          class="formulario1"
-          type="text"
-          name="nombre"
-          placeholder="Nombre completo"
-          required
-        />
-        <input
-          class="formulario1"
-          type="email"
-          name="email"
-          placeholder="Correo electronico"
-          value=""
-          required
-        />
-        <select id="formulario2">
-          <option class="form2-1" value="1">Programas</option>
-          <option class="form2-1" value="2">Peliculas</option>
-          <option class="form2-1" value="3">Juegos</option>
-          <option class="form2-1" value="4">Diseño</option>
-        </select>
-        <textarea
-          placeholder="Escribe tu peticion...";
-          id="textarea"
-          name="mensaje"
-          cols="40"
-          rows="15"
-          value="Escribe tu mensaje"
-          required
-        ></textarea>
-        <a href="#"><input id="form-enviar" type="submit" onclick="alert('Enviado')" /></a>
-        <a><input id="form-reset" type="reset"/></a>
-      </form></br>
+<div>
+  <div id="infoForm">
+    <strong><p>Rellena el formulario</p></strong></br>
+    <p>Si necesitas algun servicio por favor rellena el formulario con tu mensaje y tus datos y nos pondremos en contacto con tigo.</p></br>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum nobis enim odit possimus optio, doloribus vel, vero voluptatum facilis atque, debitis eligendi deserunt. Corporis reiciendis iure pariatur voluptate repudiandae excepturi.</p></br></br></br>
+  
+    <div class="iconshare">
+      <table>
+      <tr>
+      <td>
+        <div class="hover">
+          <a href="https://www.artstation.com/megacx" target="_blank"><i class="fa-brands fa-artstation"></i></a>
+          <br>
+          <a href="https://www.artstation.com/megacx" target="_blank">ArtStation</a>
+        </div>
+      </td>
+      <td>
+        <div class="hover">
+          <a href="https://dribbble.com/MegaCX/buckets" target="_blank"><i class="fa-brands fa-dribbble"></i></a>
+          <br>
+          <a href="https://dribbble.com/MegaCX/buckets" target="_blank">dribbble</a>
+        </div>
+      </td>
+      <td>
+        <div class="hover">
+          <a href="https://www.deviantart.com/juanhda" target="_blank"><i class="fa-brands fa-deviantart"></i></a>
+          <br>
+          <a href="https://www.deviantart.com/juanhda" target="_blank">DeviantArt</a>
+        </div>
+      </td>
+      <td>
+        <div class="hover">
+          <a href="https://www.instagram.com/mega.cx/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+          <br>
+          <a href="https://www.instagram.com/mega.cx/" target="_blank">Instagram</a>
+        </div>
+      </td>
+      <td>
+        <div class="hover">
+          <a href="https://twitter.com/Mega_CX" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+          <br>
+          <a href="https://twitter.com/Mega_CX" target="_blank">Twitter</a>
+        </div>
+      </td>
+      </tr>
+      </table>
     </div>
+    </div>
+  <form method="POST" action="enviar2.php">
+    <input
+      class="formulario1"
+      type="text"
+      name="nombre"
+      placeholder="Nombre completo"
+      required
+    />
+    <input
+      class="formulario1"
+      type="email"
+      name="email"
+      placeholder="Correo electronico"
+      value=""
+      required
+    />
+    <select id="formulario2">
+      <option class="form2-1" value="1">Programas</option>
+      <option class="form2-1" value="2">Peliculas</option>
+      <option class="form2-1" value="3">Juegos</option>
+      <option class="form2-1" value="4">Diseño</option>
+    </select>
+    <textarea
+      placeholder="Escribe tu peticion...";
+      id="textarea"
+      name="mensaje"
+      cols="40"
+      rows="15"
+      value="Escribe tu mensaje"
+      required
+    ></textarea>
+    <a href="#"><input id="form-enviar" type="submit" onclick="alert('Enviado')" /></a>
+    <a><input id="form-reset" type="reset"/></a>
+  </form></br>
+</div>
 <!--Formulario fin-->
-  
-    <button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
 
-    <footer id="footerI">
-      <p id="FT">All rights reserved @2019</p></br>
-      <p id="FT" class="FTmake">Make by Mega CX</p></br>
-      <p id="FT"><a href="mailto:juan153v0@outlook.com">Juan153v0@outlook.com</a></p>
-    </footer>
+
+</body>
   
-    <div class="loader"></div>
-  </body>
+  <button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
+
+  <footer id="footerI">
+    <p id="FT">All rights reserved @2019</p></br>
+    <p id="FT" class="FTmake">Make by Mega CX</p></br>
+    <p id="FT"><a href="mailto:juan153v0@outlook.com">Juan153v0@outlook.com</a></p>
+  </footer>
+
+  <div class="loader"></div>
 </html>

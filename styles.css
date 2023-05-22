@@ -137,7 +137,7 @@ body {
   position: absolute;
   font-size: 120px;
   line-height: 70pt;
-  top: 10%;
+  top: 5%;
   left: 0;
   right: 0;
   margin: auto;
@@ -149,7 +149,7 @@ body {
   #Tittlecx {
     font-size: 50px;
     line-height: 40pt;
-    margin-top: -30pt;
+    top: 5%;
     width: auto;
     text-align: center;
   }
@@ -171,19 +171,12 @@ body {
   }
 }
 
-#Tittlecx a {
+div#Tittlecx > a {
   text-decoration: none;
   text-decoration-style: none;
   font-family: Dominick;
   color: white;
   font-weight: bold;
-}
-
-#Tittlecx a:hover:first-child {
-  text-shadow: -1px -1px 5px rgba(255, 255, 255, 0.25),
-    1px -1px 5px rgba(255, 255, 255, 0.25),
-    -1px 1px 5px rgba(255, 255, 255, 0.25),
-    1px 1px 5px rgba(255, 255, 255, 0.25);
 }
 
 /*Menu principal*/
@@ -209,8 +202,11 @@ nav#primary {
 nav#secondary {
   position: relative;
   width: 600pt;
-  top: -10vh;
-  left: 10%;
+  top: -77px;
+  margin: auto;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
   z-index: 3;
 }
 
@@ -224,7 +220,7 @@ nav#secondary {
     justify-content: center;
     left: 50%;
     transform: translateX(-50%);
-    top: 9vh;
+    top: 7vh;
   }
 }
 
@@ -271,16 +267,12 @@ li a {
   text-decoration-style: none;
   text-decoration: none;
   color: #ffffff;
-  font-family: Londinia;
+  font-family: Shadeerah;
   font-size: 18px;
 }
 
 @media only screen and (max-width: 600px) {
   li a {
-    text-decoration-style: none;
-    text-decoration: none;
-    color: #ffffff;
-    font-family: Londinia;
     font-size: 14px;
   }
 }
@@ -399,21 +391,6 @@ li a {
   }
 }
 
-#search-box a {
-  color: black;
-  cursor: pointer;
-  text-decoration: none;
-  text-decoration-style: none;
-  vertical-align: middle;
-  margin-top: 7px;
-  margin-left: 10px;
-  text-align: center;
-}
-
-#search-box a:hover {
-  text-decoration: underline;
-}
-
 .iconGE {
   height: 24px;
   width: auto;
@@ -446,7 +423,8 @@ li a {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: Londinia;
+  font-family: Shadeerah;
+  font-weight: bold;
   text-align: center;
   letter-spacing: 5px;
   font-size: 64px;
@@ -489,7 +467,6 @@ li a {
   padding-right: 150px;
   padding-left: 150px;
   font-size: 18px;
-  font-family: Shadeerah;
   left: 0%;
   right: 0%;
 }
@@ -514,10 +491,9 @@ li a {
 }
 
 #Fbutton {
-  background-color: rgb(128, 0, 0);
+  background-color: #f10e0e;
   height: 50px;
   width: 50px;
-  display: flex;
   display: none;
   border-radius: 50%;
   border: none;
@@ -526,10 +502,10 @@ li a {
   right: 4vw;
   align-items: center;
   justify-content: center;
-  transition: 0.75s;
-  z-index: 11;
+  transition: 1s;
+  z-index: 3;
   top: 85vh;
-  transition: top 0.2s;
+  transition: top 0.25s;
 }
 
 @media only screen and (max-width: 600px) {
@@ -547,7 +523,7 @@ li a {
 #Fbutton:hover {
   background-image: linear-gradient(#b90f10, #4b1eff);
   transform: translate(0%, -25%);
-  transition: 0.75s;
+  transition: 1s;
 }
 
 footer {
@@ -615,61 +591,6 @@ footer {
     position: relative;
     transform: translate(0, 50px);
   }
-}
-
-#footerB {
-  margin-top: 100px;
-}
-
-#footerG {
-  margin-top: 32px;
-  position: relative;
-  z-index: 2;
-}
-
-#footerC {
-  margin-top: 100px;
-}
-
-#Gmail-ico {
-  float: right;
-  text-align: right;
-  position: relative;
-  bottom: 100px;
-  margin-right: 55px;
-  padding: 10px;
-  border-radius: 50px;
-  border: 2.5px solid white;
-}
-
-@media only screen and (max-width: 600px) {
-  #Gmail-ico {
-    float: left;
-    transform: translate(-7%, 155%);
-  }
-}
-
-#Gmail-ico:hover {
-  /*
-  border-image-source: linear-gradient(45deg, #b90f10, #4b1eff);
-  border-image-slice: 30%;*/
-  background: linear-gradient(45deg, #b90f10, #4b1eff);
-  border-radius: 50em;
-  border: 4px solid;
-}
-
-#Gmail-A {
-  margin-left: 5px;
-  line-height: 25pt;
-  text-align: center;
-  text-decoration-style: none;
-  text-decoration: none;
-  color: white;
-}
-
-#Gmail-A:hover {
-  text-decoration: underline;
-  color: rgb(218, 218, 218);
 }
 
 .Line1 {
@@ -899,7 +820,7 @@ body article div p {
 .box-tittle {
   color: #b90f10;
   font-size: 24px;
-  font-family: Londinia; /*
+  font-family: Shadeerah; /*
   text-shadow: -1px -1px 3px rgba(255, 255, 255, 1),
     1px -1px 3px rgba(255, 255, 255, 1), -1px 1px 3px rgba(255, 255, 255, 1),
     1px 1px 3px rgba(255, 255, 255, 1);*/
@@ -1086,28 +1007,34 @@ body article div p {
 /* contact */
 
 #infoForm {
+  /*
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  float: right;*/
   position: relative;
-  top: 100px;
-  left: auto;
-  right: 5%;
-  float: right;
+  left: 11%;
   color: white;
   border: 2.5px solid white;
   padding: 25px;
   min-width: 100px;
   max-width: 500px;
-  height: auto;
+  height: 400px;
 }
 
 @media only screen and (max-width: 600px) {
   #infoForm {
-    top: 8vh;
+    position: relative;
+    top: 5vh;
     left: 50%;
     right: auto;
     transform: translateX(-50%);
     float: initial;
     width: 70%;
     height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -1134,7 +1061,6 @@ body article div p {
     font-size: 16px;
   }
 }
-
 .iconshare table {
   table-layout: fixed;
   width: auto;
@@ -1180,17 +1106,14 @@ body article div p {
   }
 }
 
-.iconshare a:hover {
-  color: rgb(200, 200, 200);
-  text-decoration: underline;
+.iconshare .hover:hover a,
+.iconshare .hover:hover i.fa-brands {
+  color: rgb(168, 168, 168);
 }
-/*
-.iconshare table tr td {
-  border: 2px solid red;
-}*/
 
 /*Formulario*/
 form {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1198,10 +1121,10 @@ form {
   max-width: 500px;
   min-height: 200px;
   max-height: 450px;
-  padding: 60px 50px 0px 50px;
+  padding: 40px 40px 0px 40px;
   background-color: rgba(0, 0, 0, 0.452);
-  margin-left: 50px;
-  margin-top: 50px;
+  margin-left: 10%;
+  top: 5vh;
   /*box-shadow: 0px 0px 12px black;*/
   margin-bottom: -20%;
 }
@@ -1212,8 +1135,10 @@ form {
     width: 80%;
     margin-left: 6.5%;
     margin-right: 3.5%;
-    top: 10vh;
+    top: 15vh;
     position: relative;
+    display: flex;
+    flex-direction: column;
   }
 }
 
