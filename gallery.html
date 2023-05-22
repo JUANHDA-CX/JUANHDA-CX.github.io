@@ -5,71 +5,87 @@
     <meta name="description" content="Soluciones informaticas de todo tipo a pedido"/>
     <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs"/>
     <meta name="author" content="Mega CX">
-    <title>Gallery</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gallery</title>
     <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
     <link rel="icon" href="images/favicon1.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="images/favicon1.ico" type="image/x-icon"/>
     <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
-    <script src="/Scripts/search-box.js"></script>
-    <script src="https://kit.fontawesome.com/ae03bf6f9c.js"></script>
+    <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+
+    <!--Pantalla de carga-->
     <script type="text/javascript">
       window.addEventListener("load", function () {
-          const loader = document.querySelector(".loader");
-          loader.className += " hidden";
+        const loader = document.querySelector(".loader");
+        loader.className += " hidden";
       });
     </script>
 
-<!--Boton de desplazamiento-->
-<script type="text/javascript">
-  function scrollWin() {
-  window.scrollTo({
-  top: 0,
-  behavior: "smooth"
-  });
-  }
-  </script>
-
-    <script>
-window.addEventListener("scroll", function() {
-  var Fbutton = document.getElementById("Fbutton");
-  if (window.pageYOffset > 300) {
-    Fbutton.style.display = "block";
-  } else {
-    Fbutton.style.display = "none";
-  }
-});
+    <!--Boton de desplazamiento-->
+    <script type="text/javascript">
+      function scrollWin() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
     </script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--Ocultar Boton de desplazamiento-->
+    <script>
+      window.addEventListener("scroll", function() {
+        var Fbutton = document.getElementById("Fbutton");
+        if (window.pageYOffset > 300) {
+          Fbutton.style.display = "block";
+          } else {
+            Fbutton.style.display = "none";
+          }
+      });
+    </script>
 
-<script>
-  function init() {
-    function scrollToTop() {
-      $("html, body").animate({ scrollTop: 0 }, "slow");
-    }
+    <!--Animacion Boton de desplazamiento-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function init() {
+        function scrollToTop() {
+          $("html, body").animate({ scrollTop: 0 }, "slow");
+        }
+        var Fbutton = document.getElementById("Fbutton");
+        Fbutton.addEventListener("click", scrollToTop);
+      }
 
-    var Fbutton = document.getElementById("Fbutton");
-    Fbutton.addEventListener("click", scrollToTop);
-  }
+      document.addEventListener("DOMContentLoaded", init);
+    </script>
 
-  document.addEventListener("DOMContentLoaded", init);
-</script>
-
+    <!--Texto dinamico animado-->
+    <script>
+      var words = ["▾DISEÑO▾", "▾ASCESORIA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICION▾", "▾INSTALACION▾"];
+      var startIndex = Math.floor(Math.random() * words.length);
+      var i = startIndex;
+      setInterval(function() {
+        document.querySelector('.tittle-one').textContent = words[i];
+        i++;
+        if (i == words.length) {
+          i = 0;
+        }
+      }, 2000);
+    </script>
 
     <script>
-var words = ["▾DISEÑO▾", "▾ASCESORIA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICION▾", "▾INSTALACION▾"];
-var startIndex = Math.floor(Math.random() * words.length);
-var i = startIndex;
-setInterval(function() {
-  document.querySelector('.tittle-one').textContent = words[i];
-  i++;
-  if (i == words.length) {
-    i = 0;
-  }
-}, 2000);
+      document.addEventListener("DOMContentLoaded", () => {
+        const hexeBG = document.querySelector("#hexeBG");
+        console.log(hexeBG); // Debería mostrar el elemento #hexeBG en la consola
+        const flex = document.querySelector("#flex");
+        console.log(flex); // Debería mostrar el elemento #flex en la consola
+
+    
+        hexeBG.addEventListener("click", () => {
+        console.log("Clicked on #hexeBG"); // Debería mostrar este mensaje en la consola cuando haga clic en #hexeBG
+        flex.classList.toggle("expand");
+        });
+      });
     </script>
   </head>
   <body>
@@ -78,20 +94,20 @@ setInterval(function() {
       <div id="menu2Alt1"></div>
       <div id="TittlecxAlt2" onclick="window.location.href = 'index.html';">Mega CX</div>
       
-      <nav id="nav2">
+      <nav id="secondary">
         <ul>
           <li>
-            <a href="index.html">
-              <img id="iconS" src="icons/homeMv2.svg"> Inicio</a></li>
+           <a href="index.html">
+            <i class="fa-solid fa-house"></i> Inicio</a></li>
           <li>
-            <a href="build.html">
-              <img id="iconS" src="icons/build1.svg"> Build</a></li>
+           <a href="build.html">
+            <i class="fa-solid fa-desktop"></i> Build</a></li>
           <li>
             <a href="gallery.html">
-              <img id="iconS" src="icons/img1.svg"> Galeria</a></li>
+              <i class="fa-regular fa-image"></i> Galeria</a></li>
           <li>
             <a href="contact.html">
-              <img id="iconS" src="icons/contactMv2.svg"> Contacto</a></li>
+              <i class="fa-solid fa-envelope"></i> Contacto</a></li>
         </ul>
       </nav>
     </header>
@@ -144,46 +160,47 @@ setInterval(function() {
 
 -->
     <main>
-      <section id="textN1">
+      <section id="textGallery">
         <article>
+          <h1>PORFOLIO</h1>
+          <h2>3D Projects</h2><br><br>
           <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia error optio adipisci, aspernatur voluptates rerum, fuga temporibus, esse illum nostrum porro reprehenderit et laudantium magnam quos accusantium quia voluptas commodi.
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia error optio adipisci, aspernatur voluptates rerum, fuga temporibus, esse illum nostrum porro reprehenderit et laudantium magnam quos accusantium quia voluptas commodi.
           </p>
         </article>
       </section>
 
-    <div class="grid-container">
-      <img class="grid-item" src="/images/image1.jpg" alt="image1" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image2.jpg" alt="image2" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image3.jpg" alt="image3" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image4.jpg" alt="image4" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image1.jpg" alt="image5" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image2.jpg" alt="image6" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image3.jpg" alt="image7" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image4.jpg" alt="image8" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1">
-      <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1">
-    </div>
+      <div class="grid-container">
+        <img class="grid-item" src="/images/image1.jpg" alt="image1" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image2.jpg" alt="image2" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image3.jpg" alt="image3" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image4.jpg" alt="image4" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image1.jpg" alt="image5" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image2.jpg" alt="image6" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image3.jpg" alt="image7" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image4.jpg" alt="image8" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1">
+        <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1">
+      </div>
     </main>
+  
+    <button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
 
     <footer id="footerI">
       <p id="FT">All rights reserved @2019</p></br>
       <p id="FT" class="FTmake">Make by Mega CX</p></br>
       <p id="FT"><a href="mailto:juan153v0@outlook.com">Juan153v0@outlook.com</a></p>
     </footer>
-
-  </body>
-  <button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
-  <div class="loader"></div>
+  
+    <div class="loader"></div>
 </html>

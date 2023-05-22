@@ -61,12 +61,12 @@ a {
 
 .parallax {
   background-image: url("images/back-index-v3-100.png");
-  height: 300pt;
+  height: 50vh;
   width: 100%;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  position: absolute;
+  position: relative;
   top: 0;
   /*box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5);*/
 }
@@ -74,7 +74,13 @@ a {
 @media only screen and (max-width: 600px) {
   .parallax {
     background-image: url("images/back-index-v3-100.png");
-    height: 300px;
+    height: 30vh;
+    width: 100%;
+    transform: translateY(-0%);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
   }
 }
 
@@ -141,10 +147,27 @@ body {
 
 @media only screen and (max-width: 600px) {
   #Tittlecx {
-    font-size: 56px;
-    margin-left: 0px;
-    left: 50%;
-    transform: translateX(-50%);
+    font-size: 50px;
+    line-height: 40pt;
+    margin-top: -30pt;
+    width: auto;
+    text-align: center;
+  }
+}
+
+#Tittlecx .sub {
+  font-size: 60px;
+}
+
+@media only screen and (max-width: 1024px) {
+  #Tittlecx .sub {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #Tittlecx .sub {
+    font-size: 25px;
   }
 }
 
@@ -163,37 +186,62 @@ body {
     1px 1px 5px rgba(255, 255, 255, 0.25);
 }
 
+/*Menu principal*/
 nav#primary {
   position: absolute;
   width: 600pt;
-  top: 100%;
-  left: -35%;
+  top: 25vh;
+  left: -25vw;
   z-index: 1;
   background-color: rgba(0, 128, 0, 0);
 }
 
 @media only screen and (max-width: 600px) {
-  nav {
-    margin-top: -125px;
-    margin-left: 20px;
+  nav#primary {
+    width: 100%;
+    top: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
+/*Menu secundario*/
+nav#secondary {
+  position: relative;
+  width: 600pt;
+  top: -10vh;
+  left: 10%;
+  z-index: 3;
+}
+
+@media only screen and (max-width: 600px) {
+  nav#secondary {
+    position: absolute;
+    min-width: 300px;
+    max-width: 450px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 9vh;
+  }
+}
+
+/*Estilos menu*/
 nav ul li {
   list-style: none;
   display: inline;
   font-size: 24px;
   color: white;
-  margin-right: 50px;
-  padding-right: 50px;
-  padding: 5px;
+  margin-right: 15px;
+  padding-right: 15px;
+  padding: 5px 20px 5px 20px;
   border-left: 2px solid #b90f10;
   border-radius: 0px 0px 0px 0px;
-  background-image: linear-gradient(45deg, #07070760, #07070700);
+  background-image: linear-gradient(45deg, #00000080, #07070720);
   transition: 0.5s;
   /*
-  
-
   transition: padding-right 1s;
   -webkit-transition: padding-right 1s;*/
 }
@@ -201,37 +249,61 @@ nav ul li {
 @media only screen and (max-width: 600px) {
   nav ul li {
     font-size: 14px;
-    margin-right: 3px;
-    padding-right: 3px;
+    margin-right: 2px;
+    padding-right: 2px;
+    padding: 5px 8px 5px 8px;
   }
 }
 
+nav ul li:hover {
+  background-image: linear-gradient(45deg, #070707aa, #07070760);
+  border-left: solid 2px #1eff4f;
+  transition: 0.5s;
+}
+
 nav ul li:active {
-  background-color: rgb(116, 116, 116);
-  width: 150px;
-  /*border-radius: 10px;*/
-  padding: 0px;
-  transition: padding 1s;
-  /*border: none;*/
+  background-color: rgb(0, 0, 0);
   border-left: 2px solid #4b1eff;
+  transition: 0.5s;
 }
 
 li a {
   text-decoration-style: none;
   text-decoration: none;
-  color: rgb(228, 228, 228);
+  color: #ffffff;
   font-family: Londinia;
+  font-size: 18px;
 }
 
-li a:hover {
-  color: white;
-  transition: 0.5s;
+@media only screen and (max-width: 600px) {
+  li a {
+    text-decoration-style: none;
+    text-decoration: none;
+    color: #ffffff;
+    font-family: Londinia;
+    font-size: 14px;
+  }
 }
 
+/*Menu retractil*/
 #emergent {
   position: absolute;
-  top: 125%;
-  left: 125%;
+  top: 30vh;
+  left: 50vw;
+}
+
+@media (min-width: 1200px) {
+  #emergent {
+    left: 60vw;
+  }
+}
+
+@media (max-width: 600px) {
+  #emergent {
+    top: 125%;
+    left: 25%;
+    display: none;
+  }
 }
 
 #hexeBG {
@@ -364,9 +436,7 @@ li a:hover {
 
 @media only screen and (max-width: 600px) {
   .logocx {
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 110%);
+    height: 100px;
   }
 }
 
@@ -404,13 +474,10 @@ li a:hover {
 
 @media only screen and (max-width: 600px) {
   .tittle-one {
-    top: 125px;
-    font-size: 32px;
-    margin-left: 0%;
-    margin-right: 0%;
-    position: relative;
-    left: 47.5%;
-    transform: translateX(-45%);
+    font-size: 30px;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-bottom: 5%;
   }
 }
 
@@ -492,11 +559,13 @@ footer {
   color: white;
   height: 80pt;
   padding: 5%;
+  padding-left: 12%;
 }
 
 @media only screen and (max-width: 600px) {
   footer {
-    height: 150px;
+    height: 60pt;
+    padding: 15%;
   }
 }
 
@@ -644,7 +713,7 @@ footer {
 /* BUILD */
 
 #menuAlt1 {
-  background-color: rgb(17, 17, 17);
+  background-color: rgb(24, 24, 24);
   height: 50px;
   width: auto;
   box-shadow: 0px 5px 7px #0000003f;
@@ -658,10 +727,17 @@ footer {
   z-index: 3;
   background-color: rgb(129, 0, 0);
   background-image: linear-gradient(90deg, #b90f10, #4b1eff);
-  height: 50px;
+  height: 55px;
   width: 90vw;
   border-radius: 0px 0px 15px 15px;
   box-shadow: 0px 5px 7px #0000003f;
+}
+
+@media only screen and (max-width: 600px) {
+  #menu2Alt1 {
+    width: 100vw;
+    height: 50px;
+  }
 }
 
 #TittlecxAlt2 {
@@ -674,19 +750,6 @@ footer {
   color: white;
   font-weight: bold;
   z-index: 3;
-}
-
-#nav2 {
-  margin-top: -79px;
-  margin-left: 100px;
-  position: relative;
-  z-index: 3;
-}
-
-@media only screen and (max-width: 600px) {
-  #nav2 {
-    margin-left: 25px;
-  }
 }
 
 /*submenu-start*/
@@ -729,13 +792,6 @@ nav ul li ul li a:hover {
     90
   ); /*
   background-image: linear-gradient(90deg,#b90f10, #4b1eff);*/
-}
-
-nav ul li:hover {
-  border-radius: 0px 15px 15px 0px;
-  background-color: #070707a9;
-  border-left: solid 2px #4b1eff;
-  transition: 0.25s;
 }
 
 ul li ul li {
@@ -1032,30 +1088,55 @@ body article div p {
 #infoForm {
   position: relative;
   top: 100px;
-  right: 50px;
-  color: white;
+  left: auto;
+  right: 5%;
   float: right;
+  color: white;
   border: 2.5px solid white;
-  padding: 10px;
+  padding: 25px;
   min-width: 100px;
   max-width: 500px;
-}
-
-#infoForm strong {
-  font-size: 32px;
+  height: auto;
 }
 
 @media only screen and (max-width: 600px) {
   #infoForm {
-    left: 45%;
-    transform: translateX(-60%);
-    width: 80%;
-    top: 32px;
+    top: 8vh;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    float: initial;
+    width: 70%;
+    height: auto;
   }
 }
 
-.iconshare img {
-  height: 32px;
+/*Tamaño del texto*/
+#infoForm strong {
+  font-size: 32px;
+  color: #4b1eff;
+}
+
+@media only screen and (max-width: 600px) {
+  #infoForm strong {
+    font-size: 24px;
+  }
+}
+
+#infoForm p {
+  text-align: left;
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  #infoForm p {
+    text-align: justify;
+    font-size: 16px;
+  }
+}
+
+.iconshare table {
+  table-layout: fixed;
   width: auto;
 }
 
@@ -1064,20 +1145,51 @@ body article div p {
   font-weight: bold;
   align-items: center;
   justify-content: center;
+  width: 400px;
+  padding: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  .iconshare table {
+    table-layout: auto;
+  }
+}
+
+/*Iconos y texto*/
+/*Tamaño de iconos de contacto*/
+.iconshare i.fa-brands {
+  font-size: 36px;
+}
+
+@media only screen and (max-width: 600px) {
+  .iconshare i.fa-brands {
+    font-size: 20px;
+  }
 }
 
 .iconshare a {
+  font-size: 18px;
   text-decoration-style: none;
   text-decoration: none;
   color: white;
 }
+
+@media only screen and (max-width: 600px) {
+  .iconshare a {
+    font-size: 10px;
+  }
+}
+
 .iconshare a:hover {
   color: rgb(200, 200, 200);
   text-decoration: underline;
 }
+/*
 .iconshare table tr td {
-  border: 0px solid red;
-}
+  border: 2px solid red;
+}*/
+
+/*Formulario*/
 form {
   display: flex;
   flex-direction: column;
@@ -1181,7 +1293,7 @@ input:focus {
   height: 200px;
 }
 
-#formulario3 {
+#form-enviar {
   border-radius: 10px;
   background-color: rgb(233, 41, 41);
   color: rgb(0, 0, 0);
@@ -1192,12 +1304,12 @@ input:focus {
 }
 
 @media only screen and (max-width: 600px) {
-  #formulario3 {
+  #form-enviar {
     width: 130px;
   }
 }
 
-#formulario3-1 {
+#form-reset {
   border-radius: 10px;
   background-color: rgb(233, 41, 41);
   color: rgb(0, 0, 0);
@@ -1211,13 +1323,15 @@ input:focus {
 }
 
 @media only screen and (max-width: 600px) {
-  #formulario3-1 {
-    width: 150px;
+  #form-reset {
+    width: 130px;
+    float: right;
+    left: 0px;
   }
 }
 
-#formulario3:hover,
-#formulario3-1:hover {
+#form-enviar:hover,
+#form-reset:hover {
   background-color: rgb(204, 100, 100);
 }
 
@@ -1383,17 +1497,27 @@ input[name="r"] {
   margin: 25px;
   transform: translateY(225px);
 }
-#textN1 {
+#textGallery {
   position: relative;
-  transform: translateY(32px);
-  margin: 50px;
+  top: 15%;
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-bottom: 50px;
   text-align: center;
 }
 
+#textGallery > article > h1 {
+  font-size: 48px;
+}
+
+#textGallery > article > h2 {
+  font-size: 20px;
+}
+
 @media only screen and (max-width: 600px) {
-  #textN1 {
+  #textGallery {
     position: relative;
-    transform: translateY(155px);
+    top: 5%;
     margin: 25px;
     text-align: center;
   }
@@ -1546,6 +1670,13 @@ table tr td {
 
 table#tableHome {
   position: relative;
-  margin-top: 32%;
+  margin-top: 5%;
   margin-bottom: -20%;
+}
+
+@media (max-width: 600px) {
+  table#tableHome {
+    margin-top: 10%;
+    margin-bottom: -50%;
+  }
 }
