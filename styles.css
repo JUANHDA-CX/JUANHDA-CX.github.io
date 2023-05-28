@@ -318,7 +318,7 @@ nav#secondary {
   text-decoration: none;
   text-align: center;
   margin: auto;
-  top: 15px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
   display: block;
@@ -350,8 +350,8 @@ nav#secondary {
 
 #menuMobileToggle input {
   display: block;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   position: absolute;
   top: 0;
   left: 0;
@@ -363,9 +363,9 @@ nav#secondary {
 
 #menuMobileToggle span {
   display: block;
-  width: 50px;
-  height: 10px;
-  margin-bottom: 10px;
+  width: 30px;
+  height: 6px;
+  margin-bottom: 6px;
   background-color: #000000;
 }
 
@@ -388,7 +388,7 @@ nav#secondary {
   margin-bottom: 25px;
   list-style: none;
   font-family: OxfordStreet;
-  font-size: 48px;
+  font-size: 36px;
   margin-right: 15px;
   padding-right: 15px;
   padding: 15px 20px 5px 20px;
@@ -488,10 +488,9 @@ nav#secondary {
 
 @media only screen and (max-width: 600px) {
   #primary ul>li {
-    padding-right: 0px;
-    padding: 0px 2px 0px 2px;
-    margin: 0 10px 0 10px;
-    border-bottom: 0px dotted #000000;
+    margin: 0 5px 0 5px;
+    padding: 1px 2px 1px 2px;
+    line-height: 1;
   }
 }
 
@@ -858,8 +857,8 @@ li a {
 
 @media only screen and (max-width: 600px) {
   #Fbutton {
-    height: 75px;
-    width: 75px;
+    height: 50px;
+    width: 50px;
     left: 75vw;
     top: 88vh;
   }
@@ -913,7 +912,7 @@ footer {
 
 @media only screen and (max-width: 600px) {
   footer {
-    height: 150pt;
+    height: 120pt;
     width: auto;
     margin-top: 200px;
     padding: 5%;
@@ -1013,6 +1012,7 @@ input#myButton:checked~.sliderSwitch.light:before {
   margin-left: 10%;
   height: auto;
   width: 40%;
+  font-size: 16px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -1020,6 +1020,7 @@ input#myButton:checked~.sliderSwitch.light:before {
     margin-left: 5%;
     height: auto;
     width: 50%;
+    font-size: 12px;
   }
 }
 
@@ -1267,7 +1268,7 @@ body article div p {
 
 @media only screen and (max-width: 600px) {
   .box-tittle {
-    font-size: 42px;
+    font-size: 36px;
   }
 }
 
@@ -1286,7 +1287,7 @@ body article div p {
 
 @media only screen and (max-width: 600px) {
   .box-text p {
-    font-size: 24px;
+    font-size: 18px;
     width: 90%;
     height: auto;
     bottom: 0;
@@ -1473,9 +1474,9 @@ body article div p {
 
 @media only screen and (max-width: 600px) {
   .Box-buttonModal {
-    top: 685px;
-    height: 75px;
-    width: 75px;
+    top: 500px;
+    height: 50px;
+    width: 50px;
   }
 }
 
@@ -1649,6 +1650,7 @@ body article div p {
 @media only screen and (max-width: 600px) {
   #infoForm {
     height: 150px;
+    padding: 15px;
     margin-bottom: 25px;
   }
 }
@@ -1694,6 +1696,12 @@ body article div p {
   justify-content: center;
   width: 400px;
   padding: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  .iconshare table td {
+    width: 400px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
