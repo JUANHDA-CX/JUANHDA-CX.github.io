@@ -739,7 +739,7 @@ li a {
 
 @media only screen and (max-width: 600px) {
   .logocx {
-    margin-top: 50px;
+    margin-top: 12%;
     height: 100px;
   }
 }
@@ -860,7 +860,7 @@ li a {
     height: 50px;
     width: 50px;
     left: 75vw;
-    top: 88vh;
+    top: 85%;
   }
 }
 
