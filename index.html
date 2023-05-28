@@ -1,117 +1,205 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="description" content="Soluciones informaticas de todo tipo a pedido"/>
-    <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs"/>
-    <meta name="author" content="Mega CX">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-    <link rel="icon" href="images/favicon1.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="images/favicon1.ico" type="image/x-icon"/>
-    <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
 
-    <!--Pantalla de carga-->
-    <script type="text/javascript">
-      window.addEventListener("load", function () {
-        const loader = document.querySelector(".loader");
-        loader.className += " hidden";
-      });
-    </script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
+  <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
+  <meta name="author" content="Mega CX">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+  <link rel="icon" href="images/favicon1.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="images/favicon1.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
 
-    <!--Ocultar Boton de desplazamiento-->
-    <script>
-      window.addEventListener("scroll", function() {
-        var Fbutton = document.getElementById("Fbutton");
-        if (window.pageYOffset > 300) {
-          Fbutton.style.display = "block";
-          } else {
-            Fbutton.style.display = "none";
-          }
-      });
-    </script>
-
-    <!--Animacion Boton de desplazamiento-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      function init() {
-        function scrollToTop() {
-          $("html, body").animate({ scrollTop: 0 }, "slow");
-        }
-        var Fbutton = document.getElementById("Fbutton");
-        Fbutton.addEventListener("click", scrollToTop);
+  <!--Dark mode-->
+  <script>
+    function myFunction() {
+      var element = document.body;
+      var button = document.getElementById("myButton");
+      var slider = document.querySelector(".sliderSwitch");
+      element.classList.toggle("dark-mode");
+      if (element.classList.contains("dark-mode")) {
+        slider.classList.add("dark");
+        slider.classList.remove("light");
+        button.checked = false;
+        localStorage.setItem("theme", "dark");
+      } else {
+        slider.classList.add("light");
+        slider.classList.remove("dark");
+        button.checked = true;
+        localStorage.setItem("theme", "light");
       }
+    }
 
-      document.addEventListener("DOMContentLoaded", init);
-    </script>
 
-    <!--Texto dinamico animado-->
-    <script>
-      var words = ["▾DISEÑO▾", "▾ASCESORIA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICION▾", "▾INSTALACION▾"];
-      var startIndex = Math.floor(Math.random() * words.length);
-      var i = startIndex;
-      setInterval(function() {
-        document.querySelector('.tittle-one').textContent = words[i];
-        i++;
-        if (i == words.length) {
-          i = 0;
-        }
-      }, 2000);
-    </script>
+    window.onload = function () {
+      var element = document.body;
+      var button = document.getElementById("myButton");
+      var slider = document.querySelector(".sliderSwitch");
+      var theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        element.classList.add("dark-mode");
+        slider.classList.add("dark");
+        slider.classList.remove("light");
+        button.checked = false;
+      } else if (theme === "light") {
+        element.classList.remove("dark-mode");
+        slider.classList.add("light");
+        slider.classList.remove("dark");
+        button.checked = true;
+      } else if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        element.classList.add("dark-mode");
+        slider.classList.add("dark");
+        slider.classList.remove("light");
+        localStorage.setItem("theme", "dark");
+        button.checked = false;
+      } else {
+        element.classList.remove("dark-mode");
+        slider.classList.add("light");
+        slider.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+        button.checked = true;
+      }
+    };
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const hexeBG = document.querySelector("#hexeBG");
-        console.log(hexeBG); // Debería mostrar el elemento #hexeBG en la consola
-        const flex = document.querySelector("#flex");
-        console.log(flex); // Debería mostrar el elemento #flex en la consola
+  </script>
 
-    
-        hexeBG.addEventListener("click", () => {
+  <!--Sounds-->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let boton = document.querySelector(".audioclick");
+      boton.addEventListener("click", () => {
+        let etiquetaAudio = document.createElement("audio");
+        etiquetaAudio.setAttribute("src", "/sound/click-21156-666HeroHero.mp3");
+        etiquetaAudio.play();
+        etiquetaAudio.volume = 1;
+      });
+    });
+  </script>
+
+  <!--Pantalla de carga-->
+  <script type="text/javascript">
+    window.addEventListener("load", function () {
+      const loader = document.querySelector(".loader");
+      loader.className += " hidden";
+    });
+  </script>
+
+  <!--Ocultar Boton de desplazamiento-->
+  <script>
+    window.addEventListener("scroll", function () {
+      var Fbutton = document.getElementById("Fbutton");
+      if (window.pageYOffset > 300) {
+        Fbutton.style.display = "block";
+      } else {
+        Fbutton.style.display = "none";
+      }
+    });
+  </script>
+
+  <!--Animacion Boton de desplazamiento-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function init() {
+      function scrollToTop() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+      }
+      var Fbutton = document.getElementById("Fbutton");
+      Fbutton.addEventListener("click", scrollToTop);
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+
+  <!--Texto dinamico animado-->
+  <script>
+    var words = ["▾DISEÑO▾", "▾ASCESORIA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICION▾", "▾INSTALACION▾"];
+    var startIndex = Math.floor(Math.random() * words.length);
+    var i = startIndex;
+    setInterval(function () {
+      document.querySelector('.tittle-one').textContent = words[i];
+      i++;
+      if (i == words.length) {
+        i = 0;
+      }
+    }, 2000);
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const hexeBG = document.querySelector("#hexeBG");
+      console.log(hexeBG); // Debería mostrar el elemento #hexeBG en la consola
+      const flex = document.querySelector("#flex");
+      console.log(flex); // Debería mostrar el elemento #flex en la consola
+
+
+      hexeBG.addEventListener("click", () => {
         console.log("Clicked on #hexeBG"); // Debería mostrar este mensaje en la consola cuando haga clic en #hexeBG
         flex.classList.toggle("expand");
-        });
       });
-    </script>
+    });
+  </script>
 
-  </head>
-  <body>
-    <div id="scroll"></div>
-    <header>
-      <div class="parallax"></div>
-      <div id="Tittlecx"><a href="index.html">Mega CX</a><br><a class="sub">-Studios-</a><div>
-      <div id="emergent">
-        <div id="hexeBG"></div>
-        <div id="flex">
-          <div id="site1" class="siteicons"></div>
-          <div id="site2" class="siteicons"></div>
-          <div id="site3" class="siteicons"></div>
-          <div id="site4" class="siteicons"></div>
-          <div id="site5" class="siteicons"></div>
+</head>
+
+<body>
+  <div id="scroll"></div>
+  <header>
+    <div class="parallax"></div>
+    <div id="Tittlecx" class="reproductor"><a href="index.html"><!--Mega CX--></a><br><a
+        class="sub"><!---Studios---></a>
+      <div>
+        <div id="emergent">
+          <div id="hexeBG"><a><i class="fa-solid fa-xmark"></i></a></div>
+          <div id="flex" class="audioclick">
+            <div id="site1" class="siteicons" class="audioclick"><a><i class="fa-solid fa-xmark"></i></a></div>
+            <div id="site2" class="siteicons" class="audioclick"><a target="_blank"
+                href="https://twitter.com/Mega_CX"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+            <div id="site3" class="siteicons" class="audioclick"><a target="_blank"
+                href="https://www.instagram.com/mega.cx"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <div id="site4" class="siteicons" class="audioclick"><a target="_blank"
+                href="https://www.deviantart.com/juanhda"><i class="fa-brands fa-deviantart"></i></a>
+            </div>
+            <div id="site5" class="siteicons" class="audioclick"><a target="_blank"
+                href="https://dribbble.com/MegaCX/shots"><i class="fa-brands fa-dribbble"></i></a>
+            </div>
+            <div id="site6" class="siteicons" class="audioclick"><a target="_blank"
+                href="https://www.artstation.com/megacx"><i class="fa-brands fa-artstation"></i></a>
+            </div>
+          </div>
         </div>
-      </div>
-      <nav id="primary">
-        <ul>
-          <li>
-           <a href="index.html">
-            <i class="fa-solid fa-house"></i> Inicio</a></li>
-          <li>
-           <a href="build.html">
-            <i class="fa-solid fa-desktop"></i> Build</a></li>
-          <li>
-            <a href="gallery.html">
-              <i class="fa-regular fa-image"></i> Galeria</a></li>
-          <li>
-            <a href="contact.html">
-              <i class="fa-solid fa-envelope"></i> Contacto</a></li>
-        </ul>
-      </nav>
-    </header>
-
+        <nav id="primary">
+          <ul>
+            <li>
+              <a href="index.html" class="audioclick">
+                <i class="fa-solid fa-house"></i> Inicio</a>
+            </li>
+            <li>
+              <a href="build.html" class="audioclick">
+                <i class="fa-solid fa-desktop"></i> Build</a>
+            </li>
+            <li>
+              <a href="gallery.html" class="audioclick">
+                <i class="fa-regular fa-image"></i> Galeria</a>
+            </li>
+            <li>
+              <a href="contact.html" class="audioclick">
+                <i class="fa-solid fa-envelope"></i> Contacto</a>
+            </li>
+          </ul>
+        </nav>
+  </header>
+  <main>
     <table id="tableHome">
       <tr> <!--Fila 1-->
         <td>
@@ -128,8 +216,8 @@
         <td>
           <article id="art1">
             <p>
-            Loart1 ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-            recusandae.
+              Loart1 ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+              recusandae.
             </p>
           </article>
         </td>
@@ -143,16 +231,16 @@
         <td>
           <article id="art2">
             <p>
-            Loart2 ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-            eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-            eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-            eos nisi animi libero?
+              Loart2 ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+              recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+              distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+              eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+              recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+              distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+              eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+              recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+              distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+              eos nisi animi libero?
             </p>
           </article>
         </td>
@@ -166,30 +254,40 @@
         <td>
           <article id="art3">
             <p>
-            Lorem3 ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-            eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-            eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
-            recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
-            distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
-            eos nisi animi libero?
+              Lorem3 ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+              recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+              distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+              eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+              recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+              distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+              eos nisi animi libero? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla
+              recusandae. Itaque similique, quas voluptatibus deserunt quibusdam
+              distinctio excepturi harum architecto earum dignissimos quidem, fuga cum
+              eos nisi animi libero?
             </p>
           </article>
         </td>
       </tr>
     </table>
-  </body>
-  
-  <button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
 
-  <footer id="footerI">
-    <p id="FT">All rights reserved @2019</p></br>
-    <p id="FT" class="FTmake">Make by Mega CX</p></br>
-    <p id="FT"><a href="mailto:juan153v0@outlook.com">Juan153v0@outlook.com</a></p>
-  </footer>
+  </main>
+</body>
 
-  <div class="loader"></div>
+<button id="Fbutton" class="audioclick"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
+
+<footer>
+  <div id="footerCont">
+    <label class="switch">
+      <input id="myButton" onclick="myFunction()" type="checkbox" checked><!--Cambiar a tema oscuro</input>-->
+      <span class="sliderSwitch"></span>
+    </label><br><br>
+    <p>All rights reserved @2019 [MMXXIII]</p><br>
+    <p>Make by Mega CX</p><br>
+    <p><a href="mailto:juan153v0@outlook.com" class="audioclick">Juan153v0@outlook.com</a>
+    <p>
+  </div>
+</footer>
+
+<div class="loader"></div>
+
 </html>

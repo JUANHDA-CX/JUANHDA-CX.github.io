@@ -1,200 +1,266 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="description" content="Soluciones informaticas de todo tipo a pedido"/>
-    <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs"/>
-    <meta name="author" content="Mega CX">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Contact</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-    <link rel="icon" href="images/favicon1.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="images/favicon1.ico" type="image/x-icon"/>
-    <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
 
-    <!--Pantalla de carga-->
-    <script type="text/javascript">
-      window.addEventListener("load", function () {
-        const loader = document.querySelector(".loader");
-        loader.className += " hidden";
-      });
-    </script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
+  <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
+  <meta name="author" content="Mega CX">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+  <link rel="icon" href="images/favicon1.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="images/favicon1.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
 
-    <!--Ocultar Boton de desplazamiento-->
-    <script>
-      window.addEventListener("scroll", function() {
-        var Fbutton = document.getElementById("Fbutton");
-        if (window.pageYOffset > 300) {
-          Fbutton.style.display = "block";
-          } else {
-            Fbutton.style.display = "none";
-          }
-      });
-    </script>
-
-    <!--Animacion Boton de desplazamiento-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      function init() {
-        function scrollToTop() {
-          $("html, body").animate({ scrollTop: 0 }, "slow");
-        }
-        var Fbutton = document.getElementById("Fbutton");
-        Fbutton.addEventListener("click", scrollToTop);
+  <!--Dark mode-->
+  <script>
+    function myFunction() {
+      var element = document.body;
+      var button = document.getElementById("myButton");
+      var slider = document.querySelector(".sliderSwitch");
+      element.classList.toggle("dark-mode");
+      if (element.classList.contains("dark-mode")) {
+        slider.classList.add("dark");
+        slider.classList.remove("light");
+        button.checked = false;
+        localStorage.setItem("theme", "dark");
+      } else {
+        slider.classList.add("light");
+        slider.classList.remove("dark");
+        button.checked = true;
+        localStorage.setItem("theme", "light");
       }
+    }
 
-      document.addEventListener("DOMContentLoaded", init);
-    </script>
 
-    <!--Texto dinamico animado-->
-    <script>
-      var words = ["▾DISEÑO▾", "▾ASCESORIA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICION▾", "▾INSTALACION▾"];
-      var startIndex = Math.floor(Math.random() * words.length);
-      var i = startIndex;
-      setInterval(function() {
-        document.querySelector('.tittle-one').textContent = words[i];
-        i++;
-        if (i == words.length) {
-          i = 0;
+    window.onload = function () {
+      var element = document.body;
+      var button = document.getElementById("myButton");
+      var slider = document.querySelector(".sliderSwitch");
+      var theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        element.classList.add("dark-mode");
+        slider.classList.add("dark");
+        slider.classList.remove("light");
+        button.checked = false;
+      } else if (theme === "light") {
+        element.classList.remove("dark-mode");
+        slider.classList.add("light");
+        slider.classList.remove("dark");
+        button.checked = true;
+      } else if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        element.classList.add("dark-mode");
+        slider.classList.add("dark");
+        slider.classList.remove("light");
+        localStorage.setItem("theme", "dark");
+        button.checked = false;
+      } else {
+        element.classList.remove("dark-mode");
+        slider.classList.add("light");
+        slider.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+        button.checked = true;
+      }
+    };
+
+  </script>
+
+  <!--Pantalla de carga-->
+  <script type="text/javascript">
+    window.addEventListener("load", function () {
+      const loader = document.querySelector(".loader");
+      loader.className += " hidden";
+    });
+  </script>
+
+  <!--Ocultar Boton de desplazamiento-->
+  <script>
+    window.addEventListener("scroll", function () {
+      var Fbutton = document.getElementById("Fbutton");
+      if (window.pageYOffset > 300) {
+        Fbutton.style.display = "block";
+      } else {
+        Fbutton.style.display = "none";
+      }
+    });
+  </script>
+
+  <!--Animacion Boton de desplazamiento-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function init() {
+      function scrollToTop() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+      }
+      var Fbutton = document.getElementById("Fbutton");
+      Fbutton.addEventListener("click", scrollToTop);
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+
+  <!--Menu_mobile-->
+  <script>
+    window.addEventListener('load', () => {
+      const menuButton = document.querySelector('#menuMobileToggleCheckbox');
+      const body = document.querySelector('body');
+
+      menuButton.addEventListener('change', () => {
+        if (menuButton.checked) {
+          body.classList.add('no-scroll-mobile');
+        } else {
+          body.classList.remove('no-scroll-mobile');
         }
-      }, 2000);
-    </script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const hexeBG = document.querySelector("#hexeBG");
-        console.log(hexeBG); // Debería mostrar el elemento #hexeBG en la consola
-        const flex = document.querySelector("#flex");
-        console.log(flex); // Debería mostrar el elemento #flex en la consola
-
-    
-        hexeBG.addEventListener("click", () => {
-        console.log("Clicked on #hexeBG"); // Debería mostrar este mensaje en la consola cuando haga clic en #hexeBG
-        flex.classList.toggle("expand");
-        });
       });
-    </script>
-  </head>
-  <body>
-    <div id="scroll"></div>
-    <header>
-      <div id="menuAlt1"></div>
-      <div id="menu2Alt1"></div>
-      <div id="TittlecxAlt2">Mega CX</div>
-      <nav id="secondary">
-        <ul>
-          <li>
-            <a href="index.html">
-            <i class="fa-solid fa-house"></i> Inicio</a></li>
-          <li>
-            <a href="build.html">
-            <i class="fa-solid fa-desktop"></i> Build</a></li>
-          <li>
-            <a href="gallery.html">
-              <i class="fa-regular fa-image"></i> Galeria</a></li>
-          <li>
-            <a href="contact.html">
-              <i class="fa-solid fa-envelope"></i> Contacto</a></li>
-        </ul>
-      </nav>
-    </header>
+    });
+  </script>
+</head>
 
-<!--Formulario inicio-->
-  <form method="POST" action="enviar2.php">
+<body>
+  <div id="scroll"></div>
+  <header>
+    <div id="menuAlt1"></div>
+    <div id="menu2Alt1"></div>
+    <div id="TittlecxAlt2">Mega CX</div>
+    <nav id="secondary">
+      <ul>
+        <li>
+          <a href="index.html">
+            <i class="fa-solid fa-house"></i> Inicio</a>
+        </li>
+        <li>
+          <a href="build.html">
+            <i class="fa-solid fa-desktop"></i> Build</a>
+        </li>
+        <li>
+          <a href="gallery.html">
+            <i class="fa-regular fa-image"></i> Galeria</a>
+        </li>
+        <li>
+          <a href="contact.html">
+            <i class="fa-solid fa-envelope"></i> Contacto</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!--Menu Mobile-->
+    <nav role="navigation" class="menuMobile">
+      <a href="index.html">Mega CX</a>
+      <div id="menuMobileToggle">
+        <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
+        <input id="menuMobileToggleCheckbox" type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menuMobile">
+          <a href="index.html">
+            <li>Home</li>
+          </a>
+          <a href="build.html">
+            <li>Build</li>
+          </a>
+          <a href="gallery.html">
+            <li>Gallery</li>
+          </a>
+          <a href="contact.html">
+            <li>Contact</li>
+          </a>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!--Formulario inicio-->
+  <form method="POST" action="https://formspree.io/f/xeqwwvjj">
 
     <div id="infoForm">
-      <strong><p>Rellena el formulario</p></strong></br>
-      <p>Si necesitas algun servicio por favor rellena el formulario con tu mensaje y tus datos y nos pondremos en contacto con tigo.</p></br></br>
+      <strong>
+        <p>Rellena el formulario</p>
+      </strong></br>
+      <p>Si necesitas algun servicio por favor rellena el formulario con tu mensaje y tus datos y nos pondremos en
+        contacto con tigo.</p></br></br>
       <div class="iconshare">
         <table>
-        <tr>
-        <td>
-          <div class="hover">
-            <a href="https://www.artstation.com/megacx" target="_blank"><i class="fa-brands fa-artstation"></i></a>
-            <br>
-            <a href="https://www.artstation.com/megacx" target="_blank">ArtStation</a>
-          </div>
-        </td>
-        <td>
-          <div class="hover">
-            <a href="https://dribbble.com/MegaCX/buckets" target="_blank"><i class="fa-brands fa-dribbble"></i></a>
-            <br>
-            <a href="https://dribbble.com/MegaCX/buckets" target="_blank">dribbble</a>
-          </div>
-        </td>
-        <td>
-          <div class="hover">
-            <a href="https://www.deviantart.com/juanhda" target="_blank"><i class="fa-brands fa-deviantart"></i></a>
-            <br>
-            <a href="https://www.deviantart.com/juanhda" target="_blank">DeviantArt</a>
-          </div>
-        </td>
-        <td>
-          <div class="hover">
-            <a href="https://www.instagram.com/mega.cx/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <br>
-            <a href="https://www.instagram.com/mega.cx/" target="_blank">Instagram</a>
-          </div>
-        </td>
-        <td>
-          <div class="hover">
-            <a href="https://twitter.com/Mega_CX" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-            <br>
-            <a href="https://twitter.com/Mega_CX" target="_blank">Twitter</a>
-          </div>
-        </td>
-        </tr>
+          <tr>
+            <td>
+              <div class="hover">
+                <a href="https://www.artstation.com/megacx" target="_blank"><i class="fa-brands fa-artstation"></i></a>
+                <br>
+                <a href="https://www.artstation.com/megacx" target="_blank">ArtStation</a>
+              </div>
+            </td>
+            <td>
+              <div class="hover">
+                <a href="https://dribbble.com/MegaCX/shots" target="_blank"><i class="fa-brands fa-dribbble"></i></a>
+                <br>
+                <a href="https://dribbble.com/MegaCX/shots" target="_blank">dribbble</a>
+              </div>
+            </td>
+            <td>
+              <div class="hover">
+                <a href="https://www.deviantart.com/juanhda" target="_blank"><i class="fa-brands fa-deviantart"></i></a>
+                <br>
+                <a href="https://www.deviantart.com/juanhda" target="_blank">DeviantArt</a>
+              </div>
+            </td>
+            <td>
+              <div class="hover">
+                <a href="https://www.instagram.com/mega.cx" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <br>
+                <a href="https://www.instagram.com/mega.cx" target="_blank">Instagram</a>
+              </div>
+            </td>
+            <td>
+              <div class="hover">
+                <a href="https://twitter.com/Mega_CX" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                <br>
+                <a href="https://twitter.com/Mega_CX" target="_blank">Twitter</a>
+              </div>
+            </td>
+          </tr>
         </table>
       </div>
     </div>
 
-    <input
-      class="formulario1"
-      type="text"
-      name="nombre"
-      placeholder="Nombre completo"
-      required
-    />
-    <input
-      class="formulario1"
-      type="email"
-      name="email"
-      placeholder="Correo electronico"
-      value=""
-      required
-    />
-    <select id="formulario2">
-      <option class="form2-1" value="1">Programas</option>
-      <option class="form2-1" value="2">Peliculas</option>
-      <option class="form2-1" value="3">Juegos</option>
-      <option class="form2-1" value="4">Diseño</option>
+    <input class="formulario1" type="text" name="Nombre" placeholder="Nombre completo" required />
+    <input class="formulario1" type="email" name="E-Mail" placeholder="Correo electronico" value="" required />
+    <select id="formulario2" name="Categoria">
+      <option class="form2-1" value="Programas">Programas</option>
+      <option class="form2-1" value="Peliculas">Peliculas</option>
+      <option class="form2-1" value="Juegos">Juegos</option>
+      <option class="form2-1" value="Diseño">Diseño</option>
     </select>
-    <textarea
-      placeholder="Escribe tu peticion...";
-      id="textarea"
-      name="mensaje"
-      cols="40"
-      rows="15"
-      value="Escribe tu mensaje"
-      required
-    ></textarea>
-    <a href="#"><input id="form-enviar" type="submit" onclick="alert('Enviado')" /></a>
-    <a><input id="form-reset" type="reset"/></a>
+    <textarea placeholder="Escribe tu peticion..." ; id="textarea" name="Mensaje" cols="40" rows="15"
+      value="Escribe tu mensaje" required></textarea>
+    <a href="#"><input id="form-enviar" type="submit" onclick="alert('Regresa al sitio web')" /></a>
+    <a><input id="form-reset" type="reset" /></a>
   </form></br>
-<!--Formulario fin-->
+  <!--Formulario fin-->
 
 </body>
-  
-  <button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
 
-  <footer id="footerI">
-    <p id="FT">All rights reserved @2019</p></br>
-    <p id="FT" class="FTmake">Make by Mega CX</p></br>
-    <p id="FT"><a href="mailto:juan153v0@outlook.com">Juan153v0@outlook.com</a></p>
-  </footer>
+<button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
 
-  <div class="loader"></div>
+<footer>
+  <div id="footerCont">
+    <label class="switch">
+      <input id="myButton" onclick="myFunction()" type="checkbox" checked><!--Cambiar a tema oscuro</input>-->
+      <span class="sliderSwitch"></span>
+    </label><br><br>
+    <p>All rights reserved @2019 [MMXXIII]</p><br>
+    <p>Make by Mega CX</p><br>
+    <p><a href="mailto:juan153v0@outlook.com" class="audioclick">Juan153v0@outlook.com</a>
+    <p>
+  </div>
+</footer>
+
+<div class="loader"></div>
+
 </html>

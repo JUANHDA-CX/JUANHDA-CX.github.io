@@ -1,82 +1,126 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="description" content="Soluciones informaticas de todo tipo a pedido"/>
-    <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs"/>
-    <meta name="author" content="Mega CX">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mega CX World - build</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-    <link rel="icon" href="images/favicon1.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="images/favicon1.ico" type="image/x-icon"/>
-    <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
 
-    <!--Pantalla de carga-->
-    <script type="text/javascript">
-      window.addEventListener("load", function () {
-        const loader = document.querySelector(".loader");
-        loader.className += " hidden";
-      });
-    </script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
+  <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
+  <meta name="author" content="Mega CX">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Build</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+  <link rel="icon" href="images/favicon1.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="images/favicon1.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
 
-    <!--Ocultar Boton de desplazamiento-->
-    <script>
-      window.addEventListener("scroll", function() {
-        var Fbutton = document.getElementById("Fbutton");
-        if (window.pageYOffset > 300) {
-          Fbutton.style.display = "block";
-          } else {
-            Fbutton.style.display = "none";
-          }
-      });
-    </script>
-
-    <!--Animacion Boton de desplazamiento-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      function init() {
-        function scrollToTop() {
-          $("html, body").animate({ scrollTop: 0 }, "slow");
-        }
-        var Fbutton = document.getElementById("Fbutton");
-        Fbutton.addEventListener("click", scrollToTop);
+  <!--Dark mode-->
+  <script>
+    function myFunction() {
+      var element = document.body;
+      var button = document.getElementById("myButton");
+      var slider = document.querySelector(".sliderSwitch");
+      element.classList.toggle("dark-mode");
+      if (element.classList.contains("dark-mode")) {
+        slider.classList.add("dark");
+        slider.classList.remove("light");
+        button.checked = false;
+        localStorage.setItem("theme", "dark");
+      } else {
+        slider.classList.add("light");
+        slider.classList.remove("dark");
+        button.checked = true;
+        localStorage.setItem("theme", "light");
       }
+    }
 
-      document.addEventListener("DOMContentLoaded", init);
-    </script>
 
-    <!--Texto dinamico animado-->
-    <script>
-      var words = ["▾DISEÑO▾", "▾ASCESORIA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICION▾", "▾INSTALACION▾"];
-      var startIndex = Math.floor(Math.random() * words.length);
-      var i = startIndex;
-      setInterval(function() {
-        document.querySelector('.tittle-one').textContent = words[i];
-        i++;
-        if (i == words.length) {
-          i = 0;
+    window.onload = function () {
+      var element = document.body;
+      var button = document.getElementById("myButton");
+      var slider = document.querySelector(".sliderSwitch");
+      var theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        element.classList.add("dark-mode");
+        slider.classList.add("dark");
+        slider.classList.remove("light");
+        button.checked = false;
+      } else if (theme === "light") {
+        element.classList.remove("dark-mode");
+        slider.classList.add("light");
+        slider.classList.remove("dark");
+        button.checked = true;
+      } else if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        element.classList.add("dark-mode");
+        slider.classList.add("dark");
+        slider.classList.remove("light");
+        localStorage.setItem("theme", "dark");
+        button.checked = false;
+      } else {
+        element.classList.remove("dark-mode");
+        slider.classList.add("light");
+        slider.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+        button.checked = true;
+      }
+    };
+
+  </script>
+
+  <!--Pantalla de carga-->
+  <script type="text/javascript">
+    window.addEventListener("load", function () {
+      const loader = document.querySelector(".loader");
+      loader.className += " hidden";
+    });
+  </script>
+
+  <!--Ocultar Boton de desplazamiento-->
+  <script>
+    window.addEventListener("scroll", function () {
+      var Fbutton = document.getElementById("Fbutton");
+      if (window.pageYOffset > 300) {
+        Fbutton.style.display = "block";
+      } else {
+        Fbutton.style.display = "none";
+      }
+    });
+  </script>
+
+  <!--Animacion Boton de desplazamiento-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function init() {
+      function scrollToTop() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+      }
+      var Fbutton = document.getElementById("Fbutton");
+      Fbutton.addEventListener("click", scrollToTop);
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+
+  <!--Menu_mobile-->
+  <script>
+    window.addEventListener('load', () => {
+      const menuButton = document.querySelector('#menuMobileToggleCheckbox');
+      const body = document.querySelector('body');
+
+      menuButton.addEventListener('change', () => {
+        if (menuButton.checked) {
+          body.classList.add('no-scroll-mobile');
+        } else {
+          body.classList.remove('no-scroll-mobile');
         }
-      }, 2000);
-    </script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const hexeBG = document.querySelector("#hexeBG");
-        console.log(hexeBG); // Debería mostrar el elemento #hexeBG en la consola
-        const flex = document.querySelector("#flex");
-        console.log(flex); // Debería mostrar el elemento #flex en la consola
-
-    
-        hexeBG.addEventListener("click", () => {
-        console.log("Clicked on #hexeBG"); // Debería mostrar este mensaje en la consola cuando haga clic en #hexeBG
-        flex.classList.toggle("expand");
-        });
       });
-    </script>
+    });
+  </script>
 </head>
 
 <body>
@@ -84,256 +128,413 @@
   <header>
     <div id="menuAlt1"></div>
     <div id="menu2Alt1"></div>
-    <div id="TittlecxAlt2" onclick="window.location.href = 'index.html';">Mega CX</div>
-    
+    <div id="TittlecxAlt2">Mega CX</div>
     <nav id="secondary">
       <ul>
         <li>
-         <a href="index.html">
-          <i class="fa-solid fa-house"></i> Inicio</a></li>
+          <a href="index.html">
+            <i class="fa-solid fa-house"></i> Inicio</a>
+        </li>
         <li>
-         <a href="build.html">
-          <i class="fa-solid fa-desktop"></i> Build</a></li>
+          <a href="build.html">
+            <i class="fa-solid fa-desktop"></i> Build</a>
+        </li>
         <li>
           <a href="gallery.html">
-            <i class="fa-regular fa-image"></i> Galeria</a></li>
+            <i class="fa-regular fa-image"></i> Galeria</a>
+        </li>
         <li>
           <a href="contact.html">
-            <i class="fa-solid fa-envelope"></i> Contacto</a></li>
+            <i class="fa-solid fa-envelope"></i> Contacto</a>
+        </li>
       </ul>
     </nav>
-  </header>
-<table class="Tbuild">
-  <tr>
-    <td>
-      <!--Box1-->
-  <div class="Box">
-    <p>
-      <div class="img-EJ"><div class="bAlt2" onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
 
-      <span class="box-text">
-        <strong class="box-tittle">Programas</strong></br></br>
-        <p>Programas de programas de todo tipo software de diseño, creacion, gestion, ofimatica, edicion, multimedia, proteccion, optimizacion, herramientas de todo tipo, etc con toda la instruccion necesaria para su instalacion, todo original y 100% seguro.</p>
-      </span>
-    </p>
-  </div>
-    </td>
-    <td><!--Box2-->
-      <div class="Box">
-        <p>
-          <div class="img-EJ"><div class="bAlt2" onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-black"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-    
-          <span class="box-text"></span>
-            <strong class="box-tittle">Videojuegos</strong></br></br>
-            Descarga de videojuegos (Solo PC) desde los mas clasicos hasta los mas recientes de ultima generacion se incluiran todos los DLC's y actualizaciones hasta la fecha, ademas de instrucciones de instalacion y soporte para cualquier problema con el juego dentro de lo que a exclusivamente funcionamiento del juego se refiere.
+    <!--Menu Mobile-->
+    <nav role="navigation" class="menuMobile">
+      <a href="index.html">Mega CX</a>
+      <div id="menuMobileToggle">
+        <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
+        <input id="menuMobileToggleCheckbox" type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menuMobile">
+          <a href="index.html">
+            <li>Home</li>
+          </a>
+          <a href="build.html">
+            <li>Build</li>
+          </a>
+          <a href="gallery.html">
+            <li>Gallery</li>
+          </a>
+          <a href="contact.html">
+            <li>Contact</li>
+          </a>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="box-grid-container">
+
+      <!--Box1-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ">
+            <div class="Box-buttonModal" onclick="document.getElementById('id01').style.display='block'"
+              class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+          </div>
+
+          <span class="box-text">
+            <strong class="box-tittle">Programas</strong></br></br>
+            <p>
+              Todo tipo software de diseño, creacion, gestion, ofimatica, edicion, multimedia, proteccion, optimizacion,
+              herramientas de todo tipo, con su instalacion.
+            </p>
           </span>
-        </p>
-      </div></td>
-    <td><!--Box3-->
-      <div class="Box">
-        <p>
-          <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-    
+          </p>
+        </div>
+      </div>
+
+      <!--Box2-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ">
+            <div class="Box-buttonModal" onclick="document.getElementById('id02').style.display='block'"
+              class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+          </div>
+
+          <span class="box-text">
+            <strong class="box-tittle">Videojuegos</strong></br></br>
+            <p>
+              Descarga de videojuegos (Solo PC) desde clasicos hasta de ultima generacion con todos los DLC's y
+              actualizaciones, ademas de instalacion y soporte del juego solo dentro de lo que al juego se refiere.
+            </p>
+          </span>
+          </p>
+        </div>
+      </div>
+
+      <!--Box3-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ">
+            <div class="Box-buttonModal" onclick="document.getElementById('id03').style.display='block'"
+              class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+          </div>
+
           <span class="box-text">
             <strong class="box-tittle">Peliculas</strong></br></br>
-            Descargas de Peliculas en latino, clasicos y estrenos en todas las calidades DVD-Rip, 720p, 1080p y 4K si esta disponible, para el soporte en 4K se recomiendan dispositivos compatibles el formato puede   variar entre .mp4 y .mkv tambien se recomienda un reproductor compatible.
+            <p>
+              Descargas de Peliculas en latino, clasicos y estrenos en todas las calidades DVD-Rip, 720p, 1080p y 4K si
+              esta disponible, para el soporte en 4K se recomiendan dispositivos compatibles.
+            </p>
           </span>
-        </p>
-      </div></td>
-      <td>
-        <!--Box4-->
-  <div class="Box">
-    <p>
-      <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
+          </p>
+        </div>
+      </div>
 
-      <span class="box-text">
-        <strong class="box-tittle">Diseño</strong></br></br>
-        Diseño de todo tipo, logos, carteles, tarjetas, afiches, etc a medida para versiones en digital he impresa no se incluye el servicio de impresas, ademas de diseño web para que tenga su propio sitio (algunas caracteristicas estan limitadas dependiendo la plataforma).
-      </span>
-    </p>
-  </div>
-      </td>
-  </tr>
-  <tr>
-    <td><!--Box5-->
-      <div class="Box">
-        <p>
-          <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-    
+      <!--Box4-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ">
+            <div class="Box-buttonModal" onclick="document.getElementById('id04').style.display='block'"
+              class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+          </div>
+
+          <span class="box-text">
+            <strong class="box-tittle">Diseño</strong></br></br>
+            <p>
+              Diseño de todo tipo, logos, layers, tarjetas, etc, versiones en digital e impresa, no se
+              incluye el servicio de impresion, ademas de diseño web para su sitio web.
+            </p>
+          </span>
+          </p>
+        </div>
+      </div>
+
+      <!--Box5-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ">
+            <div class="Box-buttonModal" onclick="document.getElementById('id05').style.display='block'"
+              class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+          </div>
+
           <span class="box-text">
             <strong class="box-tittle">Modelado 3D</strong></br></br>
-            Creacion y diseño a pedido de modelado 3D, para arquitectura, videojuegos, y animaciones desde 720p hasta a 4K, en el archivo de .obj a .fbx ademas se incluiran todos los archivos originales del proyecto (No se incluye impresion).
+            <p>
+              Creacion y diseño de modelado 3D, para arquitectura, assets, mecanica y animaciones, para todas las
+              plataformas (No se incluye impresion 3D).
+            </p>
           </span>
-        </p>
-      </div></td>
-    <td><!--Box6-->
-      <div class="Box">
-        <p>
-          <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-    
+          </p>
+        </div>
+      </div>
+
+      <!--Box6-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ">
+            <div class="Box-buttonModal" onclick="document.getElementById('id06').style.display='block'"
+              class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+          </div>
+
           <span class="box-text">
             <strong class="box-tittle">Ultilidades</strong></br></br>
-            Instalacion de programas, formateos, arreglos de todo tipo (solo software), antivirus, optimizacion y limpieza, actualizacion de software, configuracion inicial, etc. Ademas de soporte con otros temas relacionados.
+            <p>
+              Instalacion de programas, formateos, arreglos de todo tipo (solo software), antivirus, optimizacion y
+              limpieza, actualizacion de software, configuracion inicial, etc. Ademas de soporte con otros temas
+              relacionados.
+            </p>
           </span>
-        </p>
-      </div></td>
-    <td><!--Box7-->
-      <div class="Box">
-        <p>
-          <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-    
+          </p>
+        </div>
+      </div>
+
+      <!--Box7-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ">
+            <div class="Box-buttonModal" onclick="document.getElementById('id07').style.display='block'"
+              class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+          </div>
+
           <span class="box-text">
             <strong class="box-tittle">Edicion Fotografica</strong></br></br>
-            Edicion de fotos (retratos, eventos, paisajes), arreglos de color y correcciones (No se incluye el servicio de fotografia ni el revelado de fotos fisicas o impresion).
+            <p>
+              Edicion fotografica, arreglos de color y correcciones (No se incluye el servicio de fotografia ni el
+              revelado de fotos fisicas o impresion).
+            </p>
           </span>
-        </p>
-      </div></td>
-    <td>
+          </p>
+        </div>
+      </div>
+
       <!--Box8-->
-  <div class="Box">
-    <p>
-      <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ">
+            <div class="Box-buttonModal" onclick="document.getElementById('id08').style.display='block'"
+              class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+          </div>
 
-      <span class="box-text"></span>
-        <strong class="box-tittle">Edicion de Video</strong></br></br>
-        Cortometrajes o videos publicitarios + animaciones lo que necesite desde 720p hasta a 4K (No se incluye el servico de filmacion, (no se puede trabajar a mas de los archivos originales de base, la calidad tambien puede variar de acuerdo a los archivos originales de base).
-      </span>
-    </p>
-  </div>
-    </td>
-  </tr>
-</table>
+          <span class="box-text">
+            <strong class="box-tittle">Edicion de Video</strong></br></br>
+            <p>
+              Cortometrajes, videos publicitarios, animaciones, etc (La calidad tambien puede variar de acuerdo a los
+              archivos originales de base).
+            </p>
+          </span>
+          </p>
+        </div>
+      </div>
 
-<!--Modal Content1-->
-  <div id="id01" class="w3-modal">
-    <div class="w3-modal-content">
-      <div class="w3-container">
-        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        <img src="images/image1.jpg">
-        <p>Some text. Some text. Some text.</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea minima.</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea minima.</p>
+    </div>
+
+    <!--Modal Content1-->
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id01').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Some text. Some text. Some text. 01</p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+        </div>
       </div>
     </div>
+
+    <!--Modal Content2-->
+    <div id="id02" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id02').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Some text. Some text. Some text. 02</p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content3-->
+    <div id="id03" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id03').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Some text. Some text. Some text. 03</p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content4-->
+    <div id="id04" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id04').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Some text. Some text. Some text. 04</p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content5-->
+    <div id="id05" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id05').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Some text. Some text. Some text. 05</p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content6-->
+    <div id="id06" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id06').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Some text. Some text. Some text. 06</p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content7-->
+    <div id="id07" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id07').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Some text. Some text. Some text. 07</p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content8-->
+    <div id="id08" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id08').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Some text. Some text. Some text. 08</p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+<button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
+
+<footer>
+  <div id="footerCont">
+    <label class="switch">
+      <input id="myButton" onclick="myFunction()" type="checkbox" checked><!--Cambiar a tema oscuro</input>-->
+      <span class="sliderSwitch"></span>
+    </label><br><br>
+    <p>All rights reserved @2019 [MMXXIII]</p><br>
+    <p>Make by Mega CX</p><br>
+    <p><a href="mailto:juan153v0@outlook.com" class="audioclick">Juan153v0@outlook.com</a>
+    <p>
   </div>
-<!--Modal Content2-->
-<div id="id02" class="w3-modal">
-  <div class="w3-modal-content">
-    <div class="w3-container">
-      <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-      <img src="images/image1.jpg">
-      <p>Some text. Some text. 222.</p>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea minima.</p>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea minima.</p>
-    </div>
-  </div>
-</div>
+</footer>
 
+<div class="loader"></div>
 
-<div class="tableMG2">
-
-  
-    <!--Box1-->
-    <div class="Box">
-      <p>
-        <div class="img-EJ"><div class="bAlt2" onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-  
-        <span class="box-text">
-          <strong class="box-tittle">Programas</strong></br></br>Programas de programas de todo tipo software de diseño, creacion, gestion, ofimatica, edicion, multimedia, proteccion, optimizacion, herramientas de todo tipo, etc con toda la instruccion necesaria para su instalacion, todo original y 100% seguro.
-        </span>
-      </p>
-    </div>
-      
-      <!--Box2-->
-        <div class="Box">
-          <p>
-            <div class="img-EJ"><div class="bAlt2" onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-black"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-      
-            <span class="box-text"></span>
-              <strong class="box-tittle">Videojuegos</strong></br></br>
-              Descarga de videojuegos (Solo PC) desde los mas clasicos hasta los mas recientes de ultima generacion se incluiran todos los DLC's y actualizaciones hasta la fecha, ademas de instrucciones de instalacion y soporte para cualquier problema con el juego dentro de lo que a exclusivamente funcionamiento del juego se refiere.
-            </span>
-          </p>
-        </div>
-      <!--Box3-->
-        <div class="Box">
-          <p>
-            <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-      
-            <span class="box-text">
-              <strong class="box-tittle">Peliculas</strong></br></br>
-              Descargas de Peliculas en latino, clasicos y estrenos en todas las calidades DVD-Rip, 720p, 1080p y 4K si esta disponible, para el soporte en 4K se recomiendan dispositivos compatibles el formato puede   variar entre .mp4 y .mkv tambien se recomienda un reproductor compatible.
-            </span>
-          </p>
-        </div>
-          <!--Box4-->
-    <div class="Box">
-      <p>
-        <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-  
-        <span class="box-text">
-          <strong class="box-tittle">Diseño</strong></br></br>
-          Diseño de todo tipo, logos, carteles, tarjetas, afiches, etc a medida para versiones en digital he impresa no se incluye el servicio de impresas, ademas de diseño web para que tenga su propio sitio (algunas caracteristicas estan limitadas dependiendo la plataforma).
-        </span>
-      </p>
-    </div>
-        
-      <!--Box5-->
-        <div class="Box">
-          <p>
-            <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-      
-            <span class="box-text">
-              <strong class="box-tittle">Modelado 3D</strong></br></br>
-              Creacion y diseño a pedido de modelado 3D, para arquitectura, videojuegos, y animaciones desde 720p hasta a 4K, en el archivo de .obj a .fbx ademas se incluiran todos los archivos originales del proyecto (No se incluye impresion).
-            </span>
-          </p>
-        </div>
-      <!--Box6-->
-        <div class="Box">
-          <p>
-            <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-      
-            <span class="box-text">
-              <strong class="box-tittle">Ultilidades</strong></br></br>
-              Instalacion de programas, formateos, arreglos de todo tipo (solo software), antivirus, optimizacion y limpieza, actualizacion de software, configuracion inicial, etc. Ademas de soporte con otros temas relacionados.
-            </span>
-          </p>
-        </div>
-      <!--Box7-->
-        <div class="Box">
-          <p>
-            <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-      
-            <span class="box-text">
-              <strong class="box-tittle">Edicion Fotografica</strong></br></br>
-              Edicion de fotos (retratos, eventos, paisajes), arreglos de color y correcciones (No se incluye el servicio de fotografia ni el revelado de fotos fisicas o impresion).
-            </span>
-          </p>
-        </div>
-        <!--Box8-->
-    <div class="Box">
-      <p>
-        <div class="img-EJ"><div class="bAlt2"><i class="fas fa-plus" style="font-size: 40px; color: #181818;"></i></div></div>
-  
-        <span class="box-text"></span>
-          <strong class="box-tittle">Edicion de Video</strong></br></br>
-          Cortometrajes o videos publicitarios + animaciones lo que necesite desde 720p hasta a 4K (No se incluye el servico de filmacion, (no se puede trabajar a mas de los archivos originales de base, la calidad tambien puede variar de acuerdo a los archivos originales de base).
-        </span>
-      </p>
-    </div>
-
-</div>
-  
-  </body>
-  
-  <button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
-
-  <footer id="footerI">
-    <p id="FT">All rights reserved @2019</p></br>
-    <p id="FT" class="FTmake">Make by Mega CX</p></br>
-    <p id="FT"><a href="mailto:juan153v0@outlook.com">Juan153v0@outlook.com</a></p>
-  </footer>
-
-  <div class="loader"></div>
 </html>
