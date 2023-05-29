@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<HTML lang="es">
 
 <head>
   <meta charset="utf-8" />
@@ -70,6 +71,19 @@
       }
     };
 
+  </script>
+
+  <!--Sounds-->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let boton = document.querySelector(".audioclick");
+      boton.addEventListener("click", () => {
+        let etiquetaAudio = document.createElement("audio");
+        etiquetaAudio.setAttribute("src", "/sound/click-21156-666HeroHero.mp3");
+        etiquetaAudio.play();
+        etiquetaAudio.volume = 1;
+      });
+    });
   </script>
 
   <!--Pantalla de carga-->
@@ -510,12 +524,12 @@
   </main>
 </body>
 
-<button id="Fbutton"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
+<button id="Fbutton" class="audioclick" type="button"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
 
 <footer>
   <div id="footerCont">
     <label class="switch">
-      <input id="myButton" onclick="myFunction()" type="checkbox" checked><!--Cambiar a tema oscuro</input>-->
+      <input id="myButton" onclick="myFunction()" type="checkbox" checked>
       <span class="sliderSwitch"></span>
     </label><br><br>
     <p>All rights reserved @2019 [MMXXIII]</p><br>

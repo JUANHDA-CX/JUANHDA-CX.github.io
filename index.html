@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<HTML lang="es">
 
 <head>
   <meta charset="utf-8" />
@@ -121,7 +122,7 @@
 
   <!--Texto dinamico animado-->
   <script>
-    var words = ["▾DISEÑO▾", "▾ASCESORIA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICION▾", "▾INSTALACION▾"];
+    var words = ["▾DISEÑO▾", "▾ASCESORÍA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICIÓN▾", "▾INSTALACIÓN▾"];
     var startIndex = Math.floor(Math.random() * words.length);
     var i = startIndex;
     setInterval(function () {
@@ -138,13 +139,10 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const hexeBG = document.querySelector("#hexeBG");
-      console.log(hexeBG); // Debería mostrar el elemento #hexeBG en la consola
       const flex = document.querySelector("#flex");
-      console.log(flex); // Debería mostrar el elemento #flex en la consola
 
 
       hexeBG.addEventListener("click", () => {
-        console.log("Clicked on #hexeBG"); // Debería mostrar este mensaje en la consola cuando haga clic en #hexeBG
         flex.classList.toggle("expand");
       });
     });
@@ -204,7 +202,7 @@
     <table id="tableHome">
       <tr> <!--Fila 1-->
         <td>
-          <img class="logocx" src="images/megav3.11080notCX.png">
+          <img class="logocx" src="images/megav3.11080notCX.png" alt="logo">
         </td>
       </tr>
       <tr> <!--Fila 2-->
@@ -274,12 +272,12 @@
   </main>
 </body>
 
-<button id="Fbutton" class="audioclick"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
+<button id="Fbutton" class="audioclick" type="button"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
 
 <footer>
   <div id="footerCont">
     <label class="switch">
-      <input id="myButton" onclick="myFunction()" type="checkbox" checked><!--Cambiar a tema oscuro</input>-->
+      <input id="myButton" onclick="myFunction()" type="checkbox" checked>
       <span class="sliderSwitch"></span>
     </label><br><br>
     <p>All rights reserved @2019 [MMXXIII]</p><br>
