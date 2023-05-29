@@ -40,8 +40,6 @@ body {
 body::-webkit-scrollbar {
   width: 15px;
   background-color: #cccccc;
-  cursor: url("icons/cursor_arrow.png"), auto;
-  cursor: pointer;
 }
 
 .dark-mode::-webkit-scrollbar {
@@ -71,8 +69,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 50px;
   background-clip: padding-box;
   border: 2px solid transparent;
-  cursor: url("icons/cursor_arrow.png"), default;
-  cursor: pointer;
 }
 
 .dark-mode::-webkit-scrollbar-thumb {
@@ -93,7 +89,6 @@ body::-webkit-scrollbar-thumb:active {
 
 ::selection {
   background: #ffa9a9;
-  ;
   color: black;
 }
 
@@ -201,70 +196,27 @@ body {
   src: local("fonts/LondiniaMedium.ttf"), url("fonts/LondiniaMedium.ttf");
 }
 
-#Tittlecx {
-  position: absolute;
-  font-size: 120px;
-  line-height: 70pt;
-  top: 5%;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 650px;
-  text-align: center;
-}
-
-@media only screen and (max-width: 600px) {
-  #Tittlecx {
-    font-size: 50px;
-    line-height: 40pt;
-    top: 5%;
-    width: auto;
-    text-align: center;
-  }
-}
-
-#Tittlecx .sub {
-  font-size: 60px;
-}
-
-@media only screen and (max-width: 1024px) {
-  #Tittlecx .sub {
-    font-size: 40px;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  #Tittlecx .sub {
-    font-size: 25px;
-  }
-}
-
-div#Tittlecx>a {
-  text-decoration: none;
-  text-decoration-style: none;
-  font-family: OxfordStreet;
-  color: black;
-  font-weight: bold;
-}
-
-.dark-mode div#Tittlecx>a {
-  color: white;
-}
-
 /*Menu principal*/
 nav#primary {
   position: absolute;
   width: 600pt;
-  top: 40vh;
-  left: -25vw;
+  top: 56vh;
+  left: 0;
   z-index: 2;
   background-color: rgba(0, 128, 0, 0);
+}
+
+@media (max-width: 1400px) {
+  #emergent {
+    top: 56vh;
+    left: 0;
+  }
 }
 
 @media only screen and (max-width: 600px) {
   nav#primary {
     width: 100%;
-    top: 20vh;
+    top: 28vh;
     left: 50%;
     transform: translateX(-50%);
   }
@@ -318,7 +270,7 @@ nav#secondary {
   text-decoration: none;
   text-align: center;
   margin: auto;
-  top: 12px;
+  top: 15px;
   left: 50%;
   transform: translateX(-50%);
   display: block;
@@ -332,11 +284,10 @@ nav#secondary {
 #menuMobileToggle {
   display: block;
   position: relative;
-  top: 0px;
+  top: 0;
   left: 0;
   z-index: 1;
   background-color: #ffa9a9;
-  ;
   width: 100%;
   height: auto;
   padding: 10px;
@@ -356,6 +307,7 @@ nav#secondary {
   top: 0;
   left: 0;
   cursor: pointer;
+  cursor: url("icons/cursor_select.png"), pointer;
   opacity: 0;
   z-index: 2;
   -webkit-touch-callout: none;
@@ -365,6 +317,7 @@ nav#secondary {
   display: block;
   width: 30px;
   height: 6px;
+  margin-top: 6px;
   margin-bottom: 6px;
   background-color: #000000;
 }
@@ -403,11 +356,16 @@ nav#secondary {
 }
 
 #menuMobile li:hover {
-  background-color: #000000;
+  background-color: #ffffff;
   background-image: linear-gradient(45deg, #070707aa, #07070760);
   background-image: none;
   border-left: solid 6px #b90f10;
   transition: 0.5s;
+}
+
+.dark-mode #menuMobile li:hover {
+  background-color: #323232;
+  border-left: solid 6px #cccccc;
 }
 
 #menuMobile li:active {
@@ -489,7 +447,7 @@ nav#secondary {
 @media only screen and (max-width: 600px) {
   #primary ul>li {
     margin: 0 5px 0 5px;
-    padding: 1px 2px 1px 2px;
+    padding: 0px 1px 0px 1px;
     line-height: 1;
   }
 }
@@ -522,6 +480,7 @@ li a {
   color: #000000;
   font-family: OxfordStreet;
   font-size: 18px;
+  cursor: url("icons/cursor_arrow.png"), default;
 }
 
 .dark-mode li a {
@@ -531,21 +490,21 @@ li a {
 
 @media only screen and (max-width: 600px) {
   #primary li a {
-    font-size: 20px;
+    font-size: 14pt;
   }
 }
 
 /*Menu retractil*/
 #emergent {
   position: absolute;
-  top: 48vh;
-  left: 50vw;
+  top: 55vh;
+  left: 85vw;
 }
 
 @media (max-width: 1400px) {
   #emergent {
-    top: 53vh;
-    left: 58vw;
+    top: 54vh;
+    left: 80vw;
   }
 }
 
@@ -562,7 +521,6 @@ li a {
   height: 50px;
   border-radius: 50%;
   background-color: #ffa9a9;
-  ;
   position: absolute;
   z-index: 5;
 }
@@ -672,7 +630,6 @@ li a {
 
 .siteicons:hover {
   background-color: #ffffff;
-  ;
 }
 
 .dark-mode .siteicons:hover {
@@ -769,11 +726,11 @@ li a {
   background-image: linear-gradient(270deg, #b90f10, #4b1eff);
 }
 
-.title-one {
-  animation: title-one 3s infinite;
+.tittle-one {
+  animation: tittle-one 3s infinite;
 }
 
-@keyframes title-one {
+@keyframes tittle-one {
 
   0%,
   100% {
@@ -788,8 +745,8 @@ li a {
 @media only screen and (max-width: 600px) {
   .tittle-one {
     font-size: 32px;
-    margin-left: 3%;
-    margin-right: 3%;
+    margin-left: 2%;
+    margin-right: 2%;
     margin-bottom: 5%;
   }
 }
@@ -850,6 +807,7 @@ li a {
   transition: top 0.25s;
   user-select: none;
   margin-bottom: 80px;
+  cursor: url("icons/cursor_select.png"), pointer;
 }
 
 .dark-mode #Fbutton {
@@ -948,6 +906,7 @@ footer {
   -webkit-transition: .4s;
   transition: .4s;
   user-select: none;
+  cursor: url("icons/cursor_select.png"), pointer;
 }
 
 
@@ -988,7 +947,6 @@ input#myButton:checked~.sliderSwitch:before {
 
 .sliderSwitch.light {
   background-color: #ffa9a9;
-  ;
   background-image: none;
 }
 
@@ -1077,7 +1035,7 @@ input#myButton:checked~.sliderSwitch.light:before {
 
 /* BUILD */
 
-#menuAlt1 {
+#BarMenu-secondary {
   background-color: #ffdddd;
   height: 100px;
   width: auto;
@@ -1085,40 +1043,12 @@ input#myButton:checked~.sliderSwitch.light:before {
   z-index: 3;
 }
 
-.dark-mode #menuAlt1 {
+.dark-mode #BarMenu-secondary {
   background-color: rgb(24, 24, 24);
 }
 
 @media only screen and (max-width: 600px) {
-  #menuAlt1 {
-    display: none;
-    width: 100vw;
-    height: 50px;
-  }
-}
-
-#menu2Alt1 {
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-  z-index: 3;
-  background-color: #ffa9a9;
-  ;
-  background-image: none;
-  height: 55px;
-  width: 90vw;
-  border-radius: 0px 0px 15px 15px;
-  box-shadow: 0px 5px 7px #0000003f;
-  display: none;
-}
-
-.dark-mode #menu2Alt1 {
-  background-color: rgb(129, 0, 0);
-  background-image: linear-gradient(90deg, #b90f10, #4b1eff);
-}
-
-@media only screen and (max-width: 600px) {
-  #menu2Alt1 {
+  #BarMenu-secondary {
     display: none;
     width: 100vw;
     height: 50px;
@@ -1278,8 +1208,8 @@ body article div p {
   font-size: 16px;
   width: 90%;
   height: auto;
-  bottom: 0;
   margin: auto;
+  padding-top: 50px;
   text-align: center;
   display: flex;
   align-items: center;
@@ -1289,15 +1219,15 @@ body article div p {
 @media only screen and (max-width: 600px) {
   .box-text p {
     font-size: 18px;
-    width: 90%;
+    width: 95%;
     height: auto;
-    bottom: 0;
     margin: auto;
+    padding-top: 20px;
   }
 }
 
 .dark-mode .box-tittle {
-  color: #b90f10;
+  color: #000000;
 }
 
 .img-EJ {
@@ -1320,7 +1250,7 @@ body article div p {
 @media only screen and (max-width: 600px) {
   .img-EJ {
     height: 30%;
-    width: 80%;
+    width: 85%;
   }
 }
 
@@ -1329,13 +1259,11 @@ body article div p {
 }
 
 .Box-style {
-  transform: translateX(1%);
   position: relative;
 }
 
 @media only screen and (max-width: 600px) {
   .Box-style {
-    transform: translateX(1%);
     position: relative;
   }
 }
@@ -1349,6 +1277,7 @@ body article div p {
   padding: 20px;
   padding-left: 150px;
   padding-right: 150px;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 1400px) {
@@ -1387,7 +1316,7 @@ body article div p {
   margin-bottom: 50px;
 }
 
-/*--------------------------Box styles-------------------------------*/
+/*--------------------------Box Card styles-------------------------------*/
 .Box-style {
   background-color: #ffa9a9;
   color: #000000;
@@ -1395,7 +1324,7 @@ body article div p {
   border: solid 2px #000000;
   border-radius: 10px;
   width: auto;
-  height: 50vh;
+  height: 55vh;
   margin-right: 5px;
   margin-left: 5px;
   text-align: center;
@@ -1417,8 +1346,8 @@ body article div p {
 
 @media only screen and (max-width: 600px) {
   .Box-style {
-    width: 95%;
-    height: 90vh;
+    width: 94vw;
+    height: 400pt;
   }
 }
 
@@ -1440,7 +1369,7 @@ body article div p {
   position: relative;
   left: 50%;
   transform: translate(-50%);
-  top: 40vh;
+  top: -15%;
   background-color: #000000;
   height: 70px;
   width: 70px;
@@ -1449,6 +1378,7 @@ body article div p {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: url("icons/cursor_select.png"), pointer;
 }
 
 .dark-mode .Box-buttonModal {
@@ -1461,13 +1391,17 @@ body article div p {
   font-size: 40px;
 }
 
+.Box-buttonModal i:hover {
+  transform: rotate(45deg);
+}
+
 .dark-mode .Box-buttonModal i {
   color: #181818;
 }
 
 @media only screen and (max-width: 1400px) {
   .Box-buttonModal {
-    top: 490px;
+    top: -12%;
     height: 50px;
     width: 50px;
   }
@@ -1475,7 +1409,7 @@ body article div p {
 
 @media only screen and (max-width: 600px) {
   .Box-buttonModal {
-    top: 500px;
+    top: -15%;
     height: 50px;
     width: 50px;
   }
@@ -1485,7 +1419,7 @@ body article div p {
   filter: brightness(150%);
 }
 
-/*----------------------------Modal---------------------------*/
+/*----------------------------Modal Content---------------------------*/
 
 .w3-modal {
   z-index: 7;
@@ -1508,8 +1442,7 @@ body article div p {
   outline: 0;
   width: 900px;
   height: 800px;
-  border-radius: 12px;
-  box-shadow: 0 0 0px rgb(133, 64, 64);
+  border-radius: 24px;
 }
 
 @media only screen and (max-width: 1400px) {
@@ -1521,7 +1454,7 @@ body article div p {
 
 @media only screen and (max-width: 600px) {
   .w3-modal-content {
-    width: 350px;
+    width: 90%;
     height: 700px;
   }
 }
@@ -1543,6 +1476,10 @@ body article div p {
   position: absolute;
   right: 0;
   top: 0;
+}
+
+.w3-container> :nth-child(3) {
+  font-weight: bold;
 }
 
 .w3-container img {
@@ -1619,7 +1556,6 @@ body article div p {
 .w3-container span:hover {
   color: #000000;
   background-color: #ffa9a9;
-  ;
   background-image: none;
 }
 
@@ -1684,9 +1620,15 @@ body article div p {
   }
 }
 
+.iconshare {
+  display: flex;
+  justify-content: center;
+}
+
 .iconshare table {
-  table-layout: fixed;
+  table-layout: auto;
   width: auto;
+  margin: auto;
   user-select: none;
 }
 
@@ -1695,13 +1637,12 @@ body article div p {
   font-weight: bold;
   align-items: center;
   justify-content: center;
-  width: 400px;
   padding: 5px;
 }
 
 @media only screen and (max-width: 600px) {
   .iconshare table td {
-    width: 400px;
+    padding: 4px;
   }
 }
 
@@ -1709,6 +1650,14 @@ body article div p {
   .iconshare table {
     table-layout: auto;
     margin-top: -10%;
+    width: auto;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .iconshare div.hover a:nth-of-type(2) {
+    display: block;
   }
 }
 
@@ -1751,7 +1700,6 @@ body article div p {
 .iconshare .hover:hover a,
 .iconshare .hover:hover i.fa-brands {
   color: #ffa9a9;
-  ;
 }
 
 .dark-mode .iconshare .hover:hover a,
@@ -1889,12 +1837,12 @@ form input:focus {
 #form-enviar {
   border-radius: 10px;
   background-color: #ffa9a9;
-  ;
   color: rgb(0, 0, 0);
   margin-bottom: 10px;
   height: 50px;
   width: 330px;
   border: none;
+  font-family: Londinia;
 }
 
 .dark-mode #form-enviar {
@@ -1903,14 +1851,14 @@ form input:focus {
 
 @media only screen and (max-width: 600px) {
   #form-enviar {
-    width: 130px;
+    width: 65%;
+    margin-top: 25px;
   }
 }
 
 #form-reset {
   border-radius: 10px;
   background-color: #ffa9a9;
-  ;
   color: rgb(0, 0, 0);
   margin-bottom: 10px;
   height: 50px;
@@ -1919,6 +1867,7 @@ form input:focus {
   position: relative;
   bottom: 60px;
   left: 350px;
+  font-family: Londinia;
 }
 
 .dark-mode #form-reset {
@@ -1927,7 +1876,7 @@ form input:focus {
 
 @media only screen and (max-width: 600px) {
   #form-reset {
-    width: 130px;
+    width: 30%;
     float: right;
     left: 0px;
   }
