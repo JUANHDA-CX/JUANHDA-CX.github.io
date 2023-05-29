@@ -802,7 +802,7 @@ li a {
   width: 50px;
   display: none;
   border-radius: 50%;
-  border: 5px solid #323232;
+  border: 5px solid #646464;
   position: fixed;
   right: 4vw;
   align-items: center;
@@ -1897,6 +1897,7 @@ form input:focus {
     width: 30%;
     float: right;
     left: 0px;
+    margin-left: 70%;
   }
 }
 
