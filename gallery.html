@@ -26,11 +26,11 @@
       element.classList.toggle("dark-mode");
       if (element.classList.contains("dark-mode")) {
         slider.classList.add("dark");
-        slider.classList.remove("light");
+        slider.classList.remove("lightthree");
         button.checked = false;
         localStorage.setItem("theme", "dark");
       } else {
-        slider.classList.add("light");
+        slider.classList.add("lightthree");
         slider.classList.remove("dark");
         button.checked = true;
         localStorage.setItem("theme", "light");
@@ -46,11 +46,11 @@
       if (theme === "dark") {
         element.classList.add("dark-mode");
         slider.classList.add("dark");
-        slider.classList.remove("light");
+        slider.classList.remove("lightthree");
         button.checked = false;
       } else if (theme === "light") {
         element.classList.remove("dark-mode");
-        slider.classList.add("light");
+        slider.classList.add("lightthree");
         slider.classList.remove("dark");
         button.checked = true;
       } else if (
@@ -59,12 +59,12 @@
       ) {
         element.classList.add("dark-mode");
         slider.classList.add("dark");
-        slider.classList.remove("light");
+        slider.classList.remove("lightthree");
         localStorage.setItem("theme", "dark");
         button.checked = false;
       } else {
         element.classList.remove("dark-mode");
-        slider.classList.add("light");
+        slider.classList.add("lightthree");
         slider.classList.remove("dark");
         localStorage.setItem("theme", "light");
         button.checked = true;
@@ -137,7 +137,7 @@
   </script>
 </head>
 
-<body>
+<body class="palette_three">
   <div id="scroll"></div>
   <header>
     <div id="BarMenu-secondary"></div>
@@ -166,14 +166,14 @@
     <!--Menu Mobile-->
     <nav role="navigation" class="menuMobile">
       <a href="index.html">Mega CX</a>
-      <div id="menuMobileToggle">
+      <div id="menuMobileToggle" class="palette_three">
         <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
         <input id="menuMobileToggleCheckbox" type="checkbox" />
         <span></span>
         <span></span>
         <span></span>
-        <ul id="menuMobile">
-          <a href="index.html">
+        <ul id="menuMobile" class="palette_three">
+          <a href=" index.html">
             <li>Home</li>
           </a>
           <a href="build.html">
@@ -287,7 +287,7 @@
     </label><br><br>
     <p>All rights reserved @2019 [MMXXIII]</p><br>
     <p>Make by Mega CX</p><br>
-    <p><a href="mailto:juan153v0@outlook.com" class="audioclick">Juan153v0@outlook.com</a>
+    <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_three">Juan153v0@outlook.com</a>
     <p>
   </div>
 </footer>

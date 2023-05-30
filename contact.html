@@ -26,11 +26,11 @@
       element.classList.toggle("dark-mode");
       if (element.classList.contains("dark-mode")) {
         slider.classList.add("dark");
-        slider.classList.remove("light");
+        slider.classList.remove("lightfour");
         button.checked = false;
         localStorage.setItem("theme", "dark");
       } else {
-        slider.classList.add("light");
+        slider.classList.add("lightfour");
         slider.classList.remove("dark");
         button.checked = true;
         localStorage.setItem("theme", "light");
@@ -46,11 +46,11 @@
       if (theme === "dark") {
         element.classList.add("dark-mode");
         slider.classList.add("dark");
-        slider.classList.remove("light");
+        slider.classList.remove("lightfour");
         button.checked = false;
       } else if (theme === "light") {
         element.classList.remove("dark-mode");
-        slider.classList.add("light");
+        slider.classList.add("lightfour");
         slider.classList.remove("dark");
         button.checked = true;
       } else if (
@@ -59,12 +59,12 @@
       ) {
         element.classList.add("dark-mode");
         slider.classList.add("dark");
-        slider.classList.remove("light");
+        slider.classList.remove("lightfour");
         localStorage.setItem("theme", "dark");
         button.checked = false;
       } else {
         element.classList.remove("dark-mode");
-        slider.classList.add("light");
+        slider.classList.add("lightfour");
         slider.classList.remove("dark");
         localStorage.setItem("theme", "light");
         button.checked = true;
@@ -137,7 +137,7 @@
   </script>
 </head>
 
-<body>
+<body class="palette_four">
   <div id="scroll"></div>
   <header>
     <div id="BarMenu-secondary"></div>
@@ -165,13 +165,13 @@
     <!--Menu Mobile-->
     <nav role="navigation" class="menuMobile">
       <a href="index.html">Mega CX</a>
-      <div id="menuMobileToggle">
+      <div id="menuMobileToggle" class="palette_four">
         <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
         <input id="menuMobileToggleCheckbox" type="checkbox" />
         <span></span>
         <span></span>
         <span></span>
-        <ul id="menuMobile">
+        <ul id="menuMobile" class="palette_four">
           <a href="index.html">
             <li>Home</li>
           </a>
@@ -241,38 +241,38 @@
       </div>
     </div>
 
-    <input class="formulario1" type="text" name="Nombre" placeholder="Nombre completo" required />
-    <input class="formulario1" type="email" name="E-Mail" placeholder="Correo electronico" value="" required />
-    <select id="formulario2" name="Categoria">
-      <option class="form2-1" value="Programas">Programas</option>
-      <option class="form2-1" value="Peliculas">Peliculas</option>
-      <option class="form2-1" value="Juegos">Juegos</option>
-      <option class="form2-1" value="Diseño">Diseño</option>
+    <input class="formNameMail" type="text" name="Nombre" placeholder="Nombre completo" required />
+    <input class="formNameMail" type="email" name="E-Mail" placeholder="Correo electronico" value="" required />
+    <select id="formSelect" name="Categoria">
+      <option class="formSelectOption" value="Programas">Programas</option>
+      <option class="formSelectOption" value="Peliculas">Peliculas</option>
+      <option class="formSelectOption" value="Juegos">Juegos</option>
+      <option class="formSelectOption" value="Diseño">Diseño</option>
     </select>
-    <textarea placeholder="Escribe tu peticion..." ; id="textarea" name="Mensaje" cols="40" rows="15"
+    <textarea placeholder="Escribe tu peticion..." ; id="formText" name="Mensaje" cols="40" rows="15"
       value="Escribe tu mensaje" required></textarea>
     <a href="#"><input id="form-enviar" class="audioclick" type="submit" onclick="alert('Regresa al sitio web')" /></a>
     <input id="form-reset" class="audioclick" type="reset" />
   </form></br>
   <!--Formulario fin-->
 
-</body>
+  </body">
 
-<button id="Fbutton" class="audioclick" type="button"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
+  <button id="Fbutton" class="audioclick" type="button"><img id="arrowup" src="icons/arrowUPv3.svg"></button>
 
-<footer>
-  <div id="footerCont">
-    <label class="switch">
-      <input id="myButton" onclick="myFunction()" type="checkbox" checked>
-      <span class="sliderSwitch"></span>
-    </label><br><br>
-    <p>All rights reserved @2019 [MMXXIII]</p><br>
-    <p>Make by Mega CX</p><br>
-    <p><a href="mailto:juan153v0@outlook.com" class="audioclick">Juan153v0@outlook.com</a>
-    <p>
-  </div>
-</footer>
+  <footer>
+    <div id="footerCont">
+      <label class="switch">
+        <input id="myButton" onclick="myFunction()" type="checkbox" checked>
+        <span class="sliderSwitch"></span>
+      </label><br><br>
+      <p>All rights reserved @2019 [MMXXIII]</p><br>
+      <p>Make by Mega CX</p><br>
+      <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_four">Juan153v0@outlook.com</a>
+      <p>
+    </div>
+  </footer>
 
-<div class="loader"></div>
+  <div class="loader"></div>
 
 </html>

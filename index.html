@@ -26,11 +26,11 @@
       element.classList.toggle("dark-mode");
       if (element.classList.contains("dark-mode")) {
         slider.classList.add("dark");
-        slider.classList.remove("light");
+        slider.classList.remove("lightone");
         button.checked = false;
         localStorage.setItem("theme", "dark");
       } else {
-        slider.classList.add("light");
+        slider.classList.add("lightone");
         slider.classList.remove("dark");
         button.checked = true;
         localStorage.setItem("theme", "light");
@@ -46,11 +46,11 @@
       if (theme === "dark") {
         element.classList.add("dark-mode");
         slider.classList.add("dark");
-        slider.classList.remove("light");
+        slider.classList.remove("lightone");
         button.checked = false;
       } else if (theme === "light") {
         element.classList.remove("dark-mode");
-        slider.classList.add("light");
+        slider.classList.add("lightone");
         slider.classList.remove("dark");
         button.checked = true;
       } else if (
@@ -59,12 +59,12 @@
       ) {
         element.classList.add("dark-mode");
         slider.classList.add("dark");
-        slider.classList.remove("light");
+        slider.classList.remove("lightone");
         localStorage.setItem("theme", "dark");
         button.checked = false;
       } else {
         element.classList.remove("dark-mode");
-        slider.classList.add("light");
+        slider.classList.add("lightone");
         slider.classList.remove("dark");
         localStorage.setItem("theme", "light");
         button.checked = true;
@@ -150,7 +150,7 @@
 
 </head>
 
-<body>
+<body class="palette_one">
   <div id="scroll"></div>
   <header>
     <div class="parallax"></div>
@@ -282,7 +282,7 @@
     </label><br><br>
     <p>All rights reserved @2019 [MMXXIII]</p><br>
     <p>Make by Mega CX</p><br>
-    <p><a href="mailto:juan153v0@outlook.com" class="audioclick">Juan153v0@outlook.com</a>
+    <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a>
     <p>
   </div>
 </footer>
