@@ -744,6 +744,10 @@ li a {
   background-color: #ffffff;
 }
 
+.dark-mode .siteicons>a:hover {
+  color: var(--palette_dark_accent_two);
+}
+
 .dark-mode .siteicons:hover {
   background-color: var(--palette_dark_accent_one);
 }
@@ -2059,13 +2063,13 @@ form:nth-of-type(4) {
 }
 
 form input:focus {
-  color: #ffffff;
+  color: var(--palette_text_black);
   outline: none !important;
   border-color: #323232;
 }
 
 .dark-mode form input:focus {
-  color: #ffffff;
+  color: var(--palette_text_white);
   outline: none !important;
   border-color: var(--palette_dark_accent_two);
 }
@@ -2104,7 +2108,7 @@ form input:focus {
 
 .formNameMail {
   background-color: #cccccc;
-  color: white;
+  color: var(--palette_text_black);
   margin-bottom: 10px;
   height: 25px;
   border: none;
@@ -2117,6 +2121,7 @@ form input:focus {
 
 .dark-mode .formNameMail {
   background-color: var(--palette_dark);
+  color: var(--palette_text_white);
   border-color: var(--palette_dark_accent_one);
 }
 
