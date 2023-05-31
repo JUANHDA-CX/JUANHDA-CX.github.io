@@ -76,12 +76,25 @@
   <!--Sounds-->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      let boton = document.querySelector(".audioclick");
-      boton.addEventListener("click", () => {
-        let etiquetaAudio = document.createElement("audio");
-        etiquetaAudio.setAttribute("src", "/sound/click-21156-666HeroHero.mp3");
-        etiquetaAudio.play();
-        etiquetaAudio.volume = 1;
+      const audio = new Audio("/sound/click-21156-666HeroHero.mp3");
+      audio.volume = 0.25;
+      const elements = document.querySelectorAll(".audioclick");
+
+      elements.forEach(element => {
+        element.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          audio.play();
+          setTimeout(() => {
+            if (element.hasAttribute("href")) {
+              if (element.getAttribute("target") === "_blank") {
+                window.open(element.getAttribute("href"), "_blank");
+              } else {
+                window.location.href = element.getAttribute("href");
+              }
+            }
+          }, 500);
+        });
       });
     });
   </script>
@@ -145,19 +158,19 @@
     <nav id="secondary">
       <ul>
         <li>
-          <a href="index.html">
+          <a href="index.html" class="audioclick">
             <i class="fa-solid fa-house"></i> Inicio</a>
         </li>
         <li>
-          <a href="build.html">
+          <a href="build.html" class="audioclick">
             <i class="fa-solid fa-desktop"></i> Build</a>
         </li>
         <li>
-          <a href="gallery.html">
+          <a href="gallery.html" class="audioclick">
             <i class="fa-regular fa-image"></i> Galeria</a>
         </li>
         <li>
-          <a href="contact.html">
+          <a href="contact.html" class="audioclick">
             <i class="fa-solid fa-envelope"></i> Contacto</a>
         </li>
       </ul>
@@ -173,16 +186,16 @@
         <span></span>
         <span></span>
         <ul id="menuMobile" class="palette_two">
-          <a href="index.html">
+          <a href="index.html" class="audioclick">
             <li>Home</li>
           </a>
-          <a href="build.html">
+          <a href="build.html" class="audioclick">
             <li>Build</li>
           </a>
-          <a href="gallery.html">
+          <a href="gallery.html" class="audioclick">
             <li>Gallery</li>
           </a>
-          <a href="contact.html">
+          <a href="contact.html" class="audioclick">
             <li>Contact</li>
           </a>
         </ul>
@@ -207,7 +220,7 @@
           </span>
           </p>
         </div>
-        <div class="Box-buttonModal" onclick="document.getElementById('id01').style.display='block'"
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id01').style.display='block'"
           class="w3-button w3-black"><i class="fas fa-plus"></i></div>
       </div>
 
@@ -226,7 +239,7 @@
           </span>
           </p>
         </div>
-        <div class="Box-buttonModal" onclick="document.getElementById('id02').style.display='block'"
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id02').style.display='block'"
           class="w3-button w3-black"><i class="fas fa-plus"></i></div>
       </div>
 
@@ -245,7 +258,7 @@
           </span>
           </p>
         </div>
-        <div class="Box-buttonModal" onclick="document.getElementById('id03').style.display='block'"
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id03').style.display='block'"
           class="w3-button w3-black"><i class="fas fa-plus"></i></div>
       </div>
 
@@ -264,7 +277,7 @@
           </span>
           </p>
         </div>
-        <div class="Box-buttonModal" onclick="document.getElementById('id04').style.display='block'"
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id04').style.display='block'"
           class="w3-button w3-black"><i class="fas fa-plus"></i></div>
       </div>
 
@@ -283,7 +296,7 @@
           </span>
           </p>
         </div>
-        <div class="Box-buttonModal" onclick="document.getElementById('id05').style.display='block'"
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id05').style.display='block'"
           class="w3-button w3-black"><i class="fas fa-plus"></i></div>
       </div>
 
@@ -302,7 +315,7 @@
           </span>
           </p>
         </div>
-        <div class="Box-buttonModal" onclick="document.getElementById('id06').style.display='block'"
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id06').style.display='block'"
           class="w3-button w3-black"><i class="fas fa-plus"></i></div>
       </div>
 
@@ -321,7 +334,7 @@
           </span>
           </p>
         </div>
-        <div class="Box-buttonModal" onclick="document.getElementById('id07').style.display='block'"
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id07').style.display='block'"
           class="w3-button w3-black"><i class="fas fa-plus"></i></div>
       </div>
 
@@ -340,7 +353,7 @@
           </span>
           </p>
         </div>
-        <div class="Box-buttonModal" onclick="document.getElementById('id08').style.display='block'"
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id08').style.display='block'"
           class="w3-button w3-black"><i class="fas fa-plus"></i></div>
       </div>
 
@@ -351,7 +364,7 @@
       <div class="w3-modal-content">
         <div class="w3-container">
           <span onclick="document.getElementById('id01').style.display='none'"
-            class="w3-button w3-display-topright">&times;</span>
+            class="w3-button w3-display-topright audioclick">&times;</span>
           <img src="images/image1.jpg">
           <p>Some text. Some text. Some text. 01</p>
           <p>
@@ -373,7 +386,7 @@
       <div class="w3-modal-content">
         <div class="w3-container">
           <span onclick="document.getElementById('id02').style.display='none'"
-            class="w3-button w3-display-topright">&times;</span>
+            class="w3-button w3-display-topright audioclick">&times;</span>
           <img src="images/image1.jpg">
           <p>Some text. Some text. Some text. 02</p>
           <p>
@@ -395,7 +408,7 @@
       <div class="w3-modal-content">
         <div class="w3-container">
           <span onclick="document.getElementById('id03').style.display='none'"
-            class="w3-button w3-display-topright">&times;</span>
+            class="w3-button w3-display-topright audioclick">&times;</span>
           <img src="images/image1.jpg">
           <p>Some text. Some text. Some text. 03</p>
           <p>
@@ -417,7 +430,7 @@
       <div class="w3-modal-content">
         <div class="w3-container">
           <span onclick="document.getElementById('id04').style.display='none'"
-            class="w3-button w3-display-topright">&times;</span>
+            class="w3-button w3-display-topright audioclick">&times;</span>
           <img src="images/image1.jpg">
           <p>Some text. Some text. Some text. 04</p>
           <p>
@@ -439,7 +452,7 @@
       <div class="w3-modal-content">
         <div class="w3-container">
           <span onclick="document.getElementById('id05').style.display='none'"
-            class="w3-button w3-display-topright">&times;</span>
+            class="w3-button w3-display-topright audioclick">&times;</span>
           <img src="images/image1.jpg">
           <p>Some text. Some text. Some text. 05</p>
           <p>
@@ -461,7 +474,7 @@
       <div class="w3-modal-content">
         <div class="w3-container">
           <span onclick="document.getElementById('id06').style.display='none'"
-            class="w3-button w3-display-topright">&times;</span>
+            class="w3-button w3-display-topright audioclick">&times;</span>
           <img src="images/image1.jpg">
           <p>Some text. Some text. Some text. 06</p>
           <p>
@@ -483,7 +496,7 @@
       <div class="w3-modal-content">
         <div class="w3-container">
           <span onclick="document.getElementById('id07').style.display='none'"
-            class="w3-button w3-display-topright">&times;</span>
+            class="w3-button w3-display-topright audioclick">&times;</span>
           <img src="images/image1.jpg">
           <p>Some text. Some text. Some text. 07</p>
           <p>
@@ -505,7 +518,7 @@
       <div class="w3-modal-content">
         <div class="w3-container">
           <span onclick="document.getElementById('id08').style.display='none'"
-            class="w3-button w3-display-topright">&times;</span>
+            class="w3-button w3-display-topright audioclick audioclick">&times;</span>
           <img src="images/image1.jpg">
           <p>Some text. Some text. Some text. 08</p>
           <p>
@@ -529,7 +542,7 @@
 <footer>
   <div id="footerCont">
     <label class="switch">
-      <input id="myButton" onclick="myFunction()" type="checkbox" checked>
+      <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked>
       <span class="sliderSwitch"></span>
     </label><br><br>
     <p>All rights reserved @2019 [MMXXIII]</p><br>

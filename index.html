@@ -76,12 +76,25 @@
   <!--Sounds-->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      let boton = document.querySelector(".audioclick");
-      boton.addEventListener("click", () => {
-        let etiquetaAudio = document.createElement("audio");
-        etiquetaAudio.setAttribute("src", "/sound/click-21156-666HeroHero.mp3");
-        etiquetaAudio.play();
-        etiquetaAudio.volume = 1;
+      const audio = new Audio("/sound/click-21156-666HeroHero.mp3");
+      audio.volume = 0.25;
+      const elements = document.querySelectorAll(".audioclick");
+
+      elements.forEach(element => {
+        element.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          audio.play();
+          setTimeout(() => {
+            if (element.hasAttribute("href")) {
+              if (element.getAttribute("target") === "_blank") {
+                window.open(element.getAttribute("href"), "_blank");
+              } else {
+                window.location.href = element.getAttribute("href");
+              }
+            }
+          }, 500);
+        });
       });
     });
   </script>
@@ -120,6 +133,8 @@
     document.addEventListener("DOMContentLoaded", init);
   </script>
 
+
+
   <!--Texto dinamico animado-->
   <script>
     var words = ["▾DISEÑO▾", "▾ASCESORÍA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICIÓN▾", "▾INSTALACIÓN▾"];
@@ -136,17 +151,37 @@
     document.addEventListener("DOMContentLoaded", init);
   </script>
 
+  <!--Hexe Icon
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const icon = document.querySelector("#hexeBG a");
+      console.log(icon);
+      icon.addEventListener("click", (event) => {
+        console.log("Icono clickeado");
+        if (event.currentTarget.classList.contains("rotate")) {
+          event.currentTarget.classList.remove("rotate");
+        } else {
+          event.currentTarget.classList.add("rotate");
+        }
+      });
+      console.log("Escuchador de eventos añadido");
+    });
+  </script>-->
+
+
+  <!--Hexe Expand Menu-->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const hexeBG = document.querySelector("#hexeBG");
       const flex = document.querySelector("#flex");
-
 
       hexeBG.addEventListener("click", () => {
         flex.classList.toggle("expand");
       });
     });
   </script>
+
+
 
 </head>
 
@@ -156,23 +191,23 @@
     <div class="parallax"></div>
 
     <div id="emergent">
-      <div id="hexeBG"><a><i class="fa-solid fa-xmark"></i></a></div>
-      <div id="flex" class="audioclick">
+      <div id="hexeBG" class="audioclick"><a><i class="fa-solid fa-xmark"></i></a></div>
+      <div id="flex">
         <div id="site1" class="siteicons"><a><i class="fa-solid fa-xmark"></i></a></div>
         <!--Float Menu-->
-        <div id="site2" class="siteicons" class="audioclick"><a target="_blank" href="https://twitter.com/Mega_CX"><i
+        <div id="site2" class="siteicons"><a target="_blank" class="audioclick" href="https://twitter.com/Mega_CX"><i
               class="fa-brands fa-twitter"></i></a>
         </div>
-        <div id="site3" class="siteicons" class="audioclick"><a target="_blank"
+        <div id="site3" class="siteicons"><a target="_blank" class="audioclick"
             href="https://www.instagram.com/mega.cx"><i class="fa-brands fa-instagram"></i></a>
         </div>
-        <div id="site4" class="siteicons" class="audioclick"><a target="_blank"
+        <div id="site4" class="siteicons"><a target="_blank" class="audioclick"
             href="https://www.deviantart.com/juanhda"><i class="fa-brands fa-deviantart"></i></a>
         </div>
-        <div id="site5" class="siteicons" class="audioclick"><a target="_blank"
+        <div id="site5" class="siteicons"><a target="_blank" class="audioclick"
             href="https://dribbble.com/MegaCX/shots"><i class="fa-brands fa-dribbble"></i></a>
         </div>
-        <div id="site6" class="siteicons" class="audioclick"><a target="_blank"
+        <div id="site6" class="siteicons"><a target="_blank" class="audioclick"
             href="https://www.artstation.com/megacx"><i class="fa-brands fa-artstation"></i></a>
         </div>
       </div>
@@ -277,7 +312,7 @@
 <footer>
   <div id="footerCont">
     <label class="switch">
-      <input id="myButton" onclick="myFunction()" type="checkbox" checked>
+      <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked>
       <span class="sliderSwitch"></span>
     </label><br><br>
     <p>All rights reserved @2019 [MMXXIII]</p><br>

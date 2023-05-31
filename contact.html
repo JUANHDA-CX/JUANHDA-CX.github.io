@@ -76,12 +76,25 @@
   <!--Sounds-->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      let boton = document.querySelector(".audioclick");
-      boton.addEventListener("click", () => {
-        let etiquetaAudio = document.createElement("audio");
-        etiquetaAudio.setAttribute("src", "/sound/click-21156-666HeroHero.mp3");
-        etiquetaAudio.play();
-        etiquetaAudio.volume = 1;
+      const audio = new Audio("/sound/click-21156-666HeroHero.mp3");
+      audio.volume = 0.25;
+      const elements = document.querySelectorAll(".audioclick");
+
+      elements.forEach(element => {
+        element.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          audio.play();
+          setTimeout(() => {
+            if (element.hasAttribute("href")) {
+              if (element.getAttribute("target") === "_blank") {
+                window.open(element.getAttribute("href"), "_blank");
+              } else {
+                window.location.href = element.getAttribute("href");
+              }
+            }
+          }, 500);
+        });
       });
     });
   </script>
@@ -144,19 +157,19 @@
     <nav id="secondary">
       <ul>
         <li>
-          <a href="index.html">
+          <a href="index.html" class="audioclick">
             <i class="fa-solid fa-house"></i> Inicio</a>
         </li>
         <li>
-          <a href="build.html">
+          <a href="build.html" class="audioclick">
             <i class="fa-solid fa-desktop"></i> Build</a>
         </li>
         <li>
-          <a href="gallery.html">
+          <a href="gallery.html" class="audioclick">
             <i class="fa-regular fa-image"></i> Galeria</a>
         </li>
         <li>
-          <a href="contact.html">
+          <a href="contact.html" class="audioclick">
             <i class="fa-solid fa-envelope"></i> Contacto</a>
         </li>
       </ul>
@@ -172,16 +185,16 @@
         <span></span>
         <span></span>
         <ul id="menuMobile" class="palette_four">
-          <a href="index.html">
+          <a href="index.html" class="audioclick">
             <li>Home</li>
           </a>
-          <a href="build.html">
+          <a href="build.html" class="audioclick">
             <li>Build</li>
           </a>
-          <a href="gallery.html">
+          <a href="gallery.html" class="audioclick">
             <li>Gallery</li>
           </a>
-          <a href="contact.html">
+          <a href="contact.html" class="audioclick">
             <li>Contact</li>
           </a>
         </ul>
@@ -203,37 +216,42 @@
           <tr>
             <td>
               <div class="hover">
-                <a href="https://www.artstation.com/megacx" target="_blank"><i class="fa-brands fa-artstation"></i></a>
+                <a href="https://www.artstation.com/megacx" target="_blank" class="audioclick"><i
+                    class="fa-brands fa-artstation"></i></a>
                 <br>
-                <a href="https://www.artstation.com/megacx" target="_blank">ArtStation</a>
+                <a href="https://www.artstation.com/megacx" target="_blank" class="audioclick">ArtStation</a>
               </div>
             </td>
             <td>
               <div class="hover">
-                <a href="https://dribbble.com/MegaCX/shots" target="_blank"><i class="fa-brands fa-dribbble"></i></a>
+                <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick"><i
+                    class="fa-brands fa-dribbble"></i></a>
                 <br>
-                <a href="https://dribbble.com/MegaCX/shots" target="_blank">dribbble</a>
+                <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick">dribbble</a>
               </div>
             </td>
             <td>
               <div class="hover">
-                <a href="https://www.deviantart.com/juanhda" target="_blank"><i class="fa-brands fa-deviantart"></i></a>
+                <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick"><i
+                    class="fa-brands fa-deviantart"></i></a>
                 <br>
-                <a href="https://www.deviantart.com/juanhda" target="_blank">DeviantArt</a>
+                <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick">DeviantArt</a>
               </div>
             </td>
             <td>
               <div class="hover">
-                <a href="https://www.instagram.com/mega.cx" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.instagram.com/mega.cx" target="_blank" class="audioclick"><i
+                    class="fa-brands fa-instagram"></i></a>
                 <br>
-                <a href="https://www.instagram.com/mega.cx" target="_blank">Instagram</a>
+                <a href="https://www.instagram.com/mega.cx" target="_blank" class="audioclick">Instagram</a>
               </div>
             </td>
             <td>
               <div class="hover">
-                <a href="https://twitter.com/Mega_CX" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick"><i
+                    class="fa-brands fa-twitter"></i></a>
                 <br>
-                <a href="https://twitter.com/Mega_CX" target="_blank">Twitter</a>
+                <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick">Twitter</a>
               </div>
             </td>
           </tr>
@@ -241,15 +259,16 @@
       </div>
     </div>
 
-    <input class="formNameMail" type="text" name="Nombre" placeholder="Nombre completo" required />
-    <input class="formNameMail" type="email" name="E-Mail" placeholder="Correo electronico" value="" required />
-    <select id="formSelect" name="Categoria">
-      <option class="formSelectOption" value="Programas">Programas</option>
-      <option class="formSelectOption" value="Peliculas">Peliculas</option>
-      <option class="formSelectOption" value="Juegos">Juegos</option>
-      <option class="formSelectOption" value="Diseño">Diseño</option>
+    <input class="formNameMail audioclick" type="text" name="Nombre" placeholder="Nombre completo" required />
+    <input class="formNameMail audioclick" type="email" name="E-Mail" placeholder="Correo electronico" value=""
+      required />
+    <select id="formSelect" class="audioclick" name="Categoria">
+      <option class="formSelectOption audioclick" value="Programas">Programas</option>
+      <option class="formSelectOption audioclick" value="Peliculas">Peliculas</option>
+      <option class="formSelectOption audioclick" value="Juegos">Juegos</option>
+      <option class="formSelectOption audioclick" value="Diseño">Diseño</option>
     </select>
-    <textarea placeholder="Escribe tu peticion..." ; id="formText" name="Mensaje" cols="40" rows="15"
+    <textarea placeholder="Escribe tu peticion..." ; id="formText" class="audioclick" name="Mensaje" cols="40" rows="15"
       value="Escribe tu mensaje" required></textarea>
     <a href="#"><input id="form-enviar" class="audioclick" type="submit" onclick="alert('Regresa al sitio web')" /></a>
     <input id="form-reset" class="audioclick" type="reset" />
@@ -263,7 +282,7 @@
   <footer>
     <div id="footerCont">
       <label class="switch">
-        <input id="myButton" onclick="myFunction()" type="checkbox" checked>
+        <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked>
         <span class="sliderSwitch"></span>
       </label><br><br>
       <p>All rights reserved @2019 [MMXXIII]</p><br>

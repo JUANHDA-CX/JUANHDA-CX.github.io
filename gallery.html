@@ -76,12 +76,25 @@
   <!--Sounds-->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      let boton = document.querySelector(".audioclick");
-      boton.addEventListener("click", () => {
-        let etiquetaAudio = document.createElement("audio");
-        etiquetaAudio.setAttribute("src", "/sound/click-21156-666HeroHero.mp3");
-        etiquetaAudio.play();
-        etiquetaAudio.volume = 1;
+      const audio = new Audio("/sound/click-21156-666HeroHero.mp3");
+      audio.volume = 0.25;
+      const elements = document.querySelectorAll(".audioclick");
+
+      elements.forEach(element => {
+        element.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          audio.play();
+          setTimeout(() => {
+            if (element.hasAttribute("href")) {
+              if (element.getAttribute("target") === "_blank") {
+                window.open(element.getAttribute("href"), "_blank");
+              } else {
+                window.location.href = element.getAttribute("href");
+              }
+            }
+          }, 500);
+        });
       });
     });
   </script>
@@ -145,19 +158,19 @@
     <nav id="secondary">
       <ul>
         <li>
-          <a href="index.html">
+          <a href="index.html" class="audioclick">
             <i class="fa-solid fa-house"></i> Inicio</a>
         </li>
         <li>
-          <a href="build.html">
+          <a href="build.html" class="audioclick">
             <i class="fa-solid fa-desktop"></i> Build</a>
         </li>
         <li>
-          <a href="gallery.html">
+          <a href="gallery.html" class="audioclick">
             <i class="fa-regular fa-image"></i> Galeria</a>
         </li>
         <li>
-          <a href="contact.html">
+          <a href="contact.html" class="audioclick">
             <i class="fa-solid fa-envelope"></i> Contacto</a>
         </li>
       </ul>
@@ -173,16 +186,16 @@
         <span></span>
         <span></span>
         <ul id="menuMobile" class="palette_three">
-          <a href=" index.html">
+          <a href="index.html" class="audioclick">
             <li>Home</li>
           </a>
-          <a href="build.html">
+          <a href="build.html" class="audioclick">
             <li>Build</li>
           </a>
-          <a href="gallery.html">
+          <a href="gallery.html" class="audioclick">
             <li>Gallery</li>
           </a>
-          <a href="contact.html">
+          <a href="contact.html" class="audioclick">
             <li>Contact</li>
           </a>
         </ul>
@@ -282,7 +295,7 @@
 <footer>
   <div id="footerCont">
     <label class="switch">
-      <input id="myButton" onclick="myFunction()" type="checkbox" checked>
+      <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked>
       <span class="sliderSwitch"></span>
     </label><br><br>
     <p>All rights reserved @2019 [MMXXIII]</p><br>

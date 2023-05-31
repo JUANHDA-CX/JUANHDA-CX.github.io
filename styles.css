@@ -631,11 +631,18 @@ li a {
   transition: transform 0.3s ease-in-out;
 }
 
+
 #hexeBG:hover>a,
 #hexeBG>a:hover {
   transform: rotate(45deg);
   transition: 0.5s;
 }
+
+/*
+#hexeBG>.rotate {
+  transform: rotate(45deg);
+  transition: 0.5s;
+}*/
 
 .dark-mode #hexeBG>a {
   color: #ffffff;
