@@ -882,7 +882,7 @@ li a {
   transition: 1s;
   z-index: 3;
   top: 85vh;
-  transition: top 0.25s;
+  transition: 0.5s;
   -webkit-user-select: none;
   user-select: none;
   margin-bottom: 80px;
@@ -912,7 +912,7 @@ li a {
   background-color: #323232;
   background-image: none;
   transform: translate(0%, -25%);
-  transition: 1s;
+  transition: 0.5s;
 }
 
 .dark-mode #Fbutton:hover {
@@ -1451,6 +1451,7 @@ div strong a :hover div div {
   margin-right: 5px;
   margin-left: 5px;
   text-align: center;
+  transition: 0.5s;
 }
 
 .dark-mode .Box-style {
@@ -1486,7 +1487,7 @@ div strong a :hover div div {
   border: dashed 2px white;
 }
 
-/*----------------------------button_open_Modal---------------------------*/
+/*----------------------------boton_open_Modal---------------------------*/
 
 .Box-buttonModal {
   position: relative;
@@ -1512,10 +1513,12 @@ div strong a :hover div div {
 .Box-buttonModal i {
   color: #ffffff;
   font-size: 40px;
+  transition: 0.5s;
 }
 
 .Box-buttonModal i:hover {
   transform: rotate(45deg);
+  transition: 0.5s;
 }
 
 .dark-mode .Box-buttonModal i {
@@ -1946,7 +1949,6 @@ form input:focus {
   border-bottom: solid #000000 3px;
   border-image-slice: 30 30% 45;
   padding-left: 10px;
-  transition: 3s;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -2078,6 +2080,7 @@ form input:focus {
   }
 }
 
+/*
 #galleryM {
   position: relative;
   top: 40vh;
@@ -2101,7 +2104,7 @@ form input:focus {
     width: 350px;
     height: 200px;
   }
-}
+}*/
 
 .middle {
   position: absolute;
@@ -2119,6 +2122,7 @@ form input:focus {
   z-index: 2;
 }
 
+/*
 .bar {
   width: 16px;
   height: 16px;
@@ -2133,13 +2137,14 @@ form input:focus {
 
 .bar:hover {
   background: #ffffff;
-}
+}*/
 
 form input[name="r"] {
   position: absolute;
   visibility: hidden;
 }
 
+/*
 .slides {
   width: 500%;
   height: 100%;
@@ -2151,7 +2156,7 @@ form input[name="r"] {
   transition: 1.5s;
   z-index: 1;
 }
-
+*/
 .slide img {
   width: 100%;
   height: 100%;
@@ -2159,9 +2164,11 @@ form input[name="r"] {
   position: absolute;
   /*
   bottom: 54.5px;*/
-  z-index: 1;
+  /*
+  z-index: 1;*/
 }
 
+/*
 #r1:checked~.s1 {
   margin-left: 0;
 }
@@ -2190,7 +2197,7 @@ form input[name="r"] {
   left: -25px;
   filter: opacity(15%) brightness(25%) saturate(75%);
 }
-
+*/
 /*
 #textGal {
   width: 100px;
