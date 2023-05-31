@@ -10,8 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact</title>
   <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-  <link rel="icon" href="images/favicon1.ico" type="image/x-icon" />
-  <link rel="shortcut icon" href="images/favicon1.ico" type="image/x-icon" />
+  <link rel="icon" href="icons/favicon_contact.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="icons/favicon_contact.png" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
@@ -150,6 +150,28 @@
       });
     });
   </script>
+
+  <!--Correo-->
+  <script>
+    function checkForm(form) {
+      if (form.checkValidity()) {
+        // Todos los campos requeridos están completos, enviar el formulario
+        return true;
+      } else {
+        // No todos los campos requeridos están completos, mostrar un mensaje de error
+        alert("Completa todos los campos requeridos.");
+        return false;
+      }
+    }
+
+    function submitForm(event, form) {
+      event.preventDefault();
+      if (checkForm(form)) {
+        form.submit();
+        alert("Regresa al sitio web");
+      }
+    }
+  </script>
 </head>
 
 <body class="palette_four">
@@ -205,7 +227,7 @@
   </header>
 
   <!--Formulario inicio-->
-  <form method="POST" action="https://formspree.io/f/xeqwwvjj">
+  <form method="POST" action="https://formspree.io/f/xeqwwvjj" onsubmit="return checkForm(this)">
 
     <div id="infoForm">
       <strong>
@@ -261,18 +283,19 @@
       </div>
     </div>
 
-    <input class="formNameMail audioclick" type="text" name="Nombre" placeholder="Nombre completo" required />
-    <input class="formNameMail audioclick" type="email" name="E-Mail" placeholder="Correo electronico" value=""
-      required />
+    <input class="formNameMail audioclick" type="text" name="Nombre" enterkeyhint="done" autocomplete="name"
+      placeholder="Nombre completo" required />
+    <input class="formNameMail audioclick" type="email" name="E-Mail" enterkeyhint="done" autocomplete="email"
+      placeholder="Correo electronico" value="" required />
     <select id="formSelect" class="audioclick" name="Categoria">
       <option class="formSelectOption audioclick" value="Programas">Programas</option>
       <option class="formSelectOption audioclick" value="Peliculas">Peliculas</option>
       <option class="formSelectOption audioclick" value="Juegos">Juegos</option>
       <option class="formSelectOption audioclick" value="Diseño">Diseño</option>
     </select>
-    <textarea placeholder="Escribe tu peticion..." ; id="formText" class="audioclick" name="Mensaje" cols="40" rows="15"
-      value="Escribe tu mensaje" required></textarea>
-    <a href="#"><input id="form-enviar" class="audioclick" type="submit" onclick="alert('Regresa al sitio web')" /></a>
+    <textarea placeholder="Escribe tu peticion..." ; id="formText" class="audioclick" name="Mensaje"
+      enterkeyhint="enter" cols="40" rows="15" value="Escribe tu mensaje" required></textarea>
+    <a href="#"><input id="form-enviar" class="audioclick" type="submit" onclick="submitForm(event, this.form)" /></a>
     <input id="form-reset" class="audioclick" type="reset" />
   </form></br>
   <!--Formulario fin-->
