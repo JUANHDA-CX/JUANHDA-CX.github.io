@@ -43,7 +43,7 @@ body::-webkit-scrollbar {
 }
 
 .dark-mode::-webkit-scrollbar {
-  background-color: #242424;
+  background-color: var(--palette_dark_accent_main);
 }
 
 body::-webkit-scrollbar-button:single-button {
@@ -56,7 +56,7 @@ body::-webkit-scrollbar-button:single-button {
 }
 
 .dark-mode::-webkit-scrollbar-button:single-button {
-  background-color: #646464;
+  background-color: var(--palette_dark);
 }
 
 body::-webkit-scrollbar-track {
@@ -72,7 +72,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .dark-mode::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(360deg, #b90f10, #4b1eff);
+  background-color: var(--palette_dark_accent_one);
 }
 
 body::-webkit-scrollbar-thumb:hover {
@@ -84,7 +84,7 @@ body::-webkit-scrollbar-thumb:active {
 }
 
 .dark-mode::-webkit-scrollbar-thumb:hover {
-  background-image: linear-gradient(360deg, #810b0b, #3d18cf);
+  background-color: var(--palette_dark);
 }
 
 body.palette_one ::selection {
@@ -108,7 +108,7 @@ body.palette_four ::selection {
 }
 
 body.dark-mode ::selection {
-  background: #a73333;
+  background: var(--palette_dark_accent_two);
   color: white;
 }
 
@@ -191,9 +191,9 @@ main {
   --palette_four: #fff3be;
   --palette_four_accent: #ffdd80;
   --palette_dark: #000000;
-  --palette_dark_accent_main: #535353;
-  --palette_dark_accent_one: #cc1b1b;
-  --palette_dark_accent_two: #c507eb;
+  --palette_dark_accent_main: #323232;
+  --palette_dark_accent_one: #6f2c8a;
+  --palette_dark_accent_two: #8a2b2b;
 }
 
 body {
@@ -350,7 +350,7 @@ nav#secondary {
 }
 
 .dark-mode #menuMobileToggle {
-  background-color: #242424;
+  background-color: var(--palette_dark_accent_main);
 }
 
 #menuMobileToggle input {
@@ -416,7 +416,7 @@ nav#secondary {
 }
 
 .dark-mode #menuMobile li {
-  border-left: 6px solid #b90f10;
+  border-left: 6px solid var(--palette_dark_accent_two);
   background-color: #000000;
 }
 
@@ -429,7 +429,7 @@ nav#secondary {
 }
 
 .dark-mode #menuMobile li:hover {
-  background-color: #323232;
+  background-color: var(--palette_dark_accent_main);
   border-left: solid 6px #cccccc;
 }
 
@@ -527,7 +527,7 @@ nav#secondary {
 
 .dark-mode #primary ul>li:hover,
 .dark-mode #secondary ul>li:hover {
-  border-bottom: dotted 6px #4b1eff;
+  border-bottom: dotted 6px var(--palette_dark_accent_one);
 }
 
 #primary ul>li:active,
@@ -593,7 +593,7 @@ li a {
 }
 
 .dark-mode #hexeBG {
-  background-color: #4b1eff;
+  background-color: var(--palette_dark_accent_one);
 }
 
 #hexeBG::after {
@@ -613,7 +613,7 @@ li a {
 }
 
 .dark-mode #hexeBG::after {
-  background-color: #4b1eff;
+  background-color: var(--palette_dark_accent_one);
 }
 
 #hexeBG:hover::after {
@@ -699,7 +699,7 @@ li a {
 }
 
 .dark-mode .siteicons {
-  background-color: #b90f10;
+  background-color: var(--palette_dark_accent_two);
 }
 
 .siteicons:hover {
@@ -707,7 +707,7 @@ li a {
 }
 
 .dark-mode .siteicons:hover {
-  background-color: #4b1eff;
+  background-color: var(--palette_dark_accent_one);
 }
 
 #site1 {
@@ -890,8 +890,8 @@ li a {
 }
 
 .dark-mode #Fbutton {
-  background-color: #b90f10;
-  border: 5px solid #4b1eff;
+  background-color: var(--palette_dark_accent_one);
+  border: 5px solid var(--palette_dark_accent_main);
 }
 
 @media only screen and (max-width: 600px) {
@@ -916,7 +916,7 @@ li a {
 }
 
 .dark-mode #Fbutton:hover {
-  background-image: linear-gradient(#b90f10, #4b1eff);
+  background-image: var(--palette_dark_accent_one);
 }
 
 /*--------------------------footer-----------------------------*/
@@ -1115,7 +1115,7 @@ input#myButton:checked~.sliderSwitch.lightfour:before {
 }
 
 .dark-mode #footerCont a:hover {
-  color: #b90f10;
+  color: var(--palette_dark_accent_two);
 }
 
 /*-----------------------footer fin-----------------------*/
@@ -1136,7 +1136,7 @@ input#myButton:checked~.sliderSwitch.lightfour:before {
 
 .dark-mode .Line1,
 .dark-mode .Line2 {
-  background-image: linear-gradient(90deg, #b90f10, #4b1eff);
+  background-color: var(--palette_dark_accent_one);
 }
 
 @media only screen and (max-width: 600px) {
@@ -1173,7 +1173,7 @@ input#myButton:checked~.sliderSwitch.lightfour:before {
 }
 
 .dark-mode #BarMenu-secondary {
-  background-color: rgb(24, 24, 24);
+  background-color: var(--palette_dark_accent_main);
 }
 
 @media only screen and (max-width: 600px) {
@@ -1443,7 +1443,6 @@ div strong a :hover div div {
 .Box-style {
   background-color: var(--palette_two_accent);
   color: #000000;
-  box-shadow: 0px 0px 0px #000000a8;
   border: solid 3px #000000;
   border-radius: 10px;
   width: auto;
@@ -1455,9 +1454,8 @@ div strong a :hover div div {
 }
 
 .dark-mode .Box-style {
-  color: #cccccc;
-  background-color: #242424;
-  box-shadow: 0px 0px 16px #000000a8;
+  color: #ffffff;
+  background-color: var(--palette_dark_accent_main);
   border: solid 2px #ffffff;
 }
 
@@ -1483,7 +1481,7 @@ div strong a :hover div div {
 }
 
 .dark-mode .Box-style:hover {
-  background-image: linear-gradient(30deg, #b90f10, #4b1eff);
+  background-color: var(--palette_dark_accent_one);
   border: dashed 2px white;
 }
 
@@ -1506,7 +1504,7 @@ div strong a :hover div div {
 }
 
 .dark-mode .Box-buttonModal {
-  background-color: #cccccc;
+  background-color: var(--palette_dark_accent_two);
   box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.473);
 }
 
@@ -1522,7 +1520,7 @@ div strong a :hover div div {
 }
 
 .dark-mode .Box-buttonModal i {
-  color: #181818;
+  color: var(--palette_dark);
 }
 
 @media only screen and (max-width: 1400px) {
@@ -1587,7 +1585,7 @@ div strong a :hover div div {
 
 .dark-mode .w3-modal-content {
   background-color: #000000;
-  box-shadow: 0 0 16px rgb(133, 64, 64);
+  box-shadow: 0 0 8px var(--palette_dark_accent_two);
 }
 
 .w3-hide-large {
@@ -1687,7 +1685,7 @@ div strong a :hover div div {
 
 .dark-mode .w3-container span:hover {
   color: #ffffff;
-  background-image: linear-gradient(#b90f10, #4b1eff);
+  background-color: var(--palette_dark_accent_one);
 }
 
 /*----------------------------modal---------------------------*/
@@ -1726,7 +1724,7 @@ div strong a :hover div div {
 }
 
 .dark-mode #infoForm strong p {
-  color: #b90f10;
+  color: var(--palette_dark_accent_two);
 }
 
 @media only screen and (max-width: 600px) {
@@ -1831,7 +1829,7 @@ div strong a :hover div div {
 
 .dark-mode .iconshare .hover:hover a,
 .dark-mode .iconshare .hover:hover i.fa-brands {
-  color: #4b1eff;
+  color: var(--palette_dark_accent_one);
 }
 
 /*Formulario*/
@@ -1852,7 +1850,7 @@ form {
 }
 
 .dark-mode form {
-  background-color: #323232;
+  background-color: var(--palette_dark_accent_main);
 }
 
 @media only screen and (max-width: 600px) {
@@ -1886,7 +1884,7 @@ form input:focus {
 .dark-mode form input:focus {
   color: #ffffff;
   outline: none !important;
-  border-color: rgb(202, 100, 100);
+  border-color: var(--palette_dark_accent_two);
 }
 
 textarea {
@@ -1905,12 +1903,12 @@ select:hover {
 
 select option:hover {
   margin: 40px;
-  background: rgba(202, 28, 28, 0.76);
+  background: var(--palette_dark_accent_two);
   color: #ffffff;
 }
 
 select option:focus {
-  background: rgb(204, 18, 18);
+  background: var(--palette_dark_accent_two);
 }
 
 form input:focus {
@@ -1918,7 +1916,7 @@ form input:focus {
 }
 
 .dark-mode form input:focus {
-  background-color: #323232;
+  background-color: var(--palette_dark_accent_main);
 }
 
 .formNameMail {
@@ -1965,8 +1963,8 @@ form input:focus {
 }
 
 .dark-mode .formSelectOption {
-  background-color: #000000d0;
-  color: rgb(255, 255, 255);
+  background-color: var(--palette_dark);
+  color: #ffffff;
 }
 
 #formText {
@@ -1998,7 +1996,7 @@ form input:focus {
 }
 
 .dark-mode #form-enviar {
-  background-color: rgb(233, 41, 41);
+  background-color: var(--palette_dark_accent_two);
 }
 
 @media only screen and (max-width: 600px) {
@@ -2023,7 +2021,7 @@ form input:focus {
 }
 
 .dark-mode #form-reset {
-  background-color: rgb(233, 41, 41);
+  background-color: var(--palette_dark_accent_two);
 }
 
 @media only screen and (max-width: 600px) {
@@ -2234,7 +2232,7 @@ form input[name="r"] {
 
 .dark-mode #textGallery>article>h1,
 .dark-mode #textGallery>article>h2 {
-  color: #b90f10;
+  color: var(--palette_dark_accent_two);
 }
 
 @media only screen and (max-width: 600px) {

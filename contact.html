@@ -82,8 +82,10 @@
 
       elements.forEach(element => {
         element.addEventListener("click", (event) => {
-          event.preventDefault();
-          event.stopPropagation();
+          if (element.tagName !== 'INPUT') {
+            event.preventDefault();
+            event.stopPropagation();
+          }
           audio.play();
           setTimeout(() => {
             if (element.hasAttribute("href")) {
