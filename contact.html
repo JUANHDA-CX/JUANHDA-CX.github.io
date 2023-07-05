@@ -167,8 +167,8 @@
     function submitForm(event, form) {
       event.preventDefault();
       if (checkForm(form)) {
-        form.submit();
-        alert("Regresa al sitio web");
+        form.submit();/*
+        alert("Confirma el envio y regresa.");*/
       }
     }
   </script>
@@ -289,13 +289,13 @@
       placeholder="Correo electronico" value="" required />
     <select id="formSelect" class="audioclick" name="Categoria">
       <option class="formSelectOption audioclick" value="Programas">Programas</option>
-      <option class="formSelectOption audioclick" value="Peliculas">Videojuegos</option>
-      <option class="formSelectOption audioclick" value="Juegos">Diseño</option>
-      <option class="formSelectOption audioclick" value="Diseño">Peliculas</option>
-      <option class="formSelectOption audioclick" value="Programas">Modelado 3D</option>
-      <option class="formSelectOption audioclick" value="Peliculas">Utilidades</option>
-      <option class="formSelectOption audioclick" value="Juegos">Fotografia</option>
-      <option class="formSelectOption audioclick" value="Diseño">Video</option>
+      <option class="formSelectOption audioclick" value="Videojuegos">Videojuegos</option>
+      <option class="formSelectOption audioclick" value="Diseño">Diseño</option>
+      <option class="formSelectOption audioclick" value="Peliculas">Peliculas</option>
+      <option class="formSelectOption audioclick" value="Modelado 3D">Modelado 3D</option>
+      <option class="formSelectOption audioclick" value="Utilidades">Utilidades</option>
+      <option class="formSelectOption audioclick" value="Fotografia">Fotografia</option>
+      <option class="formSelectOption audioclick" value="Video">Video</option>
     </select>
     <textarea placeholder="Escribe tu peticion..." ; id="formText" class="audioclick" name="Mensaje"
       enterkeyhint="enter" cols="40" rows="15" value="Escribe tu mensaje" required></textarea>
