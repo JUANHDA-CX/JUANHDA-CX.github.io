@@ -1,211 +1,242 @@
 <!DOCTYPE html>
 <html>
-<HTML lang="es">
+  <html lang="es">
+    <head>
+      <meta charset="utf-8" />
+      <meta
+        name="description"
+        content="Soluciones informaticas de todo tipo a pedido"
+      />
+      <meta
+        name="keywords"
+        content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs"
+      />
+      <meta name="author" content="Mega CX" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Mega CX Studios | Gallery</title>
+      <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+      <link rel="icon" href="icons/favicon_gallery.png" type="image/x-icon" />
+      <link
+        rel="shortcut icon"
+        href="icons/favicon_gallery.png"
+        type="image/x-icon"
+      />
+      <link
+        href="https://fonts.googleapis.com/css?family=Courgette&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap"
+        rel="stylesheet"
+      />
+      <script
+        src="https://kit.fontawesome.com/ae03bf6f9c.js"
+        crossorigin="anonymous"
+      ></script>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
-  <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
-  <meta name="author" content="Mega CX">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mega CX Studios | Gallery</title>
-  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-  <link rel="icon" href="icons/favicon_gallery.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="icons/favicon_gallery.png" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
-
-  <!--Dark mode-->
-  <script>
-    function myFunction() {
-      var element = document.body;
-      var button = document.getElementById("myButton");
-      var slider = document.querySelector(".sliderSwitch");
-      element.classList.toggle("dark-mode");
-      if (element.classList.contains("dark-mode")) {
-        slider.classList.add("dark");
-        slider.classList.remove("lightthree");
-        button.checked = false;
-        localStorage.setItem("theme", "dark");
-      } else {
-        slider.classList.add("lightthree");
-        slider.classList.remove("dark");
-        button.checked = true;
-        localStorage.setItem("theme", "light");
-      }
-    }
-
-
-    window.onload = function () {
-      var element = document.body;
-      var button = document.getElementById("myButton");
-      var slider = document.querySelector(".sliderSwitch");
-      var theme = localStorage.getItem("theme");
-      if (theme === "dark") {
-        element.classList.add("dark-mode");
-        slider.classList.add("dark");
-        slider.classList.remove("lightthree");
-        button.checked = false;
-      } else if (theme === "light") {
-        element.classList.remove("dark-mode");
-        slider.classList.add("lightthree");
-        slider.classList.remove("dark");
-        button.checked = true;
-      } else if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        element.classList.add("dark-mode");
-        slider.classList.add("dark");
-        slider.classList.remove("lightthree");
-        localStorage.setItem("theme", "dark");
-        button.checked = false;
-      } else {
-        element.classList.remove("dark-mode");
-        slider.classList.add("lightthree");
-        slider.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-        button.checked = true;
-      }
-    };
-
-  </script>
-
-  <!--Sounds-->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const audio = new Audio("/sound/click-21156-666HeroHero.mp3");
-      audio.volume = 0.25;
-      const elements = document.querySelectorAll(".audioclick");
-
-      elements.forEach(element => {
-        element.addEventListener("click", (event) => {
-          if (element.tagName !== 'INPUT') {
-            event.preventDefault();
-            event.stopPropagation();
+      <!--Dark mode-->
+      <script>
+        function myFunction() {
+          var element = document.body;
+          var button = document.getElementById("myButton");
+          var slider = document.querySelector(".sliderSwitch");
+          element.classList.toggle("dark-mode");
+          if (element.classList.contains("dark-mode")) {
+            slider.classList.add("dark");
+            slider.classList.remove("lightthree");
+            button.checked = false;
+            localStorage.setItem("theme", "dark");
+          } else {
+            slider.classList.add("lightthree");
+            slider.classList.remove("dark");
+            button.checked = true;
+            localStorage.setItem("theme", "light");
           }
-          audio.play();
-          setTimeout(() => {
-            if (element.hasAttribute("href")) {
-              if (element.getAttribute("target") === "_blank") {
-                window.open(element.getAttribute("href"), "_blank");
-              } else {
-                window.location.href = element.getAttribute("href");
-              }
-            }
-          }, 500);
-        });
-      });
-    });
-  </script>
-
-  <!--Pantalla de carga-->
-  <script type="text/javascript">
-    window.addEventListener("load", function () {
-      const loader = document.querySelector(".loader");
-      loader.className += " hidden";
-    });
-  </script>
-
-  <!--Ocultar Boton de desplazamiento-->
-  <script>
-    window.addEventListener("scroll", function () {
-      var Fbutton = document.getElementById("Fbutton");
-      if (window.pageYOffset > 300) {
-        Fbutton.style.display = "block";
-      } else {
-        Fbutton.style.display = "none";
-      }
-    });
-  </script>
-
-  <!--Animacion Boton de desplazamiento-->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    function init() {
-      function scrollToTop() {
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-      }
-      var Fbutton = document.getElementById("Fbutton");
-      Fbutton.addEventListener("click", scrollToTop);
-    }
-
-    document.addEventListener("DOMContentLoaded", init);
-  </script>
-
-  <!--Menu_mobile-->
-  <script>
-    window.addEventListener('load', () => {
-      const menuButton = document.querySelector('#menuMobileToggleCheckbox');
-      const body = document.querySelector('body');
-
-      menuButton.addEventListener('change', () => {
-        if (menuButton.checked) {
-          body.classList.add('no-scroll-mobile');
-        } else {
-          body.classList.remove('no-scroll-mobile');
         }
-      });
-    });
-  </script>
-</head>
 
-<body class="palette_three">
-  <div id="scroll"></div>
-  <header>
-    <div id="BarMenu-secondary"></div>
-    <div id="menu2Alt1"></div>
-    <nav id="secondary">
-      <ul>
-        <li>
-          <a href="index.html" class="audioclick">
-            <i class="fa-solid fa-house"></i> Inicio</a>
-        </li>
-        <li>
-          <a href="build.html" class="audioclick">
-            <i class="fa-solid fa-desktop"></i> Build</a>
-        </li>
-        <li>
-          <a href="gallery.html" class="audioclick">
-            <i class="fa-regular fa-image"></i> Galeria</a>
-        </li>
-        <li>
-          <a href="contact.html" class="audioclick">
-            <i class="fa-solid fa-envelope"></i> Contacto</a>
-        </li>
-      </ul>
-    </nav>
+        window.onload = function () {
+          var element = document.body;
+          var button = document.getElementById("myButton");
+          var slider = document.querySelector(".sliderSwitch");
+          var theme = localStorage.getItem("theme");
+          if (theme === "dark") {
+            element.classList.add("dark-mode");
+            slider.classList.add("dark");
+            slider.classList.remove("lightthree");
+            button.checked = false;
+          } else if (theme === "light") {
+            element.classList.remove("dark-mode");
+            slider.classList.add("lightthree");
+            slider.classList.remove("dark");
+            button.checked = true;
+          } else if (
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+          ) {
+            element.classList.add("dark-mode");
+            slider.classList.add("dark");
+            slider.classList.remove("lightthree");
+            localStorage.setItem("theme", "dark");
+            button.checked = false;
+          } else {
+            element.classList.remove("dark-mode");
+            slider.classList.add("lightthree");
+            slider.classList.remove("dark");
+            localStorage.setItem("theme", "light");
+            button.checked = true;
+          }
+        };
+      </script>
 
-    <!--Menu Mobile-->
-    <nav role="navigation" class="menuMobile">
-      <a href="index.html">Mega CX</a>
-      <div id="menuMobileToggle" class="palette_three">
-        <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
-        <input id="menuMobileToggleCheckbox" class="audioclick" type="checkbox" />
-        <span></span>
-        <span></span>
-        <span></span>
-        <ul id="menuMobile" class="palette_three">
-          <a href="index.html" class="audioclick">
-            <li>Home</li>
-          </a>
-          <a href="build.html" class="audioclick">
-            <li>Build</li>
-          </a>
-          <a href="gallery.html" class="audioclick">
-            <li>Gallery</li>
-          </a>
-          <a href="contact.html" class="audioclick">
-            <li>Contact</li>
-          </a>
-        </ul>
-      </div>
-    </nav>
-  </header>
+      <!--Sounds-->
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const audio = new Audio("/sound/click-21156-666HeroHero.mp3");
+          audio.volume = 0.25;
+          const elements = document.querySelectorAll(".audioclick");
 
-  <!--
+          elements.forEach((element) => {
+            element.addEventListener("click", (event) => {
+              if (element.tagName !== "INPUT") {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              audio.play();
+              setTimeout(() => {
+                if (element.hasAttribute("href")) {
+                  if (element.getAttribute("target") === "_blank") {
+                    window.open(element.getAttribute("href"), "_blank");
+                  } else {
+                    window.location.href = element.getAttribute("href");
+                  }
+                }
+              }, 500);
+            });
+          });
+        });
+      </script>
+
+      <!--Pantalla de carga-->
+      <script type="text/javascript">
+        window.addEventListener("load", function () {
+          const loader = document.querySelector(".loader");
+          loader.className += " hidden";
+        });
+      </script>
+
+      <!--Ocultar Boton de desplazamiento-->
+      <script>
+        window.addEventListener("scroll", function () {
+          var Fbutton = document.getElementById("Fbutton");
+          if (window.pageYOffset > 300) {
+            Fbutton.style.display = "block";
+          } else {
+            Fbutton.style.display = "none";
+          }
+        });
+      </script>
+
+      <!--Animacion Boton de desplazamiento-->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        function init() {
+          function scrollToTop() {
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+          }
+          var Fbutton = document.getElementById("Fbutton");
+          Fbutton.addEventListener("click", scrollToTop);
+        }
+
+        document.addEventListener("DOMContentLoaded", init);
+      </script>
+
+      <!--Menu_mobile-->
+      <script>
+        window.addEventListener("load", () => {
+          const menuButton = document.querySelector(
+            "#menuMobileToggleCheckbox"
+          );
+          const body = document.querySelector("body");
+
+          menuButton.addEventListener("change", () => {
+            if (menuButton.checked) {
+              body.classList.add("no-scroll-mobile");
+            } else {
+              body.classList.remove("no-scroll-mobile");
+            }
+          });
+        });
+      </script>
+    </head>
+
+    <body class="palette_three">
+      <div id="scroll"></div>
+      <header>
+        <div id="BarMenu-secondary"></div>
+        <div id="menu2Alt1"></div>
+        <nav id="secondary">
+          <ul>
+            <li>
+              <a href="index.html" class="audioclick">
+                <i class="fa-solid fa-house"></i> Inicio</a
+              >
+            </li>
+            <li>
+              <a href="services.html" class="audioclick">
+                <i class="fa-solid fa-desktop"></i> Servicios</a
+              >
+            </li>
+            <li>
+              <a href="gallery.html" class="audioclick">
+                <i class="fa-regular fa-image"></i> Galeria</a
+              >
+            </li>
+            <li>
+              <a href="contact.html" class="audioclick">
+                <i class="fa-solid fa-envelope"></i> Contacto</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <!--Menu Mobile-->
+        <nav role="navigation" class="menuMobile">
+          <a href="index.html">Mega CX</a>
+          <div id="menuMobileToggle" class="palette_three">
+            <label class="visually-hidden" for="menuMobileToggleCheckbox"
+              >menuMobile</label
+            >
+            <input
+              id="menuMobileToggleCheckbox"
+              class="audioclick"
+              type="checkbox"
+            />
+            <span></span>
+            <span></span>
+            <span></span>
+            <ul id="menuMobile" class="palette_three">
+              <a href="index.html" class="audioclick">
+                <li>Home</li>
+              </a>
+              <a href="services.html" class="audioclick">
+                <li>Servicios</li>
+              </a>
+              <a href="gallery.html" class="audioclick">
+                <li>Gallery</li>
+              </a>
+              <a href="contact.html" class="audioclick">
+                <li>Contact</li>
+              </a>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <!--
       <div id="galleryM">
         <div class="slidershow middle">
             
@@ -252,61 +283,257 @@
 <div id="degG"></div>
 
 -->
-  <main>
-    <section id="textGallery">
-      <article>
-        <h1>PORFOLIO</h1>
-        <h2>3D Projects</h2>
-        <br /><br />
+      <main>
+        <section id="textGallery">
+          <article>
+            <h1>PORFOLIO</h1>
+            <h2>3D Projects</h2>
+            <br /><br />
+            <p>
+              En esta galeria puede ver mi historial de proyectos 3D, al igual
+              que desde artstation, behance, etc donde puede seguirme para estar
+              al pendiente de mis nuevos proyectos, soy freelancer y artista 3D,
+              hago desde productos, arquitectura o assets para videojuegos, todo
+              lo que necesite para su negocio o lo que se pueda imaginar, si
+              necesita algun servicio contacteme.
+            </p>
+          </article>
+        </section>
+
+        <div class="grid-container">
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/064/378/298/large/juanhda-cx-antique-lamp-renderff.jpg?1687796335"
+            alt="image1"
+            title="Antique Lamp"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/063/893/079/large/juanhda-cx-warm-audio-wa-47-cam1ff.jpg?1686630777"
+            alt="image1"
+            title="Warm Audio WA-47 (MCX)"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/063/675/577/large/juanhda-cx-rebot003-finalff.jpg?1686088519"
+            alt="image1"
+            title="Rebot_003"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/057/398/304/large/juanhda-cx-treemixff.jpg?1671492244"
+            alt="image1"
+            title="TreeMix"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/057/398/261/large/juanhda-cx-chairff.jpg?1671492069"
+            alt="image1"
+            title="Flowery sofa"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/057/398/137/large/juanhda-cx-hachx.jpg?1671491644"
+            alt="image1"
+            title="Ancient ax with a medieval and fantastic style"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/057/397/989/large/juanhda-cx-guitaraffinity2.jpg?1671491371"
+            alt="image1"
+            title="Electric Guitar Re"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/057/397/935/large/juanhda-cx-the-misty-altarff.jpg?1671491203"
+            alt="image1"
+            title="The Misty Altar"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/057/397/564/large/juanhda-cx-snowballff.jpg?1671490287"
+            alt="image1"
+            title="Crystal Snowball 21"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/057/362/807/large/juanhda-cx-ring2ff.jpg?1671408311"
+            alt="image1"
+            title="The Ring of foundation"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/057/362/678/large/juanhda-cx-compassff.jpg?1671407977"
+            alt="image1"
+            title="Ancient golden compass"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/057/362/550/large/juanhda-cx-decima9-cam2-ff.jpg?1671407644"
+            alt="image1"
+            title="Planet Decima-9"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/040/741/752/large/juanhda-cx-pepper-salt.jpg?1629754705"
+            alt="image1"
+            title="Pepper and salt"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/040/571/367/large/juanhda-cx-mainrowfinal.jpg?1629252251"
+            alt="image1"
+            title="Main Row"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/040/571/331/large/juanhda-cx-diamond-corona.jpg?1629252060"
+            alt="image2"
+            title="Diamond>"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/040/571/287/large/juanhda-cx-droid-12-final.jpg?1629251831"
+            alt="image3"
+            title="Droid-12"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/040/571/163/large/juanhda-cx-minigunfrontfinal.jpg?1629251333"
+            alt="image4"
+            title="Minigun-Machine"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/040/101/925/large/juanhda-cx-treechrismastv2.jpg?1627879811"
+            alt="image5"
+            title="Christmas Tree"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/040/101/894/large/juanhda-cx-power-windf.jpg?1627879670"
+            alt="image6"
+            title="Wind Power Plant"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/040/101/858/large/juanhda-cx-miwom-pavilionf.jpg?1627879391"
+            alt="image7"
+            title="Miwom Pavilion"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/040/101/812/large/juanhda-cx-ballsoccer.jpg?1627879078"
+            alt="image8"
+            title="Ball Soccer"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/040/101/759/large/juanhda-cx-teddy2.jpg?1627878852"
+            alt="image9"
+            title="Teddy's playroom"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/040/101/194/large/juanhda-cx-armfictionf.jpg?1627876581"
+            alt="image10"
+            title="Retro Sci-Fi Weapon"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/040/100/569/large/juanhda-cx-ship-in-port.jpg?1627874131"
+            alt="image11"
+            title="Ship in port"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/040/100/469/large/juanhda-cx-light-hopetop.jpg?1627873529"
+            alt="image12"
+            title="A light of hope"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/031/642/489/large/juanhda-cx-gingerbrex-house-2020.jpg?1604198983"
+            alt="image9"
+            title="Gingerbread House"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/031/642/323/large/juanhda-cx-pumpkin-2020-halloween.jpg?1604198259"
+            alt="image10"
+            title="Pumpkin in the dark"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/031/009/074/large/juanhda-cx-japanese-entrance.jpg?1602307887"
+            alt="image11"
+            title="Japanese Entrance"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/026/771/794/large/juanhda-cx-top.jpg?1589684667"
+            alt="image12"
+            title="Segment-Camera-CX"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/026/416/007/large/juanhda-cx-bathroom-megacx.jpg?1588716957"
+            alt="image9"
+            title="Bathroom Gold"
+          />
+          <img
+            class="grid-item"
+            src="https://cdnb.artstation.com/p/assets/images/images/026/130/999/large/juanhda-cx-cabinf.jpg?1587972995"
+            alt="image10"
+            title="Environment Cabin Poly"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/024/256/128/large/juanhda-cx-san-heartf.jpg?1581830586"
+            alt="image11"
+            title="Skinned Heart"
+          />
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/023/925/438/large/juanhda-cx-coffe-shopfinal.jpg?1580775294"
+            alt="image12"
+            title="Coffee House at dusk"
+          />
+        </div>
+      </main>
+    </body>
+
+    <button id="Fbutton" class="audioclick" type="button">
+      <img id="arrowup" src="icons/arrowUPv4.svg" />
+    </button>
+
+    <footer>
+      <div id="footerCont">
+        <label class="switch">
+          <input
+            id="myButton"
+            class="audioclick"
+            onclick="myFunction()"
+            type="checkbox"
+            checked
+          />
+          <span class="sliderSwitch"></span> </label
+        ><br /><br />
+        <p>All rights reserved @2019 [MMXXIII]</p>
+        <br />
+        <p>Make by JUANHDA CX</p>
+        <br />
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia
-          error optio adipisci, aspernatur voluptates rerum, fuga temporibus,
-          esse illum nostrum porro reprehenderit et laudantium magnam quos
-          accusantium quia voluptas commodi.
+          <a
+            href="mailto:juan153v0@outlook.com"
+            class="audioclick palette_three"
+            >Juan153v0@outlook.com</a
+          >
         </p>
-      </article>
-    </section>
+        <p></p>
+      </div>
+    </footer>
 
-    <div class="grid-container">
-      <img class="grid-item" src="/images/image1.jpg" alt="image1" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image2.jpg" alt="image2" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image3.jpg" alt="image3" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image4.jpg" alt="image4" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image1.jpg" alt="image5" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image2.jpg" alt="image6" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image3.jpg" alt="image7" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image4.jpg" alt="image8" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image1.jpg" alt="image9" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image2.jpg" alt="image10" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image3.jpg" alt="image11" title="Descripción de la imagen 1" />
-      <img class="grid-item" src="/images/image4.jpg" alt="image12" title="Descripción de la imagen 1" />
-    </div>
-  </main>
-</body>
-
-<button id="Fbutton" class="audioclick" type="button"><img id="arrowup" src="icons/arrowUPv4.svg"></button>
-
-<footer>
-  <div id="footerCont">
-    <label class="switch">
-      <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked>
-      <span class="sliderSwitch"></span>
-    </label><br><br>
-    <p>All rights reserved @2019 [MMXXIII]</p><br>
-    <p>Make by JUANHDA CX</p><br>
-    <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_three">Juan153v0@outlook.com</a>
-    <p>
-  </div>
-</footer>
-
-<div class="loader"></div>
-
+    <div class="loader"></div>
+  </html>
 </html>

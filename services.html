@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<HTML lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
+  <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
+  <meta name="author" content="Mega CX">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mega CX Studios | Services</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+  <link rel="icon" href="icons/favicon_services.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="icons/favicon_services.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+
+  <!--Dark mode-->
+  <script>
+    function myFunction() {
+      var element = document.body;
+      var button = document.getElementById("myButton");
+      var slider = document.querySelector(".sliderSwitch");
+      element.classList.toggle("dark-mode");
+      if (element.classList.contains("dark-mode")) {
+        slider.classList.add("dark");
+        slider.classList.remove("lighttwo");
+        button.checked = false;
+        localStorage.setItem("theme", "dark");
+      } else {
+        slider.classList.add("lighttwo");
+        slider.classList.remove("dark");
+        button.checked = true;
+        localStorage.setItem("theme", "light");
+      }
+    }
+
+
+    window.onload = function () {
+      var element = document.body;
+      var button = document.getElementById("myButton");
+      var slider = document.querySelector(".sliderSwitch");
+      var theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        element.classList.add("dark-mode");
+        slider.classList.add("dark");
+        slider.classList.remove("lighttwo");
+        button.checked = false;
+      } else if (theme === "light") {
+        element.classList.remove("dark-mode");
+        slider.classList.add("lighttwo");
+        slider.classList.remove("dark");
+        button.checked = true;
+      } else if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        element.classList.add("dark-mode");
+        slider.classList.add("dark");
+        slider.classList.remove("lighttwo");
+        localStorage.setItem("theme", "dark");
+        button.checked = false;
+      } else {
+        element.classList.remove("dark-mode");
+        slider.classList.add("lighttwo");
+        slider.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+        button.checked = true;
+      }
+    };
+
+  </script>
+
+  <!--Sounds-->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const audio = new Audio("/sound/click-21156-666HeroHero.mp3");
+      audio.volume = 0.25;
+      const elements = document.querySelectorAll(".audioclick");
+
+      elements.forEach(element => {
+        element.addEventListener("click", (event) => {
+          if (element.tagName !== 'INPUT') {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          audio.play();
+          setTimeout(() => {
+            if (element.hasAttribute("href")) {
+              if (element.getAttribute("target") === "_blank") {
+                window.open(element.getAttribute("href"), "_blank");
+              } else {
+                window.location.href = element.getAttribute("href");
+              }
+            }
+          }, 500);
+        });
+      });
+    });
+  </script>
+
+  <!--Pantalla de carga-->
+  <script type="text/javascript">
+    window.addEventListener("load", function () {
+      const loader = document.querySelector(".loader");
+      loader.className += " hidden";
+    });
+  </script>
+
+  <!--Ocultar Boton de desplazamiento-->
+  <script>
+    window.addEventListener("scroll", function () {
+      var Fbutton = document.getElementById("Fbutton");
+      if (window.pageYOffset > 300) {
+        Fbutton.style.display = "block";
+      } else {
+        Fbutton.style.display = "none";
+      }
+    });
+  </script>
+
+  <!--Animacion Boton de desplazamiento-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function init() {
+      function scrollToTop() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+      }
+      var Fbutton = document.getElementById("Fbutton");
+      Fbutton.addEventListener("click", scrollToTop);
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+
+  <!--Menu_mobile-->
+  <script>
+    window.addEventListener('load', () => {
+      const menuButton = document.querySelector('#menuMobileToggleCheckbox');
+      const body = document.querySelector('body');
+
+      menuButton.addEventListener('change', () => {
+        if (menuButton.checked) {
+          body.classList.add('no-scroll-mobile');
+        } else {
+          body.classList.remove('no-scroll-mobile');
+        }
+      });
+    });
+  </script>
+</head>
+
+<body class="palette_two">
+  <div id="scroll"></div>
+  <header>
+    <div id="BarMenu-secondary" class="palette_two"></div>
+    <div id="menu2Alt1"></div>
+    <nav id="secondary">
+      <ul>
+        <li>
+          <a href="index.html" class="audioclick">
+            <i class="fa-solid fa-house"></i> Inicio</a>
+        </li>
+        <li>
+          <a href="services.html" class="audioclick">
+            <i class="fa-solid fa-desktop"></i> Servicios</a>
+        </li>
+        <li>
+          <a href="gallery.html" class="audioclick">
+            <i class="fa-regular fa-image"></i> Galeria</a>
+        </li>
+        <li>
+          <a href="contact.html" class="audioclick">
+            <i class="fa-solid fa-envelope"></i> Contacto</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!--Menu Mobile-->
+    <nav role="navigation" class="menuMobile">
+      <a href="index.html">Mega CX</a>
+      <div id="menuMobileToggle" class="palette_two">
+        <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
+        <input id="menuMobileToggleCheckbox" class="audioclick" type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menuMobile" class="palette_two">
+          <a href="index.html" class="audioclick">
+            <li>Home</li>
+          </a>
+          <a href="services.html" class="audioclick">
+            <li>Servicios</li>
+          </a>
+          <a href="gallery.html" class="audioclick">
+            <li>Gallery</li>
+          </a>
+          <a href="contact.html" class="audioclick">
+            <li>Contact</li>
+          </a>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="box-grid-container">
+
+      <!--Box1-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ"></div>
+
+          <span class="box-text">
+            <strong class="box-tittle">Programas</strong></br>
+            <p>
+              Todo tipo software de diseño, creacion, gestion, ofimatica, edicion, multimedia, proteccion, optimizacion,
+              herramientas de todo tipo, con su instalacion.
+            </p>
+          </span>
+          </p>
+        </div>
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id01').style.display='block'"
+          class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+      </div>
+
+      <!--Box2-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ"></div>
+
+          <span class="box-text">
+            <strong class="box-tittle">Videojuegos</strong></br>
+            <p>
+              Descarga de videojuegos (Solo PC) desde clasicos hasta de ultima generacion con todos los DLC's y
+              actualizaciones, ademas de instalacion y soporte del juego solo dentro de lo que al juego se refiere.
+            </p>
+          </span>
+          </p>
+        </div>
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id02').style.display='block'"
+          class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+      </div>
+
+      <!--Box3-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ"></div>
+
+          <span class="box-text">
+            <strong class="box-tittle">Peliculas</strong></br>
+            <p>
+              Descargas de Peliculas en latino, clasicos y estrenos en todas las calidades DVD-Rip, 720p, 1080p y 4K si
+              esta disponible, para el soporte en 4K se recomiendan dispositivos compatibles.
+            </p>
+          </span>
+          </p>
+        </div>
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id03').style.display='block'"
+          class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+      </div>
+
+      <!--Box4-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ"></div>
+
+          <span class="box-text">
+            <strong class="box-tittle">Diseño</strong></br>
+            <p>
+              Diseño de todo tipo, logos, layers, tarjetas, etc, versiones en digital e impresa, no se
+              incluye el servicio de impresion, ademas de diseño web para su sitio web.
+            </p>
+          </span>
+          </p>
+        </div>
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id04').style.display='block'"
+          class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+      </div>
+
+      <!--Box5-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ"></div>
+
+          <span class="box-text">
+            <strong class="box-tittle">Modelado 3D</strong></br>
+            <p>
+              Creacion y diseño de modelado 3D, para arquitectura, assets, mecanica y animaciones, para todas las
+              plataformas (No se incluye impresion 3D).
+            </p>
+          </span>
+          </p>
+        </div>
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id05').style.display='block'"
+          class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+      </div>
+
+      <!--Box6-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ"></div>
+
+          <span class="box-text">
+            <strong class="box-tittle">Utilidades</strong></br>
+            <p>
+              Instalacion de software, formateos, arreglos de todo tipo (solo software), antivirus, optimizacion y
+              limpieza, actualizacion, configuracion, etc. Ademas de soporte con otros temas relacionados.
+            </p>
+          </span>
+          </p>
+        </div>
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id06').style.display='block'"
+          class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+      </div>
+
+      <!--Box7-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ"></div>
+
+          <span class="box-text">
+            <strong class="box-tittle">Edicion Fotografica</strong></br>
+            <p>
+              Edicion fotografica, arreglos de color y correcciones (No se incluye el servicio de fotografia ni el
+              revelado de fotos fisicas o impresion).
+            </p>
+          </span>
+          </p>
+        </div>
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id07').style.display='block'"
+          class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+      </div>
+
+      <!--Box8-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <p>
+          <div class="img-EJ"></div>
+
+          <span class="box-text">
+            <strong class="box-tittle">Edicion de Video</strong></br>
+            <p>
+              Cortometrajes, videos publicitarios, animaciones, etc (La calidad tambien puede variar de acuerdo a los
+              archivos originales de base).
+            </p>
+          </span>
+          </p>
+        </div>
+        <div class="Box-buttonModal audioclick" onclick="document.getElementById('id08').style.display='block'"
+          class="w3-button w3-black"><i class="fas fa-plus"></i></div>
+      </div>
+
+    </div>
+
+    <!--Modal Content1-->
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id01').style.display='none'"
+            class="w3-button w3-display-topright audioclick">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Programas. 01</p>
+          <p>
+            Aplicaciones de ofimatica, suite de adobe, o Ultilidades, todo el software especializado que necesite, descarga e instalacion.
+          </p>
+          <p>
+            Formateos y instalacion de sistemas operativos, windows, linux, macOS o android (Roms), tambien programas antivirus, proteccion o servicios de recuperacion de archivos, el valor pedende del programa, o si necesita instalacion. $30.000 - $100.000.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content2-->
+    <div id="id02" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id02').style.display='none'"
+            class="w3-button w3-display-topright audioclick">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Videojuegos. 02</p>
+          <p>
+            Todos los generos para todos los gustos, shooter, rpg, rol, action, sandbox, indies, estrategia, clasicos, etc.
+          </p>
+          <p>
+            Por favor mirar primero los requerimientos de hardware para cada juego, CPU, GPU, RAM, almacenamiento, no ofrezco juegos multijugador pero ofrezco acesoria, este servicio incluye la descarga he instalacion con todos los DLC's y actualizaciones ademas de configuracion, si tiene alguna duda tambien lo puedo ayudar, los precios varian mucho, dependiendo principalmente el peso del juego, entre $10.000 a $150.000.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content3-->
+    <div id="id03" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id03').style.display='none'"
+            class="w3-button w3-display-topright audioclick">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Peliculas. 03</p>
+          <p>
+            Descargas de peliculas y series en todas las calidades.
+          </p>
+          <p>
+            Peliculas a resolución 720p, 1080p o 4k si hay disponibilidad, los precios van desde $10.000 hasta $30.000, las series depende el numero de capitulos.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content4-->
+    <div id="id04" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id04').style.display='none'"
+            class="w3-button w3-display-topright audioclick">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Diseño. 04</p>
+          <p>
+            Servicios de diseño grafico, logos, banners, letreros, tarjetas, flayers y hasta conceptos de paginas webs y aplicaciones.
+          </p>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas accusantium fugiat repellendus totam
+            molestias omnis similique quasi architecto. Dolorum architecto mollitia at sint rem nihil amet id vero, ea
+            minima.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content5-->
+    <div id="id05" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id05').style.display='none'"
+            class="w3-button w3-display-topright audioclick">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Modelado 3D. 05</p>
+          <p>
+            Inmuebles, productos, arquitectura y cualquier espacio que se pueda imaginar, incluye texturizacion, archivos, assets y render.
+          </p>
+          <p>
+            Si tiene la idea de un producto o un concepto se puede recrear en 3D, espacios interiores para la venta, efectos visuales proximamente recoridos virtuales, en formato de video, o tiempo real si dispone de un equipo, lo precios pueden variar ampliamente dependiendo el tamaño del proyecto, fechas, revisiones y el formato en que lo necesite renders estaticos o recorridos virtuales.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content6-->
+    <div id="id06" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id06').style.display='none'"
+            class="w3-button w3-display-topright audioclick">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Utilidades. 06</p>
+          <p>
+            Optimizacion de equipos, desarrollo de paginas webs, o aprendizaje personal, este servicio incluye beneficios que le pueden interesar.
+          </p>
+          <p>
+            Se incluyen variedad de servicios casi de cualquier indole, telefonos, pc de mesa, laptops, consolas, menos reparaciones electricas,
+            formateos y limpieza.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content7-->
+    <div id="id07" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id07').style.display='none'"
+            class="w3-button w3-display-topright audioclick">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Edicion Fotografica. 07</p>
+          <p>
+            Necesita de un editor, correcciones de color, montaje o arreglos?, este servicio le puede interesar ya sea digital o para impresion.
+          </p>
+          <p>
+            Servicio personalizado segun necesite, los precios van desde 20.000 a 50.000, si necesita un lote completo de un evento tambien lo puedo ayudar.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content8-->
+    <div id="id08" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id08').style.display='none'"
+            class="w3-button w3-display-topright audioclick audioclick">&times;</span>
+          <img src="images/image1.jpg">
+          <p>Edicion Video. 08</p>
+          <p>
+            Edicion de video para eventos, eventos informativos o cualquier proyecto.
+          </p>
+          <p>
+            Si tiene un evento y necesita un editor lo puedo ayudar, las especificaciones del video dependen del material original, se trabaja para cualquier medio y formato de publicacion, redes sociales, anuncios o correcciones.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+<button id="Fbutton" class="audioclick" type="button"><img id="arrowup" src="icons/arrowUPv4.svg"></button>
+
+<footer>
+  <div id="footerCont">
+    <label class="switch">
+      <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked>
+      <span class="sliderSwitch"></span>
+    </label><br><br>
+    <p>All rights reserved @2019 [MMXXIII]</p><br>
+    <p>Make by JUANHDA CX</p><br>
+    <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_two">Juan153v0@outlook.com</a>
+    <p>
+  </div>
+</footer>
+
+<div class="loader"></div>
+
+</html>
