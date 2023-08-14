@@ -540,7 +540,7 @@ nav#secondary {
 
 @media only screen and (max-width: 600px) {
   #primary ul > li {
-    margin: 0 5px 0 5px;
+    margin: 0 2% 0 2%;
     padding: 0px 1px 0px 1px;
     line-height: 1;
   }
@@ -584,7 +584,7 @@ li a {
 
 @media only screen and (max-width: 600px) {
   #primary li a {
-    font-size: 14pt;
+    font-size: 11pt;
   }
 }
 
@@ -1808,6 +1808,7 @@ div strong a :hover div div {
   .img-modal {
     height: 200px;
     width: 300px;
+    top: 70px;
   }
 }
 
