@@ -1,11 +1,12 @@
 {
-  "latestVersion": "1.051",
-  "latestVersionCode": 8,
+  "latestVersion": "1.052",
+  "latestVersionCode": 9,
   "url": "https://play.google.com/store/apps/details?id=com.megacx.ked",
   "releaseNotes": [
-    "50 New Icons, 655 in Total",
+    "95 New Icons, 750 in Total",
     "Fixed Activities",
     "Redesigned Icons",
+    "Send me an icon request",
     "Support me by sharing the app"
   ]
 }
