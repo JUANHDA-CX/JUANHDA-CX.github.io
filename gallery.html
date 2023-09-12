@@ -12,7 +12,10 @@
         content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs"
       />
       <meta name="author" content="Mega CX" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      />
       <title>Mega CX Studios | Gallery</title>
       <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
       <link rel="icon" href="icons/favicon_gallery.png" type="image/x-icon" />
@@ -131,8 +134,7 @@
       <!--Ocultar Boton de desplazamiento-->
       <script>
         window.addEventListener("scroll", function () {
-          var Fbutton = document.getElementById("Fbutton");
-          if (window.pageYOffset > 300) {
+          if (window.pageYOffset > 300 && !isPopupOpen) {
             Fbutton.style.display = "block";
           } else {
             Fbutton.style.display = "none";
@@ -168,6 +170,76 @@
             } else {
               body.classList.remove("no-scroll-mobile");
             }
+          });
+        });
+      </script>
+
+      <!--Gallery Expand-->
+
+      <!-- Declaración de la variable isPopupOpen -->
+      <script>
+        // Variable para rastrear si la ventana emergente está abierta
+        let isPopupOpen = false;
+      </script>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          // Obtén todas las imágenes de la cuadrícula
+          let gridItems = document.querySelectorAll(".grid-item");
+
+          // Obtén los elementos de la ventana emergente
+          let galleryExpandController = document.getElementById(
+            "galleryExpandController"
+          );
+          let galleryExpand = document.getElementById("galleryExpand");
+          let galleryExpandBtn = document.getElementById("galleryExpandBtn");
+
+          // Obtén el pie de página y el botón flotante
+          let footer = document.querySelector("footer");
+          let Fbutton = document.getElementById("Fbutton");
+
+          // Añade un evento de clic a cada imagen de la cuadrícula
+          gridItems.forEach((item) => {
+            item.addEventListener("click", function () {
+              // Actualiza el src de la imagen en la ventana emergente con el src de la imagen clicada
+              galleryExpand.src = this.src;
+
+              // Muestra la ventana emergente y el fondo
+              galleryExpandController.style.display = "block";
+
+              // Desactiva el desplazamiento de la página
+              document.body.style.overflow = "hidden";
+
+              // Oculta el botón flotante y el pie de página
+              Fbutton.style.display = "none";
+              footer.style.display = "none";
+
+              // Establece isPopupOpen a true
+              isPopupOpen = true;
+            });
+          });
+
+          // Añade un evento de clic al botón para cerrar la ventana emergente
+          galleryExpandBtn.addEventListener("click", function () {
+            // Oculta la ventana emergente y el fondo
+            galleryExpandController.style.display = "none";
+
+            // Reactiva el desplazamiento de la página
+            document.body.style.overflow = "";
+
+            // Muestra el botón flotante si la página se ha desplazado lo suficiente
+            if (window.pageYOffset > 300) {
+              Fbutton.style.display = "block";
+            }
+
+            // Muestra el pie de página
+            footer.style.display = "block";
+
+            // Establece isPopupOpen a false
+            isPopupOpen = false;
+
+            // Dispara manualmente el evento de desplazamiento
+            window.dispatchEvent(new Event("scroll"));
           });
         });
       </script>
@@ -300,7 +372,24 @@
           </article>
         </section>
 
-        <div class="grid-container">
+        <div id="galleryExpandController">
+          <div id="galleryExpandBackground"></div>
+          <img
+            id="galleryExpand"
+            src="https://cdnb.artstation.com/p/assets/images/images/057/397/935/large/juanhda-cx-the-misty-altarff.jpg?1671491203"
+          />
+          <div id="galleryExpandBtn" class="audioclick">
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+
+        <div class="grid-container audioclick">
+          <img
+            class="grid-item"
+            src="https://cdna.artstation.com/p/assets/images/images/067/006/368/large/juanhda-cx-summer-camp.jpg?1694322043"
+            alt="image1"
+            title="Summer Camp"
+          />
           <img
             class="grid-item"
             src="https://cdna.artstation.com/p/assets/images/images/065/189/808/large/juanhda-cx-turntable-full-ff.jpg?1689746534"
@@ -521,7 +610,7 @@
       </main>
     </body>
 
-    <button id="Fbutton" class="audioclick" type="button">
+    <button id="Fbutton" class="audioclick" type="button" title="btn">
       <img id="arrowup" src="icons/arrowUPv4.svg" />
     </button>
 
