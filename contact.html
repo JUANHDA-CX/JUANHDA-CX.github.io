@@ -3,12 +3,13 @@
   <html lang="es">
     <head>
       <meta charset="utf-8" />
-      <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
-      <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
+      <meta name="description" content="Soluciones informáticas de todo tipo a pedido" />
+      <meta name="description" content="Information technology solutions of all kinds on demand" />
+      <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D, Web, Programs, Software" />
       <meta name="author" content="Mega CX">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       <title>Mega CX Studios | Contact</title>
-      <link rel="stylesheet" type="text/css; charset=utf-8" media="screen" href="styles.css" />
+      <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
       <link rel="icon" href="icons/favicon_contact.png" type="image/x-icon" />
       <link rel="shortcut icon" href="icons/favicon_contact.png" type="image/x-icon" />
       <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
@@ -173,52 +174,34 @@
 
   <!--Select Option-->
 <script>
-const select = document.getElementById("formSelect");
+document.addEventListener('DOMContentLoaded', (event) => {
+  const selectSpa = document.getElementById("formSelect-spa");
+  const selectEng = document.getElementById("formSelect-eng");
 
-// Crear la nueva opción
-const option = document.createElement("option");
-option.value = "";
-option.textContent = "Selecciona una categoría";
+  // Crear la nueva opción
+  const optionSpa = document.createElement("option");
+  optionSpa.value = "";
+  optionSpa.textContent = "Selecciona una categoría";
 
-// Establecer los atributos de la nueva opción
-option.selected = true;
-option.disabled = true;
-option.style.display = "none";
+  const optionEng = document.createElement("option");
+  optionEng.value = "";
+  optionEng.textContent = "Select a category";
 
-// Agregar la nueva opción al select
-select.appendChild(option);
+  // Establecer los atributos de la nueva opción
+  optionSpa.selected = true;
+  optionSpa.disabled = true;
+  optionSpa.style.display = "none";
+
+  optionEng.selected = true;
+  optionEng.disabled = true;
+  optionEng.style.display = "none";
+
+  // Agregar la nueva opción al select
+  selectSpa.appendChild(optionSpa);
+  selectEng.appendChild(optionEng);
+});
+
 </script>
-
-<!--correo, disable campos ocultos con cambio de idioma-->
-<!--
-<script>
-// Obtener la variable de idioma del almacenamiento local
-function getLanguage() {
-  return localStorage.getItem("language");
-}
-
-// Agregar el atributo `disabled` a los campos ocultos en español
-function addDisabledAttributeToHiddenFields() {
-  // Obtener todos los campos ocultos
-  var hiddenFields = document.querySelectorAll("input[type='hidden']");
-
-  // Iterar sobre los campos ocultos y agregar el atributo `disabled`
-  for (var i = 0; i < hiddenFields.length; i++) {
-    // Determinar el idioma actual
-    var currentLanguage = getLanguage();
-
-    // Agregar el atributo `disabled` solo si el idioma es español y el campo oculto está en español
-    if (currentLanguage === "Spanish" && hiddenFields[i].classList.contains("spanish")) {
-      hiddenFields[i].setAttribute("disabled", "");
-    }
-  }
-}
-
-// Agregar el evento de cambio de idioma
-window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
-
-
-</script>-->
 
   <!--Idioma de la pagina-->
   <script>
@@ -361,7 +344,7 @@ window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
     </nav>
   </header>
 
- <!--Formulario inicio SPA-->
+ <!--Formulario 1 inicio SPA-->
  <div class="spanish">
  <form method="POST" action="https://formspree.io/f/xeqwwvjj" onsubmit="return checkForm(this)">
 
@@ -431,14 +414,14 @@ window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
     <option class="formSelectOption audioclick" value="Fotografía">Fotografía</option>
     <option class="formSelectOption audioclick" value="Vídeo">Vídeo</option>
   </select>
-  <textarea placeholder="Escribe tu petición..." id="formText-spa" class="audioclick" name="Mensaje" enterkeyhint="send" cols="40" rows="15" value="Mensaje" required></textarea>
+  <textarea placeholder="Escribe tu petición..." id="formText-spa" class="audioclick" name="Mensaje" enterkeyhint="done" cols="40" rows="15" value="Mensaje" required></textarea>
   <a href="#"><input id="form-enviar-spa" class="audioclick" value="Enviar" type="submit" onclick="submitForm(event, this.form)" /></a>
   <input id="form-reset-spa" class="audioclick" value="Borrar" type="reset" />
 </form></br>
 </div>
-<!--Formulario fin SPA-->
+<!--Formulario 1 fin SPA-->
 
- <!--Formulario inicio ENG-->
+ <!--Formulario 2 inicio ENG-->
  <div class="english">
  <form method="POST" action="https://formspree.io/f/xyyqpkdo" onsubmit="return checkForm(this)">
 
@@ -508,12 +491,12 @@ window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
     <option class="formSelectOption audioclick" value="Photography">Photography</option>
     <option class="formSelectOption audioclick" value="Video">Video</option>
   </select>
-  <textarea placeholder="Write your request..." id="formText-eng" class="audioclick" name="Message" enterkeyhint="send" cols="40" rows="15" value="Message" required></textarea>
+  <textarea placeholder="Write your request..." id="formText-eng" class="audioclick" name="Message" enterkeyhint="done" cols="40" rows="15" value="Message" required></textarea>
   <a href="#"><input id="form-enviar-eng" class="audioclick" value="Send" type="submit" onclick="submitForm(event, this.form)" /></a>
   <input id="form-reset-eng" class="audioclick" value="Delete" type="reset" />
 </form></br>
 </div>
-<!--Formulario fin ENG-->
+<!--Formulario 2 fin ENG-->
 
   </body">
 
