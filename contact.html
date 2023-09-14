@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
-<HTML lang="es">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
-  <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
-  <meta name="author" content="Mega CX">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Mega CX Studios | Contact</title>
-  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-  <link rel="icon" href="icons/favicon_contact.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="icons/favicon_contact.png" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+  <html lang="es">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
+      <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
+      <meta name="author" content="Mega CX">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <title>Mega CX Studios | Contact</title>
+      <link rel="stylesheet" type="text/css; charset=utf-8" media="screen" href="styles.css" />
+      <link rel="icon" href="icons/favicon_contact.png" type="image/x-icon" />
+      <link rel="shortcut icon" href="icons/favicon_contact.png" type="image/x-icon" />
+      <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
+      <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
 
   <!--Dark mode-->
   <script>
@@ -334,13 +333,13 @@ window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
     <!--Menu Mobile-->
     <nav role="navigation" class="menuMobile">
       <a href="index.html">Mega CX</a>
-      <div id="menuMobileToggle" class="palette_two">
+      <div id="menuMobileToggle" class="palette_four">
         <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
         <input id="menuMobileToggleCheckbox" class="audioclick" type="checkbox" />
         <span></span>
         <span></span>
         <span></span>
-        <ul id="menuMobile" class="palette_two">
+        <ul id="menuMobile" class="palette_four">
           <a href="index.html" class="audioclick">
             <li class="spanish">Inicio</li>
             <li class="english">Home</li>
@@ -366,7 +365,7 @@ window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
  <div class="spanish">
  <form method="POST" action="https://formspree.io/f/xeqwwvjj" onsubmit="return checkForm(this)">
 
-  <div id="infoForm">
+  <div id="infoForm-spa">
     <strong>
       <p>Rellena el formulario</p>
     </strong></br>
@@ -421,7 +420,7 @@ window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
 
   <input class="formNameMail audioclick" type="text" name="Nombre Completo" enterkeyhint="next" autocomplete="name" placeholder="Nombre completo" required />
   <input class="formNameMail audioclick" type="email" name="Correo electrónico" enterkeyhint="next" autocomplete="email" placeholder="Correo electrónico" required />
-  <select id="formSelect" class="audioclick" name="Categoría" required>
+  <select id="formSelect-spa" class="audioclick" name="Categoría" required>
     <option value="" selected disabled style="display: none;">Selecciona una categoría</option>
     <option class="formSelectOption audioclick" value="Programas">Programas</option>
     <option class="formSelectOption audioclick" value="Videojuegos">Videojuegos</option>
@@ -432,9 +431,9 @@ window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
     <option class="formSelectOption audioclick" value="Fotografía">Fotografía</option>
     <option class="formSelectOption audioclick" value="Vídeo">Vídeo</option>
   </select>
-  <textarea placeholder="Escribe tu petición..." id="formText" class="audioclick" name="Mensaje" enterkeyhint="send" cols="40" rows="15" value="Mensaje" required></textarea>
-  <a href="#"><input id="form-enviar" class="audioclick" value="Enviar" type="submit" onclick="submitForm(event, this.form)" /></a>
-  <input id="form-reset" class="audioclick" value="Borrar" type="reset" />
+  <textarea placeholder="Escribe tu petición..." id="formText-spa" class="audioclick" name="Mensaje" enterkeyhint="send" cols="40" rows="15" value="Mensaje" required></textarea>
+  <a href="#"><input id="form-enviar-spa" class="audioclick" value="Enviar" type="submit" onclick="submitForm(event, this.form)" /></a>
+  <input id="form-reset-spa" class="audioclick" value="Borrar" type="reset" />
 </form></br>
 </div>
 <!--Formulario fin SPA-->
@@ -443,7 +442,7 @@ window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
  <div class="english">
  <form method="POST" action="https://formspree.io/f/xyyqpkdo" onsubmit="return checkForm(this)">
 
-  <div id="infoForm">
+  <div id="infoForm-eng">
     <strong>
       <p>Fill the form</p>
     </strong></br>
@@ -498,7 +497,7 @@ window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
 
   <input class="formNameMail audioclick" type="text" name="Full Name" enterkeyhint="next" autocomplete="name" placeholder="Full name" required />
   <input class="formNameMail audioclick" type="email" name="E-Mail" enterkeyhint="next" autocomplete="email" placeholder="Email" required />
-  <select id="formSelect" class="audioclick" name="Category" required>
+  <select id="formSelect-eng" class="audioclick" name="Category" required>
     <option value="" selected disabled style="display: none;">Select a category</option>
     <option class="formSelectOption audioclick" value="Software">Software</option>
     <option class="formSelectOption audioclick" value="Videogames">Videogames</option>
@@ -509,16 +508,16 @@ window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
     <option class="formSelectOption audioclick" value="Photography">Photography</option>
     <option class="formSelectOption audioclick" value="Video">Video</option>
   </select>
-  <textarea placeholder="Write your request..." id="formText" class="audioclick" name="Message" enterkeyhint="send" cols="40" rows="15" value="Message" required></textarea>
-  <a href="#"><input id="form-enviar" class="audioclick" value="Send" type="submit" onclick="submitForm(event, this.form)" /></a>
-  <input id="form-reset" class="audioclick" value="Delete" type="reset" />
+  <textarea placeholder="Write your request..." id="formText-eng" class="audioclick" name="Message" enterkeyhint="send" cols="40" rows="15" value="Message" required></textarea>
+  <a href="#"><input id="form-enviar-eng" class="audioclick" value="Send" type="submit" onclick="submitForm(event, this.form)" /></a>
+  <input id="form-reset-eng" class="audioclick" value="Delete" type="reset" />
 </form></br>
 </div>
 <!--Formulario fin ENG-->
 
   </body">
 
-  <button id="Fbutton" class="audioclick" type="button" title="btn"><img id="arrowup" src="icons/arrowUPv4.svg"></button>
+  <button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup" src="icons/arrowUPv4.svg"></button>
 
   <footer>
     <div id="footerCont">
@@ -527,7 +526,7 @@ window.addEventListener("languagechange", addDisabledAttributeToHiddenFields);
           <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
           <span class="sliderSwitch"></span>
         </label>
-        <div id="language-switch-button" style="cursor: pointer"></div>
+        <div id="language-switch-button"></div>
       </div>
       <br><br>
       <p class="spanish">Todos los derechos reservados @2023 [MMXXIII]</p>

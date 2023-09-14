@@ -8,7 +8,7 @@
       <meta name="author" content="Mega CX" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       <title>Mega CX Studios | Gallery</title>
-      <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+      <link rel="stylesheet" type="text/css; charset=utf-8" media="screen" href="styles.css" />
       <link rel="icon" href="icons/favicon_gallery.png" type="image/x-icon" />
       <link rel="shortcut icon" href="icons/favicon_gallery.png" type="image/x-icon" />
       <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet" />
@@ -325,13 +325,13 @@
         <!--Menu Mobile-->
         <nav role="navigation" class="menuMobile">
           <a href="index.html">Mega CX</a>
-          <div id="menuMobileToggle" class="palette_two">
+          <div id="menuMobileToggle" class="palette_three">
             <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
             <input id="menuMobileToggleCheckbox" class="audioclick" type="checkbox" />
             <span></span>
             <span></span>
             <span></span>
-            <ul id="menuMobile" class="palette_two">
+            <ul id="menuMobile" class="palette_three">
               <a href="index.html" class="audioclick">
                 <li class="spanish">Inicio</li>
                 <li class="english">Home</li>
@@ -422,7 +422,7 @@
 
         <div id="galleryExpandController">
           <div id="galleryExpandBackground"></div>
-          <img id="galleryExpand" src="https://cdnb.artstation.com/p/assets/images/images/057/397/935/large/juanhda-cx-the-misty-altarff.jpg?1671491203" />
+          <img id="galleryExpand" src="" />
           <div id="galleryExpandBtn" class="audioclick">
             <i class="fas fa-plus"></i>
           </div>
@@ -655,9 +655,7 @@
       </main>
     </body>
 
-    <button id="Fbutton" class="audioclick" type="button" title="btn">
-      <img id="arrowup" src="icons/arrowUPv4.svg" />
-    </button>
+    <button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup" src="icons/arrowUPv4.svg" /></button>
 
     <footer>
       <div id="footerCont">
@@ -666,7 +664,7 @@
             <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
             <span class="sliderSwitch"></span>
           </label>
-          <div id="language-switch-button" style="cursor: pointer"></div>
+          <div id="language-switch-button"></div>
         </div>
         <br /><br />
         <p class="spanish">Todos los derechos reservados @2023 [MMXXIII]</p>

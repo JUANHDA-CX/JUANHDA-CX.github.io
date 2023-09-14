@@ -995,15 +995,17 @@ li a {
   border: 5px solid var(--palette_text_black);
 }
 
+/*Tablet Device*/
 @media only screen and (max-width: 900px) {
   #Fbutton {
     height: 50px;
     width: 50px;
     left: 85vw;
-    top: 90%;
+    top: 80%;
   }
 }
 
+/*Mobile Device*/
 @media only screen and (max-width: 600px) {
   #Fbutton {
     height: 50px;
@@ -1086,11 +1088,10 @@ footer {
 
 #language-switch-button {
   margin-left: 3%;
-}
-
-#language-switch-button {
   height: 32px;
   width: 32px;
+  cursor: pointer;
+  cursor: url("icons/cursor_select.png"), pointer;
 }
 
 /*Switch*/
@@ -1494,6 +1495,7 @@ div strong a :hover div div {
   align-items: center;
   justify-content: center;
   -webkit-user-select: none;
+  user-select: none;
 }
 
 .dark-mode .img-services {
@@ -1740,6 +1742,7 @@ div strong a :hover div div {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);
   animation: background 2s ease-in-out forwards;
 }
@@ -1747,10 +1750,12 @@ div strong a :hover div div {
 @keyframes backgroundModal {
   from {
     background-color: rgba(0, 0, 0, 1);
+    -webkit-backdrop-filter: blur(25px);
     backdrop-filter: blur(25px);
   }
   to {
     background-color: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
   }
 }
@@ -1851,6 +1856,7 @@ div strong a :hover div div {
   height: 300px;
   width: auto;
   -webkit-user-select: none;
+  user-select: none;
 }
 
 /*720p Device*/
@@ -1959,7 +1965,8 @@ div strong a :hover div div {
 
 /* contact */
 
-#infoForm {
+#infoForm-spa,
+#infoForm-eng {
   color: #000000;
   border: 2.5px #000000;
   border-style: dashed dashed none dashed;
@@ -1969,14 +1976,16 @@ div strong a :hover div div {
   margin-bottom: 25px;
 }
 
-.dark-mode #infoForm {
+.dark-mode #infoForm-spa,
+.dark-mode #infoForm-eng {
   color: #ffffff;
   border: 2.5px #ffffff;
   border-style: dashed dashed none dashed;
 }
 
 @media only screen and (max-width: 600px) {
-  #infoForm {
+  #infoForm-spa,
+  #infoForm-eng {
     height: 150px;
     padding: 15px;
     margin-bottom: 25px;
@@ -1984,29 +1993,34 @@ div strong a :hover div div {
 }
 
 /*Tamaño del texto*/
-#infoForm strong p {
+#infoForm-spa strong p,
+#infoForm-eng strong p {
   font-family: OxfordStreet;
   font-size: 24px;
   color: #000000;
 }
 
-.dark-mode #infoForm strong p {
+.dark-mode #infoForm-spa strong p,
+.dark-mode #infoForm-eng strong p {
   color: var(--palette_dark_accent_two);
 }
 
 @media only screen and (max-width: 600px) {
-  #infoForm strong p {
+  #infoForm-spa strong p,
+  #infoForm-eng strong p {
     font-size: 24px;
   }
 }
 
-#infoForm p {
+#infoForm-spa p,
+#infoForm-eng p {
   text-align: left;
   font-size: 16px;
 }
 
 @media only screen and (max-width: 600px) {
-  #infoForm p {
+  #infoForm-spa p,
+  #infoForm-eng p {
     font-size: 12px;
   }
 }
@@ -2216,7 +2230,8 @@ form input:focus {
   border-color: var(--palette_dark_accent_one);
 }
 
-#formSelect {
+#formSelect-spa,
+#formSelect-eng {
   background-color: #cccccc;
   color: #646464;
   margin-bottom: 10px;
@@ -2230,7 +2245,8 @@ form input:focus {
   user-select: none;
 }
 
-.dark-mode #formSelect {
+.dark-mode #formSelect-spa,
+.dark-mode #formSelect-eng {
   background-color: var(--palette_dark);
   border-color: var(--palette_dark_accent_one);
 }
@@ -2246,7 +2262,8 @@ form input:focus {
   color: var(--palette_text_white);
 }
 
-#formText {
+#formText-spa,
+#formText-eng {
   background-color: #cccccc;
   color: #000000;
   margin-bottom: 10px;
@@ -2257,13 +2274,15 @@ form input:focus {
   height: 200px;
 }
 
-.dark-mode #formText {
+.dark-mode #formText-spa,
+.dark-mode #formText-eng {
   background-color: var(--palette_dark);
   color: #ffffff;
   border-color: var(--palette_dark_accent_one);
 }
 
-#form-enviar {
+#form-enviar-spa,
+#form-enviar-eng {
   border-radius: 10px;
   background-color: var(--palette_four_accent);
   color: rgb(0, 0, 0);
@@ -2274,18 +2293,21 @@ form input:focus {
   font-family: Londinia;
 }
 
-.dark-mode #form-enviar {
+.dark-mode #form-enviar-spa,
+.dark-mode #form-enviar-eng {
   background-color: var(--palette_dark_accent_one);
 }
 
 @media only screen and (max-width: 600px) {
-  #form-enviar {
+  #form-enviar-spa,
+  #form-enviar-eng {
     width: 65%;
     margin-top: 25px;
   }
 }
 
-#form-reset {
+#form-reset-spa,
+#form-reset-eng {
   border-radius: 10px;
   background-color: var(--palette_four_accent);
   color: rgb(0, 0, 0);
@@ -2299,7 +2321,8 @@ form input:focus {
   font-family: Londinia;
 }
 
-.dark-mode #form-reset {
+.dark-mode #form-reset-spa,
+.dark-mode #form-reset-eng {
   background-color: var(--palette_dark_accent_one);
 }
 
@@ -2312,7 +2335,8 @@ form input:focus {
   }
 }
 
-#form-enviar:hover,
+#form-enviar-spa:hover,
+#form-enviar-eng:hover,
 #form-reset:hover {
   filter: saturate(64%);
 }
@@ -2659,6 +2683,7 @@ table tr td {
   background-color: rgba(0, 0, 0, 0.5); /* Color de fondo semitransparente */
   position: fixed;
   top: 0%;
+  -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px); /* Añade el efecto de desenfoque */
   animation: background 2s ease-in-out forwards;
 }
@@ -2666,10 +2691,12 @@ table tr td {
 @keyframes background {
   from {
     background-color: rgba(0, 0, 0, 1);
+    -webkit-backdrop-filter: blur(25px);
     backdrop-filter: blur(25px);
   }
   to {
     background-color: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
   }
 }

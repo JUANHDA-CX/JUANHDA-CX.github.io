@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
-<HTML lang="es">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
-  <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
-  <meta name="author" content="Mega CX">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Mega CX Studios | Home</title>
-  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-  <link rel="icon" href="icons/favicon_home.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="icons/favicon_home.png" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+  <html lang="es">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
+      <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
+      <meta name="author" content="Mega CX">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <title>Mega CX Studios | Home</title>
+      <link rel="stylesheet" type="text/css; charset=utf-8" media="screen" href="styles.css" />
+      <link rel="icon" href="icons/favicon_home.png" type="image/x-icon" />
+      <link rel="shortcut icon" href="icons/favicon_home.png" type="image/x-icon" />
+      <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
+      <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
 
   <!--Dark mode-->
   <script>
@@ -205,54 +204,41 @@
     });
   </script>
 
-    <!--Texto dinamico-->
-    <script>
-      var words_es = ["▾DISEÑO▾", "▾ASCESORÍA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICIÓN▾", "▾DESCARGAS▾", "▾MONTAJE▾", "▾VIDEOJUEGOS▾", "▾PROGRAMAS▾", "▾INSTALACIÓN▾"];
-      var words_en = ["▾DESIGN▾", "▾ADVISORY▾", "▾3D MODELING▾", "▾DEVELOPMENT▾", "▾EDITING▾", "▾DOWNLOADS▾", "▾ASSEMBLY▾", "▾VIDEOGAMES▾", "▾SOFTWARE▾", "▾INSTALLATION▾"];
-      var words = words_es; // Inicialmente en español
-      var useSpanish = true; // Variable booleana para alternar entre las listas
-      var startIndex = Math.floor(Math.random() * words.length);
-      var i = startIndex;
-      var intervalId;
-      
-      function startInterval() {
-        intervalId = setInterval(function () {
-          // Obtener el valor de la variable language del almacenamiento local del navegador
-          var language = localStorage.getItem('language');
-      
-          // Si la variable language es Spanish, use la lista de palabras en español
-          if (language === 'Spanish') {
-            words = words_es;
-          }
-          // Si la variable language es English, use la lista de palabras en inglés
-          else if (language === 'English') {
-            words = words_en;
-          }
-      
-          // Actualizar la lista en vivo
-          document.querySelector('.tittle-one').textContent = words[i];
-          i++;
-          if (i == words.length) {
-            i = 0;
-          }
-        }, 2000);
-      }
-      
-      startInterval();
-      
-      // Escuchar los cambios en la variable language
-      localStorage.addEventListener('change', function () {
-        // Obtener el nuevo valor de la variable language
-        var newLanguage = localStorage.getItem('language');
-      
-        // Actualizar la lista en vivo
-        if (newLanguage === 'English') {
-          words = words_en;
-          document.querySelector('.tittle-one').textContent = words[i];
+  <!--Texto dinamico-->
+  <script>
+    var words_es = ["▾DISEÑO▾", "▾ASCESORÍA▾", "▾MODELADO 3D▾", "▾DESARROLLO▾", "▾EDICIÓN▾", "▾DESCARGAS▾", "▾MONTAJE▾", "▾VIDEOJUEGOS▾", "▾PROGRAMAS▾", "▾INSTALACIÓN▾"];
+    var words_en = ["▾DESIGN▾", "▾ADVISORY▾", "▾3D MODELING▾", "▾DEVELOPMENT▾", "▾EDITING▾", "▾DOWNLOADS▾", "▾ASSEMBLY▾", "▾VIDEOGAMES▾", "▾SOFTWARE▾", "▾INSTALLATION▾"];
+    var words = words_es; // Inicialmente en español
+    var useSpanish = true; // Variable booleana para alternar entre las listas
+    var startIndex = Math.floor(Math.random() * words.length);
+    var i = startIndex;
+    var intervalId;
+    
+    function startInterval() {
+      intervalId = setInterval(function () {
+        // Obtener el valor de la variable language del almacenamiento local del navegador
+        var language = localStorage.getItem('language');
+    
+        // Si la variable language es Spanish, use la lista de palabras en español
+        if (language === 'Spanish') {
+          words = words_es;
         }
-      });
-      
-        </script>
+        // Si la variable language es English, use la lista de palabras en inglés
+        else if (language === 'English') {
+          words = words_en;
+        }
+    
+        // Actualizar la lista en vivo
+        document.querySelector('.tittle-one').textContent = words[i];
+        i++;
+        if (i == words.length) {
+          i = 0;
+        }
+      }, 2000);
+    }
+    
+    startInterval();
+  </script>
     
     
 
@@ -282,20 +268,20 @@
       <div id="flex">
         <div id="site1" class="siteicons"><a><i class="fa-solid fa-xmark"></i></a></div>
         <!--Float Menu-->
-        <div id="site2" class="siteicons"><a target="_blank" class="audioclick" href="https://twitter.com/Mega_CX"><i
-              class="fa-brands fa-twitter"></i></a>
+        <div id="site2" class="siteicons"><a target="_blank" class="audioclick"
+            href="https://twitter.com/Mega_CX" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
         </div>
         <div id="site3" class="siteicons"><a target="_blank" class="audioclick"
-            href="https://www.behance.net/mega_cx"><i class="fa-brands fa-behance"></i></a>
+            href="https://www.behance.net/mega_cx" title="Behance"><i class="fa-brands fa-behance"></i></a>
         </div>
         <div id="site4" class="siteicons"><a target="_blank" class="audioclick"
-            href="https://www.deviantart.com/juanhda"><i class="fa-brands fa-deviantart"></i></a>
+            href="https://www.deviantart.com/juanhda" title="DeviantArt"><i class="fa-brands fa-deviantart"></i></a>
         </div>
         <div id="site5" class="siteicons"><a target="_blank" class="audioclick"
-            href="https://dribbble.com/MegaCX/shots"><i class="fa-brands fa-dribbble"></i></a>
+            href="https://dribbble.com/MegaCX/shots" title="dribble"><i class="fa-brands fa-dribbble"></i></a>
         </div>
         <div id="site6" class="siteicons"><a target="_blank" class="audioclick"
-            href="https://www.artstation.com/megacx"><i class="fa-brands fa-artstation"></i></a>
+            href="https://www.artstation.com/megacx" title="ArtStation"><i class="fa-brands fa-artstation"></i></a>
         </div>
       </div>
     </div>
@@ -396,7 +382,7 @@
   </main>
 </body>
 
-<button id="Fbutton" class="audioclick" type="button" title="btn"><img id="arrowup" src="icons/arrowUPv4.svg"></button>
+<button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup" src="icons/arrowUPv4.svg"></button>
 
 <footer>
   <div id="footerCont">
@@ -405,7 +391,7 @@
         <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
         <span class="sliderSwitch"></span>
       </label>
-      <div id="language-switch-button" style="cursor: pointer"></div>
+      <div id="language-switch-button"></div>
     </div>
     <br><br>
     <p class="spanish">Todos los derechos reservados @2023 [MMXXIII]</p>
