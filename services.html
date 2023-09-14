@@ -7,7 +7,7 @@
   <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
   <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
   <meta name="author" content="Mega CX">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Mega CX Studios | Services</title>
   <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
   <link rel="icon" href="icons/favicon_services.png" type="image/x-icon" />
@@ -150,33 +150,118 @@
       });
     });
   </script>
+
+  <!--Idioma de la pagina-->
+  <script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+      var currentLanguage = localStorage.getItem("language") || "Spanish";
+      var userLang = navigator.language || navigator.userLanguage;
+
+      var button = document.getElementById("language-switch-button");
+      var iconEnglishDark = document.createElement("img");
+      iconEnglishDark.src = "icons/icon_english_dark.svg";
+      var iconSpanishDark = document.createElement("img");
+      iconSpanishDark.src = "icons/icon_spanish_dark.svg";
+
+      if (currentLanguage === "Spanish") {
+        displayContentInSpanish();
+        button.appendChild(iconSpanishDark);
+      } else {
+        displayContentInEnglish();
+        button.appendChild(iconEnglishDark);
+      }
+
+      button.addEventListener("click", function () {
+        button.innerHTML = "";
+        button.style.display = "none";
+        button.offsetHeight;
+        button.style.display = "";
+
+        if (currentLanguage === "English") {
+          displayContentInSpanish();
+          currentLanguage = "Spanish";
+          localStorage.setItem("language", "Spanish");
+          button.appendChild(iconSpanishDark);
+        } else {
+          displayContentInEnglish();
+          currentLanguage = "English";
+          localStorage.setItem("language", "English");
+          button.appendChild(iconEnglishDark);
+        }
+      });
+
+      function displayContentInSpanish() {
+        document.querySelectorAll(".english").forEach(function (element) {
+          element.style.display = "none";
+        });
+        document.querySelectorAll(".spanish").forEach(function (element) {
+          element.style.display = "block";
+        });
+        document.querySelectorAll(".menu-english").forEach(function (element) {
+          element.style.display = "none";
+        });
+        document.querySelectorAll(".menu-spanish").forEach(function (element) {
+          element.style.display = "inline-block";
+        });
+      }
+
+      function displayContentInEnglish() {
+        document.querySelectorAll(".spanish").forEach(function (element) {
+          element.style.display = "none";
+        });
+        document.querySelectorAll(".english").forEach(function (element) {
+          element.style.display = "block";
+        });
+        document.querySelectorAll(".menu-spanish").forEach(function (element) {
+          element.style.display = "none";
+        });
+        document.querySelectorAll(".menu-english").forEach(function (element) {
+          element.style.display = "inline-block";
+        });
+      }
+    });
+  </script>
+  
+
 </head>
 
-<body class="palette_two">
-  <div id="scroll"></div>
-  <header>
-    <div id="BarMenu-secondary" class="palette_two"></div>
-    <div id="menu2Alt1"></div>
-    <nav id="secondary">
-      <ul>
-        <li>
-          <a href="index.html" class="audioclick">
-            <i class="fa-solid fa-house"></i> Inicio</a>
-        </li>
-        <li>
-          <a href="services.html" class="audioclick">
-            <i class="fa-solid fa-desktop"></i> Servicios</a>
-        </li>
-        <li>
-          <a href="gallery.html" class="audioclick">
-            <i class="fa-regular fa-image"></i> Galeria</a>
-        </li>
-        <li>
-          <a href="contact.html" class="audioclick">
-            <i class="fa-solid fa-envelope"></i> Contacto</a>
-        </li>
-      </ul>
-    </nav>
+  <body class="palette_two">
+    <div id="scroll"></div>
+    <header>
+      <div id="BarMenu-secondary" class="palette_two"></div>
+      <div id="menu2Alt1"></div>
+      <nav id="secondary">
+        <ul>
+          <li onclick="window.location.href='index.html';">
+            <a href="index.html" class="audioclick">
+              <i class="fa-solid fa-house"></i>
+              <spa class="menu-spanish">Inicio</spa>
+              <spa class="menu-english">Home</spa></a
+            >
+          </li>
+          <li onclick="window.location.href='services.html';">
+            <a href="services.html" class="audioclick">
+              <i class="fa-solid fa-desktop"></i>
+              <spa class="menu-spanish">Servicios</spa>
+              <spa class="menu-english">Services</spa>
+            </a>
+          </li>
+          <li onclick="window.location.href='gallery.html';">
+            <a href="gallery.html" class="audioclick">
+              <i class="fa-regular fa-image"></i>
+              <span class="menu-spanish">Galeria</span>
+              <span class="menu-english">Gallery</span>
+            </a>
+          </li>
+          <li onclick="window.location.href='contact.html';">
+            <a href="contact.html" class="audioclick">
+              <i class="fa-solid fa-envelope"></i>
+              <span class="menu-spanish">Contacto</span>
+              <span class="menu-english">Contact</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
 
     <!--Menu Mobile-->
     <nav role="navigation" class="menuMobile">
@@ -189,16 +274,20 @@
         <span></span>
         <ul id="menuMobile" class="palette_two">
           <a href="index.html" class="audioclick">
-            <li>Home</li>
+            <li class="spanish">Inicio</li>
+            <li class="english">Home</li>
           </a>
           <a href="services.html" class="audioclick">
-            <li>Servicios</li>
+            <li class="spanish">Servicios</li>
+            <li class="english">Services</li>
           </a>
           <a href="gallery.html" class="audioclick">
-            <li>Galleria</li>
+            <li class="spanish">Galeria</li>
+            <li class="english">Gallery</li>
           </a>
           <a href="contact.html" class="audioclick">
-            <li>Contacto</li>
+            <li class="spanish">Contacto</li>
+            <li class="english">Contact</li>
           </a>
         </ul>
       </div>
@@ -214,10 +303,13 @@
           <div class="img-services"><img src="images/Service_Software.png"></div>
 
           <span class="box-text">
-            <strong class="box-tittle">Programas</strong></br>
-            <p>
-              Todo tipo software de diseño, creacion, gestion, ofimatica, edicion, multimedia, proteccion, optimizacion,
-              herramientas de todo tipo, con su instalacion.
+            <strong class="box-tittle spanish">Programas</strong>
+            <strong class="box-tittle english">Software</strong></br>
+            <p class="spanish">
+              Todo tipo software de diseño, creación, gestión, ofimática, edición, multimedia, protección, optimización, herramientas de todo tipo, con su instalación.
+            </p>
+            <p class="english">
+              All types of software for design, creation, management, office, editing, multimedia, protection, optimization, all kinds of tools, with their installation.
             </p>
           </span>
           </p>
@@ -233,10 +325,13 @@
           <div class="img-services"><img src="images/Service_Games.png"></div>
 
           <span class="box-text">
-            <strong class="box-tittle">Videojuegos</strong></br>
-            <p>
-              Descarga de videojuegos (Solo PC) desde clasicos hasta de ultima generacion con todos los DLC's y
-              actualizaciones, ademas de instalacion y soporte del juego solo dentro de lo que al juego se refiere.
+            <strong class="box-tittle spanish">Videojuegos</strong>
+            <strong class="box-tittle english">Videogames</strong></br>
+            <p class="spanish">
+              Descarga de videojuegos (Solo PC) desde clásicos hasta de ultima generación con todos los DLC's y actualizaciones, ademas de instalación y soporte del juego solo dentro de lo que al juego se refiere.
+            </p>
+            <p class="english">
+              Video game downloads (PC only) from classics to the latest generation with all DLCs and updates, as well as game installation and support, only within the scope of the game itself.
             </p>
           </span>
           </p>
@@ -252,10 +347,13 @@
           <div class="img-services"><img src="images/Service_Movies.png"></div>
 
           <span class="box-text">
-            <strong class="box-tittle">Peliculas</strong></br>
-            <p>
-              Descargas de Peliculas en latino, clasicos y estrenos en todas las calidades DVD-Rip, 720p, 1080p y 4K si
-              esta disponible, para el soporte en 4K se recomiendan dispositivos compatibles.
+            <strong class="box-tittle spanish">Peliculas</strong>
+            <strong class="box-tittle english">Movies</strong></br>
+            <p class="spanish">
+              Descargas de Películas en latino, clásicos y estrenos en todas las calidades DVD-Rip, 720p, 1080p y 4K si esta disponible, para el soporte en 4K se recomiendan dispositivos compatibles.
+            </p>
+            <p class="english">
+              Movie downloads in Latin, classics and premieres in all qualities DVD-Rip, 720p, 1080p and 4K if available. For 4K support, compatible devices are recommended.
             </p>
           </span>
           </p>
@@ -271,10 +369,13 @@
           <div class="img-services"><img src="images/Service_Design.png"></div>
 
           <span class="box-text">
-            <strong class="box-tittle">Diseño</strong></br>
-            <p>
-              Diseño de todo tipo, logos, flayers, tarjetas, etc, versiones en digital e impresa, no se
-              incluye el servicio de impresion, ademas de diseño web para su sitio web.
+            <strong class="box-tittle spanish">Diseño</strong>
+            <strong class="box-tittle english">Design</strong></br>
+            <p class="spanish">
+              Diseño de todo tipo, logos, volantes, tarjetas, etc, versiones en digital e impresa, no se incluye el servicio de impresión, ademas de diseño web para su sitio web.
+            </p>
+            <p class="english">
+              Design of all kinds, logos, flyers, cards, etc., digital and printed versions. Printing service is not included. In addition, web design for your website.
             </p>
           </span>
           </p>
@@ -290,10 +391,13 @@
           <div class="img-services"><img src="images/Service_3D.png"></div>
 
           <span class="box-text">
-            <strong class="box-tittle">Modelado 3D</strong></br>
-            <p>
-              Creacion y diseño de modelado 3D, para arquitectura, assets, mecanica y animaciones, para todas las
-              plataformas (No se incluye impresion 3D).
+            <strong class="box-tittle spanish">Modelado 3D</strong>
+            <strong class="box-tittle english">Modeling 3D</strong></br>
+            <p class="spanish">
+              Creación y diseño de modelado 3D, para arquitectura, assets, mecánica y animaciones, para todas las plataformas (No se incluye impresion 3D).
+            </p>
+            <p class="english">
+              Creation and design of 3D modeling, for architecture, assets, mechanics, and animations, for all platforms (3D printing not included).
             </p>
           </span>
           </p>
@@ -309,10 +413,13 @@
           <div class="img-services"><img src="images/Service_Utilities.png"></div>
 
           <span class="box-text">
-            <strong class="box-tittle">Utilidades</strong></br>
-            <p>
-              Instalacion de software, formateos, arreglos de todo tipo (solo software), antivirus, optimizacion y
-              limpieza, actualizacion, configuracion, etc. Ademas de soporte con otros temas relacionados.
+            <strong class="box-tittle spanish">Utilidades</strong>
+            <strong class="box-tittle english">Utilities</strong></br>
+            <p class="spanish">
+              Instalación de software, formateo, arreglos de todo tipo (solo software), antivirus, optimización y  limpieza, actualización, configuración, etc. Ademas de soporte con otros temas relacionados.
+            </p>
+            <p class="english">
+              Software installation, formatting, all kinds of fixes (software only), antivirus, optimization and cleaning, updating, configuration, etc. In addition, support with other related topics.
             </p>
           </span>
           </p>
@@ -328,10 +435,13 @@
           <div class="img-services"><img src="images/Service_Photo.png"></div>
 
           <span class="box-text">
-            <strong class="box-tittle">Edicion Fotografica</strong></br>
-            <p>
-              Edicion fotografica, arreglos de color y correcciones (No se incluye el servicio de fotografia ni el
-              revelado de fotos fisicas o impresion).
+            <strong class="box-tittle spanish">Edicion Fotografica</strong>
+            <strong class="box-tittle english">Photo Editing</strong></br>
+            <p class="spanish">
+              Edición fotográfica, arreglos de color y correcciones (No se incluye el servicio de fotografiá ni el revelado de fotos físicas o impresión).
+            </p>
+            <p class="english">
+              Photo editing, color adjustments and corrections (Photography service or development of physical photos or printing not included).
             </p>
           </span>
           </p>
@@ -347,10 +457,13 @@
           <div class="img-services"><img src="images/Service_Video.png"></div>
 
           <span class="box-text">
-            <strong class="box-tittle">Edicion de Video</strong></br>
-            <p>
-              Cortometrajes, videos publicitarios, animaciones, etc (La calidad tambien puede variar de acuerdo a los
-              archivos originales de base).
+            <strong class="box-tittle spanish">Edicion de Video</strong>
+            <strong class="box-tittle english">Video Editing</strong></br>
+            <p class="spanish">
+              Cortometrajes, videos publicitarios, animaciones, etc (La calidad también puede variar de acuerdo a los archivos originales de base).
+            </p>
+            <p class="english">
+              Short films, advertising videos, animations, etc. (The quality can also vary according to the original base files).
             </p>
           </span>
           </p>
@@ -367,12 +480,19 @@
         <div class="w3-container">
           <span onclick="document.getElementById('id01').style.display='none'; document.body.style.overflow='auto';" class="w3-button w3-display-topright audioclick">×</span>
           <div class="img-modal"><img src="images/Service_Software.png"></div>
-          <p>Programas</p>
-          <p>
-            Aplicaciones de ofimatica, suite de adobe, o Ultilidades, todo el software especializado que necesite, descarga e instalacion.
+          <p class="spanish">Programas</p>
+          <p class="english">Software</p>
+          <p class="spanish">
+            Aplicaciones de ofimática, suite de adobe, o utilidades, todo el software especializado que necesite, descarga e instalación.
           </p>
-          <p>
-            Formateos y instalacion de sistemas operativos, windows, linux, macOS o android (Roms), tambien programas antivirus, proteccion o servicios de recuperacion de archivos, el valor pedende del programa, o si necesita instalacion. $30.000 - $100.000.
+          <p class="english">
+            Office applications, Adobe suite, or utilities, all the specialized software you need, download and installation.
+          </p>
+          <p class="spanish">
+            Formateo e instalación de sistemas operativos, Windows, Linux, macOS o Android (Roms), también programas antivirus, protección o servicios de recuperación de archivos, el valor depende del programa, o si necesita instalacion. $30.000 - $100.000.
+          </p>
+          <p class="english">
+            Formatting and installation of operating systems, Windows, Linux, macOS or Android (Roms), also antivirus programs, protection or file recovery services, the value depends on the program, or if you need installation. $30,000 - $100,000.
           </p>
         </div>
       </div>
@@ -384,12 +504,19 @@
         <div class="w3-container">
           <span onclick="document.getElementById('id02').style.display='none'; document.body.style.overflow='auto';" class="w3-button w3-display-topright audioclick">×</span>
           <div class="img-modal"><img src="images/Service_Games.png"></div>
-          <p>Videojuegos</p>
-          <p>
-            Todos los generos para todos los gustos, shooter, rpg, rol, action, sandbox, indies, estrategia, clasicos, etc.
+          <p class="spanish">Videojuegos</p>
+          <p class="english">Videogames</p>
+          <p class="spanish">
+            Todos los géneros para todos los gustos, Shooter, RPG, Rol, Action, Sandbox, Indies, estrategia, clásicos, etc.
           </p>
-          <p>
-            Por favor mirar primero los requerimientos de hardware para cada juego, CPU, GPU, RAM, almacenamiento, no ofrezco juegos multijugador pero ofrezco acesoria, este servicio incluye la descarga he instalacion con todos los DLC's y actualizaciones ademas de configuracion, si tiene alguna duda tambien lo puedo ayudar, los precios varian mucho, dependiendo principalmente el peso del juego, entre $10.000 a $150.000.
+          <p class="english">
+            All genres for all tastes, Shooter, RPG, Role-playing, Action, Sandbox, Indies, strategy, classics, etc.
+          </p>
+          <p class="spanish">
+            Por favor mirar primero los requerimientos de hardware para cada juego, CPU, GPU, RAM, almacenamiento, no ofrezco juegos multijugador pero ofrezco accesoria, este servicio incluye la descarga he instalación con todos los DLC's y actualizaciones ademas de configuración, si tiene alguna duda también lo puedo ayudar, los precios varían mucho, dependiendo principalmente el peso del juego, entre $10.000 a $150.000.
+          </p>
+          <p class="english">
+            Please check the hardware requirements for each game first, CPU, GPU, RAM, storage. I don’t offer multiplayer games but I do offer advice. This service includes download and installation with all DLCs and updates as well as configuration. If you have any questions, I can also help you. Prices vary a lot, mainly depending on the weight of the game, between $10,000 to $150,000.
           </p>
         </div>
       </div>
@@ -401,12 +528,19 @@
         <div class="w3-container">
           <span onclick="document.getElementById('id03').style.display='none'; document.body.style.overflow='auto';" class="w3-button w3-display-topright audioclick">×</span>
           <div class="img-modal"><img src="images/Service_Movies.png"></div>
-          <p>Peliculas</p>
-          <p>
-            Descargas de peliculas y series en todas las calidades.
+          <p class="spanish">Peliculas</p>
+          <p class="english">Movies</p>
+          <p class="spanish">
+            Descargas de películas y series en todas las calidades.
           </p>
-          <p>
-            Peliculas a resolución 720p, 1080p o 4k si hay disponibilidad, los precios van desde $10.000 hasta $30.000, las series depende el numero de capitulos. Se recomienda un reproductor y pantalla compatibles.
+          <p class="english">
+            Movie and series downloads in all qualities.
+          </p>
+          <p class="spanish">
+            Películas a resolución 720p, 1080p o 4k si hay disponibilidad, los precios van desde $10.000 hasta $30.000, las series depende el numero de capítulos. Se recomienda un reproductor y pantalla compatibles.
+          </p>
+          <p class="english">
+            Movies at 720p, 1080p or 4k resolution if available, prices range from $10,000 to $30,000. The series depends on the number of episodes. A compatible player and screen are recommended.
           </p>
         </div>
       </div>
@@ -418,12 +552,19 @@
         <div class="w3-container">
           <span onclick="document.getElementById('id04').style.display='none'; document.body.style.overflow='auto';" class="w3-button w3-display-topright audioclick">×</span>
           <div class="img-modal"><img src="images/Service_Design.png"></div>
-          <p>Diseño</p>
-          <p>
-            Servicios de diseño grafico, logos, banners, letreros, tarjetas, flayers y hasta conceptos de paginas webs y aplicaciones.
+          <p class="spanish">Diseño</p>
+          <p class="english">Design</p>
+          <p class="spanish">
+            Servicios de diseño grafico, logos, banners, letreros, tarjetas, volantes y hasta conceptos de paginas webs y aplicaciones.
           </p>
-          <p>
-            Los precios varian por proyecto segun lo que necesite en cada caso.
+          <p class="english">
+            Graphic design services, logos, banners, signs, cards, flyers, and even concepts for websites and applications.
+          </p>
+          <p class="spanish">
+            Los precios varían por proyecto según lo que necesite en cada caso.
+          </p>
+          <p class="english">
+            Prices vary by project depending on what you need in each case
           </p>
         </div>
       </div>
@@ -435,12 +576,19 @@
         <div class="w3-container">
           <span onclick="document.getElementById('id05').style.display='none'; document.body.style.overflow='auto';" class="w3-button w3-display-topright audioclick">×</span>
           <div class="img-modal"><img src="images/Service_3D.png"></div>
-          <p>Modelado 3D</p>
-          <p>
+          <p class="spanish">Modelado 3D</p>
+          <p class="english">Modeling 3D</p>
+          <p class="spanish">
             Inmuebles, productos, arquitectura y cualquier espacio que se pueda imaginar, incluye texturizacion, archivos, assets y render.
           </p>
-          <p>
-            Si tiene la idea de un producto o un concepto se puede recrear en 3D, espacios interiores para la venta o efectos visuales y proximamente recoridos virtuales, en formato de video, o tiempo real (si dispone de un equipo compatible), lo precios pueden variar ampliamente dependiendo el tamaño del proyecto, fechas, revisiones y el formato en que lo necesite renders estaticos o recorridos virtuales.
+          <p class="english">
+            Real estate, products, architecture, and any space you can imagine, including texturing, files, assets, and rendering.
+          </p>
+          <p class="spanish">
+            Si tiene la idea de un producto o un concepto se puede recrear en 3D, espacios interiores para la venta o efectos visuales y próximamente recorridos virtuales, en formato de video, o tiempo real (si dispone de un equipo compatible), lo precios pueden variar ampliamente dependiendo el tamaño del proyecto, fechas, revisiones y el formato en que lo necesite renders estáticos o recorridos virtuales.
+          </p>
+          <p class="english">
+            If you have an idea for a product or a concept, it can be recreated in 3D, interior spaces for sale or visual effects, and soon virtual tours, in video format, or real time (if you have a compatible device). Prices can vary widely depending on the size of the project, dates, revisions, and the format in which you need it - static renders or virtual tours.
           </p>
         </div>
       </div>
@@ -452,13 +600,19 @@
         <div class="w3-container">
           <span onclick="document.getElementById('id06').style.display='none'; document.body.style.overflow='auto';" class="w3-button w3-display-topright audioclick">×</span>
           <div class="img-modal"><img src="images/Service_Utilities.png"></div>
-          <p>Utilidades</p>
-          <p>
-            Optimizacion de equipos, desarrollo de paginas webs, o aprendizaje personal, este servicio incluye beneficios que le pueden interesar.
+          <p class="spanish">Utilidades</p>
+          <p class="english">Utilities</p>
+          <p class="spanish">
+            Optimización de equipos, desarrollo de paginas webs, o aprendizaje personal, este servicio incluye beneficios que le pueden interesar.
           </p>
-          <p>
-            Se incluyen variedad de servicios casi de cualquier indole, telefonos, pc de mesa, laptops, consolas, menos reparaciones electricas,
-            formateos y limpieza.
+          <p class="english">
+            Optimization of equipment, web page development, or personal learning, this service includes benefits that may interest you.
+          </p>
+          <p class="spanish">
+            Se incluyen variedad de servicios casi de cualquier índole, teléfonos, PC de mesa, laptops, consolas, menos reparaciones eléctricas, formateo y limpieza.
+          </p>
+          <p class="english">
+            A variety of services are included, almost of any kind, phones, desktop PCs, laptops, consoles, except for electrical repairs, formatting and cleaning.
           </p>
         </div>
       </div>
@@ -470,12 +624,19 @@
         <div class="w3-container">
           <span onclick="document.getElementById('id07').style.display='none'; document.body.style.overflow='auto';" class="w3-button w3-display-topright audioclick">×</span>
           <div class="img-modal"><img src="images/Service_Photo.png"></div>
-          <p>Edicion Fotografica</p>
-          <p>
-            Necesita de un editor, correcciones de color, montaje o arreglos?, este servicio le puede interesar ya sea digital o para impresion.
+          <p class="spanish">Edicion Fotografica</p>
+          <p class="english">Photo Editing</p>
+          <p class="spanish">
+            Necesita de un editor, correcciones de color, montaje o arreglos?, este servicio le puede interesar ya sea digital o para impresión.
           </p>
-          <p>
-            Servicio personalizado segun necesite, los precios van desde 20.000 a 50.000, si necesita un lote completo de un evento tambien lo puedo ayudar.
+          <p class="english">
+            Do you need an editor, color corrections, assembly or adjustments? This service may interest you, whether it’s digital or for printing.
+          </p>
+          <p class="spanish">
+            Servicio personalizado según necesite, los precios van desde 20.000 a 50.000, si necesita un lote completo de un evento también lo puedo ayudar.
+          </p>
+          <p class="english">
+            Customized service as needed, prices range from 20,000 to 50,000. If you need a complete batch from an event, I can also help.
           </p>
         </div>
       </div>
@@ -487,12 +648,19 @@
         <div class="w3-container">
           <span onclick="document.getElementById('id08').style.display='none'; document.body.style.overflow='auto';" class="w3-button w3-display-topright audioclick">×</span>
           <div class="img-modal"><img src="images/Service_Video.png"></div>
-          <p>Edicion Video</p>
-          <p>
-            Edicion de video para eventos, eventos informativos o cualquier proyecto.
+          <p class="spanish">Edicion Video</p>
+          <p class="english">Video Editing</p>
+          <p class="spanish">
+            Edición de video para eventos, eventos informativos o cualquier proyecto.
           </p>
-          <p>
-            Si tiene un evento y necesita un editor lo puedo ayudar, las especificaciones del video dependen del material original, se trabaja para cualquier medio y formato de publicacion, redes sociales, anuncios o correcciones.
+          <p class="english">
+            Video editing for events, informational events, or any project.
+          </p>
+          <p class="spanish">
+            Si tiene un evento y necesita un editor lo puedo ayudar, las especificaciones del video dependen del material original, se trabaja para cualquier medio y formato de publicación, redes sociales, anuncios o correcciones.
+          </p>
+          <p class="english">
+            If you have an event and need an editor, I can help. The specifications of the video depend on the original material. I work for any medium and publication format, social networks, advertisements, or corrections.
           </p>
         </div>
       </div>
@@ -500,17 +668,25 @@
   </main>
 </body>
 
-<button id="Fbutton" class="audioclick" type="button"><img id="arrowup" src="icons/arrowUPv4.svg"></button>
+<button id="Fbutton" class="audioclick" type="button" title="btn"><img id="arrowup" src="icons/arrowUPv4.svg"></button>
 
 <footer>
   <div id="footerCont">
-    <label class="switch">
-      <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked>
-      <span class="sliderSwitch"></span>
-    </label><br><br>
-    <p>All rights reserved @2023 [MMXXIII]</p><br>
-    <p>Make by JUANHDA CX</p><br>
-    <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_two">Juan153v0@outlook.com</a>
+    <div id="footerbtn">
+      <label class="switch">
+        <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
+        <span class="sliderSwitch"></span>
+      </label>
+      <div id="language-switch-button" style="cursor: pointer"></div>
+    </div>
+    <br><br>
+    <p class="spanish">Todos los derechos reservados @2023 [MMXXIII]</p>
+    <p class="english">All rights reserved @2023 [MMXXIII]</p>
+    <br>
+    <p class="spanish">Creado por JUANHDA CX.</p>
+    <p class="english">Created by JUANHDA CX.</p>
+    <br>
+    <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a>
     <p>
   </div>
 </footer>

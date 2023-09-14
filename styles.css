@@ -1889,7 +1889,8 @@ div strong a :hover div div {
 }
 
 /*Text Modal*/
-.w3-container > :nth-child(3) {
+.w3-container > :nth-child(3),
+.w3-container > :nth-child(4) {
   font-weight: bold;
   font-family: OxfordStreet;
   font-size: 24px;
@@ -2340,12 +2341,7 @@ form input:focus {
   height: 500px;
   transform: translateY(-39px);
   z-index: -1;
-  background-image: linear-gradient(
-    0deg,
-    rgb(24, 24, 24),
-    rgb(24, 5, 5),
-    rgb(24, 12, 12)
-  );
+  background-image: linear-gradient(0deg, rgb(24, 24, 24), rgb(24, 5, 5), rgb(24, 12, 12));
   background-blend-mode: screen;
 }
 
@@ -2712,7 +2708,7 @@ table tr td {
 #galleryExpandBtn {
   width: 64px;
   height: 64px;
-  background-color: #30c24f;
+  background-color: var(--palette_three_accent);
   position: fixed;
   bottom: 3%;
   left: 50%;
@@ -2724,8 +2720,16 @@ table tr td {
   font-size: 32px;
 }
 
+.dark-mode #galleryExpandBtn {
+  background-color: var(--palette_dark_accent_one);
+}
+
 #galleryExpandBtn:hover {
-  background-color: #a7ffba;
+  background-color: var(--palette_three);
+}
+
+.dark-mode #galleryExpandBtn:hover {
+  background-color: var(--palette_dark_accent_main);
 }
 
 #galleryExpandBtn i {

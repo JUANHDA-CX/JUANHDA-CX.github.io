@@ -3,43 +3,18 @@
   <html lang="es">
     <head>
       <meta charset="utf-8" />
-      <meta
-        name="description"
-        content="Soluciones informaticas de todo tipo a pedido"
-      />
-      <meta
-        name="keywords"
-        content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs"
-      />
+      <meta name="description" content="Soluciones informaticas de todo tipo a pedido" />
+      <meta name="keywords" content="VideoEdit, Photo, Games, Movies, Design, 3D, Web, Programs" />
       <meta name="author" content="Mega CX" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-      />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       <title>Mega CX Studios | Gallery</title>
       <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
       <link rel="icon" href="icons/favicon_gallery.png" type="image/x-icon" />
-      <link
-        rel="shortcut icon"
-        href="icons/favicon_gallery.png"
-        type="image/x-icon"
-      />
-      <link
-        href="https://fonts.googleapis.com/css?family=Courgette&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap"
-        rel="stylesheet"
-      />
-      <script
-        src="https://kit.fontawesome.com/ae03bf6f9c.js"
-        crossorigin="anonymous"
-      ></script>
+      <link rel="shortcut icon" href="icons/favicon_gallery.png" type="image/x-icon" />
+      <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet" />
+      <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
 
       <!--Dark mode-->
       <script>
@@ -76,10 +51,7 @@
             slider.classList.add("lightthree");
             slider.classList.remove("dark");
             button.checked = true;
-          } else if (
-            window.matchMedia &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches
-          ) {
+          } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
             element.classList.add("dark-mode");
             slider.classList.add("dark");
             slider.classList.remove("lightthree");
@@ -159,9 +131,7 @@
       <!--Menu_mobile-->
       <script>
         window.addEventListener("load", () => {
-          const menuButton = document.querySelector(
-            "#menuMobileToggleCheckbox"
-          );
+          const menuButton = document.querySelector("#menuMobileToggleCheckbox");
           const body = document.querySelector("body");
 
           menuButton.addEventListener("change", () => {
@@ -188,9 +158,7 @@
           let gridItems = document.querySelectorAll(".grid-item");
 
           // Obtén los elementos de la ventana emergente
-          let galleryExpandController = document.getElementById(
-            "galleryExpandController"
-          );
+          let galleryExpandController = document.getElementById("galleryExpandController");
           let galleryExpand = document.getElementById("galleryExpand");
           let galleryExpandBtn = document.getElementById("galleryExpandBtn");
 
@@ -243,6 +211,77 @@
           });
         });
       </script>
+
+      <!--Idioma de la pagina-->
+      <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+          var currentLanguage = localStorage.getItem("language") || "Spanish";
+          var userLang = navigator.language || navigator.userLanguage;
+
+          var button = document.getElementById("language-switch-button");
+          var iconEnglishDark = document.createElement("img");
+          iconEnglishDark.src = "icons/icon_english_dark.svg";
+          var iconSpanishDark = document.createElement("img");
+          iconSpanishDark.src = "icons/icon_spanish_dark.svg";
+
+          if (currentLanguage === "Spanish") {
+            displayContentInSpanish();
+            button.appendChild(iconSpanishDark);
+          } else {
+            displayContentInEnglish();
+            button.appendChild(iconEnglishDark);
+          }
+
+          button.addEventListener("click", function () {
+            button.innerHTML = "";
+            button.style.display = "none";
+            button.offsetHeight;
+            button.style.display = "";
+
+            if (currentLanguage === "English") {
+              displayContentInSpanish();
+              currentLanguage = "Spanish";
+              localStorage.setItem("language", "Spanish");
+              button.appendChild(iconSpanishDark);
+            } else {
+              displayContentInEnglish();
+              currentLanguage = "English";
+              localStorage.setItem("language", "English");
+              button.appendChild(iconEnglishDark);
+            }
+          });
+
+          function displayContentInSpanish() {
+            document.querySelectorAll(".english").forEach(function (element) {
+              element.style.display = "none";
+            });
+            document.querySelectorAll(".spanish").forEach(function (element) {
+              element.style.display = "block";
+            });
+            document.querySelectorAll(".menu-english").forEach(function (element) {
+              element.style.display = "none";
+            });
+            document.querySelectorAll(".menu-spanish").forEach(function (element) {
+              element.style.display = "inline-block";
+            });
+          }
+
+          function displayContentInEnglish() {
+            document.querySelectorAll(".spanish").forEach(function (element) {
+              element.style.display = "none";
+            });
+            document.querySelectorAll(".english").forEach(function (element) {
+              element.style.display = "block";
+            });
+            document.querySelectorAll(".menu-spanish").forEach(function (element) {
+              element.style.display = "none";
+            });
+            document.querySelectorAll(".menu-english").forEach(function (element) {
+              element.style.display = "inline-block";
+            });
+          }
+        });
+      </script>
     </head>
 
     <body class="palette_three">
@@ -252,25 +291,33 @@
         <div id="menu2Alt1"></div>
         <nav id="secondary">
           <ul>
-            <li>
+            <li onclick="window.location.href='index.html';">
               <a href="index.html" class="audioclick">
-                <i class="fa-solid fa-house"></i> Inicio</a
+                <i class="fa-solid fa-house"></i>
+                <spa class="menu-spanish">Inicio</spa>
+                <spa class="menu-english">Home</spa></a
               >
             </li>
-            <li>
+            <li onclick="window.location.href='services.html';">
               <a href="services.html" class="audioclick">
-                <i class="fa-solid fa-desktop"></i> Servicios</a
-              >
+                <i class="fa-solid fa-desktop"></i>
+                <spa class="menu-spanish">Servicios</spa>
+                <spa class="menu-english">Services</spa>
+              </a>
             </li>
-            <li>
+            <li onclick="window.location.href='gallery.html';">
               <a href="gallery.html" class="audioclick">
-                <i class="fa-regular fa-image"></i> Galeria</a
-              >
+                <i class="fa-regular fa-image"></i>
+                <span class="menu-spanish">Galeria</span>
+                <span class="menu-english">Gallery</span>
+              </a>
             </li>
-            <li>
+            <li onclick="window.location.href='contact.html';">
               <a href="contact.html" class="audioclick">
-                <i class="fa-solid fa-envelope"></i> Contacto</a
-              >
+                <i class="fa-solid fa-envelope"></i>
+                <span class="menu-spanish">Contacto</span>
+                <span class="menu-english">Contact</span>
+              </a>
             </li>
           </ul>
         </nav>
@@ -279,14 +326,8 @@
         <nav role="navigation" class="menuMobile">
           <a href="index.html">Mega CX</a>
           <div id="menuMobileToggle" class="palette_three">
-            <label class="visually-hidden" for="menuMobileToggleCheckbox"
-              >menuMobile</label
-            >
-            <input
-              id="menuMobileToggleCheckbox"
-              class="audioclick"
-              type="checkbox"
-            />
+            <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
+            <input id="menuMobileToggleCheckbox" class="audioclick" type="checkbox" />
             <span></span>
             <span></span>
             <span></span>
@@ -359,25 +400,25 @@
         <section id="textGallery">
           <article>
             <h1>PORFOLIO</h1>
-            <h2>3D Projects</h2>
+            <h2 class="spanish">Proyectos 3D</h2>
+            <h2 class="english">3D Projects</h2>
             <br /><br />
-            <p>
-              En esta galeria puede ver mi historial de proyectos 3D, al igual
-              que desde artstation, behance, etc donde puede seguirme para estar
-              al pendiente de mis nuevos proyectos, soy freelancer y artista 3D,
-              hago desde productos, arquitectura o assets para videojuegos, todo
-              lo que necesite para su negocio o lo que se pueda imaginar, si
-              necesita algun servicio contacteme.
+            <p class="spanish">
+              En esta galeria puede ver mi historial de proyectos 3D, al igual que desde artstation, behance, etc donde puede seguirme para estar al pendiente
+              de mis nuevos proyectos, soy freelancer y artista 3D, hago desde productos, arquitectura o assets para videojuegos, todo lo que necesite para su
+              negocio o lo que se pueda imaginar, si necesita algun servicio contacteme.
+            </p>
+            <p class="english">
+              In this gallery, you can see my history of 3D projects, as well as from ArtStation, Behance, etc., where you can follow me to keep up with my new
+              projects. I am a freelancer and 3D artist. I do everything from products, architecture, or assets for video games, everything you need for your
+              business or whatever you can imagine. If you need any service, please contact me.
             </p>
           </article>
         </section>
 
         <div id="galleryExpandController">
           <div id="galleryExpandBackground"></div>
-          <img
-            id="galleryExpand"
-            src="https://cdnb.artstation.com/p/assets/images/images/057/397/935/large/juanhda-cx-the-misty-altarff.jpg?1671491203"
-          />
+          <img id="galleryExpand" src="https://cdnb.artstation.com/p/assets/images/images/057/397/935/large/juanhda-cx-the-misty-altarff.jpg?1671491203" />
           <div id="galleryExpandBtn" class="audioclick">
             <i class="fas fa-plus"></i>
           </div>
@@ -616,27 +657,21 @@
 
     <footer>
       <div id="footerCont">
-        <label class="switch">
-          <input
-            id="myButton"
-            class="audioclick"
-            onclick="myFunction()"
-            type="checkbox"
-            checked
-          />
-          <span class="sliderSwitch"></span> </label
-        ><br /><br />
-        <p>All rights reserved @2023 [MMXXIII]</p>
+        <div id="footerbtn">
+          <label class="switch">
+            <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
+            <span class="sliderSwitch"></span>
+          </label>
+          <div id="language-switch-button" style="cursor: pointer"></div>
+        </div>
+        <br /><br />
+        <p class="spanish">Todos los derechos reservados @2023 [MMXXIII]</p>
+        <p class="english">All rights reserved @2023 [MMXXIII]</p>
         <br />
-        <p>Make by JUANHDA CX</p>
+        <p class="spanish">Creado por JUANHDA CX.</p>
+        <p class="english">Created by JUANHDA CX.</p>
         <br />
-        <p>
-          <a
-            href="mailto:juan153v0@outlook.com"
-            class="audioclick palette_three"
-            >Juan153v0@outlook.com</a
-          >
-        </p>
+        <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
         <p></p>
       </div>
     </footer>
