@@ -926,11 +926,9 @@ li a {
 #art3 {
   text-align: center;
   color: black;
-  padding-right: 150px;
-  padding-left: 150px;
+  margin-right: 450px;
+  margin-left: 450px;
   font-size: 18px;
-  left: 0%;
-  right: 0%;
 }
 
 .dark-mode #art1,
@@ -944,8 +942,8 @@ li a {
   #art1,
   #art2,
   #art3 {
-    padding-right: 55px;
-    padding-left: 55px;
+    margin-right: 55px;
+    margin-left: 55px;
     font-size: 16px;
   }
 }
@@ -954,8 +952,8 @@ li a {
   #art1,
   #art2,
   #art3 {
-    padding-right: 25px;
-    padding-left: 25px;
+    margin-right: 25px;
+    margin-left: 25px;
     font-size: 14px;
   }
 }
@@ -2435,8 +2433,8 @@ form input[name="r"] {
 #textGallery {
   position: relative;
   top: 15%;
-  margin-left: 150px;
-  margin-right: 150px;
+  margin-left: 450px;
+  margin-right: 450px;
   margin-bottom: 50px;
   text-align: center;
 }
