@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 120 120">
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
   <defs>
     <style>
       .cls-1, .cls-2 {
@@ -9,14 +9,7 @@
       .cls-2 {
         fill: #fff;
       }
-
-      .cls-3 {
-        mask: url(#mask);
-      }
     </style>
-    <mask id="mask" x="18" y="18" width="84" height="59.5" maskUnits="userSpaceOnUse">
-      <path class="cls-2" d="m102,60c0-23.2-18.8-42-42-42S18,36.8,18,60h84Z"/>
-    </mask>
   </defs>
   <g id="icon_spanish_dark">
     <path class="cls-2" d="m120,60C120,26.86,93.14,0,60,0S0,26.86,0,60h120Z"/>
@@ -24,16 +17,10 @@
     <path class="cls-2" d="m8.5,60c0,28.44,23.06,51.5,51.5,51.5s51.5-23.06,51.5-51.5H8.5Z"/>
     <path class="cls-1" d="m111.5,60c0-28.44-23.06-51.5-51.5-51.5S8.5,31.56,8.5,60h103Z"/>
     <path class="cls-2" d="m102,60c0-23.2-18.8-42-42-42S18,36.8,18,60h84Z"/>
-    <path class="cls-1" d="m18,60c0,23.2,18.8,42,42,42s42-18.8,42-42H18Z"/>
+    <path class="cls-2" d="m18,60c0,23.2,18.8,42,42,42s42-18.8,42-42H18Z"/>
     <g>
-      <path class="cls-2" d="m38.32,48.76v8.11h14.03v6.26h-14.03v8.12h15.59v6.26h-22.19v-35h22.19v6.26h-15.59Z"/>
-      <path class="cls-2" d="m59.98,42.5h7.67l14.08,23.46h.39l-.39-6.75v-16.72h6.55v35h-6.94l-14.86-24.78h-.39l.39,6.75v18.04h-6.5v-35Z"/>
-    </g>
-    <g class="cls-3">
-      <g>
-        <path class="cls-1" d="m38.32,48.76v8.11h14.03v6.26h-14.03v8.12h15.59v6.26h-22.19v-35h22.19v6.26h-15.59Z"/>
-        <path class="cls-1" d="m59.98,42.5h7.67l14.08,23.46h.39l-.39-6.75v-16.72h6.55v35h-6.94l-14.86-24.78h-.39l.39,6.75v18.04h-6.5v-35Z"/>
-      </g>
+      <path class="cls-1" d="m38.32,48.76v8.11h14.03v6.26h-14.03v8.12h15.59v6.26h-22.19v-35h22.19v6.26h-15.59Z"/>
+      <path class="cls-1" d="m59.98,42.5h7.67l14.08,23.46h.39l-.39-6.75v-16.72h6.55v35h-6.94l-14.86-24.78h-.39l.39,6.75v18.04h-6.5v-35Z"/>
     </g>
   </g>
 </svg>
