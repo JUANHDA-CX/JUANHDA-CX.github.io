@@ -283,6 +283,29 @@
           }
         });
       </script>
+
+      <!--Lazzy Gallery-->
+
+      <script>
+        window.addEventListener("load", function () {
+          var images = document.querySelectorAll(".grid-item");
+          var index = 0;
+
+          function loadNextImage() {
+            if (index < images.length) {
+              var img = new Image();
+              img.src = images[index].dataset.src;
+              img.onload = function () {
+                images[index].src = img.src;
+                index++;
+                loadNextImage();
+              };
+            }
+          }
+
+          loadNextImage();
+        });
+      </script>
     </head>
 
     <body class="palette_three">
@@ -385,230 +408,268 @@
         <div class="grid-container audioclick">
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/067/322/432/large/juanhda-cx-mushroom-iridescence-ff.jpg?1695103390"
-            alt="image1"
+            data-src="https://cdna.artstation.com/p/assets/images/images/067/322/432/large/juanhda-cx-mushroom-iridescence-ff.jpg?1695103390"
+            src="icons/placeholder.webp"
+            alt=""
             title="Mushroom Iridescence"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/067/006/368/large/juanhda-cx-summer-camp.jpg?1694322043"
-            alt="image1"
+            data-src="https://cdna.artstation.com/p/assets/images/images/067/006/368/large/juanhda-cx-summer-camp.jpg?1694322043"
+            src="icons/placeholder.webp"
+            alt=""
             title="Summer Camp"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/065/189/808/large/juanhda-cx-turntable-full-ff.jpg?1689746534"
-            alt="image1"
+            data-src="https://cdna.artstation.com/p/assets/images/images/065/189/808/large/juanhda-cx-turntable-full-ff.jpg?1689746534"
+            src="icons/placeholder.webp"
+            alt=""
             title="Turntable vintage"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/065/189/629/large/juanhda-cx-kitchen-renderff.jpg?1689746088"
-            alt="image1"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/065/189/629/large/juanhda-cx-kitchen-renderff.jpg?1689746088"
+            src="icons/placeholder.webp"
+            alt=""
             title="Kitchen Interior"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/065/189/186/large/juanhda-cx-medieval-shield-swords-front-ff.jpg?1689744340"
-            alt="image1"
+            data-src="https://cdna.artstation.com/p/assets/images/images/065/189/186/large/juanhda-cx-medieval-shield-swords-front-ff.jpg?1689744340"
+            src="icons/placeholder.webp"
+            alt=""
             title="Ancient armored medieval shield"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/064/378/298/large/juanhda-cx-antique-lamp-renderff.jpg?1687796335"
-            alt="image1"
+            data-src="https://cdna.artstation.com/p/assets/images/images/064/378/298/large/juanhda-cx-antique-lamp-renderff.jpg?1687796335"
+            src="icons/placeholder.webp"
+            alt=""
             title="Antique Lamp"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/063/893/079/large/juanhda-cx-warm-audio-wa-47-cam1ff.jpg?1686630777"
-            alt="image1"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/063/893/079/large/juanhda-cx-warm-audio-wa-47-cam1ff.jpg?1686630777"
+            src="icons/placeholder.webp"
+            alt=""
             title="Warm Audio WA-47 (MCX)"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/063/675/577/large/juanhda-cx-rebot003-finalff.jpg?1686088519"
-            alt="image1"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/063/675/577/large/juanhda-cx-rebot003-finalff.jpg?1686088519"
+            src="icons/placeholder.webp"
+            alt=""
             title="Rebot_003"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/057/398/304/large/juanhda-cx-treemixff.jpg?1671492244"
-            alt="image1"
+            data-src="https://cdna.artstation.com/p/assets/images/images/057/398/304/large/juanhda-cx-treemixff.jpg?1671492244"
+            src="icons/placeholder.webp"
+            alt=""
             title="TreeMix"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/057/398/261/large/juanhda-cx-chairff.jpg?1671492069"
-            alt="image1"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/057/398/261/large/juanhda-cx-chairff.jpg?1671492069"
+            src="icons/placeholder.webp"
+            alt=""
             title="Flowery sofa"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/057/398/137/large/juanhda-cx-hachx.jpg?1671491644"
-            alt="image1"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/057/398/137/large/juanhda-cx-hachx.jpg?1671491644"
+            src="icons/placeholder.webp"
+            alt=""
             title="Ancient ax with a medieval and fantastic style"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/057/397/989/large/juanhda-cx-guitaraffinity2.jpg?1671491371"
-            alt="image1"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/057/397/989/large/juanhda-cx-guitaraffinity2.jpg?1671491371"
+            src="icons/placeholder.webp"
+            alt=""
             title="Electric Guitar Re"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/057/397/935/large/juanhda-cx-the-misty-altarff.jpg?1671491203"
-            alt="image1"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/057/397/935/large/juanhda-cx-the-misty-altarff.jpg?1671491203"
+            src="icons/placeholder.webp"
+            alt=""
             title="The Misty Altar"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/057/397/564/large/juanhda-cx-snowballff.jpg?1671490287"
-            alt="image1"
+            data-src="https://cdna.artstation.com/p/assets/images/images/057/397/564/large/juanhda-cx-snowballff.jpg?1671490287"
+            src="icons/placeholder.webp"
+            alt=""
             title="Crystal Snowball 21"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/057/362/807/large/juanhda-cx-ring2ff.jpg?1671408311"
-            alt="image1"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/057/362/807/large/juanhda-cx-ring2ff.jpg?1671408311"
+            src="icons/placeholder.webp"
+            alt=""
             title="The Ring of foundation"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/057/362/678/large/juanhda-cx-compassff.jpg?1671407977"
-            alt="image1"
+            data-src="https://cdna.artstation.com/p/assets/images/images/057/362/678/large/juanhda-cx-compassff.jpg?1671407977"
+            src="icons/placeholder.webp"
+            alt=""
             title="Ancient golden compass"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/057/362/550/large/juanhda-cx-decima9-cam2-ff.jpg?1671407644"
-            alt="image1"
+            data-src="https://cdna.artstation.com/p/assets/images/images/057/362/550/large/juanhda-cx-decima9-cam2-ff.jpg?1671407644"
+            src="icons/placeholder.webp"
+            alt=""
             title="Planet Decima-9"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/040/741/752/large/juanhda-cx-pepper-salt.jpg?1629754705"
-            alt="image1"
+            data-src="https://cdna.artstation.com/p/assets/images/images/040/741/752/large/juanhda-cx-pepper-salt.jpg?1629754705"
+            src="icons/placeholder.webp"
+            alt=""
             title="Pepper and salt"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/040/571/367/large/juanhda-cx-mainrowfinal.jpg?1629252251"
-            alt="image1"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/367/large/juanhda-cx-mainrowfinal.jpg?1629252251"
+            src="icons/placeholder.webp"
+            alt=""
             title="Main Row"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/040/571/331/large/juanhda-cx-diamond-corona.jpg?1629252060"
-            alt="image2"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/331/large/juanhda-cx-diamond-corona.jpg?1629252060"
+            src="icons/placeholder.webp"
+            alt=""
             title="Diamond>"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/040/571/287/large/juanhda-cx-droid-12-final.jpg?1629251831"
-            alt="image3"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/287/large/juanhda-cx-droid-12-final.jpg?1629251831"
+            src="icons/placeholder.webp"
+            alt=""
             title="Droid-12"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/040/571/163/large/juanhda-cx-minigunfrontfinal.jpg?1629251333"
-            alt="image4"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/163/large/juanhda-cx-minigunfrontfinal.jpg?1629251333"
+            src="icons/placeholder.webp"
+            alt=""
             title="Minigun-Machine"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/040/101/925/large/juanhda-cx-treechrismastv2.jpg?1627879811"
-            alt="image5"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/040/101/925/large/juanhda-cx-treechrismastv2.jpg?1627879811"
+            src="icons/placeholder.webp"
+            alt=""
             title="Christmas Tree"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/040/101/894/large/juanhda-cx-power-windf.jpg?1627879670"
-            alt="image6"
+            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/894/large/juanhda-cx-power-windf.jpg?1627879670"
+            src="icons/placeholder.webp"
+            alt=""
             title="Wind Power Plant"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/040/101/858/large/juanhda-cx-miwom-pavilionf.jpg?1627879391"
-            alt="image7"
+            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/858/large/juanhda-cx-miwom-pavilionf.jpg?1627879391"
+            src="icons/placeholder.webp"
+            alt=""
             title="Miwom Pavilion"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/040/101/812/large/juanhda-cx-ballsoccer.jpg?1627879078"
-            alt="image8"
+            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/812/large/juanhda-cx-ballsoccer.jpg?1627879078"
+            src="icons/placeholder.webp"
+            alt=""
             title="Ball Soccer"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/040/101/759/large/juanhda-cx-teddy2.jpg?1627878852"
-            alt="image9"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/040/101/759/large/juanhda-cx-teddy2.jpg?1627878852"
+            src="icons/placeholder.webp"
+            alt=""
             title="Teddy's playroom"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/040/101/194/large/juanhda-cx-armfictionf.jpg?1627876581"
-            alt="image10"
+            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/194/large/juanhda-cx-armfictionf.jpg?1627876581"
+            src="icons/placeholder.webp"
+            alt=""
             title="Retro Sci-Fi Weapon"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/040/100/569/large/juanhda-cx-ship-in-port.jpg?1627874131"
-            alt="image11"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/040/100/569/large/juanhda-cx-ship-in-port.jpg?1627874131"
+            src="icons/placeholder.webp"
+            alt=""
             title="Ship in port"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/040/100/469/large/juanhda-cx-light-hopetop.jpg?1627873529"
-            alt="image12"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/040/100/469/large/juanhda-cx-light-hopetop.jpg?1627873529"
+            src="icons/placeholder.webp"
+            alt=""
             title="A light of hope"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/031/642/489/large/juanhda-cx-gingerbrex-house-2020.jpg?1604198983"
-            alt="image9"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/031/642/489/large/juanhda-cx-gingerbrex-house-2020.jpg?1604198983"
+            src="icons/placeholder.webp"
+            alt=""
             title="Gingerbread House"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/031/642/323/large/juanhda-cx-pumpkin-2020-halloween.jpg?1604198259"
-            alt="image10"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/031/642/323/large/juanhda-cx-pumpkin-2020-halloween.jpg?1604198259"
+            src="icons/placeholder.webp"
+            alt=""
             title="Pumpkin in the dark"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/031/009/074/large/juanhda-cx-japanese-entrance.jpg?1602307887"
-            alt="image11"
+            data-src="https://cdna.artstation.com/p/assets/images/images/031/009/074/large/juanhda-cx-japanese-entrance.jpg?1602307887"
+            src="icons/placeholder.webp"
+            alt=""
             title="Japanese Entrance"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/026/771/794/large/juanhda-cx-top.jpg?1589684667"
-            alt="image12"
+            data-src="https://cdna.artstation.com/p/assets/images/images/026/771/794/large/juanhda-cx-top.jpg?1589684667"
+            src="icons/placeholder.webp"
+            alt=""
             title="Segment-Camera-CX"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/026/416/007/large/juanhda-cx-bathroom-megacx.jpg?1588716957"
-            alt="image9"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/026/416/007/large/juanhda-cx-bathroom-megacx.jpg?1588716957"
+            src="icons/placeholder.webp"
+            alt=""
             title="Bathroom Gold"
           />
           <img
             class="grid-item"
-            src="https://cdnb.artstation.com/p/assets/images/images/026/130/999/large/juanhda-cx-cabinf.jpg?1587972995"
-            alt="image10"
+            data-src="https://cdnb.artstation.com/p/assets/images/images/026/130/999/large/juanhda-cx-cabinf.jpg?1587972995"
+            src="icons/placeholder.webp"
+            alt=""
             title="Environment Cabin Poly"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/024/256/128/large/juanhda-cx-san-heartf.jpg?1581830586"
-            alt="image11"
+            data-src="https://cdna.artstation.com/p/assets/images/images/024/256/128/large/juanhda-cx-san-heartf.jpg?1581830586"
+            src="icons/placeholder.webp"
+            alt=""
             title="Skinned Heart"
           />
           <img
             class="grid-item"
-            src="https://cdna.artstation.com/p/assets/images/images/023/925/438/large/juanhda-cx-coffe-shopfinal.jpg?1580775294"
-            alt="image12"
+            data-src="https://cdna.artstation.com/p/assets/images/images/023/925/438/large/juanhda-cx-coffe-shopfinal.jpg?1580775294"
+            src="icons/placeholder.webp"
+            alt=""
             title="Coffee House at dusk"
           />
         </div>
