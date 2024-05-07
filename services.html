@@ -1,751 +1,567 @@
 <!DOCTYPE html>
 <html>
-  <html lang="es">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="description" content="Soluciones informáticas de todo tipo a pedido" />
-      <meta name="description" content="Information technology solutions of all kinds on demand" />
-      <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D, Web, Programs, Software" />
-      <meta name="author" content="Mega CX" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      <title>Mega CX Studios | Services</title>
-      <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-      <link rel="icon" href="icons/favicon_services.png" type="image/x-icon" />
-      <link rel="shortcut icon" href="icons/favicon_services.png" type="image/x-icon" />
-      <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet" />
-      <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+<html lang="es">
 
-      <!--Dark mode-->
-      <script>
-        function myFunction() {
-          var element = document.body;
-          var button = document.getElementById("myButton");
-          var slider = document.querySelector(".sliderSwitch");
-          element.classList.toggle("dark-mode");
-          if (element.classList.contains("dark-mode")) {
-            slider.classList.add("dark");
-            slider.classList.remove("lighttwo");
-            button.checked = false;
-            localStorage.setItem("theme", "dark");
-          } else {
-            slider.classList.add("lighttwo");
-            slider.classList.remove("dark");
-            button.checked = true;
-            localStorage.setItem("theme", "light");
-          }
-        }
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Soluciones informáticas de todo tipo a pedido" />
+  <meta name="description" content="Information technology solutions of all kinds on demand" />
+  <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D, Web, Programs, Software" />
+  <meta name="author" content="Mega CX" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Mega CX Studios | Services</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+  <link rel="icon" href="icons/favicon_services.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="icons/favicon_services.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="main.js"></script>
+  <script src="menuMobile.js"></script>
 
-        window.onload = function () {
-          var element = document.body;
-          var button = document.getElementById("myButton");
-          var slider = document.querySelector(".sliderSwitch");
-          var theme = localStorage.getItem("theme");
-          if (theme === "dark") {
-            element.classList.add("dark-mode");
-            slider.classList.add("dark");
-            slider.classList.remove("lighttwo");
-            button.checked = false;
-          } else if (theme === "light") {
-            element.classList.remove("dark-mode");
-            slider.classList.add("lighttwo");
-            slider.classList.remove("dark");
-            button.checked = true;
-          } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            element.classList.add("dark-mode");
-            slider.classList.add("dark");
-            slider.classList.remove("lighttwo");
-            localStorage.setItem("theme", "dark");
-            button.checked = false;
-          } else {
-            element.classList.remove("dark-mode");
-            slider.classList.add("lighttwo");
-            slider.classList.remove("dark");
-            localStorage.setItem("theme", "light");
-            button.checked = true;
-          }
-        };
-      </script>
 
-      <!--Sounds-->
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const audio = new Audio("/sound/click-21156-666HeroHero.mp3");
-          audio.volume = 0.25;
-          const elements = document.querySelectorAll(".audioclick");
+</head>
 
-          elements.forEach((element) => {
-            element.addEventListener("click", (event) => {
-              if (element.tagName !== "INPUT") {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              audio.play();
-              setTimeout(() => {
-                if (element.hasAttribute("href")) {
-                  if (element.getAttribute("target") === "_blank") {
-                    window.open(element.getAttribute("href"), "_blank");
-                  } else {
-                    window.location.href = element.getAttribute("href");
-                  }
-                }
-              }, 500);
-            });
-          });
-        });
-      </script>
+<body class="palette_two">
+  <div id="scroll"></div>
+  <header>
+    <div id="BarMenu-secondary" class="palette_two"></div>
+    <div id="menu2Alt1"></div>
+    <nav id="secondary">
+      <ul>
+        <li onclick="window.location.href='index.html';">
+          <a href="index.html" class="audioclick">
+            <i class="fa-solid fa-house"></i>
+            <spa class="menu-spanish">Inicio</spa>
+            <spa class="menu-english">Home</spa>
+          </a>
+        </li>
+        <li onclick="window.location.href='services.html';">
+          <a href="services.html" class="audioclick">
+            <i class="fa-solid fa-desktop"></i>
+            <spa class="menu-spanish">Servicios</spa>
+            <spa class="menu-english">Services</spa>
+          </a>
+        </li>
+        <li onclick="window.location.href='gallery.html';">
+          <a href="gallery.html" class="audioclick">
+            <i class="fa-regular fa-image"></i>
+            <span class="menu-spanish">Galería</span>
+            <span class="menu-english">Gallery</span>
+          </a>
+        </li>
+        <li onclick="window.location.href='contact.html';">
+          <a href="contact.html" class="audioclick">
+            <i class="fa-solid fa-envelope"></i>
+            <span class="menu-spanish">Contacto</span>
+            <span class="menu-english">Contact</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-      <!--Pantalla de carga-->
-      <script type="text/javascript">
-        window.addEventListener("load", function () {
-          const loader = document.querySelector(".loader");
-          loader.className += " hidden";
-        });
-      </script>
-
-      <!--Ocultar Boton de desplazamiento-->
-      <script>
-        window.addEventListener("scroll", function () {
-          var Fbutton = document.getElementById("Fbutton");
-          if (window.pageYOffset > 300) {
-            Fbutton.style.display = "block";
-          } else {
-            Fbutton.style.display = "none";
-          }
-        });
-      </script>
-
-      <!--Animacion Boton de desplazamiento-->
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script>
-        function init() {
-          function scrollToTop() {
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-          }
-          var Fbutton = document.getElementById("Fbutton");
-          Fbutton.addEventListener("click", scrollToTop);
-        }
-
-        document.addEventListener("DOMContentLoaded", init);
-      </script>
-
-      <!--Menu_mobile-->
-      <script>
-        window.addEventListener("load", () => {
-          const menuButton = document.querySelector("#menuMobileToggleCheckbox");
-          const body = document.querySelector("body");
-
-          menuButton.addEventListener("change", () => {
-            if (menuButton.checked) {
-              body.classList.add("no-scroll-mobile");
-            } else {
-              body.classList.remove("no-scroll-mobile");
-            }
-          });
-        });
-      </script>
-
-      <!--Idioma de la pagina-->
-      <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-          var currentLanguage = localStorage.getItem("language") || "Spanish";
-          var userLang = navigator.language || navigator.userLanguage;
-
-          var button = document.getElementById("language-switch-button");
-          var iconEnglishDark = document.createElement("img");
-          iconEnglishDark.src = "icons/icon_english_dark.svg";
-          var iconSpanishDark = document.createElement("img");
-          iconSpanishDark.src = "icons/icon_spanish_dark.svg";
-
-          if (currentLanguage === "Spanish") {
-            displayContentInSpanish();
-            button.appendChild(iconSpanishDark);
-          } else {
-            displayContentInEnglish();
-            button.appendChild(iconEnglishDark);
-          }
-
-          button.addEventListener("click", function () {
-            button.innerHTML = "";
-            button.style.display = "none";
-            button.offsetHeight;
-            button.style.display = "";
-
-            if (currentLanguage === "English") {
-              displayContentInSpanish();
-              currentLanguage = "Spanish";
-              localStorage.setItem("language", "Spanish");
-              button.appendChild(iconSpanishDark);
-            } else {
-              displayContentInEnglish();
-              currentLanguage = "English";
-              localStorage.setItem("language", "English");
-              button.appendChild(iconEnglishDark);
-            }
-          });
-
-          function displayContentInSpanish() {
-            document.querySelectorAll(".english").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".spanish").forEach(function (element) {
-              element.style.display = "block";
-            });
-            document.querySelectorAll(".menu-english").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".menu-spanish").forEach(function (element) {
-              element.style.display = "inline-block";
-            });
-          }
-
-          function displayContentInEnglish() {
-            document.querySelectorAll(".spanish").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".english").forEach(function (element) {
-              element.style.display = "block";
-            });
-            document.querySelectorAll(".menu-spanish").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".menu-english").forEach(function (element) {
-              element.style.display = "inline-block";
-            });
-          }
-        });
-      </script>
-    </head>
-
-    <body class="palette_two">
-      <div id="scroll"></div>
-      <header>
-        <div id="BarMenu-secondary" class="palette_two"></div>
-        <div id="menu2Alt1"></div>
-        <nav id="secondary">
-          <ul>
-            <li onclick="window.location.href='index.html';">
-              <a href="index.html" class="audioclick">
-                <i class="fa-solid fa-house"></i>
-                <spa class="menu-spanish">Inicio</spa>
-                <spa class="menu-english">Home</spa></a
-              >
-            </li>
-            <li onclick="window.location.href='services.html';">
-              <a href="services.html" class="audioclick">
-                <i class="fa-solid fa-desktop"></i>
-                <spa class="menu-spanish">Servicios</spa>
-                <spa class="menu-english">Services</spa>
-              </a>
-            </li>
-            <li onclick="window.location.href='gallery.html';">
-              <a href="gallery.html" class="audioclick">
-                <i class="fa-regular fa-image"></i>
-                <span class="menu-spanish">Galería</span>
-                <span class="menu-english">Gallery</span>
-              </a>
-            </li>
-            <li onclick="window.location.href='contact.html';">
-              <a href="contact.html" class="audioclick">
-                <i class="fa-solid fa-envelope"></i>
-                <span class="menu-spanish">Contacto</span>
-                <span class="menu-english">Contact</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <!--Menu Mobile-->
-        <nav role="navigation" class="menuMobile">
-          <a href="index.html">Mega CX</a>
-          <div id="menuMobileToggle" class="palette_two">
-            <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
-            <input id="menuMobileToggleCheckbox" class="audioclick" type="checkbox" />
-            <span></span>
-            <span></span>
-            <span></span>
-            <ul id="menuMobile" class="palette_two">
-              <a href="index.html" class="audioclick">
-                <li class="spanish">Inicio</li>
-                <li class="english">Home</li>
-              </a>
-              <a href="services.html" class="audioclick">
-                <li class="spanish">Servicios</li>
-                <li class="english">Services</li>
-              </a>
-              <a href="gallery.html" class="audioclick">
-                <li class="spanish">Galería</li>
-                <li class="english">Gallery</li>
-              </a>
-              <a href="contact.html" class="audioclick">
-                <li class="spanish">Contacto</li>
-                <li class="english">Contact</li>
-              </a>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      <main>
-        <div class="box-grid-container">
-          <!--Box1-->
-          <div class="box-grid-item">
-            <div class="Box-style">
-              <div class="noisy_services"></div>
-              <div class="img-services"><img src="images/Service_Software.png" alt="Service Software" /></div>
-
-              <span class="box-text">
-                <strong class="box-tittle spanish">Programas</strong>
-                <strong class="box-tittle english">Software</strong><br />
-                <p class="spanish">
-                  Todo tipo software de diseño, creación, gestión, ofimática, edición, multimedia, protección, optimización, herramientas de todo tipo, con su
-                  instalación.
-                </p>
-                <p class="english">
-                  All types of software for design, creation, management, office, editing, multimedia, protection, optimization, all kinds of tools, with their
-                  installation.
-                </p>
-              </span>
-            </div>
-            <div
-              class="Box-buttonModal audioclick"
-              onclick="document.getElementById('id01').style.display='flex'; document.body.style.overflow='hidden'"
-              class="w3-button w3-black"
-            >
-              <i class="fas fa-plus"></i>
-            </div>
-          </div>
-
-          <!--Box2-->
-          <div class="box-grid-item">
-            <div class="Box-style">
-              <div class="noisy_services"></div>
-              <div class="img-services"><img src="images/Service_Games.png" alt="Service Games" /></div>
-
-              <span class="box-text">
-                <strong class="box-tittle spanish">Videojuegos</strong>
-                <strong class="box-tittle english">Videogames</strong><br />
-                <p class="spanish">
-                  Descarga de videojuegos (Solo PC) desde clásicos hasta de ultima generación, ademas de instalación y soporte del juego solo dentro de lo que
-                  al juego se refiere.
-                </p>
-                <p class="english">
-                  Videogames downloads (PC only) from classics to the latest generation, as well as game installation and support, only within the scope of the
-                  game itself.
-                </p>
-              </span>
-            </div>
-            <div
-              class="Box-buttonModal audioclick"
-              onclick="document.getElementById('id02').style.display='flex'; document.body.style.overflow='hidden'"
-              class="w3-button w3-black"
-            >
-              <i class="fas fa-plus"></i>
-            </div>
-          </div>
-
-          <!--Box3-->
-          <div class="box-grid-item">
-            <div class="Box-style">
-              <div class="noisy_services"></div>
-              <div class="img-services"><img src="images/Service_Movies.png" alt="Service Movies" /></div>
-
-              <span class="box-text">
-                <strong class="box-tittle spanish">Peliculas</strong>
-                <strong class="box-tittle english">Movies</strong><br />
-                <p class="spanish">
-                  Descargas de Películas en latino, clásicos y estrenos en todas las calidades DVD-Rip, 720p, 1080p y 4K si esta disponible, para el soporte en
-                  4K se recomiendan dispositivos compatibles.
-                </p>
-                <p class="english">
-                  Movie downloads in Latin, classics and premieres in all qualities DVD-Rip, 720p, 1080p and 4K if available. For 4K support, compatible devices
-                  are recommended.
-                </p>
-              </span>
-            </div>
-            <div
-              class="Box-buttonModal audioclick"
-              onclick="document.getElementById('id03').style.display='flex'; document.body.style.overflow='hidden'"
-              class="w3-button w3-black"
-            >
-              <i class="fas fa-plus"></i>
-            </div>
-          </div>
-
-          <!--Box4-->
-          <div class="box-grid-item">
-            <div class="Box-style">
-              <div class="noisy_services"></div>
-              <div class="img-services"><img src="images/Service_Design.png" alt="Service Design" /></div>
-
-              <span class="box-text">
-                <strong class="box-tittle spanish">Diseño</strong>
-                <strong class="box-tittle english">Design</strong><br />
-                <p class="spanish">
-                  Diseño de todo tipo, logos, volantes, tarjetas, etc, versiones en digital e impresa, no se incluye el servicio de impresión, ademas de diseño
-                  web para su sitio web.
-                </p>
-                <p class="english">
-                  Design of all kinds, logos, flyers, cards, etc., digital and printed versions. Printing service is not included. In addition, web design for
-                  your website.
-                </p>
-              </span>
-            </div>
-            <div
-              class="Box-buttonModal audioclick"
-              onclick="document.getElementById('id04').style.display='flex'; document.body.style.overflow='hidden'"
-              class="w3-button w3-black"
-            >
-              <i class="fas fa-plus"></i>
-            </div>
-          </div>
-
-          <!--Box5-->
-          <div class="box-grid-item">
-            <div class="Box-style">
-              <div class="noisy_services"></div>
-              <div class="img-services"><img src="images/Service_3D.png" alt="Service 3D" /></div>
-
-              <span class="box-text">
-                <strong class="box-tittle spanish">Modelado 3D</strong>
-                <strong class="box-tittle english">Modeling 3D</strong><br />
-                <p class="spanish">
-                  Creación y diseño de modelado 3D, para arquitectura, assets, mecánica y animaciones, para todas las plataformas (No se incluye impresion 3D).
-                </p>
-                <p class="english">
-                  Creation and design of 3D modeling, for architecture, assets, mechanics, and animations, for all platforms (3D printing not included).
-                </p>
-              </span>
-            </div>
-            <div
-              class="Box-buttonModal audioclick"
-              onclick="document.getElementById('id05').style.display='flex'; document.body.style.overflow='hidden'"
-              class="w3-button w3-black"
-            >
-              <i class="fas fa-plus"></i>
-            </div>
-          </div>
-
-          <!--Box6-->
-          <div class="box-grid-item">
-            <div class="Box-style">
-              <div class="noisy_services"></div>
-              <div class="img-services"><img src="images/Service_Utilities.png" alt="Service Utilities" /></div>
-
-              <span class="box-text">
-                <strong class="box-tittle spanish">Utilidades</strong>
-                <strong class="box-tittle english">Utilities</strong><br />
-                <p class="spanish">
-                  Instalación de software, formateo, arreglos de todo tipo (solo software), antivirus, optimización y limpieza, actualización, configuración,
-                  etc.
-                </p>
-                <p class="english">
-                  Software installation, formatting, all kinds of fixes (software only), antivirus, optimization and cleaning, updating, configuration, etc.
-                </p>
-              </span>
-            </div>
-            <div
-              class="Box-buttonModal audioclick"
-              onclick="document.getElementById('id06').style.display='flex'; document.body.style.overflow='hidden'"
-              class="w3-button w3-black"
-            >
-              <i class="fas fa-plus"></i>
-            </div>
-          </div>
-
-          <!--Box7-->
-          <div class="box-grid-item">
-            <div class="Box-style">
-              <div class="noisy_services"></div>
-              <div class="img-services"><img src="images/Service_Photo.png" alt="Service Photo" /></div>
-
-              <span class="box-text">
-                <strong class="box-tittle spanish">Edición Fotográfica</strong>
-                <strong class="box-tittle english">Photo Editing</strong><br />
-                <p class="spanish">
-                  Edición fotográfica, arreglos de color y correcciones (No se incluye el servicio de fotografiá ni el revelado de fotos físicas o impresión).
-                </p>
-                <p class="english">
-                  Photo editing, color adjustments and corrections (Photography service or development of physical photos or printing not included).
-                </p>
-              </span>
-            </div>
-            <div
-              class="Box-buttonModal audioclick"
-              onclick="document.getElementById('id07').style.display='flex'; document.body.style.overflow='hidden'"
-              class="w3-button w3-black"
-            >
-              <i class="fas fa-plus"></i>
-            </div>
-          </div>
-
-          <!--Box8-->
-          <div class="box-grid-item">
-            <div class="Box-style">
-              <div class="noisy_services"></div>
-              <div class="img-services"><img src="images/Service_Video.png" alt="Service Video" /></div>
-
-              <span class="box-text">
-                <strong class="box-tittle spanish">Edición de Video</strong>
-                <strong class="box-tittle english">Video Editing</strong><br />
-                <p class="spanish">
-                  Cortometrajes, videos publicitarios, animaciones, etc (La calidad también puede variar de acuerdo a los archivos originales de base).
-                </p>
-                <p class="english">Short films, advertising videos, animations, etc. (The quality can also vary according to the original base files).</p>
-              </span>
-            </div>
-            <div
-              class="Box-buttonModal audioclick"
-              onclick="document.getElementById('id08').style.display='flex'; document.body.style.overflow='hidden'"
-              class="w3-button w3-black"
-            >
-              <i class="fas fa-plus"></i>
-            </div>
-          </div>
-        </div>
-
-        <!--Modal Content1-->
-        <div id="id01" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span
-                onclick="document.getElementById('id01').style.display='none'; document.body.style.overflow='auto';"
-                class="w3-button w3-display-topright audioclick"
-                >×</span
-              >
-              <div class="img-modal"><img src="images/Service_Software.png" alt="Service Software" /></div>
-              <p class="spanish">Programas</p>
-              <p class="english">Software</p>
-              <p class="spanish">
-                Aplicaciones de ofimática, suite de adobe, o utilidades, todo el software especializado que necesite, descarga e instalación.
-              </p>
-              <p class="english">Office applications, Adobe suite, or utilities, all the specialized software you need, download and installation.</p>
-              <p class="spanish">
-                Formateo e instalación de sistemas operativos, Windows, Linux, macOS o Android (Roms), también programas antivirus, protección o servicios de
-                recuperación de archivos, el valor depende del programa, o si necesita instalacion.
-              </p>
-              <p class="english">
-                Formatting and installation of operating systems, Windows, Linux, macOS or Android (Roms), also antivirus programs, protection or file recovery
-                services, the value depends on the program, or if you need installation.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!--Modal Content2-->
-        <div id="id02" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span
-                onclick="document.getElementById('id02').style.display='none'; document.body.style.overflow='auto';"
-                class="w3-button w3-display-topright audioclick"
-                >×</span
-              >
-              <div class="img-modal"><img src="images/Service_Games.png" alt="Service Games" /></div>
-              <p class="spanish">Videojuegos</p>
-              <p class="english">Videogames</p>
-              <p class="spanish">Todos los géneros para todos los gustos, Shooter, RPG, Rol, Action, Sandbox, Indies, estrategia, clásicos, etc.</p>
-              <p class="english">All genres for all tastes, Shooter, RPG, Role-playing, Action, Sandbox, Indies, strategy, classics, etc.</p>
-              <p class="spanish">
-                Revisar primero los requerimientos de hardware para cada juego, CPU, GPU, RAM, almacenamiento, no ofrezco juegos multijugador pero ofrezco
-                accesoria, este servicio incluye la descarga he instalación con todos los DLC's y actualizaciones ademas de configuración, los precios varían
-                mucho dependiendo principalmente el peso del juego.
-              </p>
-              <p class="english">
-                Check the hardware requirements for each game first, including CPU, GPU, RAM, and storage. I don't offer multiplayer games, but I do offer
-                advice. This service includes downloading and installing all DLCs and updates, as well as configuration. Prices vary greatly, mainly depending
-                on the size of the game.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!--Modal Content3-->
-        <div id="id03" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span
-                onclick="document.getElementById('id03').style.display='none'; document.body.style.overflow='auto';"
-                class="w3-button w3-display-topright audioclick"
-                >×</span
-              >
-              <div class="img-modal"><img src="images/Service_Movies.png" alt="Service Movies" /></div>
-              <p class="spanish">Peliculas</p>
-              <p class="english">Movies</p>
-              <p class="spanish">Descargas de películas y series en todas las calidades.</p>
-              <p class="english">Movie and series downloads in all qualities.</p>
-              <p class="spanish">
-                Películas a resolución 720p, 1080p o 4k si hay disponibilidad, los precios varian, las series depende el numero de
-                capítulos. Se recomienda un reproductor y pantalla compatibles.
-              </p>
-              <p class="english">
-                Movies at 720p, 1080p or 4k resolution if available, prices vary. The series depends on the number of episodes. A
-                compatible player and screen are recommended.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!--Modal Content4-->
-        <div id="id04" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span
-                onclick="document.getElementById('id04').style.display='none'; document.body.style.overflow='auto';"
-                class="w3-button w3-display-topright audioclick"
-                >×</span
-              >
-              <div class="img-modal"><img src="images/Service_Design.png" alt="Service Design" /></div>
-              <p class="spanish">Diseño</p>
-              <p class="english">Design</p>
-              <p class="spanish">Servicios de diseño grafico, logos, banners, letreros, tarjetas, volantes y hasta conceptos de paginas webs y aplicaciones.</p>
-              <p class="english">Graphic design services, logos, banners, signs, cards, flyers, and even concepts for websites and applications.</p>
-              <p class="spanish">Los precios varían por proyecto según lo que necesite en cada caso.</p>
-              <p class="english">Prices vary by project depending on what you need in each case</p>
-            </div>
-          </div>
-        </div>
-
-        <!--Modal Content5-->
-        <div id="id05" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span
-                onclick="document.getElementById('id05').style.display='none'; document.body.style.overflow='auto';"
-                class="w3-button w3-display-topright audioclick"
-                >×</span
-              >
-              <div class="img-modal"><img src="images/Service_3D.png" alt="Service 3D" /></div>
-              <p class="spanish">Modelado 3D</p>
-              <p class="english">Modeling 3D</p>
-              <p class="spanish">
-                Inmuebles, productos, arquitectura y cualquier espacio que se pueda imaginar, incluye texturizacion, archivos, assets y render.
-              </p>
-              <p class="english">Real estate, products, architecture, and any space you can imagine, including texturing, files, assets, and rendering.</p>
-              <p class="spanish">
-                Si tiene la idea de un producto o un concepto se puede recrear en 3D, espacios interiores para la venta o efectos visuales y próximamente
-                recorridos virtuales, en formato de video, o tiempo real (si dispone de un equipo compatible), lo precios pueden variar ampliamente dependiendo
-                el tamaño del proyecto, fechas, revisiones y el formato en que lo necesite renders estáticos o recorridos virtuales.
-              </p>
-              <p class="english">
-                If you have an idea for a product or a concept, it can be recreated in 3D, interior spaces for sale or visual effects, and soon virtual tours,
-                in video format, or real time (if you have a compatible device). Prices can vary widely depending on the size of the project, dates, revisions,
-                and the format in which you need it - static renders or virtual tours.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!--Modal Content6-->
-        <div id="id06" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span
-                onclick="document.getElementById('id06').style.display='none'; document.body.style.overflow='auto';"
-                class="w3-button w3-display-topright audioclick"
-                >×</span
-              >
-              <div class="img-modal"><img src="images/Service_Utilities.png" alt="Service Utilities" /></div>
-              <p class="spanish">Utilidades</p>
-              <p class="english">Utilities</p>
-              <p class="spanish">
-                Optimización de equipos, desarrollo de paginas webs, o aprendizaje personal, este servicio incluye beneficios que le pueden interesar.
-              </p>
-              <p class="english">
-                Optimization of equipment, web page development, or personal learning, this service includes benefits that may interest you.
-              </p>
-              <p class="spanish">
-                Se incluyen variedad de servicios casi de cualquier índole, teléfonos, PC de mesa, laptops, consolas, menos reparaciones eléctricas, formateo y
-                limpieza.
-              </p>
-              <p class="english">
-                A variety of services are included, almost of any kind, phones, desktop PCs, laptops, consoles, except for electrical repairs, formatting and
-                cleaning.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!--Modal Content7-->
-        <div id="id07" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span
-                onclick="document.getElementById('id07').style.display='none'; document.body.style.overflow='auto';"
-                class="w3-button w3-display-topright audioclick"
-                >×</span
-              >
-              <div class="img-modal"><img src="images/Service_Photo.png" alt="Service Photo" /></div>
-              <p class="spanish">Edicion Fotografica</p>
-              <p class="english">Photo Editing</p>
-              <p class="spanish">
-                Necesita de un editor, correcciones de color, montaje o arreglos?, este servicio le puede interesar ya sea digital o para impresión.
-              </p>
-              <p class="english">
-                Do you need an editor, color corrections, assembly or adjustments? This service may interest you, whether it’s digital or for printing.
-              </p>
-              <p class="spanish">
-                Servicio personalizado según necesite, los precios van desde 20.000 a 50.000, si necesita un lote completo de un evento también lo puedo ayudar.
-              </p>
-              <p class="english">
-                Customized service as needed, prices range from 20,000 to 50,000. If you need a complete batch from an event, I can also help.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!--Modal Content8-->
-        <div id="id08" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span
-                onclick="document.getElementById('id08').style.display='none'; document.body.style.overflow='auto';"
-                class="w3-button w3-display-topright audioclick"
-                >×</span
-              >
-              <div class="img-modal"><img src="images/Service_Video.png" alt="Service Video" /></div>
-              <p class="spanish">Edicion Video</p>
-              <p class="english">Video Editing</p>
-              <p class="spanish">Edición de video para eventos, eventos informativos o cualquier proyecto.</p>
-              <p class="english">Video editing for events, informational events, or any project.</p>
-              <p class="spanish">
-                Si tiene un evento y necesita un editor lo puedo ayudar, las especificaciones del video dependen del material original, se trabaja para
-                cualquier medio y formato de publicación, redes sociales, anuncios o correcciones.
-              </p>
-              <p class="english">
-                If you have an event and need an editor, I can help. The specifications of the video depend on the original material. I work for any medium and
-                publication format, social networks, advertisements, or corrections.
-              </p>
-            </div>
-          </div>
-        </div>
-      </main>
-    </body>
-
-    <button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup" src="icons/arrowUPv4.svg" /></button>
-
-    <footer>
-      <div class="noisy"></div>
-      <div id="footerCont">
-        <div id="footerbtn">
-          <label class="switch">
-            <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
-            <span class="sliderSwitch"></span>
-          </label>
-          <div id="language-switch-button"></div>
-        </div>
-        <br /><br />
-        <p class="spanish">Todos los derechos reservados @2024 [MMXXIV]</p>
-        <p class="english">All rights reserved @2024 [MMXXIV]</p>
-        <br />
-        <p class="spanish">Creado por JUANHDA CX.</p>
-        <p class="english">Created by JUANHDA CX.</p>
-        <br />
-        <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
-        <p></p>
+    <!--Menu Mobile-->
+    <nav role="navigation" class="menuMobile">
+      <a href="index.html">Mega CX</a>
+      <div id="menuMobileToggle" class="palette_two">
+        <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
+        <input id="menuMobileToggleCheckbox" class="audioclick" type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menuMobile" class="palette_two">
+          <a href="index.html" class="audioclick">
+            <li class="spanish">Inicio</li>
+            <li class="english">Home</li>
+          </a>
+          <a href="services.html" class="audioclick">
+            <li class="spanish">Servicios</li>
+            <li class="english">Services</li>
+          </a>
+          <a href="gallery.html" class="audioclick">
+            <li class="spanish">Galería</li>
+            <li class="english">Gallery</li>
+          </a>
+          <a href="contact.html" class="audioclick">
+            <li class="spanish">Contacto</li>
+            <li class="english">Contact</li>
+          </a>
+        </ul>
       </div>
-    </footer>
+    </nav>
+  </header>
+  <main>
+    <div class="box-grid-container">
+      <!--Box1-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <div class="noisy_services"></div>
+          <div class="img-services"><img src="images/Service_Software.png" alt="Service Software" /></div>
 
-    <div class="loader"></div>
-  </html>
+          <span class="box-text">
+            <strong class="box-tittle spanish">Programas</strong>
+            <strong class="box-tittle english">Software</strong><br />
+            <p class="spanish">
+              Todo tipo software de diseño, creación, gestión, ofimática, edición, multimedia, protección, optimización,
+              herramientas de todo tipo, con su
+              instalación.
+            </p>
+            <p class="english">
+              All types of software for design, creation, management, office, editing, multimedia, protection,
+              optimization, all kinds of tools, with their
+              installation.
+            </p>
+          </span>
+        </div>
+        <div class="Box-buttonModal audioclick"
+          onclick="document.getElementById('id01').style.display='flex'; document.body.style.overflow='hidden'"
+          class="w3-button w3-black">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+
+      <!--Box2-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <div class="noisy_services"></div>
+          <div class="img-services"><img src="images/Service_Games.png" alt="Service Games" /></div>
+
+          <span class="box-text">
+            <strong class="box-tittle spanish">Videojuegos</strong>
+            <strong class="box-tittle english">Videogames</strong><br />
+            <p class="spanish">
+              Descarga de videojuegos (Solo PC) desde clásicos hasta de ultima generación, ademas de instalación y
+              soporte del juego solo dentro de lo que
+              al juego se refiere.
+            </p>
+            <p class="english">
+              Videogames downloads (PC only) from classics to the latest generation, as well as game installation and
+              support, only within the scope of the
+              game itself.
+            </p>
+          </span>
+        </div>
+        <div class="Box-buttonModal audioclick"
+          onclick="document.getElementById('id02').style.display='flex'; document.body.style.overflow='hidden'"
+          class="w3-button w3-black">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+
+      <!--Box3-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <div class="noisy_services"></div>
+          <div class="img-services"><img src="images/Service_Movies.png" alt="Service Movies" /></div>
+
+          <span class="box-text">
+            <strong class="box-tittle spanish">Peliculas</strong>
+            <strong class="box-tittle english">Movies</strong><br />
+            <p class="spanish">
+              Descargas de Películas en latino, clásicos y estrenos en todas las calidades DVD-Rip, 720p, 1080p y 4K si
+              esta disponible, para el soporte en
+              4K se recomiendan dispositivos compatibles.
+            </p>
+            <p class="english">
+              Movie downloads in Latin, classics and premieres in all qualities DVD-Rip, 720p, 1080p and 4K if
+              available. For 4K support, compatible devices
+              are recommended.
+            </p>
+          </span>
+        </div>
+        <div class="Box-buttonModal audioclick"
+          onclick="document.getElementById('id03').style.display='flex'; document.body.style.overflow='hidden'"
+          class="w3-button w3-black">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+
+      <!--Box4-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <div class="noisy_services"></div>
+          <div class="img-services"><img src="images/Service_Design.png" alt="Service Design" /></div>
+
+          <span class="box-text">
+            <strong class="box-tittle spanish">Diseño</strong>
+            <strong class="box-tittle english">Design</strong><br />
+            <p class="spanish">
+              Diseño de todo tipo, logos, volantes, tarjetas, etc, versiones en digital e impresa, no se incluye el
+              servicio de impresión, ademas de diseño
+              web para su sitio web.
+            </p>
+            <p class="english">
+              Design of all kinds, logos, flyers, cards, etc., digital and printed versions. Printing service is not
+              included. In addition, web design for
+              your website.
+            </p>
+          </span>
+        </div>
+        <div class="Box-buttonModal audioclick"
+          onclick="document.getElementById('id04').style.display='flex'; document.body.style.overflow='hidden'"
+          class="w3-button w3-black">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+
+      <!--Box5-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <div class="noisy_services"></div>
+          <div class="img-services"><img src="images/Service_3D.png" alt="Service 3D" /></div>
+
+          <span class="box-text">
+            <strong class="box-tittle spanish">Modelado 3D</strong>
+            <strong class="box-tittle english">Modeling 3D</strong><br />
+            <p class="spanish">
+              Creación y diseño de modelado 3D, para arquitectura, assets, mecánica y animaciones, para todas las
+              plataformas (No se incluye impresion 3D).
+            </p>
+            <p class="english">
+              Creation and design of 3D modeling, for architecture, assets, mechanics, and animations, for all platforms
+              (3D printing not included).
+            </p>
+          </span>
+        </div>
+        <div class="Box-buttonModal audioclick"
+          onclick="document.getElementById('id05').style.display='flex'; document.body.style.overflow='hidden'"
+          class="w3-button w3-black">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+
+      <!--Box6-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <div class="noisy_services"></div>
+          <div class="img-services"><img src="images/Service_Utilities.png" alt="Service Utilities" /></div>
+
+          <span class="box-text">
+            <strong class="box-tittle spanish">Utilidades</strong>
+            <strong class="box-tittle english">Utilities</strong><br />
+            <p class="spanish">
+              Instalación de software, formateo, arreglos de todo tipo (solo software), antivirus, optimización y
+              limpieza, actualización, configuración,
+              etc.
+            </p>
+            <p class="english">
+              Software installation, formatting, all kinds of fixes (software only), antivirus, optimization and
+              cleaning, updating, configuration, etc.
+            </p>
+          </span>
+        </div>
+        <div class="Box-buttonModal audioclick"
+          onclick="document.getElementById('id06').style.display='flex'; document.body.style.overflow='hidden'"
+          class="w3-button w3-black">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+
+      <!--Box7-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <div class="noisy_services"></div>
+          <div class="img-services"><img src="images/Service_Photo.png" alt="Service Photo" /></div>
+
+          <span class="box-text">
+            <strong class="box-tittle spanish">Edición Fotográfica</strong>
+            <strong class="box-tittle english">Photo Editing</strong><br />
+            <p class="spanish">
+              Edición fotográfica, arreglos de color y correcciones (No se incluye el servicio de fotografiá ni el
+              revelado de fotos físicas o impresión).
+            </p>
+            <p class="english">
+              Photo editing, color adjustments and corrections (Photography service or development of physical photos or
+              printing not included).
+            </p>
+          </span>
+        </div>
+        <div class="Box-buttonModal audioclick"
+          onclick="document.getElementById('id07').style.display='flex'; document.body.style.overflow='hidden'"
+          class="w3-button w3-black">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+
+      <!--Box8-->
+      <div class="box-grid-item">
+        <div class="Box-style">
+          <div class="noisy_services"></div>
+          <div class="img-services"><img src="images/Service_Video.png" alt="Service Video" /></div>
+
+          <span class="box-text">
+            <strong class="box-tittle spanish">Edición de Video</strong>
+            <strong class="box-tittle english">Video Editing</strong><br />
+            <p class="spanish">
+              Cortometrajes, videos publicitarios, animaciones, etc (La calidad también puede variar de acuerdo a los
+              archivos originales de base).
+            </p>
+            <p class="english">Short films, advertising videos, animations, etc. (The quality can also vary according to
+              the original base files).</p>
+          </span>
+        </div>
+        <div class="Box-buttonModal audioclick"
+          onclick="document.getElementById('id08').style.display='flex'; document.body.style.overflow='hidden'"
+          class="w3-button w3-black">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content1-->
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id01').style.display='none'; document.body.style.overflow='auto';"
+            class="w3-button w3-display-topright audioclick">×</span>
+          <div class="img-modal"><img src="images/Service_Software.png" alt="Service Software" /></div>
+          <p class="spanish">Programas</p>
+          <p class="english">Software</p>
+          <p class="spanish">
+            Aplicaciones de ofimática, suite de adobe, o utilidades, todo el software especializado que necesite,
+            descarga e instalación.
+          </p>
+          <p class="english">Office applications, Adobe suite, or utilities, all the specialized software you need,
+            download and installation.</p>
+          <p class="spanish">
+            Formateo e instalación de sistemas operativos, Windows, Linux, macOS o Android (Roms), también programas
+            antivirus, protección o servicios de
+            recuperación de archivos, el valor depende del programa, o si necesita instalacion.
+          </p>
+          <p class="english">
+            Formatting and installation of operating systems, Windows, Linux, macOS or Android (Roms), also antivirus
+            programs, protection or file recovery
+            services, the value depends on the program, or if you need installation.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content2-->
+    <div id="id02" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id02').style.display='none'; document.body.style.overflow='auto';"
+            class="w3-button w3-display-topright audioclick">×</span>
+          <div class="img-modal"><img src="images/Service_Games.png" alt="Service Games" /></div>
+          <p class="spanish">Videojuegos</p>
+          <p class="english">Videogames</p>
+          <p class="spanish">Todos los géneros para todos los gustos, Shooter, RPG, Rol, Action, Sandbox, Indies,
+            estrategia, clásicos, etc.</p>
+          <p class="english">All genres for all tastes, Shooter, RPG, Role-playing, Action, Sandbox, Indies, strategy,
+            classics, etc.</p>
+          <p class="spanish">
+            Revisar primero los requerimientos de hardware para cada juego, CPU, GPU, RAM, almacenamiento, no ofrezco
+            juegos multijugador pero ofrezco
+            accesoria, este servicio incluye la descarga he instalación con todos los DLC's y actualizaciones ademas de
+            configuración, los precios varían
+            mucho dependiendo principalmente el peso del juego.
+          </p>
+          <p class="english">
+            Check the hardware requirements for each game first, including CPU, GPU, RAM, and storage. I don't offer
+            multiplayer games, but I do offer
+            advice. This service includes downloading and installing all DLCs and updates, as well as configuration.
+            Prices vary greatly, mainly depending
+            on the size of the game.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content3-->
+    <div id="id03" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id03').style.display='none'; document.body.style.overflow='auto';"
+            class="w3-button w3-display-topright audioclick">×</span>
+          <div class="img-modal"><img src="images/Service_Movies.png" alt="Service Movies" /></div>
+          <p class="spanish">Peliculas</p>
+          <p class="english">Movies</p>
+          <p class="spanish">Descargas de películas y series en todas las calidades.</p>
+          <p class="english">Movie and series downloads in all qualities.</p>
+          <p class="spanish">
+            Películas a resolución 720p, 1080p o 4k si hay disponibilidad, los precios varian, las series depende el
+            numero de
+            capítulos. Se recomienda un reproductor y pantalla compatibles.
+          </p>
+          <p class="english">
+            Movies at 720p, 1080p or 4k resolution if available, prices vary. The series depends on the number of
+            episodes. A
+            compatible player and screen are recommended.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content4-->
+    <div id="id04" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id04').style.display='none'; document.body.style.overflow='auto';"
+            class="w3-button w3-display-topright audioclick">×</span>
+          <div class="img-modal"><img src="images/Service_Design.png" alt="Service Design" /></div>
+          <p class="spanish">Diseño</p>
+          <p class="english">Design</p>
+          <p class="spanish">Servicios de diseño grafico, logos, banners, letreros, tarjetas, volantes y hasta conceptos
+            de paginas webs y aplicaciones.</p>
+          <p class="english">Graphic design services, logos, banners, signs, cards, flyers, and even concepts for
+            websites and applications.</p>
+          <p class="spanish">Los precios varían por proyecto según lo que necesite en cada caso.</p>
+          <p class="english">Prices vary by project depending on what you need in each case</p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content5-->
+    <div id="id05" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id05').style.display='none'; document.body.style.overflow='auto';"
+            class="w3-button w3-display-topright audioclick">×</span>
+          <div class="img-modal"><img src="images/Service_3D.png" alt="Service 3D" /></div>
+          <p class="spanish">Modelado 3D</p>
+          <p class="english">Modeling 3D</p>
+          <p class="spanish">
+            Inmuebles, productos, arquitectura y cualquier espacio que se pueda imaginar, incluye texturizacion,
+            archivos, assets y render.
+          </p>
+          <p class="english">Real estate, products, architecture, and any space you can imagine, including texturing,
+            files, assets, and rendering.</p>
+          <p class="spanish">
+            Si tiene la idea de un producto o un concepto se puede recrear en 3D, espacios interiores para la venta o
+            efectos visuales y próximamente
+            recorridos virtuales, en formato de video, o tiempo real (si dispone de un equipo compatible), lo precios
+            pueden variar ampliamente dependiendo
+            el tamaño del proyecto, fechas, revisiones y el formato en que lo necesite renders estáticos o recorridos
+            virtuales.
+          </p>
+          <p class="english">
+            If you have an idea for a product or a concept, it can be recreated in 3D, interior spaces for sale or
+            visual effects, and soon virtual tours,
+            in video format, or real time (if you have a compatible device). Prices can vary widely depending on the
+            size of the project, dates, revisions,
+            and the format in which you need it - static renders or virtual tours.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content6-->
+    <div id="id06" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id06').style.display='none'; document.body.style.overflow='auto';"
+            class="w3-button w3-display-topright audioclick">×</span>
+          <div class="img-modal"><img src="images/Service_Utilities.png" alt="Service Utilities" /></div>
+          <p class="spanish">Utilidades</p>
+          <p class="english">Utilities</p>
+          <p class="spanish">
+            Optimización de equipos, desarrollo de paginas webs, o aprendizaje personal, este servicio incluye
+            beneficios que le pueden interesar.
+          </p>
+          <p class="english">
+            Optimization of equipment, web page development, or personal learning, this service includes benefits that
+            may interest you.
+          </p>
+          <p class="spanish">
+            Se incluyen variedad de servicios casi de cualquier índole, teléfonos, PC de mesa, laptops, consolas, menos
+            reparaciones eléctricas, formateo y
+            limpieza.
+          </p>
+          <p class="english">
+            A variety of services are included, almost of any kind, phones, desktop PCs, laptops, consoles, except for
+            electrical repairs, formatting and
+            cleaning.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content7-->
+    <div id="id07" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id07').style.display='none'; document.body.style.overflow='auto';"
+            class="w3-button w3-display-topright audioclick">×</span>
+          <div class="img-modal"><img src="images/Service_Photo.png" alt="Service Photo" /></div>
+          <p class="spanish">Edicion Fotografica</p>
+          <p class="english">Photo Editing</p>
+          <p class="spanish">
+            Necesita de un editor, correcciones de color, montaje o arreglos?, este servicio le puede interesar ya sea
+            digital o para impresión.
+          </p>
+          <p class="english">
+            Do you need an editor, color corrections, assembly or adjustments? This service may interest you, whether
+            it’s digital or for printing.
+          </p>
+          <p class="spanish">
+            Servicio personalizado según necesite, los precios van desde 20.000 a 50.000, si necesita un lote completo
+            de un evento también lo puedo ayudar.
+          </p>
+          <p class="english">
+            Customized service as needed, prices range from 20,000 to 50,000. If you need a complete batch from an
+            event, I can also help.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Content8-->
+    <div id="id08" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id08').style.display='none'; document.body.style.overflow='auto';"
+            class="w3-button w3-display-topright audioclick">×</span>
+          <div class="img-modal"><img src="images/Service_Video.png" alt="Service Video" /></div>
+          <p class="spanish">Edicion Video</p>
+          <p class="english">Video Editing</p>
+          <p class="spanish">Edición de video para eventos, eventos informativos o cualquier proyecto.</p>
+          <p class="english">Video editing for events, informational events, or any project.</p>
+          <p class="spanish">
+            Si tiene un evento y necesita un editor lo puedo ayudar, las especificaciones del video dependen del
+            material original, se trabaja para
+            cualquier medio y formato de publicación, redes sociales, anuncios o correcciones.
+          </p>
+          <p class="english">
+            If you have an event and need an editor, I can help. The specifications of the video depend on the original
+            material. I work for any medium and
+            publication format, social networks, advertisements, or corrections.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+<button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup"
+    src="icons/arrowUPv4.svg" /></button>
+
+<footer>
+  <div class="noisy"></div>
+  <div id="footerCont">
+    <div id="footerbtn">
+      <label class="switch">
+        <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
+        <span class="sliderSwitch"></span>
+      </label>
+      <div id="language-switch-button"></div>
+    </div>
+    <br /><br />
+    <p class="spanish">Todos los derechos reservados @2024 [MMXXIV]</p>
+    <p class="english">All rights reserved @2024 [MMXXIV]</p>
+    <br />
+    <p class="spanish">Creado por JUANHDA CX.</p>
+    <p class="english">Created by JUANHDA CX.</p>
+    <br />
+    <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
+    <p></p>
+  </div>
+</footer>
+
+<div class="loader"></div>
+
+</html>
+
 </html>

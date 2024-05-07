@@ -1,445 +1,322 @@
 <!DOCTYPE html>
 <html>
-  <html lang="es">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="description" content="Soluciones informáticas de todo tipo a pedido" />
-      <meta name="description" content="Information technology solutions of all kinds on demand" />
-      <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D, Web, Programs, Software" />
-      <meta name="author" content="Mega CX" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      <title>Mega CX Studios | Home</title>
-      <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-      <link rel="icon" href="icons/favicon_home.png" type="image/x-icon" />
-      <link rel="shortcut icon" href="icons/favicon_home.png" type="image/x-icon" />
-      <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet" />
-      <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+<html lang="es">
 
-      <!--Dark mode-->
-      <script>
-        function myFunction() {
-          var element = document.body;
-          var button = document.getElementById("myButton");
-          var slider = document.querySelector(".sliderSwitch");
-          element.classList.toggle("dark-mode");
-          if (element.classList.contains("dark-mode")) {
-            slider.classList.add("dark");
-            slider.classList.remove("lightfour");
-            button.checked = false;
-            localStorage.setItem("theme", "dark");
-          } else {
-            slider.classList.add("lightfour");
-            slider.classList.remove("dark");
-            button.checked = true;
-            localStorage.setItem("theme", "light");
-          }
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Soluciones informáticas de todo tipo a pedido" />
+  <meta name="description" content="Information technology solutions of all kinds on demand" />
+  <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D, Web, Programs, Software" />
+  <meta name="author" content="Mega CX" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Mega CX Studios | Home</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+  <link rel="icon" href="icons/favicon_home.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="icons/favicon_home.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="main.js"></script>
+
+  <!--Texto dinamico-->
+  <script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+      var words_es = [
+        "▾DISEÑO▾",
+        "▾ASCESORÍA▾",
+        "▾MODELADO 3D▾",
+        "▾DESARROLLO▾",
+        "▾EDICIÓN▾",
+        "▾DESCARGAS▾",
+        "▾MONTAJE▾",
+        "▾VIDEOJUEGOS▾",
+        "▾PROGRAMAS▾",
+        "▾INSTALACIÓN▾",
+      ];
+      var words_en = [
+        "▾DESIGN▾",
+        "▾ADVISORY▾",
+        "▾3D MODELING▾",
+        "▾DEVELOPMENT▾",
+        "▾EDITING▾",
+        "▾DOWNLOADS▾",
+        "▾ASSEMBLY▾",
+        "▾VIDEOGAMES▾",
+        "▾SOFTWARE▾",
+        "▾INSTALLATION▾",
+      ];
+
+      function getListByLanguage() {
+        // Verificar idioma
+
+        // Obtener el valor de la variable language del almacenamiento local del navegador
+        var language = localStorage.getItem("language");
+
+        // Si la variable language es Spanish, use la lista de palabras en español
+        if (language === "Spanish") {
+          return words_es;
         }
-
-        window.onload = function () {
-          var element = document.body;
-          var button = document.getElementById("myButton");
-          var slider = document.querySelector(".sliderSwitch");
-          var theme = localStorage.getItem("theme");
-          if (theme === "dark") {
-            element.classList.add("dark-mode");
-            slider.classList.add("dark");
-            slider.classList.remove("lightfour");
-            button.checked = false;
-          } else if (theme === "light") {
-            element.classList.remove("dark-mode");
-            slider.classList.add("lightfour");
-            slider.classList.remove("dark");
-            button.checked = true;
-          } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            element.classList.add("dark-mode");
-            slider.classList.add("dark");
-            slider.classList.remove("lightfour");
-            localStorage.setItem("theme", "dark");
-            button.checked = false;
-          } else {
-            element.classList.remove("dark-mode");
-            slider.classList.add("lightfour");
-            slider.classList.remove("dark");
-            localStorage.setItem("theme", "light");
-            button.checked = true;
-          }
-        };
-      </script>
-
-      <!--Sounds-->
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const audio = new Audio("/sound/click-21156-666HeroHero.mp3");
-          audio.volume = 0.25;
-          const elements = document.querySelectorAll(".audioclick");
-
-          elements.forEach((element) => {
-            element.addEventListener("click", (event) => {
-              if (element.tagName !== "INPUT") {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              audio.play();
-              setTimeout(() => {
-                if (element.hasAttribute("href")) {
-                  if (element.getAttribute("target") === "_blank") {
-                    window.open(element.getAttribute("href"), "_blank");
-                  } else {
-                    window.location.href = element.getAttribute("href");
-                  }
-                }
-              }, 500);
-            });
-          });
-        });
-      </script>
-
-      <!--Pantalla de carga-->
-      <script type="text/javascript">
-        window.addEventListener("load", function () {
-          const loader = document.querySelector(".loader");
-          loader.className += " hidden";
-        });
-      </script>
-
-      <!--Ocultar Boton de desplazamiento-->
-      <script>
-        window.addEventListener("scroll", function () {
-          var Fbutton = document.getElementById("Fbutton");
-          if (window.pageYOffset > 300) {
-            Fbutton.style.display = "block";
-          } else {
-            Fbutton.style.display = "none";
-          }
-        });
-      </script>
-
-      <!--Animacion Boton de desplazamiento-->
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script>
-        function init() {
-          function scrollToTop() {
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-          }
-          var Fbutton = document.getElementById("Fbutton");
-          Fbutton.addEventListener("click", scrollToTop);
+        // Si la variable language es English, use la lista de palabras en inglés
+        else if (language === "English") {
+          words = words_en;
         }
+        return words_en;
 
-        document.addEventListener("DOMContentLoaded", init);
-      </script>
+      }
 
-      <!--Idioma de la pagina-->
-      <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-          var currentLanguage = localStorage.getItem("language") || "Spanish";
-          var userLang = navigator.language || navigator.userLanguage;
 
-          var button = document.getElementById("language-switch-button");
-          var iconEnglishDark = document.createElement("img");
-          iconEnglishDark.src = "icons/icon_english_dark.svg";
-          var iconSpanishDark = document.createElement("img");
-          iconSpanishDark.src = "icons/icon_spanish_dark.svg";
+      var words = getListByLanguage(); // Inicialmente en español
+      //console.log("list words: " + words);
+      var startIndex = Math.floor(Math.random() * words.length);
+      var i = startIndex;
+      var intervalId;
+      var tittleOne = document.querySelector(".tittle-one");
 
-          if (currentLanguage === "Spanish") {
-            displayContentInSpanish();
-            button.appendChild(iconSpanishDark);
-          } else {
-            displayContentInEnglish();
-            button.appendChild(iconEnglishDark);
+      // Primera carga con un titulo aleatorio en .tittle-one
+      tittleOne.textContent = words[i];
+
+      function startInterval() {
+        intervalId = setInterval(function () {
+          words = getListByLanguage();
+
+          // Actualizar la lista en vivo
+          tittleOne.textContent = words[i];
+          i++;
+          if (i == words.length) {
+            i = 0;
           }
+        }, 2000);
+      }
 
-          button.addEventListener("click", function () {
-            button.innerHTML = "";
-            button.style.display = "none";
-            button.offsetHeight;
-            button.style.display = "";
+      startInterval();
+    });
 
-            if (currentLanguage === "English") {
-              displayContentInSpanish();
-              currentLanguage = "Spanish";
-              localStorage.setItem("language", "Spanish");
-              button.appendChild(iconSpanishDark);
-            } else {
-              displayContentInEnglish();
-              currentLanguage = "English";
-              localStorage.setItem("language", "English");
-              button.appendChild(iconEnglishDark);
-            }
-          });
+  </script>
 
-          function displayContentInSpanish() {
-            document.querySelectorAll(".english").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".spanish").forEach(function (element) {
-              element.style.display = "block";
-            });
-            document.querySelectorAll(".menu-english").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".menu-spanish").forEach(function (element) {
-              element.style.display = "inline-block";
-            });
-          }
+  <!--Hexe Expand Menu-->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const hexeBG = document.querySelector("#hexeBG");
+      const flex = document.querySelector("#flex");
 
-          function displayContentInEnglish() {
-            document.querySelectorAll(".spanish").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".english").forEach(function (element) {
-              element.style.display = "block";
-            });
-            document.querySelectorAll(".menu-spanish").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".menu-english").forEach(function (element) {
-              element.style.display = "inline-block";
-            });
-          }
-        });
-      </script>
+      hexeBG.addEventListener("click", () => {
+        flex.classList.toggle("expand");
+      });
+    });
+  </script>
 
-      <!--Texto dinamico-->
-      <script>
-        var words_es = [
-          "▾DISEÑO▾",
-          "▾ASCESORÍA▾",
-          "▾MODELADO 3D▾",
-          "▾DESARROLLO▾",
-          "▾EDICIÓN▾",
-          "▾DESCARGAS▾",
-          "▾MONTAJE▾",
-          "▾VIDEOJUEGOS▾",
-          "▾PROGRAMAS▾",
-          "▾INSTALACIÓN▾",
-        ];
-        var words_en = [
-          "▾DESIGN▾",
-          "▾ADVISORY▾",
-          "▾3D MODELING▾",
-          "▾DEVELOPMENT▾",
-          "▾EDITING▾",
-          "▾DOWNLOADS▾",
-          "▾ASSEMBLY▾",
-          "▾VIDEOGAMES▾",
-          "▾SOFTWARE▾",
-          "▾INSTALLATION▾",
-        ];
-        var words = words_es; // Inicialmente en español
-        var useSpanish = true; // Variable booleana para alternar entre las listas
-        var startIndex = Math.floor(Math.random() * words.length);
-        var i = startIndex;
-        var intervalId;
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      var statusButtonRotate;
 
-        function startInterval() {
-          intervalId = setInterval(function () {
-            // Obtener el valor de la variable language del almacenamiento local del navegador
-            var language = localStorage.getItem("language");
+      var classBT = document.querySelector("#hexeBG") || document.querySelector(".Box-buttonModal");
 
-            // Si la variable language es Spanish, use la lista de palabras en español
-            if (language === "Spanish") {
-              words = words_es;
-            }
-            // Si la variable language es English, use la lista de palabras en inglés
-            else if (language === "English") {
-              words = words_en;
-            }
+      classBT.style.transition = "transform 0.5s";
 
-            // Actualizar la lista en vivo
-            document.querySelector(".tittle-one").textContent = words[i];
-            i++;
-            if (i == words.length) {
-              i = 0;
-            }
-          }, 2000);
+      classBT.addEventListener("click", function () {
+        if (statusButtonRotate) {
+          this.style.transform = 'rotate(0deg)';
+          statusButtonRotate = false;
+        } else {
+          this.style.transform = 'rotate(45deg)';
+          statusButtonRotate = true;
         }
+      });
+    });
+  </script>
+</head>
 
-        startInterval();
-      </script>
+<body class="palette_one">
+  <div id="scroll"></div>
+  <header>
+    <div class="parallax"></div>
 
-      <!--Hexe Expand Menu-->
-      <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          const hexeBG = document.querySelector("#hexeBG");
-          const flex = document.querySelector("#flex");
-
-          hexeBG.addEventListener("click", () => {
-            flex.classList.toggle("expand");
-          });
-        });
-      </script>
-    </head>
-
-    <body class="palette_one">
-      <div id="scroll"></div>
-      <header>
-        <div class="parallax"></div>
-
-        <div id="emergent">
-          <div id="hexeBG" class="audioclick">
-            <a><i class="fa-solid fa-xmark"></i></a>
-          </div>
-          <div id="flex">
-            <div id="site1" class="siteicons">
-              <a><i class="fa-solid fa-xmark"></i></a>
-            </div>
-            <!--Float Menu-->
-            <div id="site2" class="siteicons">
-              <a target="_blank" class="audioclick" href="https://twitter.com/Mega_CX" title="X-Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-            </div>
-            <div id="site3" class="siteicons">
-              <a target="_blank" class="audioclick" href="https://www.behance.net/mega_cx" title="Behance"><i class="fa-brands fa-behance"></i></a>
-            </div>
-            <div id="site4" class="siteicons">
-              <a target="_blank" class="audioclick" href="https://www.deviantart.com/juanhda" title="DeviantArt"><i class="fa-brands fa-deviantart"></i></a>
-            </div>
-            <div id="site5" class="siteicons">
-              <a target="_blank" class="audioclick" href="https://dribbble.com/MegaCX/shots" title="dribble"><i class="fa-brands fa-dribbble"></i></a>
-            </div>
-            <div id="site6" class="siteicons">
-              <a target="_blank" class="audioclick" href="https://megacx.artstation.com/" title="ArtStation"><i class="fa-brands fa-artstation"></i></a>
-            </div>
-          </div>
-        </div>
-        <nav id="primary">
-          <ul>
-            <li onclick="window.location.href='index.html';">
-              <a href="index.html" class="audioclick">
-                <i class="fa-solid fa-house"></i>
-                <spa class="menu-spanish">Inicio</spa>
-                <spa class="menu-english">Home</spa></a
-              >
-            </li>
-            <li onclick="window.location.href='services.html';">
-              <a href="services.html" class="audioclick">
-                <i class="fa-solid fa-desktop"></i>
-                <spa class="menu-spanish">Servicios</spa>
-                <spa class="menu-english">Services</spa>
-              </a>
-            </li>
-            <li onclick="window.location.href='gallery.html';">
-              <a href="gallery.html" class="audioclick">
-                <i class="fa-regular fa-image"></i>
-                <span class="menu-spanish">Galería</span>
-                <span class="menu-english">Gallery</span>
-              </a>
-            </li>
-            <li onclick="window.location.href='contact.html';">
-              <a href="contact.html" class="audioclick">
-                <i class="fa-solid fa-envelope"></i>
-                <span class="menu-spanish">Contacto</span>
-                <span class="menu-english">Contact</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <table id="tableHome">
-          <tr>
-            <!--Fila 1-->
-            <td>
-              <img class="logocx" src="images/mega_v4_notCX.png" alt="logo" />
-            </td>
-          </tr>
-          <tr>
-            <!--Fila 2-->
-            <td>
-              <!--Texto dinamico-->
-              <div class="tittle-one">
-                <strong><a></a></strong>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <!--Fila 3-->
-            <td>
-              <article id="art1">
-                <p class="spanish">Servicios informáticos de todo tipo, freelancer.</p>
-                <p class="english">All types of computer services, freelancer.</p>
-              </article>
-            </td>
-          </tr>
-          <tr>
-            <!--Fila 4-->
-            <td>
-              <div class="Line1"></div>
-              <div class="wavy"></div>
-            </td>
-          </tr>
-          <tr>
-            <!--Fila 5-->
-            <td>
-              <article id="art2">
-                <p class="spanish">
-                  Accesoria con proyectos, diseño de paginas webs de todo tipo, diseño de logotipos o letreros para su negocio desde el concepto hasta su
-                  finalización de la manera que necesite, edición de video o fotografiá disponible en la sección de servicios, modelado 3D para arquitectura o
-                  inmuebles, render y assets incluidos, diseño de volantes o tarjetas de negocio listas para impresión, si necesita algún programa para una
-                  tarea en especifica o mantenimiento para su PC, también videojuegos de todas las categorías para PC según sus especificaciones, revise los
-                  servicios para ver los detalles de lo que necesite.
-                </p>
-                <p class="english">
-                  Consulting with projects, design of web pages of all types, design of logos or signs for your business from concept to completion in the way
-                  you need, video or photography editing available in the services section, 3D modeling for architecture or real estate, render and assets
-                  included, design of flyers or business cards ready for printing. If you need any program for a specific task or maintenance for your PC, also
-                  video games of all categories for PC according to your specifications, check the services to see the details of what you need.
-                </p>
-              </article>
-            </td>
-          </tr>
-          <tr>
-            <!--Fila 6-->
-            <td>
-              <div class="Line2"></div>
-              <div class="wavy"></div>
-            </td>
-          </tr>
-          <tr>
-            <!--Fila 7-->
-            <td>
-              <article id="art3">
-                <p class="spanish">
-                  Solicite los servicio desde la sección de contacto para empezar con la planeación y hablar de precios, leer los detalles del servicio en el
-                  que esta interesado y poner la información que se requiere. Actualmente trabajo de manera local en chinavita - Boyacá pero también a distancia
-                  a nivel nacional.
-                </p>
-                <p class="english">
-                  Request the services from the contact section to start planning and discuss prices. Read the details of the service you are interested in and
-                  provide the required information. I currently work locally in Chinavita - Boyacá, but also remotely at a national level.
-                </p>
-              </article>
-            </td>
-          </tr>
-        </table>
-      </main>
-    </body>
-
-    <button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup" src="icons/arrowUPv4.svg" /></button>
-
-    <footer>
-      <div class="noisy"></div>
-      <div id="footerCont">
-        <div id="footerbtn">
-          <label class="switch">
-            <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
-            <span class="sliderSwitch"></span>
-          </label>
-          <div id="language-switch-button"></div>
-        </div>
-        <br /><br />
-        <p class="spanish">Todos los derechos reservados @2024 [MMXXIV]</p>
-        <p class="english">All rights reserved @2024 [MMXXIV]</p>
-        <br />
-        <p class="spanish">Creado por JUANHDA CX.</p>
-        <p class="english">Created by JUANHDA CX.</p>
-        <br />
-        <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
-        <p></p>
+    <div id="emergent">
+      <div id="hexeBG" class="audioclick">
+        <a><i class="fa-solid fa-xmark"></i></a>
       </div>
-    </footer>
+      <div id="flex">
+        <div id="site1" class="siteicons">
+          <a><i class="fa-solid fa-xmark"></i></a>
+        </div>
+        <!--Float Menu-->
+        <div id="site2" class="siteicons">
+          <a target="_blank" class="audioclick" href="https://twitter.com/Mega_CX" title="X-Twitter"><i
+              class="fa-brands fa-x-twitter"></i></a>
+        </div>
+        <div id="site3" class="siteicons">
+          <a target="_blank" class="audioclick" href="https://www.behance.net/mega_cx" title="Behance"><i
+              class="fa-brands fa-behance"></i></a>
+        </div>
+        <div id="site4" class="siteicons">
+          <a target="_blank" class="audioclick" href="https://www.deviantart.com/juanhda" title="DeviantArt"><i
+              class="fa-brands fa-deviantart"></i></a>
+        </div>
+        <div id="site5" class="siteicons">
+          <a target="_blank" class="audioclick" href="https://dribbble.com/MegaCX/shots" title="dribble"><i
+              class="fa-brands fa-dribbble"></i></a>
+        </div>
+        <div id="site6" class="siteicons">
+          <a target="_blank" class="audioclick" href="https://megacx.artstation.com/" title="ArtStation"><i
+              class="fa-brands fa-artstation"></i></a>
+        </div>
+      </div>
+    </div>
+    <nav id="primary">
+      <ul>
+        <li onclick="window.location.href='index.html';">
+          <a href="index.html" class="audioclick">
+            <i class="fa-solid fa-house"></i>
+            <spa class="menu-spanish">Inicio</spa>
+            <spa class="menu-english">Home</spa>
+          </a>
+        </li>
+        <li onclick="window.location.href='services.html';">
+          <a href="services.html" class="audioclick">
+            <i class="fa-solid fa-desktop"></i>
+            <spa class="menu-spanish">Servicios</spa>
+            <spa class="menu-english">Services</spa>
+          </a>
+        </li>
+        <li onclick="window.location.href='gallery.html';">
+          <a href="gallery.html" class="audioclick">
+            <i class="fa-regular fa-image"></i>
+            <span class="menu-spanish">Galería</span>
+            <span class="menu-english">Gallery</span>
+          </a>
+        </li>
+        <li onclick="window.location.href='contact.html';">
+          <a href="contact.html" class="audioclick">
+            <i class="fa-solid fa-envelope"></i>
+            <span class="menu-spanish">Contacto</span>
+            <span class="menu-english">Contact</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <table id="tableHome">
+      <tr>
+        <!--Fila 1-->
+        <td>
+          <img class="logocx" src="images/mega_v4_notCX.png" alt="logo" />
+        </td>
+      </tr>
+      <tr>
+        <!--Fila 2-->
+        <td>
+          <!--Texto dinamico-->
+          <div class="tittle-one">
+            ♦ 読み込み中 ♦
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <!--Fila 3-->
+        <td>
+          <article id="art1">
+            <p class="spanish">Servicios informáticos de todo tipo, freelancer.</p>
+            <p class="english">All types of computer services, freelancer.</p>
+          </article>
+        </td>
+      </tr>
+      <tr>
+        <!--Fila 4-->
+        <td>
+          <div class="Line1"></div>
+          <div class="wavy"></div>
+        </td>
+      </tr>
+      <tr>
+        <!--Fila 5-->
+        <td>
+          <article id="art2">
+            <p class="spanish">
+              Accesoria con proyectos, diseño de paginas webs de todo tipo, diseño de logotipos o letreros para su
+              negocio desde el concepto hasta su
+              finalización de la manera que necesite, edición de video o fotografiá disponible en la sección de
+              servicios, modelado 3D para arquitectura o
+              inmuebles, render y assets incluidos, diseño de volantes o tarjetas de negocio listas para impresión, si
+              necesita algún programa para una
+              tarea en especifica o mantenimiento para su PC, también videojuegos de todas las categorías para PC según
+              sus especificaciones, revise los
+              servicios para ver los detalles de lo que necesite.
+            </p>
+            <p class="english">
+              Consulting with projects, design of web pages of all types, design of logos or signs for your business
+              from concept to completion in the way
+              you need, video or photography editing available in the services section, 3D modeling for architecture or
+              real estate, render and assets
+              included, design of flyers or business cards ready for printing. If you need any program for a specific
+              task or maintenance for your PC, also
+              video games of all categories for PC according to your specifications, check the services to see the
+              details of what you need.
+            </p>
+          </article>
+        </td>
+      </tr>
+      <tr>
+        <!--Fila 6-->
+        <td>
+          <div class="Line2"></div>
+          <div class="wavy"></div>
+        </td>
+      </tr>
+      <tr>
+        <!--Fila 7-->
+        <td>
+          <article id="art3">
+            <p class="spanish">
+              Solicite los servicio desde la sección de contacto para empezar con la planeación y hablar de precios,
+              leer los detalles del servicio en el
+              que esta interesado y poner la información que se requiere. Actualmente trabajo de manera local en
+              chinavita - Boyacá pero también a distancia
+              a nivel nacional.
+            </p>
+            <p class="english">
+              Request the services from the contact section to start planning and discuss prices. Read the details of
+              the service you are interested in and
+              provide the required information. I currently work locally in Chinavita - Boyacá, but also remotely at a
+              national level.
+            </p>
+          </article>
+        </td>
+      </tr>
+    </table>
+  </main>
 
-    <div class="loader"></div>
-  </html>
+</body>
+
+<button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup"
+    src="icons/arrowUPv4.svg" /></button>
+
+<footer>
+  <div class="noisy"></div>
+  <div id="footerCont">
+    <div id="footerbtn">
+      <label class="switch">
+        <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
+        <span class="sliderSwitch"></span>
+      </label>
+      <div id="language-switch-button"></div>
+    </div>
+    <br /><br />
+    <p class="spanish">Todos los derechos reservados @2024 [MMXXIV]</p>
+    <p class="english">All rights reserved @2024 [MMXXIV]</p>
+    <br />
+    <p class="spanish">Creado por JUANHDA CX.</p>
+    <p class="english">Created by JUANHDA CX.</p>
+    <br />
+    <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
+    <p></p>
+  </div>
+</footer>
+
+<div class="loader"></div>
+
+</html>
+
 </html>

@@ -1,782 +1,408 @@
 <!DOCTYPE html>
 <html>
-  <html lang="es">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="description" content="Soluciones informáticas de todo tipo a pedido" />
-      <meta name="description" content="Information technology solutions of all kinds on demand" />
-      <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D, Web, Programs, Software" />
-      <meta name="author" content="Mega CX" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      <title>Mega CX Studios | Gallery</title>
-      <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-      <link rel="icon" href="icons/favicon_gallery.png" type="image/x-icon" />
-      <link rel="shortcut icon" href="icons/favicon_gallery.png" type="image/x-icon" />
-      <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet" />
-      <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+<html lang="es">
 
-      <!--Dark mode-->
-      <script>
-        function myFunction() {
-          var element = document.body;
-          var button = document.getElementById("myButton");
-          var slider = document.querySelector(".sliderSwitch");
-          element.classList.toggle("dark-mode");
-          if (element.classList.contains("dark-mode")) {
-            slider.classList.add("dark");
-            slider.classList.remove("lightthree");
-            button.checked = false;
-            localStorage.setItem("theme", "dark");
-          } else {
-            slider.classList.add("lightthree");
-            slider.classList.remove("dark");
-            button.checked = true;
-            localStorage.setItem("theme", "light");
-          }
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Soluciones informáticas de todo tipo a pedido" />
+  <meta name="description" content="Information technology solutions of all kinds on demand" />
+  <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D, Web, Programs, Software" />
+  <meta name="author" content="Mega CX" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Mega CX Studios | Gallery</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+  <link rel="icon" href="icons/favicon_gallery.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="icons/favicon_gallery.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="main.js"></script>
+  <script src="menuMobile.js"></script>
+
+  <!--Gallery Expand-->
+  <script>
+    // Variable para rastrear si la ventana emergente está abierta
+    let isPopupOpen = false;
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Obtén todas las imágenes de la cuadrícula
+      let gridItems = document.querySelectorAll(".grid-item");
+
+      // Obtén los elementos de la ventana emergente
+      let galleryExpandController = document.getElementById("galleryExpandController");
+      let galleryExpand = document.getElementById("galleryExpand");
+      let galleryExpandBtn = document.getElementById("galleryExpandBtn");
+
+      // Obtén el pie de página y el botón flotante
+      let footer = document.querySelector("footer");
+      let Fbutton = document.getElementById("Fbutton");
+
+      // Añade un evento de clic a cada imagen de la cuadrícula
+      gridItems.forEach((item) => {
+        item.addEventListener("click", function () {
+          // Actualiza el src de la imagen en la ventana emergente con el src de la imagen clicada
+          galleryExpand.src = this.src;
+
+          // Muestra la ventana emergente y el fondo
+          galleryExpandController.style.display = "block";
+
+          // Desactiva el desplazamiento de la página
+          document.body.style.overflow = "hidden";
+
+          // Oculta el botón flotante y el pie de página
+          Fbutton.style.display = "none";
+          footer.style.display = "none";
+
+          // Eliminar efecto hover
+          document.querySelectorAll('.grid-item').forEach((gridItem) => {
+            gridItem.classList.remove('imgGhover');
+          });
+
+          // Establece isPopupOpen a true
+          isPopupOpen = true;
+        });
+      });
+
+      // Añade un evento de clic al botón para cerrar la ventana emergente
+      galleryExpandBtn.addEventListener("click", function () {
+        // Oculta la ventana emergente y el fondo
+        galleryExpandController.style.display = "none";
+
+        // Reactiva el desplazamiento de la página
+        document.body.style.overflow = "";
+
+        // Muestra el botón flotante si la página se ha desplazado lo suficiente
+        if (window.pageYOffset > 300) {
+          Fbutton.style.display = "block";
         }
 
-        window.onload = function () {
-          var element = document.body;
-          var button = document.getElementById("myButton");
-          var slider = document.querySelector(".sliderSwitch");
-          var theme = localStorage.getItem("theme");
-          if (theme === "dark") {
-            element.classList.add("dark-mode");
-            slider.classList.add("dark");
-            slider.classList.remove("lightthree");
-            button.checked = false;
-          } else if (theme === "light") {
-            element.classList.remove("dark-mode");
-            slider.classList.add("lightthree");
-            slider.classList.remove("dark");
-            button.checked = true;
-          } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            element.classList.add("dark-mode");
-            slider.classList.add("dark");
-            slider.classList.remove("lightthree");
-            localStorage.setItem("theme", "dark");
-            button.checked = false;
-          } else {
-            element.classList.remove("dark-mode");
-            slider.classList.add("lightthree");
-            slider.classList.remove("dark");
-            localStorage.setItem("theme", "light");
-            button.checked = true;
-          }
-        };
-      </script>
+        // Muestra el pie de página
+        footer.style.display = "block";
 
-      <!--Sounds-->
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const audio = new Audio("/sound/click-21156-666HeroHero.mp3");
-          audio.volume = 0.25;
-          const elements = document.querySelectorAll(".audioclick");
-
-          elements.forEach((element) => {
-            element.addEventListener("click", (event) => {
-              if (element.tagName !== "INPUT") {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              audio.play();
-              setTimeout(() => {
-                if (element.hasAttribute("href")) {
-                  if (element.getAttribute("target") === "_blank") {
-                    window.open(element.getAttribute("href"), "_blank");
-                  } else {
-                    window.location.href = element.getAttribute("href");
-                  }
-                }
-              }, 500);
-            });
-          });
+        // Añade efecto hover
+        document.querySelectorAll('.grid-item').forEach((gridItem) => {
+          gridItem.classList.add('imgGhover');
         });
-      </script>
 
-      <!--Pantalla de carga-->
-      <script type="text/javascript">
-        window.addEventListener("load", function () {
-          const loader = document.querySelector(".loader");
-          loader.className += " hidden";
-        });
-      </script>
+        // Establece isPopupOpen a false
+        isPopupOpen = false;
 
-      <!--Ocultar Boton de desplazamiento-->
-      <script>
-        window.addEventListener("scroll", function () {
-          if (window.pageYOffset > 300 && !isPopupOpen) {
-            Fbutton.style.display = "block";
-          } else {
-            Fbutton.style.display = "none";
-          }
-        });
-      </script>
+        // Dispara manualmente el evento de desplazamiento
+        window.dispatchEvent(new Event("scroll"));
+      });
+    });
+  </script>
 
-      <!--Animacion Boton de desplazamiento-->
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script>
-        function init() {
-          function scrollToTop() {
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-          }
-          var Fbutton = document.getElementById("Fbutton");
-          Fbutton.addEventListener("click", scrollToTop);
+
+  <!--Lazzy Gallery-->
+  <script>
+    window.addEventListener("load", function () {
+      var images = document.querySelectorAll(".grid-item");
+      var index = 0;
+
+      function loadNextImage() {
+        if (index < images.length) {
+          var img = new Image();
+          img.src = images[index].dataset.src;
+          img.onload = function () {
+            images[index].src = img.src;
+            index++;
+            loadNextImage();
+          };
         }
+      }
 
-        document.addEventListener("DOMContentLoaded", init);
-      </script>
+      loadNextImage();
+    });
+  </script>
 
-      <!--Menu_mobile-->
-      <script>
-        window.addEventListener("load", () => {
-          const menuButton = document.querySelector("#menuMobileToggleCheckbox");
-          const body = document.querySelector("body");
 
-          menuButton.addEventListener("change", () => {
-            if (menuButton.checked) {
-              body.classList.add("no-scroll-mobile");
-            } else {
-              body.classList.remove("no-scroll-mobile");
-            }
-          });
-        });
-      </script>
+</head>
 
-      <!--Gallery Expand-->
+<body class="palette_three">
+  <div id="scroll"></div>
+  <header>
+    <div id="BarMenu-secondary"></div>
+    <div id="menu2Alt1"></div>
+    <nav id="secondary">
+      <ul>
+        <li onclick="window.location.href='index.html';">
+          <a href="index.html" class="audioclick">
+            <i class="fa-solid fa-house"></i>
+            <spa class="menu-spanish">Inicio</spa>
+            <spa class="menu-english">Home</spa>
+          </a>
+        </li>
+        <li onclick="window.location.href='services.html';">
+          <a href="services.html" class="audioclick">
+            <i class="fa-solid fa-desktop"></i>
+            <spa class="menu-spanish">Servicios</spa>
+            <spa class="menu-english">Services</spa>
+          </a>
+        </li>
+        <li onclick="window.location.href='gallery.html';">
+          <a href="gallery.html" class="audioclick">
+            <i class="fa-regular fa-image"></i>
+            <span class="menu-spanish">Galería</span>
+            <span class="menu-english">Gallery</span>
+          </a>
+        </li>
+        <li onclick="window.location.href='contact.html';">
+          <a href="contact.html" class="audioclick">
+            <i class="fa-solid fa-envelope"></i>
+            <span class="menu-spanish">Contacto</span>
+            <span class="menu-english">Contact</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-      <!-- Declaración de la variable isPopupOpen -->
-      <script>
-        // Variable para rastrear si la ventana emergente está abierta
-        let isPopupOpen = false;
-      </script>
-
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          // Obtén todas las imágenes de la cuadrícula
-          let gridItems = document.querySelectorAll(".grid-item");
-
-          // Obtén los elementos de la ventana emergente
-          let galleryExpandController = document.getElementById("galleryExpandController");
-          let galleryExpand = document.getElementById("galleryExpand");
-          let galleryExpandBtn = document.getElementById("galleryExpandBtn");
-
-          // Obtén el pie de página y el botón flotante
-          let footer = document.querySelector("footer");
-          let Fbutton = document.getElementById("Fbutton");
-
-          // Añade un evento de clic a cada imagen de la cuadrícula
-          gridItems.forEach((item) => {
-            item.addEventListener("click", function () {
-              // Actualiza el src de la imagen en la ventana emergente con el src de la imagen clicada
-              galleryExpand.src = this.src;
-
-              // Muestra la ventana emergente y el fondo
-              galleryExpandController.style.display = "block";
-
-              // Desactiva el desplazamiento de la página
-              document.body.style.overflow = "hidden";
-
-              // Oculta el botón flotante y el pie de página
-              Fbutton.style.display = "none";
-              footer.style.display = "none";
-
-              // Establece isPopupOpen a true
-              isPopupOpen = true;
-            });
-          });
-
-          // Añade un evento de clic al botón para cerrar la ventana emergente
-          galleryExpandBtn.addEventListener("click", function () {
-            // Oculta la ventana emergente y el fondo
-            galleryExpandController.style.display = "none";
-
-            // Reactiva el desplazamiento de la página
-            document.body.style.overflow = "";
-
-            // Muestra el botón flotante si la página se ha desplazado lo suficiente
-            if (window.pageYOffset > 300) {
-              Fbutton.style.display = "block";
-            }
-
-            // Muestra el pie de página
-            footer.style.display = "block";
-
-            // Establece isPopupOpen a false
-            isPopupOpen = false;
-
-            // Dispara manualmente el evento de desplazamiento
-            window.dispatchEvent(new Event("scroll"));
-          });
-        });
-      </script>
-
-      <!--Idioma de la pagina-->
-      <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-          var currentLanguage = localStorage.getItem("language") || "Spanish";
-          var userLang = navigator.language || navigator.userLanguage;
-
-          var button = document.getElementById("language-switch-button");
-          var iconEnglishDark = document.createElement("img");
-          iconEnglishDark.src = "icons/icon_english_dark.svg";
-          var iconSpanishDark = document.createElement("img");
-          iconSpanishDark.src = "icons/icon_spanish_dark.svg";
-
-          if (currentLanguage === "Spanish") {
-            displayContentInSpanish();
-            button.appendChild(iconSpanishDark);
-          } else {
-            displayContentInEnglish();
-            button.appendChild(iconEnglishDark);
-          }
-
-          button.addEventListener("click", function () {
-            button.innerHTML = "";
-            button.style.display = "none";
-            button.offsetHeight;
-            button.style.display = "";
-
-            if (currentLanguage === "English") {
-              displayContentInSpanish();
-              currentLanguage = "Spanish";
-              localStorage.setItem("language", "Spanish");
-              button.appendChild(iconSpanishDark);
-            } else {
-              displayContentInEnglish();
-              currentLanguage = "English";
-              localStorage.setItem("language", "English");
-              button.appendChild(iconEnglishDark);
-            }
-          });
-
-          function displayContentInSpanish() {
-            document.querySelectorAll(".english").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".spanish").forEach(function (element) {
-              element.style.display = "block";
-            });
-            document.querySelectorAll(".menu-english").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".menu-spanish").forEach(function (element) {
-              element.style.display = "inline-block";
-            });
-          }
-
-          function displayContentInEnglish() {
-            document.querySelectorAll(".spanish").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".english").forEach(function (element) {
-              element.style.display = "block";
-            });
-            document.querySelectorAll(".menu-spanish").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".menu-english").forEach(function (element) {
-              element.style.display = "inline-block";
-            });
-          }
-        });
-      </script>
-
-      <!--Lazzy Gallery-->
-
-      <script>
-        window.addEventListener("load", function () {
-          var images = document.querySelectorAll(".grid-item");
-          var index = 0;
-
-          function loadNextImage() {
-            if (index < images.length) {
-              var img = new Image();
-              img.src = images[index].dataset.src;
-              img.onload = function () {
-                images[index].src = img.src;
-                index++;
-                loadNextImage();
-              };
-            }
-          }
-
-          loadNextImage();
-        });
-      </script>
-    </head>
-
-    <body class="palette_three">
-      <div id="scroll"></div>
-      <header>
-        <div id="BarMenu-secondary"></div>
-        <div id="menu2Alt1"></div>
-        <nav id="secondary">
-          <ul>
-            <li onclick="window.location.href='index.html';">
-              <a href="index.html" class="audioclick">
-                <i class="fa-solid fa-house"></i>
-                <spa class="menu-spanish">Inicio</spa>
-                <spa class="menu-english">Home</spa></a
-              >
-            </li>
-            <li onclick="window.location.href='services.html';">
-              <a href="services.html" class="audioclick">
-                <i class="fa-solid fa-desktop"></i>
-                <spa class="menu-spanish">Servicios</spa>
-                <spa class="menu-english">Services</spa>
-              </a>
-            </li>
-            <li onclick="window.location.href='gallery.html';">
-              <a href="gallery.html" class="audioclick">
-                <i class="fa-regular fa-image"></i>
-                <span class="menu-spanish">Galería</span>
-                <span class="menu-english">Gallery</span>
-              </a>
-            </li>
-            <li onclick="window.location.href='contact.html';">
-              <a href="contact.html" class="audioclick">
-                <i class="fa-solid fa-envelope"></i>
-                <span class="menu-spanish">Contacto</span>
-                <span class="menu-english">Contact</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <!--Menu Mobile-->
-        <nav role="navigation" class="menuMobile">
-          <a href="index.html">Mega CX</a>
-          <div id="menuMobileToggle" class="palette_three">
-            <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
-            <input id="menuMobileToggleCheckbox" class="audioclick" type="checkbox" />
-            <span></span>
-            <span></span>
-            <span></span>
-            <ul id="menuMobile" class="palette_three">
-              <a href="index.html" class="audioclick">
-                <li class="spanish">Inicio</li>
-                <li class="english">Home</li>
-              </a>
-              <a href="services.html" class="audioclick">
-                <li class="spanish">Servicios</li>
-                <li class="english">Services</li>
-              </a>
-              <a href="gallery.html" class="audioclick">
-                <li class="spanish">Galería</li>
-                <li class="english">Gallery</li>
-              </a>
-              <a href="contact.html" class="audioclick">
-                <li class="spanish">Contacto</li>
-                <li class="english">Contact</li>
-              </a>
-            </ul>
-          </div>
-        </nav>
-      </header>
-
-      <main>
-        <section id="textGallery">
-          <article>
-            <h1>PORFOLIO</h1>
-            <h2 class="spanish">Proyectos 3D</h2>
-            <h2 class="english">3D Projects</h2>
-            <br /><br />
-            <p class="spanish">
-              En esta galería puede ver mi historial de proyectos 3D, al igual que desde ArtStation, Behance, etc donde puede seguirme para estar al pendiente
-              de mis nuevos proyectos, soy freelancer y artista 3D, hago desde productos, arquitectura o assets para videojuegos, todo lo que necesite para su
-              negocio o lo que se pueda imaginar, si necesita algún servicio contácteme.
-            </p>
-            <p class="english">
-              In this gallery, you can see my history of 3D projects, as well as from ArtStation, Behance, etc., where you can follow me to keep up with my new
-              projects. I am a freelancer and 3D artist. I do everything from products, architecture, or assets for video games, everything you need for your
-              business or whatever you can imagine. If you need any service, please contact me.
-            </p>
-          </article>
-        </section>
-
-        <div id="galleryExpandController">
-          <div id="galleryExpandBackground"></div>
-          <img id="galleryExpand" src="" />
-          <div id="galleryExpandBtn" class="audioclick">
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-
-        <div class="grid-container audioclick">
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/075/006/764/large/juanhda-cx-counterposition-interior-bedroom-ff.jpg?1713493978"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Counterposition Interior Bedroom"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/074/567/077/large/juanhda-cx-ambre-dhiver-ff.jpg?1712369804"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Mégalomanie - AMBRE D’HIVER"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/074/314/161/large/juanhda-cx-bombastic-hug-ff.jpg?1711746197"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Bombastic Hug"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/074/238/250/large/juanhda-cx-italian-restaurant-ff.jpg?1711561597"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Italian Restaurant, A Culinary Journey"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/074/109/098/large/juanhda-cx-soda-fresh-ff.jpg?1711260824"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Soda Fresh"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/074/107/704/large/juanhda-cx-telescope-mega-star-u-01-cam2-ff.jpg?1711252976"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Telescope Mega Star U-01"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/074/046/779/large/juanhda-cx-red-formation-ff.jpg?1711075974"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Red Formation"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/070/530/545/large/juanhda-cx-treefallen-willow-ff.jpg?1702759806"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Tree Fallen - [Type: Willow]"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/070/474/303/large/juanhda-cx-up.jpg?1702602181"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Aisle in The DEPTHS"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/070/179/893/large/juanhda-cx-house-bluebright-day-ff.jpg?1701930334"
-            src="icons/placeholder.webp"
-            alt=""
-            title="House Bluebright"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/070/137/021/large/juanhda-cx-fennec-cam2-ff.jpg?1701838071"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Fennec Weapon - [KRISS Vector]"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/067/322/432/large/juanhda-cx-mushroom-iridescence-ff.jpg?1695103390"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Mushroom Iridescence"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/067/006/368/large/juanhda-cx-summer-camp.jpg?1694322043"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Summer Camp"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/065/189/808/large/juanhda-cx-turntable-full-ff.jpg?1689746534"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Turntable vintage"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/065/189/629/large/juanhda-cx-kitchen-renderff.jpg?1689746088"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Kitchen Interior"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/065/189/186/large/juanhda-cx-medieval-shield-swords-front-ff.jpg?1689744340"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Ancient armored medieval shield"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/064/378/298/large/juanhda-cx-antique-lamp-renderff.jpg?1687796335"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Antique Lamp"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/063/893/079/large/juanhda-cx-warm-audio-wa-47-cam1ff.jpg?1686630777"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Warm Audio WA-47 (MCX)"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/063/675/577/large/juanhda-cx-rebot003-finalff.jpg?1686088519"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Rebot_003"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/057/398/304/large/juanhda-cx-treemixff.jpg?1671492244"
-            src="icons/placeholder.webp"
-            alt=""
-            title="TreeMix"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/057/398/261/large/juanhda-cx-chairff.jpg?1671492069"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Flowery sofa"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/057/398/137/large/juanhda-cx-hachx.jpg?1671491644"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Ancient ax with a medieval and fantastic style"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/057/397/989/large/juanhda-cx-guitaraffinity2.jpg?1671491371"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Electric Guitar Re"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/057/397/935/large/juanhda-cx-the-misty-altarff.jpg?1671491203"
-            src="icons/placeholder.webp"
-            alt=""
-            title="The Misty Altar"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/057/397/564/large/juanhda-cx-snowballff.jpg?1671490287"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Crystal Snowball 21"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/057/362/807/large/juanhda-cx-ring2ff.jpg?1671408311"
-            src="icons/placeholder.webp"
-            alt=""
-            title="The Ring of foundation"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/057/362/678/large/juanhda-cx-compassff.jpg?1671407977"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Ancient golden compass"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/057/362/550/large/juanhda-cx-decima9-cam2-ff.jpg?1671407644"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Planet Decima-9"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/040/741/752/large/juanhda-cx-pepper-salt.jpg?1629754705"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Pepper and salt"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/367/large/juanhda-cx-mainrowfinal.jpg?1629252251"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Main Row"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/331/large/juanhda-cx-diamond-corona.jpg?1629252060"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Diamond>"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/287/large/juanhda-cx-droid-12-final.jpg?1629251831"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Droid-12"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/163/large/juanhda-cx-minigunfrontfinal.jpg?1629251333"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Minigun-Machine"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/101/925/large/juanhda-cx-treechrismastv2.jpg?1627879811"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Christmas Tree"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/894/large/juanhda-cx-power-windf.jpg?1627879670"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Wind Power Plant"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/858/large/juanhda-cx-miwom-pavilionf.jpg?1627879391"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Miwom Pavilion"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/812/large/juanhda-cx-ballsoccer.jpg?1627879078"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Ball Soccer"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/101/759/large/juanhda-cx-teddy2.jpg?1627878852"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Teddy's playroom"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/194/large/juanhda-cx-armfictionf.jpg?1627876581"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Retro Sci-Fi Weapon"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/100/569/large/juanhda-cx-ship-in-port.jpg?1627874131"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Ship in port"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/100/469/large/juanhda-cx-light-hopetop.jpg?1627873529"
-            src="icons/placeholder.webp"
-            alt=""
-            title="A light of hope"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/031/642/489/large/juanhda-cx-gingerbrex-house-2020.jpg?1604198983"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Gingerbread House"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/031/642/323/large/juanhda-cx-pumpkin-2020-halloween.jpg?1604198259"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Pumpkin in the dark"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/031/009/074/large/juanhda-cx-japanese-entrance.jpg?1602307887"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Japanese Entrance"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/026/771/794/large/juanhda-cx-top.jpg?1589684667"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Segment-Camera-CX"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/026/416/007/large/juanhda-cx-bathroom-megacx.jpg?1588716957"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Bathroom Gold"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/026/130/999/large/juanhda-cx-cabinf.jpg?1587972995"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Environment Cabin Poly"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/024/256/128/large/juanhda-cx-san-heartf.jpg?1581830586"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Skinned Heart"
-          />
-          <img
-            class="grid-item"
-            data-src="https://cdna.artstation.com/p/assets/images/images/023/925/438/large/juanhda-cx-coffe-shopfinal.jpg?1580775294"
-            src="icons/placeholder.webp"
-            alt=""
-            title="Coffee House at dusk"
-          />
-        </div>
-      </main>
-    </body>
-
-    <button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup" src="icons/arrowUPv4.svg" /></button>
-
-    <footer>
-      <div class="noisy"></div>
-      <div id="footerCont">
-        <div id="footerbtn">
-          <label class="switch">
-            <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
-            <span class="sliderSwitch"></span>
-          </label>
-          <div id="language-switch-button"></div>
-        </div>
-        <br /><br />
-        <p class="spanish">Todos los derechos reservados @2024 [MMXXIV]</p>
-        <p class="english">All rights reserved @2024 [MMXXIV]</p>
-        <br />
-        <p class="spanish">Creado por JUANHDA CX.</p>
-        <p class="english">Created by JUANHDA CX.</p>
-        <br />
-        <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
-        <p></p>
+    <!--Menu Mobile-->
+    <nav role="navigation" class="menuMobile">
+      <a href="index.html">Mega CX</a>
+      <div id="menuMobileToggle" class="palette_three">
+        <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
+        <input id="menuMobileToggleCheckbox" class="audioclick" type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menuMobile" class="palette_three">
+          <a href="index.html" class="audioclick">
+            <li class="spanish">Inicio</li>
+            <li class="english">Home</li>
+          </a>
+          <a href="services.html" class="audioclick">
+            <li class="spanish">Servicios</li>
+            <li class="english">Services</li>
+          </a>
+          <a href="gallery.html" class="audioclick">
+            <li class="spanish">Galería</li>
+            <li class="english">Gallery</li>
+          </a>
+          <a href="contact.html" class="audioclick">
+            <li class="spanish">Contacto</li>
+            <li class="english">Contact</li>
+          </a>
+        </ul>
       </div>
-    </footer>
+    </nav>
+  </header>
 
-    <div class="loader"></div>
-  </html>
+  <main>
+    <section id="textGallery">
+      <article>
+        <h1>PORFOLIO</h1>
+        <h2 class="spanish">Proyectos 3D</h2>
+        <h2 class="english">3D Projects</h2>
+        <br /><br />
+        <p class="spanish">
+          En esta galería puede ver mi historial de proyectos 3D, al igual que desde ArtStation, Behance, etc donde
+          puede seguirme para estar al pendiente
+          de mis nuevos proyectos, soy freelancer y artista 3D, hago desde productos, arquitectura o assets para
+          videojuegos, todo lo que necesite para su
+          negocio o lo que se pueda imaginar, si necesita algún servicio contácteme.
+        </p>
+        <p class="english">
+          In this gallery, you can see my history of 3D projects, as well as from ArtStation, Behance, etc., where you
+          can follow me to keep up with my new
+          projects. I am a freelancer and 3D artist. I do everything from products, architecture, or assets for video
+          games, everything you need for your
+          business or whatever you can imagine. If you need any service, please contact me.
+        </p>
+      </article>
+    </section>
+
+    <div id="galleryExpandController">
+      <div id="galleryExpandBackground"></div>
+      <img id="galleryExpand" src="" />
+      <div id="galleryExpandBtn" class="audioclick">
+        <i class="fas fa-plus"></i>
+      </div>
+    </div>
+
+    <div class="grid-container audioclick">
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/075/006/764/large/juanhda-cx-counterposition-interior-bedroom-ff.jpg?1713493978"
+        src="icons/placeholder.webp" alt="" title="Counterposition Interior Bedroom" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/074/567/077/large/juanhda-cx-ambre-dhiver-ff.jpg?1712369804"
+        src="icons/placeholder.webp" alt="" title="Mégalomanie - AMBRE D’HIVER" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/074/314/161/large/juanhda-cx-bombastic-hug-ff.jpg?1711746197"
+        src="icons/placeholder.webp" alt="" title="Bombastic Hug" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/074/238/250/large/juanhda-cx-italian-restaurant-ff.jpg?1711561597"
+        src="icons/placeholder.webp" alt="" title="Italian Restaurant, A Culinary Journey" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/074/109/098/large/juanhda-cx-soda-fresh-ff.jpg?1711260824"
+        src="icons/placeholder.webp" alt="" title="Soda Fresh" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/074/107/704/large/juanhda-cx-telescope-mega-star-u-01-cam2-ff.jpg?1711252976"
+        src="icons/placeholder.webp" alt="" title="Telescope Mega Star U-01" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/074/046/779/large/juanhda-cx-red-formation-ff.jpg?1711075974"
+        src="icons/placeholder.webp" alt="" title="Red Formation" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/070/530/545/large/juanhda-cx-treefallen-willow-ff.jpg?1702759806"
+        src="icons/placeholder.webp" alt="" title="Tree Fallen - [Type: Willow]" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/070/474/303/large/juanhda-cx-up.jpg?1702602181"
+        src="icons/placeholder.webp" alt="" title="Aisle in The DEPTHS" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/070/179/893/large/juanhda-cx-house-bluebright-day-ff.jpg?1701930334"
+        src="icons/placeholder.webp" alt="" title="House Bluebright" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/070/137/021/large/juanhda-cx-fennec-cam2-ff.jpg?1701838071"
+        src="icons/placeholder.webp" alt="" title="Fennec Weapon - [KRISS Vector]" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/067/322/432/large/juanhda-cx-mushroom-iridescence-ff.jpg?1695103390"
+        src="icons/placeholder.webp" alt="" title="Mushroom Iridescence" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/067/006/368/large/juanhda-cx-summer-camp.jpg?1694322043"
+        src="icons/placeholder.webp" alt="" title="Summer Camp" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/065/189/808/large/juanhda-cx-turntable-full-ff.jpg?1689746534"
+        src="icons/placeholder.webp" alt="" title="Turntable vintage" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/065/189/629/large/juanhda-cx-kitchen-renderff.jpg?1689746088"
+        src="icons/placeholder.webp" alt="" title="Kitchen Interior" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/065/189/186/large/juanhda-cx-medieval-shield-swords-front-ff.jpg?1689744340"
+        src="icons/placeholder.webp" alt="" title="Ancient armored medieval shield" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/064/378/298/large/juanhda-cx-antique-lamp-renderff.jpg?1687796335"
+        src="icons/placeholder.webp" alt="" title="Antique Lamp" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/063/893/079/large/juanhda-cx-warm-audio-wa-47-cam1ff.jpg?1686630777"
+        src="icons/placeholder.webp" alt="" title="Warm Audio WA-47 (MCX)" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/063/675/577/large/juanhda-cx-rebot003-finalff.jpg?1686088519"
+        src="icons/placeholder.webp" alt="" title="Rebot_003" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/057/398/304/large/juanhda-cx-treemixff.jpg?1671492244"
+        src="icons/placeholder.webp" alt="" title="TreeMix" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/057/398/261/large/juanhda-cx-chairff.jpg?1671492069"
+        src="icons/placeholder.webp" alt="" title="Flowery sofa" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/057/398/137/large/juanhda-cx-hachx.jpg?1671491644"
+        src="icons/placeholder.webp" alt="" title="Ancient ax with a medieval and fantastic style" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/057/397/989/large/juanhda-cx-guitaraffinity2.jpg?1671491371"
+        src="icons/placeholder.webp" alt="" title="Electric Guitar Re" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/057/397/935/large/juanhda-cx-the-misty-altarff.jpg?1671491203"
+        src="icons/placeholder.webp" alt="" title="The Misty Altar" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/057/397/564/large/juanhda-cx-snowballff.jpg?1671490287"
+        src="icons/placeholder.webp" alt="" title="Crystal Snowball 21" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/057/362/807/large/juanhda-cx-ring2ff.jpg?1671408311"
+        src="icons/placeholder.webp" alt="" title="The Ring of foundation" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/057/362/678/large/juanhda-cx-compassff.jpg?1671407977"
+        src="icons/placeholder.webp" alt="" title="Ancient golden compass" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/057/362/550/large/juanhda-cx-decima9-cam2-ff.jpg?1671407644"
+        src="icons/placeholder.webp" alt="" title="Planet Decima-9" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/040/741/752/large/juanhda-cx-pepper-salt.jpg?1629754705"
+        src="icons/placeholder.webp" alt="" title="Pepper and salt" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/367/large/juanhda-cx-mainrowfinal.jpg?1629252251"
+        src="icons/placeholder.webp" alt="" title="Main Row" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/331/large/juanhda-cx-diamond-corona.jpg?1629252060"
+        src="icons/placeholder.webp" alt="" title="Diamond>" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/287/large/juanhda-cx-droid-12-final.jpg?1629251831"
+        src="icons/placeholder.webp" alt="" title="Droid-12" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/163/large/juanhda-cx-minigunfrontfinal.jpg?1629251333"
+        src="icons/placeholder.webp" alt="" title="Minigun-Machine" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/040/101/925/large/juanhda-cx-treechrismastv2.jpg?1627879811"
+        src="icons/placeholder.webp" alt="" title="Christmas Tree" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/040/101/894/large/juanhda-cx-power-windf.jpg?1627879670"
+        src="icons/placeholder.webp" alt="" title="Wind Power Plant" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/040/101/858/large/juanhda-cx-miwom-pavilionf.jpg?1627879391"
+        src="icons/placeholder.webp" alt="" title="Miwom Pavilion" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/040/101/812/large/juanhda-cx-ballsoccer.jpg?1627879078"
+        src="icons/placeholder.webp" alt="" title="Ball Soccer" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/040/101/759/large/juanhda-cx-teddy2.jpg?1627878852"
+        src="icons/placeholder.webp" alt="" title="Teddy's playroom" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/040/101/194/large/juanhda-cx-armfictionf.jpg?1627876581"
+        src="icons/placeholder.webp" alt="" title="Retro Sci-Fi Weapon" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/040/100/569/large/juanhda-cx-ship-in-port.jpg?1627874131"
+        src="icons/placeholder.webp" alt="" title="Ship in port" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/040/100/469/large/juanhda-cx-light-hopetop.jpg?1627873529"
+        src="icons/placeholder.webp" alt="" title="A light of hope" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/031/642/489/large/juanhda-cx-gingerbrex-house-2020.jpg?1604198983"
+        src="icons/placeholder.webp" alt="" title="Gingerbread House" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/031/642/323/large/juanhda-cx-pumpkin-2020-halloween.jpg?1604198259"
+        src="icons/placeholder.webp" alt="" title="Pumpkin in the dark" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/031/009/074/large/juanhda-cx-japanese-entrance.jpg?1602307887"
+        src="icons/placeholder.webp" alt="" title="Japanese Entrance" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/026/771/794/large/juanhda-cx-top.jpg?1589684667"
+        src="icons/placeholder.webp" alt="" title="Segment-Camera-CX" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/026/416/007/large/juanhda-cx-bathroom-megacx.jpg?1588716957"
+        src="icons/placeholder.webp" alt="" title="Bathroom Gold" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdnb.artstation.com/p/assets/images/images/026/130/999/large/juanhda-cx-cabinf.jpg?1587972995"
+        src="icons/placeholder.webp" alt="" title="Environment Cabin Poly" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/024/256/128/large/juanhda-cx-san-heartf.jpg?1581830586"
+        src="icons/placeholder.webp" alt="" title="Skinned Heart" />
+      <img class="grid-item imgGhover"
+        data-src="https://cdna.artstation.com/p/assets/images/images/023/925/438/large/juanhda-cx-coffe-shopfinal.jpg?1580775294"
+        src="icons/placeholder.webp" alt="" title="Coffee House at dusk" />
+    </div>
+  </main>
+</body>
+
+<button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup"
+    src="icons/arrowUPv4.svg" /></button>
+
+<footer>
+  <div class="noisy"></div>
+  <div id="footerCont">
+    <div id="footerbtn">
+      <label class="switch">
+        <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
+        <span class="sliderSwitch"></span>
+      </label>
+      <div id="language-switch-button"></div>
+    </div>
+    <br /><br />
+    <p class="spanish">Todos los derechos reservados @2024 [MMXXIV]</p>
+    <p class="english">All rights reserved @2024 [MMXXIV]</p>
+    <br />
+    <p class="spanish">Creado por JUANHDA CX.</p>
+    <p class="english">Created by JUANHDA CX.</p>
+    <br />
+    <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
+    <p></p>
+  </div>
+</footer>
+
+<div class="loader"></div>
+
+</html>
+
 </html>

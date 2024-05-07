@@ -630,8 +630,12 @@ li a {
   height: 50px;
   border-radius: 50%;
   background-color: var(--palette_one_accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   z-index: 5;
+  cursor: url("icons/cursor_select.png"), pointer;
 }
 
 .dark-mode #hexeBG {
@@ -664,26 +668,10 @@ li a {
 }
 
 #hexeBG > a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
   color: #000000;
   transform: rotate(0deg);
   transition: transform 0.3s ease-in-out;
 }
-
-#hexeBG:hover > a,
-#hexeBG > a:hover {
-  transform: rotate(45deg);
-  transition: 0.5s;
-}
-
-/*
-#hexeBG>.rotate {
-  transform: rotate(45deg);
-  transition: 0.5s;
-}*/
 
 .dark-mode #hexeBG > a {
   color: #ffffff;
@@ -831,7 +819,7 @@ li a {
   float: right;
   transform: translate();
   z-index: 3;
-  cursor: pointer;
+  cursor: url("icons/cursor_select.png"), pointer;
 }
 
 .logocx {
@@ -1144,7 +1132,6 @@ footer {
 
 .sliderSwitch {
   position: absolute;
-  cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
@@ -1709,6 +1696,10 @@ div strong a :hover div div {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .tableModal {
@@ -1780,8 +1771,6 @@ div strong a :hover div div {
 
 .Box-buttonModal {
   position: relative;
-  left: 50%;
-  transform: translate(-50%);
   top: -15%;
   background-color: #000000;
   height: 50px;
@@ -1792,6 +1781,7 @@ div strong a :hover div div {
   align-items: center;
   justify-content: center;
   cursor: url("icons/cursor_select.png"), pointer;
+  transition: 500ms ease-in-out;
 }
 
 .dark-mode .Box-buttonModal {
@@ -1802,12 +1792,11 @@ div strong a :hover div div {
 .Box-buttonModal i {
   color: #ffffff;
   font-size: 40px;
-  transition: 0.5s;
 }
 
-.Box-buttonModal i:hover {
-  transform: rotate(45deg);
-  transition: 0.5s;
+.Box-buttonModal:hover {
+  transform: rotate(405deg);
+  transition: 500ms ease-in-out;
 }
 
 .dark-mode .Box-buttonModal i {
@@ -1847,21 +1836,17 @@ div strong a :hover div div {
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);
-  animation: background 2s ease-in-out forwards;
+  animation: backgroundModal 2s ease-in-out forwards;
   align-items: center;
   justify-content: center;
 }
 
 @keyframes backgroundModal {
-  from {
-    background-color: rgba(0, 0, 0, 1);
-    -webkit-backdrop-filter: blur(25px);
-    backdrop-filter: blur(25px);
-  }
   to {
     background-color: rgba(0, 0, 0, 0.5);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+  }
+  from {
+    background-color: rgba(0, 0, 0, 1);
   }
 }
 
@@ -2695,21 +2680,18 @@ table tr td {
   background-color: rgba(0, 0, 0, 0.5); /* Color de fondo semitransparente */
   position: fixed;
   top: 0%;
+  pointer-events: auto;
   -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px); /* Añade el efecto de desenfoque */
-  animation: background 2s ease-in-out forwards;
+  animation: backgroundGallery 2s ease-in-out forwards;
 }
 
-@keyframes background {
+@keyframes backgroundGallery {
   from {
     background-color: rgba(0, 0, 0, 1);
-    -webkit-backdrop-filter: blur(25px);
-    backdrop-filter: blur(25px);
   }
   to {
     background-color: rgba(0, 0, 0, 0.5);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
   }
 }
 
@@ -2757,6 +2739,8 @@ table tr td {
   align-items: center;
   justify-content: center;
   font-size: 32px;
+  cursor: pointer;
+  cursor: url("icons/cursor_select.png"), pointer;
 }
 
 .dark-mode #galleryExpandBtn {
@@ -2765,6 +2749,7 @@ table tr td {
 
 #galleryExpandBtn:hover {
   background-color: var(--palette_three);
+  /*transform: rotate(360deg);*/
 }
 
 .dark-mode #galleryExpandBtn:hover {
@@ -2782,14 +2767,27 @@ table tr td {
   grid-auto-rows: minmax(150px, auto);
   -webkit-user-select: none;
   user-select: none;
-  /*
-  grid-gap: 10px;*/
 }
 
 .grid-item {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: pointer;
+  cursor: url("icons/cursor_select.png"), pointer;
+}
+
+.imgGhover {
+  transition: 500ms ease;
+}
+
+.imgGhover:hover {
+  opacity: 0.75;
+  transition: 500ms ease;
+}
+
+.dark-mode .imgGhover:hover {
+  opacity: 0.25;
 }
 
 /*Tablet Device*/

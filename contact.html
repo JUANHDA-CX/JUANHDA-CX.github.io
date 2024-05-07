@@ -1,553 +1,349 @@
 <!DOCTYPE html>
 <html>
-  <html lang="es">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="description" content="Soluciones informáticas de todo tipo a pedido" />
-      <meta name="description" content="Information technology solutions of all kinds on demand" />
-      <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D, Web, Programs, Software" />
-      <meta name="author" content="Mega CX" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      <title>Mega CX Studios | Contact</title>
-      <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-      <link rel="icon" href="icons/favicon_contact.png" type="image/x-icon" />
-      <link rel="shortcut icon" href="icons/favicon_contact.png" type="image/x-icon" />
-      <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet" />
-      <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+<html lang="es">
 
-      <!--Dark mode-->
-      <script>
-        function myFunction() {
-          var element = document.body;
-          var button = document.getElementById("myButton");
-          var slider = document.querySelector(".sliderSwitch");
-          element.classList.toggle("dark-mode");
-          if (element.classList.contains("dark-mode")) {
-            slider.classList.add("dark");
-            slider.classList.remove("lightfour");
-            button.checked = false;
-            localStorage.setItem("theme", "dark");
-          } else {
-            slider.classList.add("lightfour");
-            slider.classList.remove("dark");
-            button.checked = true;
-            localStorage.setItem("theme", "light");
-          }
-        }
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Soluciones informáticas de todo tipo a pedido" />
+  <meta name="description" content="Information technology solutions of all kinds on demand" />
+  <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D, Web, Programs, Software" />
+  <meta name="author" content="Mega CX" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Mega CX Studios | Contact</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+  <link rel="icon" href="icons/favicon_contact.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="icons/favicon_contact.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="main.js"></script>
+  <script src="menuMobile.js"></script>
 
-        window.onload = function () {
-          var element = document.body;
-          var button = document.getElementById("myButton");
-          var slider = document.querySelector(".sliderSwitch");
-          var theme = localStorage.getItem("theme");
-          if (theme === "dark") {
-            element.classList.add("dark-mode");
-            slider.classList.add("dark");
-            slider.classList.remove("lightfour");
-            button.checked = false;
-          } else if (theme === "light") {
-            element.classList.remove("dark-mode");
-            slider.classList.add("lightfour");
-            slider.classList.remove("dark");
-            button.checked = true;
-          } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            element.classList.add("dark-mode");
-            slider.classList.add("dark");
-            slider.classList.remove("lightfour");
-            localStorage.setItem("theme", "dark");
-            button.checked = false;
-          } else {
-            element.classList.remove("dark-mode");
-            slider.classList.add("lightfour");
-            slider.classList.remove("dark");
-            localStorage.setItem("theme", "light");
-            button.checked = true;
-          }
-        };
-      </script>
+  <!--Correo-->
+  <script>
+    function checkForm(form) {
+      if (form.checkValidity()) {
+        // Todos los campos requeridos están completos, enviar el formulario
+        return true;
+      } else {
+        // No todos los campos requeridos están completos, mostrar un mensaje de error
+        alert("Completa todos los campos requeridos.");
+        return false;
+      }
+    }
 
-      <!--Sounds-->
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const audio = new Audio("/sound/click-21156-666HeroHero.mp3");
-          audio.volume = 0.25;
-          const elements = document.querySelectorAll(".audioclick");
-
-          elements.forEach((element) => {
-            element.addEventListener("click", (event) => {
-              if (element.tagName !== "INPUT") {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              audio.play();
-              setTimeout(() => {
-                if (element.hasAttribute("href")) {
-                  if (element.getAttribute("target") === "_blank") {
-                    window.open(element.getAttribute("href"), "_blank");
-                  } else {
-                    window.location.href = element.getAttribute("href");
-                  }
-                }
-              }, 500);
-            });
-          });
-        });
-      </script>
-
-      <!--Pantalla de carga-->
-      <script type="text/javascript">
-        window.addEventListener("load", function () {
-          const loader = document.querySelector(".loader");
-          loader.className += " hidden";
-        });
-      </script>
-
-      <!--Ocultar Boton de desplazamiento-->
-      <script>
-        window.addEventListener("scroll", function () {
-          var Fbutton = document.getElementById("Fbutton");
-          if (window.pageYOffset > 300) {
-            Fbutton.style.display = "block";
-          } else {
-            Fbutton.style.display = "none";
-          }
-        });
-      </script>
-
-      <!--Animacion Boton de desplazamiento-->
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script>
-        function init() {
-          function scrollToTop() {
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-          }
-          var Fbutton = document.getElementById("Fbutton");
-          Fbutton.addEventListener("click", scrollToTop);
-        }
-
-        document.addEventListener("DOMContentLoaded", init);
-      </script>
-
-      <!--Menu_mobile-->
-      <script>
-        window.addEventListener("load", () => {
-          const menuButton = document.querySelector("#menuMobileToggleCheckbox");
-          const body = document.querySelector("body");
-
-          menuButton.addEventListener("change", () => {
-            if (menuButton.checked) {
-              body.classList.add("no-scroll-mobile");
-            } else {
-              body.classList.remove("no-scroll-mobile");
-            }
-          });
-        });
-      </script>
-
-      <!--Correo-->
-      <script>
-        function checkForm(form) {
-          if (form.checkValidity()) {
-            // Todos los campos requeridos están completos, enviar el formulario
-            return true;
-          } else {
-            // No todos los campos requeridos están completos, mostrar un mensaje de error
-            alert("Completa todos los campos requeridos.");
-            return false;
-          }
-        }
-
-        function submitForm(event, form) {
-          event.preventDefault();
-          if (checkForm(form)) {
-            form.submit(); /*
+    function submitForm(event, form) {
+      event.preventDefault();
+      if (checkForm(form)) {
+        form.submit(); /*
         alert("Confirma el envio y regresa.");*/
-          }
-        }
-      </script>
+      }
+    }
+  </script>
 
-      <!--Select Option-->
-      <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-          const selectSpa = document.getElementById("formSelect-spa");
-          const selectEng = document.getElementById("formSelect-eng");
+  <!--Select Option-->
+  <script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const selectSpa = document.getElementById("formSelect-spa");
+      const selectEng = document.getElementById("formSelect-eng");
 
-          // Crear la nueva opción
-          const optionSpa = document.createElement("option");
-          optionSpa.value = "";
-          optionSpa.textContent = "Selecciona una categoría";
+      // Crear la nueva opción
+      const optionSpa = document.createElement("option");
+      optionSpa.value = "";
+      optionSpa.textContent = "Selecciona una categoría";
 
-          const optionEng = document.createElement("option");
-          optionEng.value = "";
-          optionEng.textContent = "Select a category";
+      const optionEng = document.createElement("option");
+      optionEng.value = "";
+      optionEng.textContent = "Select a category";
 
-          // Establecer los atributos de la nueva opción
-          optionSpa.selected = true;
-          optionSpa.disabled = true;
-          optionSpa.style.display = "none";
+      // Establecer los atributos de la nueva opción
+      optionSpa.selected = true;
+      optionSpa.disabled = true;
+      optionSpa.style.display = "none";
 
-          optionEng.selected = true;
-          optionEng.disabled = true;
-          optionEng.style.display = "none";
+      optionEng.selected = true;
+      optionEng.disabled = true;
+      optionEng.style.display = "none";
 
-          // Agregar la nueva opción al select
-          selectSpa.appendChild(optionSpa);
-          selectEng.appendChild(optionEng);
-        });
-      </script>
+      // Agregar la nueva opción al select
+      selectSpa.appendChild(optionSpa);
+      selectEng.appendChild(optionEng);
+    });
+  </script>
 
-      <!--Idioma de la pagina-->
-      <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-          var currentLanguage = localStorage.getItem("language") || "Spanish";
-          var userLang = navigator.language || navigator.userLanguage;
+</head>
 
-          var button = document.getElementById("language-switch-button");
-          var iconEnglishDark = document.createElement("img");
-          iconEnglishDark.src = "icons/icon_english_dark.svg";
-          var iconSpanishDark = document.createElement("img");
-          iconSpanishDark.src = "icons/icon_spanish_dark.svg";
+<body class="palette_four">
+  <div id="scroll"></div>
+  <header>
+    <div id="BarMenu-secondary"></div>
+    <nav id="secondary">
+      <ul>
+        <li onclick="window.location.href='index.html';">
+          <a href="index.html" class="audioclick">
+            <i class="fa-solid fa-house"></i>
+            <spa class="menu-spanish">Inicio</spa>
+            <spa class="menu-english">Home</spa>
+          </a>
+        </li>
+        <li onclick="window.location.href='services.html';">
+          <a href="services.html" class="audioclick">
+            <i class="fa-solid fa-desktop"></i>
+            <spa class="menu-spanish">Servicios</spa>
+            <spa class="menu-english">Services</spa>
+          </a>
+        </li>
+        <li onclick="window.location.href='gallery.html';">
+          <a href="gallery.html" class="audioclick">
+            <i class="fa-regular fa-image"></i>
+            <span class="menu-spanish">Galería</span>
+            <span class="menu-english">Gallery</span>
+          </a>
+        </li>
+        <li onclick="window.location.href='contact.html';">
+          <a href="contact.html" class="audioclick">
+            <i class="fa-solid fa-envelope"></i>
+            <span class="menu-spanish">Contacto</span>
+            <span class="menu-english">Contact</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-          if (currentLanguage === "Spanish") {
-            displayContentInSpanish();
-            button.appendChild(iconSpanishDark);
-          } else {
-            displayContentInEnglish();
-            button.appendChild(iconEnglishDark);
-          }
-
-          button.addEventListener("click", function () {
-            button.innerHTML = "";
-            button.style.display = "none";
-            button.offsetHeight;
-            button.style.display = "";
-
-            if (currentLanguage === "English") {
-              displayContentInSpanish();
-              currentLanguage = "Spanish";
-              localStorage.setItem("language", "Spanish");
-              button.appendChild(iconSpanishDark);
-            } else {
-              displayContentInEnglish();
-              currentLanguage = "English";
-              localStorage.setItem("language", "English");
-              button.appendChild(iconEnglishDark);
-            }
-          });
-
-          function displayContentInSpanish() {
-            document.querySelectorAll(".english").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".spanish").forEach(function (element) {
-              element.style.display = "block";
-            });
-            document.querySelectorAll(".menu-english").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".menu-spanish").forEach(function (element) {
-              element.style.display = "inline-block";
-            });
-          }
-
-          function displayContentInEnglish() {
-            document.querySelectorAll(".spanish").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".english").forEach(function (element) {
-              element.style.display = "block";
-            });
-            document.querySelectorAll(".menu-spanish").forEach(function (element) {
-              element.style.display = "none";
-            });
-            document.querySelectorAll(".menu-english").forEach(function (element) {
-              element.style.display = "inline-block";
-            });
-          }
-        });
-      </script>
-    </head>
-
-    <body class="palette_four">
-      <div id="scroll"></div>
-      <header>
-        <div id="BarMenu-secondary"></div>
-        <nav id="secondary">
-          <ul>
-            <li onclick="window.location.href='index.html';">
-              <a href="index.html" class="audioclick">
-                <i class="fa-solid fa-house"></i>
-                <spa class="menu-spanish">Inicio</spa>
-                <spa class="menu-english">Home</spa></a
-              >
-            </li>
-            <li onclick="window.location.href='services.html';">
-              <a href="services.html" class="audioclick">
-                <i class="fa-solid fa-desktop"></i>
-                <spa class="menu-spanish">Servicios</spa>
-                <spa class="menu-english">Services</spa>
-              </a>
-            </li>
-            <li onclick="window.location.href='gallery.html';">
-              <a href="gallery.html" class="audioclick">
-                <i class="fa-regular fa-image"></i>
-                <span class="menu-spanish">Galería</span>
-                <span class="menu-english">Gallery</span>
-              </a>
-            </li>
-            <li onclick="window.location.href='contact.html';">
-              <a href="contact.html" class="audioclick">
-                <i class="fa-solid fa-envelope"></i>
-                <span class="menu-spanish">Contacto</span>
-                <span class="menu-english">Contact</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <!--Menu Mobile-->
-        <nav role="navigation" class="menuMobile">
-          <a href="index.html">Mega CX</a>
-          <div id="menuMobileToggle" class="palette_four">
-            <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
-            <input id="menuMobileToggleCheckbox" class="audioclick" type="checkbox" />
-            <span></span>
-            <span></span>
-            <span></span>
-            <ul id="menuMobile" class="palette_four">
-              <a href="index.html" class="audioclick">
-                <li class="spanish">Inicio</li>
-                <li class="english">Home</li>
-              </a>
-              <a href="services.html" class="audioclick">
-                <li class="spanish">Servicios</li>
-                <li class="english">Services</li>
-              </a>
-              <a href="gallery.html" class="audioclick">
-                <li class="spanish">Galería</li>
-                <li class="english">Gallery</li>
-              </a>
-              <a href="contact.html" class="audioclick">
-                <li class="spanish">Contacto</li>
-                <li class="english">Contact</li>
-              </a>
-            </ul>
-          </div>
-        </nav>
-      </header>
-
-      <!--Formulario 1 inicio SPA-->
-      <div class="spanish">
-        <form method="POST" action="https://formspree.io/f/xeqwwvjj" onsubmit="return checkForm(this)">
-          <div class="noisy"></div>
-          <div id="infoForm-spa">
-            <strong><p>Rellena el formulario</p></strong><br />
-            <p>
-              Si necesitas algún servicio por favor rellena el formulario con tu mensaje y datos, me pondré en contacto contigo.
-              <b>(Servicios en Chinavita-Boyacá)</b>
-            </p>
-            <br /><br />
-            <div class="iconshare">
-              <table>
-                <tr>
-                  <td>
-                    <div class="hover">
-                      <a href="https://megacx.artstation.com/" target="_blank" class="audioclick"><i class="fa-brands fa-artstation"></i></a>
-                      <br />
-                      <a href="https://megacx.artstation.com/" target="_blank" class="audioclick">ArtStation</a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="hover">
-                      <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick"><i class="fa-brands fa-dribbble"></i></a>
-                      <br />
-                      <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick">dribbble</a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="hover">
-                      <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick"><i class="fa-brands fa-deviantart"></i></a>
-                      <br />
-                      <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick">DeviantArt</a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="hover">
-                      <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick"><i class="fa-brands fa-behance"></i></a>
-                      <br />
-                      <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick">Behance</a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="hover">
-                      <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick"><i class="fa-brands fa-x-twitter"></i></a>
-                      <br />
-                      <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick">X-Twitter</a>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-
-          <input
-            class="formNameMail audioclick"
-            type="text"
-            name="Nombre Completo"
-            enterkeyhint="next"
-            autocomplete="name"
-            placeholder="Nombre completo"
-            required
-          />
-          <input
-            class="formNameMail audioclick"
-            type="email"
-            name="Correo electrónico"
-            enterkeyhint="next"
-            autocomplete="email"
-            placeholder="Correo electrónico"
-            required
-          />
-          <select id="formSelect-spa" class="audioclick" name="Categoría" required>
-            <option value="" selected disabled style="display: none">Selecciona una categoría</option>
-            <option class="formSelectOption audioclick" value="Programas">Programas</option>
-            <option class="formSelectOption audioclick" value="Videojuegos">Videojuegos</option>
-            <option class="formSelectOption audioclick" value="Diseño">Diseño</option>
-            <option class="formSelectOption audioclick" value="Películas">Películas</option>
-            <option class="formSelectOption audioclick" value="Modelado 3D">Modelado 3D</option>
-            <option class="formSelectOption audioclick" value="Utilidades">Utilidades</option>
-            <option class="formSelectOption audioclick" value="Fotografía">Fotografía</option>
-            <option class="formSelectOption audioclick" value="Vídeo">Vídeo</option>
-          </select>
-          <textarea
-            placeholder="Escribe tu petición..."
-            id="formText-spa"
-            class="audioclick"
-            name="Mensaje"
-            enterkeyhint="done"
-            cols="40"
-            rows="15"
-            value="Mensaje"
-            required
-          ></textarea>
-          <a href="#"><input id="form-enviar-spa" class="audioclick" value="Enviar" type="submit" onclick="submitForm(event, this.form)" /></a>
-          <input id="form-reset-spa" class="audioclick" value="Borrar" type="reset" />
-        </form>
-        <br />
+    <!--Menu Mobile-->
+    <nav role="navigation" class="menuMobile">
+      <a href="index.html">Mega CX</a>
+      <div id="menuMobileToggle" class="palette_four">
+        <label class="visually-hidden" for="menuMobileToggleCheckbox">menuMobile</label>
+        <input id="menuMobileToggleCheckbox" class="audioclick" type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menuMobile" class="palette_four">
+          <a href="index.html" class="audioclick">
+            <li class="spanish">Inicio</li>
+            <li class="english">Home</li>
+          </a>
+          <a href="services.html" class="audioclick">
+            <li class="spanish">Servicios</li>
+            <li class="english">Services</li>
+          </a>
+          <a href="gallery.html" class="audioclick">
+            <li class="spanish">Galería</li>
+            <li class="english">Gallery</li>
+          </a>
+          <a href="contact.html" class="audioclick">
+            <li class="spanish">Contacto</li>
+            <li class="english">Contact</li>
+          </a>
+        </ul>
       </div>
-      <!--Formulario 1 fin SPA-->
+    </nav>
+  </header>
 
-      <!--Formulario 2 inicio ENG-->
-      <div class="english">
-        <form method="POST" action="https://formspree.io/f/xyyqpkdo" onsubmit="return checkForm(this)">
-          <div class="noisy"></div>
-          <div id="infoForm-eng">
-            <strong><p>Fill the form</p></strong><br />
-            <p>
-              If you need any service, please fill out the form with your message and information, I will contact you. <b>(Services in Chinavita-Boyacá)</b>
-            </p>
-            <br /><br />
-            <div class="iconshare">
-              <table>
-                <tr>
-                  <td>
-                    <div class="hover">
-                      <a href="https://megacx.artstation.com/" target="_blank" class="audioclick"><i class="fa-brands fa-artstation"></i></a>
-                      <br />
-                      <a href="https://megacx.artstation.com/" target="_blank" class="audioclick">ArtStation</a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="hover">
-                      <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick"><i class="fa-brands fa-dribbble"></i></a>
-                      <br />
-                      <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick">dribbble</a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="hover">
-                      <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick"><i class="fa-brands fa-deviantart"></i></a>
-                      <br />
-                      <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick">DeviantArt</a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="hover">
-                      <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick"><i class="fa-brands fa-behance"></i></a>
-                      <br />
-                      <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick">Behance</a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="hover">
-                      <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick"><i class="fa-brands fa-x-twitter"></i></a>
-                      <br />
-                      <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick">X-Twitter</a>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-
-          <input class="formNameMail audioclick" type="text" name="Full Name" enterkeyhint="next" autocomplete="name" placeholder="Full name" required />
-          <input class="formNameMail audioclick" type="email" name="E-Mail" enterkeyhint="next" autocomplete="email" placeholder="Email" required />
-          <select id="formSelect-eng" class="audioclick" name="Category" required>
-            <option value="" selected disabled style="display: none">Select a category</option>
-            <option class="formSelectOption audioclick" value="Software">Software</option>
-            <option class="formSelectOption audioclick" value="Videogames">Videogames</option>
-            <option class="formSelectOption audioclick" value="Design">Design</option>
-            <option class="formSelectOption audioclick" value="Movies">Movies</option>
-            <option class="formSelectOption audioclick" value="3D modeling">3D Modeling</option>
-            <option class="formSelectOption audioclick" value="Utilities">Utilities</option>
-            <option class="formSelectOption audioclick" value="Photography">Photography</option>
-            <option class="formSelectOption audioclick" value="Video">Video</option>
-          </select>
-          <textarea
-            placeholder="Write your request..."
-            id="formText-eng"
-            class="audioclick"
-            name="Message"
-            enterkeyhint="done"
-            cols="40"
-            rows="15"
-            value="Message"
-            required
-          ></textarea>
-          <a href="#"><input id="form-enviar-eng" class="audioclick" value="Send" type="submit" onclick="submitForm(event, this.form)" /></a>
-          <input id="form-reset-eng" class="audioclick" value="Delete" type="reset" />
-        </form>
-        <br />
-      </div>
-      <!--Formulario 2 fin ENG-->
-    </body>
-
-    <button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup" src="icons/arrowUPv4.svg" /></button>
-
-    <footer>
+  <!--Formulario 1 inicio SPA-->
+  <div class="spanish">
+    <form method="POST" action="https://formspree.io/f/xeqwwvjj" onsubmit="return checkForm(this)">
       <div class="noisy"></div>
-      <div id="footerCont">
-        <div id="footerbtn">
-          <label class="switch">
-            <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
-            <span class="sliderSwitch"></span>
-          </label>
-          <div id="language-switch-button"></div>
-        </div>
+      <div id="infoForm-spa">
+        <strong>
+          <p>Rellena el formulario</p>
+        </strong><br />
+        <p>
+          Si necesitas algún servicio por favor rellena el formulario con tu mensaje y datos, me pondré en contacto
+          contigo.
+          <b>(Servicios en Chinavita-Boyacá)</b>
+        </p>
         <br /><br />
-        <p class="spanish">Todos los derechos reservados @2024 [MMXXIV]</p>
-        <p class="english">All rights reserved @2024 [MMXXIV]</p>
-        <br />
-        <p class="spanish">Creado por JUANHDA CX.</p>
-        <p class="english">Created by JUANHDA CX.</p>
-        <br />
-        <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
-        <p></p>
+        <div class="iconshare">
+          <table>
+            <tr>
+              <td>
+                <div class="hover">
+                  <a href="https://megacx.artstation.com/" target="_blank" class="audioclick"><i
+                      class="fa-brands fa-artstation"></i></a>
+                  <br />
+                  <a href="https://megacx.artstation.com/" target="_blank" class="audioclick">ArtStation</a>
+                </div>
+              </td>
+              <td>
+                <div class="hover">
+                  <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick"><i
+                      class="fa-brands fa-dribbble"></i></a>
+                  <br />
+                  <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick">dribbble</a>
+                </div>
+              </td>
+              <td>
+                <div class="hover">
+                  <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick"><i
+                      class="fa-brands fa-deviantart"></i></a>
+                  <br />
+                  <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick">DeviantArt</a>
+                </div>
+              </td>
+              <td>
+                <div class="hover">
+                  <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick"><i
+                      class="fa-brands fa-behance"></i></a>
+                  <br />
+                  <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick">Behance</a>
+                </div>
+              </td>
+              <td>
+                <div class="hover">
+                  <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick"><i
+                      class="fa-brands fa-x-twitter"></i></a>
+                  <br />
+                  <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick">X-Twitter</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
-    </footer>
 
-    <div class="loader"></div>
-  </html>
+      <input class="formNameMail audioclick" type="text" name="Nombre Completo" enterkeyhint="next" autocomplete="name"
+        placeholder="Nombre completo" required />
+      <input class="formNameMail audioclick" type="email" name="Correo electrónico" enterkeyhint="next"
+        autocomplete="email" placeholder="Correo electrónico" required />
+      <select id="formSelect-spa" class="audioclick" name="Categoría" required>
+        <option value="" selected disabled style="display: none">Selecciona una categoría</option>
+        <option class="formSelectOption audioclick" value="Programas">Programas</option>
+        <option class="formSelectOption audioclick" value="Videojuegos">Videojuegos</option>
+        <option class="formSelectOption audioclick" value="Diseño">Diseño</option>
+        <option class="formSelectOption audioclick" value="Películas">Películas</option>
+        <option class="formSelectOption audioclick" value="Modelado 3D">Modelado 3D</option>
+        <option class="formSelectOption audioclick" value="Utilidades">Utilidades</option>
+        <option class="formSelectOption audioclick" value="Fotografía">Fotografía</option>
+        <option class="formSelectOption audioclick" value="Vídeo">Vídeo</option>
+      </select>
+      <textarea placeholder="Escribe tu petición..." id="formText-spa" class="audioclick" name="Mensaje"
+        enterkeyhint="done" cols="40" rows="15" value="Mensaje" required></textarea>
+      <a href="#"><input id="form-enviar-spa" class="audioclick" value="Enviar" type="submit"
+          onclick="submitForm(event, this.form)" /></a>
+      <input id="form-reset-spa" class="audioclick" value="Borrar" type="reset" />
+    </form>
+    <br />
+  </div>
+  <!--Formulario 1 fin SPA-->
+
+  <!--Formulario 2 inicio ENG-->
+  <div class="english">
+    <form method="POST" action="https://formspree.io/f/xyyqpkdo" onsubmit="return checkForm(this)">
+      <div class="noisy"></div>
+      <div id="infoForm-eng">
+        <strong>
+          <p>Fill the form</p>
+        </strong><br />
+        <p>
+          If you need any service, please fill out the form with your message and information, I will contact you.
+          <b>(Services in Chinavita-Boyacá)</b>
+        </p>
+        <br /><br />
+        <div class="iconshare">
+          <table>
+            <tr>
+              <td>
+                <div class="hover">
+                  <a href="https://megacx.artstation.com/" target="_blank" class="audioclick"><i
+                      class="fa-brands fa-artstation"></i></a>
+                  <br />
+                  <a href="https://megacx.artstation.com/" target="_blank" class="audioclick">ArtStation</a>
+                </div>
+              </td>
+              <td>
+                <div class="hover">
+                  <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick"><i
+                      class="fa-brands fa-dribbble"></i></a>
+                  <br />
+                  <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick">dribbble</a>
+                </div>
+              </td>
+              <td>
+                <div class="hover">
+                  <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick"><i
+                      class="fa-brands fa-deviantart"></i></a>
+                  <br />
+                  <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick">DeviantArt</a>
+                </div>
+              </td>
+              <td>
+                <div class="hover">
+                  <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick"><i
+                      class="fa-brands fa-behance"></i></a>
+                  <br />
+                  <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick">Behance</a>
+                </div>
+              </td>
+              <td>
+                <div class="hover">
+                  <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick"><i
+                      class="fa-brands fa-x-twitter"></i></a>
+                  <br />
+                  <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick">X-Twitter</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <input class="formNameMail audioclick" type="text" name="Full Name" enterkeyhint="next" autocomplete="name"
+        placeholder="Full name" required />
+      <input class="formNameMail audioclick" type="email" name="E-Mail" enterkeyhint="next" autocomplete="email"
+        placeholder="Email" required />
+      <select id="formSelect-eng" class="audioclick" name="Category" required>
+        <option value="" selected disabled style="display: none">Select a category</option>
+        <option class="formSelectOption audioclick" value="Software">Software</option>
+        <option class="formSelectOption audioclick" value="Videogames">Videogames</option>
+        <option class="formSelectOption audioclick" value="Design">Design</option>
+        <option class="formSelectOption audioclick" value="Movies">Movies</option>
+        <option class="formSelectOption audioclick" value="3D modeling">3D Modeling</option>
+        <option class="formSelectOption audioclick" value="Utilities">Utilities</option>
+        <option class="formSelectOption audioclick" value="Photography">Photography</option>
+        <option class="formSelectOption audioclick" value="Video">Video</option>
+      </select>
+      <textarea placeholder="Write your request..." id="formText-eng" class="audioclick" name="Message"
+        enterkeyhint="done" cols="40" rows="15" value="Message" required></textarea>
+      <a href="#"><input id="form-enviar-eng" class="audioclick" value="Send" type="submit"
+          onclick="submitForm(event, this.form)" /></a>
+      <input id="form-reset-eng" class="audioclick" value="Delete" type="reset" />
+    </form>
+    <br />
+  </div>
+  <!--Formulario 2 fin ENG-->
+</body>
+
+<button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup"
+    src="icons/arrowUPv4.svg" /></button>
+
+<footer>
+  <div class="noisy"></div>
+  <div id="footerCont">
+    <div id="footerbtn">
+      <label class="switch">
+        <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" checked />
+        <span class="sliderSwitch"></span>
+      </label>
+      <div id="language-switch-button"></div>
+    </div>
+    <br /><br />
+    <p class="spanish">Todos los derechos reservados @2024 [MMXXIV]</p>
+    <p class="english">All rights reserved @2024 [MMXXIV]</p>
+    <br />
+    <p class="spanish">Creado por JUANHDA CX.</p>
+    <p class="english">Created by JUANHDA CX.</p>
+    <br />
+    <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
+    <p></p>
+  </div>
+</footer>
+
+<div class="loader"></div>
+
+</html>
+
 </html>
