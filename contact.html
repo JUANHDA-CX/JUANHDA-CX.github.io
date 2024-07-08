@@ -84,15 +84,15 @@
         <li onclick="window.location.href='index.html';">
           <a href="index.html" class="audioclick">
             <i class="fa-solid fa-house"></i>
-            <spa class="menu-spanish">Inicio</spa>
-            <spa class="menu-english">Home</spa>
+            <span class="menu-spanish">Inicio</span>
+            <span class="menu-english">Home</span>
           </a>
         </li>
         <li onclick="window.location.href='services.html';">
           <a href="services.html" class="audioclick">
             <i class="fa-solid fa-desktop"></i>
-            <spa class="menu-spanish">Servicios</spa>
-            <spa class="menu-english">Services</spa>
+            <span class="menu-spanish">Servicios</span>
+            <span class="menu-english">Services</span>
           </a>
         </li>
         <li onclick="window.location.href='gallery.html';">
@@ -143,176 +143,217 @@
     </nav>
   </header>
 
+  <h1 class="MainH1">
+    <span class="spanish">ESCRIBEME UN MENSAJE</span>
+    <span class="english">WRITE ME A MESSAGE</span>
+  </h1>
+
   <!--Formulario 1 inicio SPA-->
   <div class="spanish">
     <form method="POST" action="https://formspree.io/f/xeqwwvjj" onsubmit="return checkForm(this)">
-      <div class="noisy"></div>
-      <div id="infoForm-spa">
-        <strong>
-          <p>Rellena el formulario</p>
-        </strong><br />
-        <p>
-          Si necesitas algún servicio por favor rellena el formulario con tu mensaje y datos, me pondré en contacto
-          contigo.
-          <b>(Servicios en Chinavita-Boyacá)</b>
-        </p>
-        <br /><br />
-        <div class="iconshare">
-          <table>
-            <tr>
-              <td>
-                <div class="hover">
-                  <a href="https://megacx.artstation.com/" target="_blank" class="audioclick"><i
-                      class="fa-brands fa-artstation"></i></a>
-                  <br />
-                  <a href="https://megacx.artstation.com/" target="_blank" class="audioclick">ArtStation</a>
-                </div>
-              </td>
-              <td>
-                <div class="hover">
-                  <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick"><i
-                      class="fa-brands fa-dribbble"></i></a>
-                  <br />
-                  <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick">dribbble</a>
-                </div>
-              </td>
-              <td>
-                <div class="hover">
-                  <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick"><i
-                      class="fa-brands fa-deviantart"></i></a>
-                  <br />
-                  <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick">DeviantArt</a>
-                </div>
-              </td>
-              <td>
-                <div class="hover">
-                  <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick"><i
-                      class="fa-brands fa-behance"></i></a>
-                  <br />
-                  <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick">Behance</a>
-                </div>
-              </td>
-              <td>
-                <div class="hover">
-                  <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick"><i
-                      class="fa-brands fa-x-twitter"></i></a>
-                  <br />
-                  <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick">X-Twitter</a>
-                </div>
-              </td>
-            </tr>
-          </table>
+      <div class="formShapes">
+        <div id="infoForm-spa">
+          <strong>
+            <p>Rellena el formulario</p>
+          </strong>
+          <br>
+          <p>
+            Si necesitas algún servicio por favor rellena el formulario con tu mensaje y datos, me pondré en contacto
+            contigo.
+            <b>(Servicios en Chinavita-Boyacá)</b>
+          </p>
+        </div>
+
+        <input class="formNameMail audioclick" type="text" name="Nombre Completo" enterkeyhint="next"
+          autocomplete="name" placeholder="Nombre completo" required />
+        <input class="formNameMail audioclick" type="email" name="Correo electrónico" enterkeyhint="next"
+          autocomplete="email" placeholder="Correo electrónico" required />
+        <select id="formSelect-spa" class="audioclick" name="Categoría" required>
+          <option value="" selected disabled style="display: none">Selecciona una categoría</option>
+          <option class="formSelectOption audioclick" value="Modelado 3D">Modelado 3D</option>
+          <option class="formSelectOption audioclick" value="Diseño">Diseño</option>
+          <option class="formSelectOption audioclick" value="Vídeo">Vídeo</option>
+          <option class="formSelectOption audioclick" value="Fotografía">Fotografía</option>
+          <option class="formSelectOption audioclick" value="Programas">Desarrollo</option>
+          <option class="formSelectOption audioclick" value="Utilidades">Utilidades</option>
+        </select>
+        <textarea placeholder="Escribe tu petición..." id="formText-spa" class="audioclick" name="Mensaje"
+          enterkeyhint="done" cols="40" rows="15" value="Mensaje" required></textarea>
+
+        <div class="BTsub_resMobile">
+          <a href="#"><input id="form-enviar-spa" class="audioclick" value="Enviar Mensaje" type="submit"
+              onclick="submitForm(event, this.form)" /></a>
+          <input id="form-reset-spa" class="audioclick" value="Borrar" type="reset" />
         </div>
       </div>
 
-      <input class="formNameMail audioclick" type="text" name="Nombre Completo" enterkeyhint="next" autocomplete="name"
-        placeholder="Nombre completo" required />
-      <input class="formNameMail audioclick" type="email" name="Correo electrónico" enterkeyhint="next"
-        autocomplete="email" placeholder="Correo electrónico" required />
-      <select id="formSelect-spa" class="audioclick" name="Categoría" required>
-        <option value="" selected disabled style="display: none">Selecciona una categoría</option>
-        <option class="formSelectOption audioclick" value="Programas">Programas</option>
-        <option class="formSelectOption audioclick" value="Videojuegos">Videojuegos</option>
-        <option class="formSelectOption audioclick" value="Diseño">Diseño</option>
-        <option class="formSelectOption audioclick" value="Películas">Películas</option>
-        <option class="formSelectOption audioclick" value="Modelado 3D">Modelado 3D</option>
-        <option class="formSelectOption audioclick" value="Utilidades">Utilidades</option>
-        <option class="formSelectOption audioclick" value="Fotografía">Fotografía</option>
-        <option class="formSelectOption audioclick" value="Vídeo">Vídeo</option>
-      </select>
-      <textarea placeholder="Escribe tu petición..." id="formText-spa" class="audioclick" name="Mensaje"
-        enterkeyhint="done" cols="40" rows="15" value="Mensaje" required></textarea>
-      <a href="#"><input id="form-enviar-spa" class="audioclick" value="Enviar" type="submit"
-          onclick="submitForm(event, this.form)" /></a>
-      <input id="form-reset-spa" class="audioclick" value="Borrar" type="reset" />
+      <div class="shortcuts">
+
+        <div class="iconSSS">
+          <div class="hover">
+            <a href="https://megacx.artstation.com/" target="_blank" class="audioclick"><i
+                class="fa-brands fa-artstation"></i></a>
+
+            <a href="https://megacx.artstation.com/" target="_blank" class="audioclick">ArtStation</a>
+          </div>
+
+
+          <div class="hover">
+            <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick"><i
+                class="fa-brands fa-dribbble"></i></a>
+            <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick">dribbble</a>
+          </div>
+
+
+          <div class="hover">
+            <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick"><i
+                class="fa-brands fa-deviantart"></i></a>
+
+            <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick">DeviantArt</a>
+          </div>
+
+
+          <div class="hover">
+            <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick"><i
+                class="fa-brands fa-behance"></i></a>
+
+            <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick">Behance</a>
+          </div>
+
+          <div class="hover">
+            <a href="https://www.linkedin.com/in/mega-cx" target="_blank" class="audioclick"><i
+                class="fa-brands fa-linkedin"></i></a>
+
+            <a href="https://www.linkedin.com/in/mega-cx" target="_blank" class="audioclick">LinkedIn</a>
+          </div>
+
+          <div class="hover">
+            <a href="https://x.com/Mega_CX" target="_blank" class="audioclick"><i
+                class="fa-brands fa-x-twitter"></i></a>
+
+            <a href="https://x.com/Mega_CX" target="_blank" class="audioclick">X-Twitter</a>
+          </div>
+        </div>
+        <div class="BTsub_resDesktop">
+          <div>
+            <i class="fa-solid fa-envelope"></i>
+            <a href="#"><input id="form-enviar-spa" class="audioclick" value="" type="submit"
+                onclick="submitForm(event, this.form)" /></a>
+          </div>
+          <br>
+          <br>
+          <div>
+            <i class="fa-solid fa-eraser"></i>
+            <input id="form-reset-spa" class="audioclick" value="" type="reset" />
+          </div>
+        </div>
+
+      </div>
     </form>
-    <br />
   </div>
   <!--Formulario 1 fin SPA-->
 
   <!--Formulario 2 inicio ENG-->
   <div class="english">
     <form method="POST" action="https://formspree.io/f/xyyqpkdo" onsubmit="return checkForm(this)">
-      <div class="noisy"></div>
-      <div id="infoForm-eng">
-        <strong>
-          <p>Fill the form</p>
-        </strong><br />
-        <p>
-          If you need any service, please fill out the form with your message and information, I will contact you.
-          <b>(Services in Chinavita-Boyacá)</b>
-        </p>
-        <br /><br />
-        <div class="iconshare">
-          <table>
-            <tr>
-              <td>
-                <div class="hover">
-                  <a href="https://megacx.artstation.com/" target="_blank" class="audioclick"><i
-                      class="fa-brands fa-artstation"></i></a>
-                  <br />
-                  <a href="https://megacx.artstation.com/" target="_blank" class="audioclick">ArtStation</a>
-                </div>
-              </td>
-              <td>
-                <div class="hover">
-                  <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick"><i
-                      class="fa-brands fa-dribbble"></i></a>
-                  <br />
-                  <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick">dribbble</a>
-                </div>
-              </td>
-              <td>
-                <div class="hover">
-                  <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick"><i
-                      class="fa-brands fa-deviantart"></i></a>
-                  <br />
-                  <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick">DeviantArt</a>
-                </div>
-              </td>
-              <td>
-                <div class="hover">
-                  <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick"><i
-                      class="fa-brands fa-behance"></i></a>
-                  <br />
-                  <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick">Behance</a>
-                </div>
-              </td>
-              <td>
-                <div class="hover">
-                  <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick"><i
-                      class="fa-brands fa-x-twitter"></i></a>
-                  <br />
-                  <a href="https://twitter.com/Mega_CX" target="_blank" class="audioclick">X-Twitter</a>
-                </div>
-              </td>
-            </tr>
-          </table>
+      <div class="formShapes">
+        <div id="infoForm-eng">
+          <strong>
+            <p>Fill the form, Please.</p>
+          </strong>
+          <br>
+          <p>
+            If you need any service, please fill out the form with your message and information, I will contact you.
+            <b>(Services in Chinavita-Boyacá)</b>
+          </p>
+        </div>
+
+        <input class="formNameMail audioclick" type="text" name="Full Name" enterkeyhint="next" autocomplete="name"
+          placeholder="Full name" required />
+        <input class="formNameMail audioclick" type="email" name="E-Mail" enterkeyhint="next" autocomplete="email"
+          placeholder="Email" required />
+        <select id="formSelect-eng" class="audioclick" name="Category" required>
+          <option value="" selected disabled style="display: none">Select a category</option>
+          <option class="formSelectOption audioclick" value="3D modeling">3D Modeling</option>
+          <option class="formSelectOption audioclick" value="Design">Design</option>
+          <option class="formSelectOption audioclick" value="Video">Video</option>
+          <option class="formSelectOption audioclick" value="Photography">Photography</option>
+          <option class="formSelectOption audioclick" value="Software">Software</option>
+          <option class="formSelectOption audioclick" value="Utilities">Utilities</option>
+        </select>
+        <textarea placeholder="Write your request..." id="formText-eng" class="audioclick" name="Message"
+          enterkeyhint="done" cols="40" rows="15" value="Message" required></textarea>
+
+        <div class="BTsub_resMobile">
+          <a href="#"><input id="form-enviar-eng" class="audioclick" value="Send Message" type="submit"
+              onclick="submitForm(event, this.form)" /></a>
+          <input id="form-reset-eng" class="audioclick" value="Delete" type="reset" />
         </div>
       </div>
 
-      <input class="formNameMail audioclick" type="text" name="Full Name" enterkeyhint="next" autocomplete="name"
-        placeholder="Full name" required />
-      <input class="formNameMail audioclick" type="email" name="E-Mail" enterkeyhint="next" autocomplete="email"
-        placeholder="Email" required />
-      <select id="formSelect-eng" class="audioclick" name="Category" required>
-        <option value="" selected disabled style="display: none">Select a category</option>
-        <option class="formSelectOption audioclick" value="Software">Software</option>
-        <option class="formSelectOption audioclick" value="Videogames">Videogames</option>
-        <option class="formSelectOption audioclick" value="Design">Design</option>
-        <option class="formSelectOption audioclick" value="Movies">Movies</option>
-        <option class="formSelectOption audioclick" value="3D modeling">3D Modeling</option>
-        <option class="formSelectOption audioclick" value="Utilities">Utilities</option>
-        <option class="formSelectOption audioclick" value="Photography">Photography</option>
-        <option class="formSelectOption audioclick" value="Video">Video</option>
-      </select>
-      <textarea placeholder="Write your request..." id="formText-eng" class="audioclick" name="Message"
-        enterkeyhint="done" cols="40" rows="15" value="Message" required></textarea>
-      <a href="#"><input id="form-enviar-eng" class="audioclick" value="Send" type="submit"
-          onclick="submitForm(event, this.form)" /></a>
-      <input id="form-reset-eng" class="audioclick" value="Delete" type="reset" />
+      <div class="shortcuts">
+
+        <div class="iconSSS">
+          <div class="hover">
+            <a href="https://megacx.artstation.com/" target="_blank" class="audioclick"><i
+                class="fa-brands fa-artstation"></i></a>
+
+            <a href="https://megacx.artstation.com/" target="_blank" class="audioclick">ArtStation</a>
+          </div>
+
+
+          <div class="hover">
+            <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick"><i
+                class="fa-brands fa-dribbble"></i></a>
+            <a href="https://dribbble.com/MegaCX/shots" target="_blank" class="audioclick">dribbble</a>
+          </div>
+
+
+          <div class="hover">
+            <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick"><i
+                class="fa-brands fa-deviantart"></i></a>
+
+            <a href="https://www.deviantart.com/juanhda" target="_blank" class="audioclick">DeviantArt</a>
+          </div>
+
+
+          <div class="hover">
+            <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick"><i
+                class="fa-brands fa-behance"></i></a>
+
+            <a href="https://www.behance.net/mega_cx" target="_blank" class="audioclick">Behance</a>
+          </div>
+
+          <div class="hover">
+            <a href="https://www.linkedin.com/in/mega-cx" target="_blank" class="audioclick"><i
+                class="fa-brands fa-linkedin"></i></a>
+
+            <a href="https://www.linkedin.com/in/mega-cx" target="_blank" class="audioclick">LinkedIn</a>
+          </div>
+
+          <div class="hover">
+            <a href="https://X.com/Mega_CX" target="_blank" class="audioclick"><i
+                class="fa-brands fa-fa-x-twitter-p"></i></a>
+
+            <a href="https://X.com/Mega_CX" target="_blank" class="audioclick">X-Twitter</a>
+          </div>
+        </div>
+        <div class="BTsub_resDesktop">
+          <div>
+            <i class="fa-solid fa-envelope"></i>
+            <a href="#"><input id="form-enviar-eng" class="audioclick" value="" type="submit"
+                onclick="submitForm(event, this.form)" /></a>
+          </div>
+          <br>
+          <br>
+          <div>
+            <i class="fa-solid fa-eraser"></i>
+            <input id="form-reset-eng" class="audioclick" value="" type="reset" />
+          </div>
+        </div>
+
+      </div>
     </form>
-    <br />
   </div>
   <!--Formulario 2 fin ENG-->
 </body>

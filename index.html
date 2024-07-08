@@ -100,11 +100,30 @@
     document.addEventListener("DOMContentLoaded", () => {
       const hexeBG = document.querySelector("#hexeBG");
       const flex = document.querySelector("#flex");
+      const siteIconsList = document.querySelectorAll(".siteicons");
+
+      let isShadowVisible = false; // Variable para rastrear si la sombra está visible
 
       hexeBG.addEventListener("click", () => {
         flex.classList.toggle("expand");
+
+        // Cambia la opacidad de la sombra con una transición
+        if (isShadowVisible) {
+          siteIconsList.forEach((siteIcon) => {
+            siteIcon.style.boxShadow = "none"; // Quita la sombra
+            siteIcon.style.transition = "box-shadow 0.5s ease"; // Agrega una transición
+          });
+        } else {
+          siteIconsList.forEach((siteIcon) => {
+            siteIcon.style.boxShadow = "5px 5px 15px #00000020"; // Aplica la sombra
+            siteIcon.style.transition = "box-shadow 0.5s ease"; // Agrega una transición
+          });
+        }
+
+        isShadowVisible = !isShadowVisible; // Cambia el estado de la sombra
       });
     });
+
   </script>
 
   <script>
@@ -133,69 +152,71 @@
   <header>
     <div class="parallax"></div>
 
-    <div id="emergent">
-      <div id="hexeBG" class="audioclick">
-        <a><i class="fa-solid fa-xmark"></i></a>
-      </div>
-      <div id="flex">
-        <div id="site1" class="siteicons">
+    <div id="HomeGnav">
+      <div id="emergent">
+        <div id="hexeBG" class="audioclick">
           <a><i class="fa-solid fa-xmark"></i></a>
         </div>
-        <!--Float Menu-->
-        <div id="site2" class="siteicons">
-          <a target="_blank" class="audioclick" href="https://twitter.com/Mega_CX" title="X-Twitter"><i
-              class="fa-brands fa-x-twitter"></i></a>
-        </div>
-        <div id="site3" class="siteicons">
-          <a target="_blank" class="audioclick" href="https://www.behance.net/mega_cx" title="Behance"><i
-              class="fa-brands fa-behance"></i></a>
-        </div>
-        <div id="site4" class="siteicons">
-          <a target="_blank" class="audioclick" href="https://www.deviantart.com/juanhda" title="DeviantArt"><i
-              class="fa-brands fa-deviantart"></i></a>
-        </div>
-        <div id="site5" class="siteicons">
-          <a target="_blank" class="audioclick" href="https://dribbble.com/MegaCX/shots" title="dribble"><i
-              class="fa-brands fa-dribbble"></i></a>
-        </div>
-        <div id="site6" class="siteicons">
-          <a target="_blank" class="audioclick" href="https://megacx.artstation.com/" title="ArtStation"><i
-              class="fa-brands fa-artstation"></i></a>
+        <div id="flex">
+          <div id="site1" class="siteicons">
+            <a><i class="fa-solid fa-xmark"></i></a>
+          </div>
+          <!--Float Menu-->
+          <div id="site2" class="siteicons">
+            <a target="_blank" class="audioclick" href="https://twitter.com/Mega_CX" title="X-Twitter"><i
+                class="fa-brands fa-x-twitter"></i></a>
+          </div>
+          <div id="site3" class="siteicons">
+            <a target="_blank" class="audioclick" href="https://www.behance.net/mega_cx" title="Behance"><i
+                class="fa-brands fa-behance"></i></a>
+          </div>
+          <div id="site4" class="siteicons">
+            <a target="_blank" class="audioclick" href="https://www.deviantart.com/juanhda" title="DeviantArt"><i
+                class="fa-brands fa-deviantart"></i></a>
+          </div>
+          <div id="site5" class="siteicons">
+            <a target="_blank" class="audioclick" href="https://dribbble.com/MegaCX/shots" title="dribble"><i
+                class="fa-brands fa-dribbble"></i></a>
+          </div>
+          <div id="site6" class="siteicons">
+            <a target="_blank" class="audioclick" href="https://megacx.artstation.com/" title="ArtStation"><i
+                class="fa-brands fa-artstation"></i></a>
+          </div>
         </div>
       </div>
+      <nav id="primary">
+        <ul>
+          <li onclick="window.location.href='index.html';">
+            <a href="index.html" class="audioclick">
+              <i class="fa-solid fa-house"></i>
+              <span class="menu-spanish">Inicio</span>
+              <span class="menu-english">Home</span>
+            </a>
+          </li>
+          <li onclick="window.location.href='services.html';">
+            <a href="services.html" class="audioclick">
+              <i class="fa-solid fa-desktop"></i>
+              <span class="menu-spanish">Servicios</span>
+              <span class="menu-english">Services</span>
+            </a>
+          </li>
+          <li onclick="window.location.href='gallery.html';">
+            <a href="gallery.html" class="audioclick">
+              <i class="fa-regular fa-image"></i>
+              <span class="menu-spanish">Galería</span>
+              <span class="menu-english">Gallery</span>
+            </a>
+          </li>
+          <li onclick="window.location.href='contact.html';">
+            <a href="contact.html" class="audioclick">
+              <i class="fa-solid fa-envelope"></i>
+              <span class="menu-spanish">Contacto</span>
+              <span class="menu-english">Contact</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
-    <nav id="primary">
-      <ul>
-        <li onclick="window.location.href='index.html';">
-          <a href="index.html" class="audioclick">
-            <i class="fa-solid fa-house"></i>
-            <spa class="menu-spanish">Inicio</spa>
-            <spa class="menu-english">Home</spa>
-          </a>
-        </li>
-        <li onclick="window.location.href='services.html';">
-          <a href="services.html" class="audioclick">
-            <i class="fa-solid fa-desktop"></i>
-            <spa class="menu-spanish">Servicios</spa>
-            <spa class="menu-english">Services</spa>
-          </a>
-        </li>
-        <li onclick="window.location.href='gallery.html';">
-          <a href="gallery.html" class="audioclick">
-            <i class="fa-regular fa-image"></i>
-            <span class="menu-spanish">Galería</span>
-            <span class="menu-english">Gallery</span>
-          </a>
-        </li>
-        <li onclick="window.location.href='contact.html';">
-          <a href="contact.html" class="audioclick">
-            <i class="fa-solid fa-envelope"></i>
-            <span class="menu-spanish">Contacto</span>
-            <span class="menu-english">Contact</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
   </header>
   <main>
     <table id="tableHome">
@@ -220,7 +241,7 @@
           <article id="art1">
             <p class="spanish">Servicios informáticos de todo tipo, freelancer.</p>
             <p class="english">All types of computer services, freelancer.</p>
-          </article>
+          </article><br>
         </td>
       </tr>
       <tr>
@@ -232,30 +253,25 @@
       </tr>
       <tr>
         <!--Fila 5-->
-        <td>
+        <td><br>
           <article id="art2">
             <p class="spanish">
-              Accesoria con proyectos, diseño de paginas webs de todo tipo, diseño de logotipos o letreros para su
-              negocio desde el concepto hasta su
-              finalización de la manera que necesite, edición de video o fotografiá disponible en la sección de
-              servicios, modelado 3D para arquitectura o
-              inmuebles, render y assets incluidos, diseño de volantes o tarjetas de negocio listas para impresión, si
-              necesita algún programa para una
-              tarea en especifica o mantenimiento para su PC, también videojuegos de todas las categorías para PC según
-              sus especificaciones, revise los
-              servicios para ver los detalles de lo que necesite.
+              Ofrezco servicios integrales de diseño y desarrollo web, creación de marcas, tarjetas y letreros
+              personalizados para su negocio, desde la concepción hasta la implementación. Además, realizo edición de
+              video y fotografía, modelado 3D para proyectos de productos, arquitectónicos e inmobiliarios. Si necesita
+              asesoría en software específico o mantenimiento para su PC, también puedo ayudar. Le invito a explorar los
+              detalles de mis servicios.
             </p>
             <p class="english">
-              Consulting with projects, design of web pages of all types, design of logos or signs for your business
-              from concept to completion in the way
-              you need, video or photography editing available in the services section, 3D modeling for architecture or
-              real estate, render and assets
-              included, design of flyers or business cards ready for printing. If you need any program for a specific
-              task or maintenance for your PC, also
-              video games of all categories for PC according to your specifications, check the services to see the
-              details of what you need.
+              I offer integral services of web design and development, branding, cards and custom signs for your
+              business, from conception to implementation.
+              from conception to implementation. I also do custom branding, cards and signage for your business. I also
+              do video and photo editing, 3D modeling
+              video and photography, 3D modeling for product, architectural and real estate projects. If you need
+              advice on specific software or maintenance for your PC, I can also help. I invite you to explore the
+              details of my services.
             </p>
-          </article>
+          </article><br>
         </td>
       </tr>
       <tr>
@@ -270,17 +286,15 @@
         <td>
           <article id="art3">
             <p class="spanish">
-              Solicite los servicio desde la sección de contacto para empezar con la planeación y hablar de precios,
-              leer los detalles del servicio en el
-              que esta interesado y poner la información que se requiere. Actualmente trabajo de manera local en
-              chinavita - Boyacá pero también a distancia
-              a nivel nacional.
+              Solicite alguno de los servicios desde la sección de contacto para empezar con la planeación y negociar
+              precios, puede leer los detalles del servicio en el que esta interesado y añadir la información que se
+              requiere en el formulario. Actualmente trabajo de manera local en Colombia - Boyacá pero también a
+              distancia a nivel nacional e internacional.
             </p>
             <p class="english">
-              Request the services from the contact section to start planning and discuss prices. Read the details of
-              the service you are interested in and
-              provide the required information. I currently work locally in Chinavita - Boyacá, but also remotely at a
-              national level.
+              Request any of the services from the contact section to start with the planning and negotiate prices, you
+              can read the details of the service you are interested in and add the required information in the form. I
+              currently work locally in Colombia - Boyacá but also at a distance nationally and internationally.
             </p>
           </article>
         </td>
