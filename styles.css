@@ -203,11 +203,12 @@ a {
   }
 }
 
+/*Desktop*/
 @media only screen and (min-width: 1601px) and (max-width: 2560px) {
   .parallax {
     background-image: url("images/back-index-v4-Light.webp");
     height: 45vh;
-    background-position: center -300px;
+    background-position: center -325px;
   }
 }
 
@@ -215,10 +216,11 @@ a {
   .dark-mode .parallax {
     background-image: url("images/back-index-v4-Dark.webp");
     height: 45vh;
-    background-position: center -300px;
+    background-position: center -325px;
   }
 }
 
+/*Laptop*/
 @media only screen and (min-width: 901px) and (max-width: 1600px) {
   .parallax {
     background-image: url("images/back-index-v4-Light.webp");
@@ -235,6 +237,7 @@ a {
   }
 }
 
+/*Tablet*/
 @media only screen and (min-width: 601px) and (max-width: 900px) {
   .parallax {
     background-image: url("images/back-index-v4-Light.webp");
