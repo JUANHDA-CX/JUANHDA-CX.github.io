@@ -139,7 +139,7 @@ body.palette_four ::selection {
 
 body.dark-mode ::selection {
   background: var(--palette_dark_accent_two);
-  color: white;
+  color: black;
 }
 
 a {
@@ -2833,7 +2833,9 @@ form input[name="r"] {
     top: 5%;
     width: 90%;
     margin: auto;
-    padding: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 0;
   }
 }
 
