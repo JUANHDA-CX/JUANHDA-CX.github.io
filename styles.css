@@ -1,25 +1,7 @@
-/*
-
-Palette colors:
-
-Purple: #4b1eff
-
-Red: #b90f10
-
-Dark: #242424
-
-*/
-
 * {
-  /*background-color: #252525;*/
   margin: 0;
   padding: 0;
   cursor: url("icons/cursor_default.png"), default;
-  /*
-  cursor: url("icons/cursor_pointer.png"), pointer;
-  cursor: url("icons/cursor_load.png"), wait;
-  cursor: url("icons/cursor_text.png"), text;
-  cursor: url("icons/cursor_move.png"), move;*/
 }
 
 input {
@@ -40,20 +22,6 @@ body::-webkit-scrollbar {
 .dark-mode::-webkit-scrollbar {
   background-color: var(--palette_dark_accent_main);
 }
-
-/*
-body::-webkit-scrollbar-button:single-button {
-  background-color: var(--palette_text_black);
-  display: block;
-  background-size: 10px;
-  background-repeat: no-repeat;
-  background-clip: padding-box;
-  border: 2px solid transparent;
-}
-
-.dark-mode::-webkit-scrollbar-button:single-button {
-  background-color: var(--palette_dark);
-}*/
 
 ::-webkit-scrollbar-button:single-button {
   background-color: transparent;
@@ -269,13 +237,6 @@ a {
     background-position: center 0;
   }
 }
-
-/* Turn off parallax scrolling for all tablets and phones. Increase/decrease the pixels if needed */
-/*@media only screen and (max-device-width: 1366px) {
-  .parallax {
-    background-attachment: scroll;
-  }
-} */
 
 #img2 {
   width: 100%;
@@ -2526,7 +2487,9 @@ form input:focus {
 }
 
 #form-enviar-spa,
-#form-enviar-eng {
+#form-enviar-eng,
+#form-enviar-spaM,
+#form-enviar-engM {
   border-radius: 10px;
   background-color: var(--palette_four_accent);
   color: var(--palette_text_black);
@@ -2537,15 +2500,17 @@ form input:focus {
 }
 
 .dark-mode #form-enviar-spa,
-.dark-mode #form-enviar-eng {
+.dark-mode #form-enviar-eng,
+.dark-mode #form-enviar-spaM,
+.dark-mode #form-enviar-engM {
   background-color: var(--palette_dark_accent_one);
   color: var(--palette_text_white);
 }
 
 @media only screen and (max-width: 600px) {
 
-  #form-enviar-spa,
-  #form-enviar-eng {
+  #form-enviar-spaM,
+  #form-enviar-engM {
     width: 65%;
     margin-top: 0;
     margin-bottom: 0;
@@ -2553,7 +2518,9 @@ form input:focus {
 }
 
 #form-reset-spa,
-#form-reset-eng {
+#form-reset-eng,
+#form-reset-spaM,
+#form-reset-engM {
   border-radius: 10px;
   background-color: var(--palette_four_accent);
   color: var(--palette_text_black);
@@ -2565,15 +2532,17 @@ form input:focus {
 }
 
 .dark-mode #form-reset-spa,
-.dark-mode #form-reset-eng {
+.dark-mode #form-reset-eng,
+.dark-mode #form-reset-spaM,
+.dark-mode #form-reset-engM {
   background-color: var(--palette_dark_accent_one);
   color: var(--palette_text_white);
 }
 
 @media only screen and (max-width: 600px) {
 
-  #form-reset-spa,
-  #form-reset-eng {
+  #form-reset-spaM,
+  #form-reset-engM {
     width: 30%;
     float: right;
     left: 0px;
@@ -2583,7 +2552,11 @@ form input:focus {
 #form-enviar-spa:hover,
 #form-enviar-eng:hover,
 #form-reset-spa:hover,
-#form-reset-eng:hover {
+#form-reset-eng:hover,
+#form-enviar-spaM:hover,
+#form-enviar-engM:hover,
+#form-reset-spaM:hover,
+#form-reset-engM:hover {
   filter: saturate(64%);
 }
 
@@ -2672,6 +2645,8 @@ form input:focus {
 
 .shortcuts :nth-child(2) div input#form-reset-eng,
 .shortcuts :nth-child(2) div input#form-reset-spa,
+.shortcuts :nth-child(2) div input#form-reset-engM,
+.shortcuts :nth-child(2) div input#form-reset-spaM,
 .shortcuts :nth-child(2) div a {
   position: absolute;
 }
@@ -2970,6 +2945,7 @@ table tr td {
 
 #galleryExpandController {
   display: none;
+  justify-content: center;
 }
 
 #galleryExpandBackground {
@@ -2997,35 +2973,66 @@ table tr td {
   }
 }
 
-#galleryExpand {
+.hiddenC {
   width: auto;
-  height: 500px;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  height: auto;
   position: fixed;
-  border-radius: calc(3rem);
+  border-radius: calc(1.5rem);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  overflow: hidden;
   z-index: 3;
-  border: solid 0.5rem var(--palette_text_white);
-  background-color: var(--palette_text_black);
+  background-color: rgb(0, 0, 0);
+  border: solid 0.25rem var(--palette_text_white);
 }
 
-@media (min-width: 2500px) {
-  #galleryExpand {
-    width: auto;
-    height: 75%;
-    border: solid 2rem var(--palette_text_white);
-    border-radius: calc(8rem);
+@media (max-width: 900px) {
+  .hiddenC {
+    border-radius: calc(1.5rem);
+    border: solid 0.25rem var(--palette_text_white);
   }
 }
 
-/*Tablet Device*/
-@media (min-width: 601px) and (max-width: 900px) {
+/*Mobile Device*/
+
+@media (max-width: 600px) {
+  .hiddenC {
+    border-radius: calc(1.5rem);
+    border: solid 0.25rem var(--palette_text_white);
+  }
+}
+
+#galleryExpand {
+  width: auto;
+  height: 95vh;
+  object-fit: contain;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  z-index: 3;
+}
+
+@media (min-width: 3001px) {
   #galleryExpand {
-    width: 600px;
+    width: auto;
+    height: 80vh;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) and (orientation: landscape) {
+  #galleryExpand {
+    width: auto;
+    height: 85vh;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) and (orientation: portrait) {
+  #galleryExpand {
+    width: 85vw;
     height: auto;
   }
 }
@@ -3034,21 +3041,90 @@ table tr td {
 
 @media (max-width: 600px) {
   #galleryExpand {
-    width: 360px;
+    width: 90vw;
     height: auto;
-    border-radius: calc(2rem);
   }
 }
 
-#galleryExpandBtn {
-  width: 64px;
-  height: 64px;
+
+#galleryControls {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+}
+
+@media (min-width: 3001px) {
+  #galleryControls {
+    width: 10%;
+    height: auto;
+    bottom: 4%;
+  }
+}
+
+@media (min-width: 2001px) and (max-width: 3000px) {
+  #galleryControls {
+    width: 15%;
+    height: auto;
+    bottom: 5%;
+  }
+}
+
+@media (min-width: 1401px) and (max-width: 2000px) {
+  #galleryControls {
+    width: 15%;
+    height: auto;
+    bottom: 6%;
+  }
+}
+
+
+/* Laptop */
+@media (min-width: 901px) and (max-width: 1400px) {
+  #galleryControls {
+    width: 25%;
+    height: auto;
+    bottom: 6%;
+  }
+}
+
+/* Tablets */
+@media (min-width: 601px) and (max-width: 900px) and (orientation: landscape) {
+  #galleryControls {
+    width: 30%;
+    height: auto;
+    bottom: 12%;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) and (orientation: portrait) {
+  #galleryControls {
+    width: 30%;
+    height: auto;
+    bottom: 5%;
+  }
+}
+
+/*Mobile Device*/
+
+@media (max-width: 600px) {
+  #galleryControls {
+    width: 65%;
+    height: auto;
+    bottom: 8%;
+  }
+}
+
+
+#galleryExpandBtn,
+#galleryZOOMinBtn,
+#galleryZOOMoutBtn,
+#galleryRESETzBtn {
+  width: 48px;
+  height: 48px;
   background-color: var(--palette_three_accent);
   box-shadow: 5px 5px 15px #00000020;
-  position: fixed;
-  bottom: 3%;
-  left: 50%;
-  transform: translateX(-50%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -3058,20 +3134,38 @@ table tr td {
   cursor: url("icons/cursor_pointer.png"), pointer;
 }
 
-#galleryExpandBtn i {
+#galleryExpandBtn i,
+#galleryZOOMinBtn i,
+#galleryZOOMoutBtn i,
+#galleryRESETzBtn i {
+  font-size: 1rem;
+}
+
+#galleryExpandBtn i,
+#galleryZOOMinBtn i,
+#galleryZOOMoutBtn i,
+#galleryRESETzBtn i {
   cursor: url("icons/cursor_pointer.png"), pointer;
 }
 
-.dark-mode #galleryExpandBtn {
+.dark-mode #galleryExpandBtn,
+.dark-mode #galleryZOOMinBtn,
+.dark-mode #galleryZOOMoutBtn,
+.dark-mode #galleryRESETzBtn {
   background-color: var(--palette_dark_accent_one);
 }
 
-#galleryExpandBtn:hover {
+#galleryExpandBtn:hover,
+#galleryZOOMinBtn:hover,
+#galleryZOOMoutBtn:hover,
+#galleryRESETzBtn:hover {
   background-color: var(--palette_three);
-  /*transform: rotate(360deg);*/
 }
 
-.dark-mode #galleryExpandBtn:hover {
+.dark-mode #galleryExpandBtn:hover,
+.dark-mode #galleryZOOMinBtn:hover,
+.dark-mode #galleryZOOMoutBtn:hover,
+.dark-mode #galleryRESETzBtn:hover {
   background-color: var(--palette_dark_accent_main);
 }
 
@@ -3094,6 +3188,10 @@ table tr td {
   object-fit: cover;
   cursor: pointer;
   cursor: url("icons/cursor_pointer.png"), pointer;
+}
+
+.grid-itemNO {
+  display: none;
 }
 
 .imgGhover {
