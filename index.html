@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html>
 <html lang="es">
 
 <head>
+  <meta id="theme-color-meta" name="theme-color" content="cccccc" data-light-color="#ffd3d3">
   <meta charset="utf-8" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta name="description" content="Soluciones informáticas de todo tipo a pedido" />
-  <meta name="description" content="Information technology solutions of all kinds on demand" />
-  <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D, Web, Programs, Software" />
+  <meta name="description"
+    content="Mega CX Studios, servicios de diseño web, modelado 3D, edición de video y más. ¡Bienvenido!" />
+  <meta name="description"
+    content="Mega CX Studios, web design services, 3D modeling, video editing, and more. Welcome!" />
+  <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D Model, Web, Programs, Software" />
+  <meta name="keywords"
+    content="Edición de Video, Edición de Fotos, Juegos, Películas, Diseño, Modelado 3D, Web, Programas, Software" />
+  <!-- Metaetiquetas - Open Graph -->
+  <meta property="og:title" content="Inicio | Mega CX Studios" />
+  <meta property="og:description"
+    content="Mega CX Studios, servicios de diseño web, modelado 3D, edición de video y más. ¡Bienvenido!" />
+  <meta property="og:image" content="src/mega_v4_notCX.webp" />
+  <meta property="og:url" content="contact.html" />
   <meta name="author" content="Mega CX" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mega CX Studios | Home</title>
@@ -16,6 +26,17 @@
   <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="main.js"></script>
+  <!--GSAP-->
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/gsap.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/TextPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollSmoother.min.js"></script>
+  <script src="anim.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.13/build/player/lottie.min.js"></script>
+  <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@rive-app/canvas/rive.min.js"></script>
 
   <!--Texto dinamico-->
   <script>
@@ -141,43 +162,10 @@
 </head>
 
 <body class="palette_one">
-  <div id="scroll"></div>
-  <header>
-    <div class="parallax"></div>
-
-    <div id="HomeGnav">
-      <div id="emergent">
-        <div id="hexeBG" class="audioclick">
-          <a><i class="fa-solid fa-xmark"></i></a>
-        </div>
-        <div id="flex">
-          <div id="site1" class="siteicons">
-            <a><i class="fa-solid fa-xmark"></i></a>
-          </div>
-          <!--Float Menu-->
-          <div id="site2" class="siteicons">
-            <a target="_blank" class="audioclick" href="https://twitter.com/Mega_CX" title="X-Twitter"><i
-                class="fa-brands fa-x-twitter"></i></a>
-          </div>
-          <div id="site3" class="siteicons">
-            <a target="_blank" class="audioclick" href="https://www.behance.net/mega_cx" title="Behance"><i
-                class="fa-brands fa-behance"></i></a>
-          </div>
-          <div id="site4" class="siteicons">
-            <a target="_blank" class="audioclick" href="https://www.deviantart.com/juanhda" title="DeviantArt"><i
-                class="fa-brands fa-deviantart"></i></a>
-          </div>
-          <div id="site5" class="siteicons">
-            <a target="_blank" class="audioclick" href="https://dribbble.com/MegaCX/shots" title="dribble"><i
-                class="fa-brands fa-dribbble"></i></a>
-          </div>
-          <div id="site6" class="siteicons">
-            <a target="_blank" class="audioclick" href="https://megacx.artstation.com/" title="ArtStation"><i
-                class="fa-brands fa-artstation"></i></a>
-          </div>
-        </div>
-      </div>
-      <nav id="primary">
+  <!--Menu Desktop-->
+  <div class="Nav-Container HomeGnavDesktop">
+    <div class="Nav-Component frontdrop">
+      <nav class="Nav-PrimaryH">
         <ul>
           <li onclick="window.location.href='index.html';">
             <a href="index.html" class="audioclick">
@@ -188,141 +176,277 @@
           </li>
           <li onclick="window.location.href='services.html';">
             <a href="services.html" class="audioclick">
-              <i class="fa-solid fa-desktop"></i>
+              <i class="fa-solid fa-user-gear"></i>
               <span class="menu-spanish">Servicios</span>
               <span class="menu-english">Services</span>
             </a>
           </li>
           <li onclick="window.location.href='gallery.html';">
             <a href="gallery.html" class="audioclick">
-              <i class="fa-regular fa-image"></i>
+              <i class="fa-solid fa-images"></i>
               <span class="menu-spanish">Galería</span>
               <span class="menu-english">Gallery</span>
             </a>
           </li>
           <li onclick="window.location.href='contact.html';">
             <a href="contact.html" class="audioclick">
-              <i class="fa-solid fa-envelope"></i>
+              <i class="fa-solid fa-envelope-open-text"></i>
               <span class="menu-spanish">Contacto</span>
               <span class="menu-english">Contact</span>
             </a>
           </li>
         </ul>
       </nav>
-    </div>
-  </header>
-  <main>
-    <table id="tableHome">
-      <tr>
-        <!--Fila 1-->
-        <td>
-          <img class="logocx" src="images/mega_v4_notCX.png" alt="logo" />
-        </td>
-      </tr>
-      <tr>
-        <!--Fila 2-->
-        <td>
-          <!--Texto dinamico-->
-          <div class="tittle-one">
-            ♦ 読み込み中 ♦
+      <div id="emergent">
+        <div id="hexeBG" class="audioclick">
+          <a><i class="lni lni-share-1-circle"></i></a>
+        </div>
+        <div id="flex">
+          <div id="site1" class="siteicons">
+            <a><i class="fa-solid fa-xmark"></i></a>
           </div>
-        </td>
-      </tr>
-      <tr>
-        <!--Fila 3-->
-        <td>
-          <article id="art1">
-            <p class="spanish">Servicios informáticos de todo tipo, freelancer.</p>
-            <p class="english">All types of computer services, freelancer.</p>
-          </article><br>
-        </td>
-      </tr>
-      <tr>
-        <!--Fila 4-->
-        <td>
-          <div class="Line1"></div>
-          <div class="wavy"></div>
-        </td>
-      </tr>
-      <tr>
-        <!--Fila 5-->
-        <td><br>
+          <!--Float Menu-->
+          <div id="site2" class="siteicons">
+            <a target="_blank" rel="noopener" class="audioclick" href="https://twitter.com/Mega_CX" title="X-Twitter">
+              <i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+          <div id="site3" class="siteicons">
+            <a target="_blank" rel="noopener" class="audioclick" href="https://www.behance.net/mega_cx" title="Behance">
+              <i class="fa-brands fa-behance"></i></a>
+          </div>
+          <div id="site4" class="siteicons">
+            <a target="_blank" rel="noopener" class="audioclick" href="https://www.deviantart.com/juanhda"
+              title="DeviantArt">
+              <i class="fa-brands fa-deviantart"></i></a>
+          </div>
+          <div id="site5" class="siteicons">
+            <a target="_blank" rel="noopener" class="audioclick" href="https://dribbble.com/MegaCX/shots"
+              title="dribble">
+              <i class="fa-brands fa-dribbble"></i></a>
+          </div>
+          <div id="site6" class="siteicons">
+            <a target="_blank" rel="noopener" class="audioclick" href="https://megacx.artstation.com/"
+              title="ArtStation">
+              <i class="fa-brands fa-artstation"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="scroll"></div>
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+
+      <header>
+        <!--Parallax container-->
+        <div class="paralax-container">
+          <div class="parallax" data-speed="0.5"></div>
+        </div>
+
+        <div class="banner-container-GSAP">
+          <div class="parallax-bg-GSAP far"></div>
+          <div class="parallax-bg-GSAP mid"></div>
+          <div class="parallax-bg-GSAP close"></div>
+          <div class="banner-tittle-content-GSAP">
+            <img class="logocx" src="src/mega_v4_notCX.webp" alt="logo" />
+            <article id="art0">
+              <span>MEGA CX STUDIOS</span>
+            </article>
+
+            <div id="art1">
+              <p class="spanish">Para ti, con visión, creamos la solución.</p>
+              <p class="english">For you, with clear sight, we build what’s right.</p>
+            </div>
+            <!--Texto dinamico-->
+            <div class="tittle-one">
+              ♦ 読み込み中 ♦
+            </div>
+
+
+          </div>
+        </div>
+
+        <!--Menu Mobile-->
+        <div class=" Nav-Container HomeGnavMobile">
+          <div class="Nav-Component">
+            <nav id="Nav_secondary">
+              <ul>
+                <li onclick="window.location.href='index.html';">
+                  <a href="index.html" class="audioclick">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="menu-spanish">Inicio</span>
+                    <span class="menu-english">Home</span>
+                  </a>
+                </li>
+                <li onclick="window.location.href='services.html';">
+                  <a href="services.html" class="audioclick">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span class="menu-spanish">Servicios</span>
+                    <span class="menu-english">Services</span>
+                  </a>
+                </li>
+                <li onclick="window.location.href='gallery.html';">
+                  <a href="gallery.html" class="audioclick">
+                    <i class="fa-solid fa-images"></i>
+                    <span class="menu-spanish">Galería</span>
+                    <span class="menu-english">Gallery</span>
+                  </a>
+                </li>
+                <li onclick="window.location.href='contact.html';">
+                  <a href="contact.html" class="audioclick">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                    <span class="menu-spanish">Contacto</span>
+                    <span class="menu-english">Contact</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <main>
+
+
+
+
+
+        <div id="blockArt02">
+          <canvas id="CanvasPerson"></canvas>
+          <!--
+          <div id="lottie-container01" class="lottie-object"></div>
+          <script>
+            var lottieAnimation01 = lottie.loadAnimation({
+              container: document.getElementById('lottie-container01'),
+              renderer: 'svg',
+              loop: false,
+              autoplay: false,
+              path: 'images/Home_Contact_Animation.json'
+            });
+          </script>-->
           <article id="art2">
             <p class="spanish">
-              Ofrezco servicios integrales de diseño y desarrollo web, creación de marcas, tarjetas y letreros
-              personalizados para su negocio, desde la concepción hasta la implementación. Además, realizo edición de
-              video y fotografía, modelado 3D para proyectos de productos, arquitectónicos e inmobiliarios. Si necesita
-              asesoría en software específico o mantenimiento para su PC, también puedo ayudar. Le invito a explorar los
-              detalles de mis servicios.
+              <span>私 Mi historia</span><br>
+              Me llamo JUAN. Soy Diseñador 3D, Desarrollador Web e Informático de profesión. Desde 2019 me dedico
+              formalmente al mundo 3D, creando soluciones para pequeños y grandes negocios o empresas mediante la
+              creación de productos, material publicitario, piezas artísticas y arquitectura.
+              <br><br>
+              Domino todo el flujo de trabajo: Diseño, modelado, UVs, texturizado, iluminación, render, animación y
+              composición, hasta entregar la pieza final lista para producción.
             </p>
             <p class="english">
-              I offer integral services of web design and development, branding, cards and custom signs for your
-              business, from conception to implementation.
-              from conception to implementation. I also do custom branding, cards and signage for your business. I also
-              do video and photo editing, 3D modeling
-              video and photography, 3D modeling for product, architectural and real estate projects. If you need
-              advice on specific software or maintenance for your PC, I can also help. I invite you to explore the
-              details of my services.
-            </p>
-          </article><br>
-        </td>
-      </tr>
-      <tr>
-        <!--Fila 6-->
-        <td>
-          <div class="Line2"></div>
-          <div class="wavy"></div>
-        </td>
-      </tr>
-      <tr>
-        <!--Fila 7-->
-        <td>
-          <article id="art3">
-            <p class="spanish">
-              Solicite alguno de los servicios desde la sección de contacto para empezar con la planeación y negociar
-              precios, puede leer los detalles del servicio en el que esta interesado y añadir la información que se
-              requiere en el formulario. Actualmente trabajo de manera local en Colombia - Boyacá pero también a
-              distancia a nivel nacional e internacional.
-            </p>
-            <p class="english">
-              Request any of the services from the contact section to start with the planning and negotiate prices, you
-              can read the details of the service you are interested in and add the required information in the form. I
-              currently work locally in Colombia - Boyacá but also at a distance nationally and internationally.
+              <span>私 My history</span><br>
+              My name is JUAN. I am a 3D Designer, Web Developer, and Computer Scientist by profession. Since 2019, I
+              have been formally dedicated to the world of 3D, creating solutions for small and large businesses or
+              companies through the creation of products, advertising material, artistic pieces, and architecture.
+              <br><br>
+              I master the entire workflow: design, modeling, UVs, texturing, lighting, rendering, animation, and
+              composition, until I deliver the final piece ready for production.
             </p>
           </article>
-        </td>
-      </tr>
-    </table>
-  </main>
 
-</body>
+        </div>
+        <div id="blockArt03">
+          <canvas id="CanvasServices"></canvas>
+          <article id="art3">
+            <p class="spanish">
+              <span>奉 Servicios</span><br>
+              Brindo soluciones integrales en diseño y desarrollo web, identidad de marca, tarjetas de presentación y
+              señalética personalizada, abarcando desde la conceptualización creativa hasta la implementación final.
+              Complemento estos servicios con edición profesional de video y fotografía, así como modelado 3D orientado
+              a productos, arquitectura y proyectos inmobiliarios.
+              <br><br>
+              Además, ofrezco asesoría especializada en software técnico y mantenimiento de equipos informáticos. Le
+              invito a conocer en detalle cada una de estas propuestas y descubrir cómo pueden potenciar su negocio.
+            </p>
+            <p class="english">
+              <span>奉 Services</span><br>
+              I provide comprehensive solutions in web design and development, brand identity, business cards, and
+              custom signage, covering everything from creative conceptualization to final implementation. I complement
+              these services with professional video and photo editing, as well as 3D modeling for products,
+              architecture, and real estate projects.
+              <br><br>
+              In addition, I offer specialized consulting in technical software and computer equipment maintenance. I
+              invite you to learn more about each of these services and discover how they can enhance your business.
+            </p>
+          </article>
 
-<button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup"
-    src="icons/arrowUPv4.svg" /></button>
+        </div>
 
-<footer>
-  <div class="noisy"></div>
-  <div id="footerCont">
-    <div id="footerbtn">
-      <label class="switch">
-        <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" title="theme" checked />
-        <span class="sliderSwitch"></span>
-      </label>
-      <div id="language-switch-button"></div>
+        <div id="blockArt04">
+          <canvas id="CanvasContact"></canvas>
+          <article id="art4">
+            <p class="spanish">
+              <span>接 Contacto</span><br>
+              Para iniciar la planificación de su proyecto, le invito a realizar su solicitud a través de la sección de
+              contacto. Desde allí podremos coordinar los detalles específicos, establecer prioridades y negociar
+              condiciones económicas de manera personalizada. Cada servicio está descrito con mas detalles para que
+              pueda explorar sus características y seleccionar el que se ajusten mejor a sus necesidades.
+              <br><br>
+              Actualmente, ofrezco atención a nivel nacional en Colombia, colaborando con emprendedores, empresas y
+              profesionales en distintas regiones del país. Asimismo, extiendo mis servicios a clientes internacionales
+              garantizando resultados de alta calidad sin
+              importar la ubicación.
+              <br><br>
+              Mi compromiso es brindar soluciones creativas, funcionales y profesionales, acompañando cada etapa
+              del proceso con asesoría experta y atención personalizada.
+            </p>
+            <p class="english">
+              <span>接 Contact</span><br>
+              To begin planning your project, I invite you to submit your request through the contact section.
+              From there, we can coordinate the specific details, establish priorities, and negotiate
+              financial terms on a personalized basis. Each service is described in more detail so that you can
+              explore its features and select the one that best suits your needs.
+              <br><br>
+              Currently, I offer nationwide service in Colombia, collaborating with entrepreneurs, companies, and
+              professionals in different regions of the country. I also extend my services to international clients,
+              guaranteeing high-quality results regardless of
+              location.
+              <br><br>
+              My commitment is to provide creative, functional, and professional solutions, accompanying each stage
+              of the process with expert advice and personalized attention.
+            </p>
+          </article><!--
+        <div>
+          <div class="Line2"></div>
+          <div class="wavy"></div>
+        </div>-->
+        </div>
+      </main>
+
+
+
+
+
+      <footer>
+        <div id="footerCont">
+          <div id="footerbtn">
+            <label class="switch">
+              <input id="myButton" class="audioclick" onclick="myFunction()" type="checkbox" title="theme" checked />
+              <span class="sliderSwitch lightone buzz"></span>
+            </label>
+            <div id="language-switch-button"></div>
+          </div>
+          <br /><br />
+          <p class="spanish">Todos los derechos reservados @2025 [MMXXV]</p>
+          <p class="english">All rights reserved @2025 [MMXXV]</p>
+          <br />
+          <p class="spanish">Creado por JUANHDA CX.</p>
+          <p class="english">Created by JUANHDA CX.</p>
+          <br />
+          <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
+          <p></p>
+        </div>
+      </footer>
     </div>
-    <br /><br />
-    <p class="spanish">Todos los derechos reservados @2024 [MMXXIV]</p>
-    <p class="english">All rights reserved @2024 [MMXXIV]</p>
-    <br />
-    <p class="spanish">Creado por JUANHDA CX.</p>
-    <p class="english">Created by JUANHDA CX.</p>
-    <br />
-    <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
-    <p></p>
   </div>
-</footer>
-
+  <button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup"
+      src="icons/arrow_to_up.svg" /></button>
+</body>
 <div class="loader"></div>
+
+
 
 </html>
 

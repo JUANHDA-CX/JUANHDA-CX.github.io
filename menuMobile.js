@@ -1,12 +1,19 @@
-window.addEventListener("load", () => {
-    const menuButton = document.querySelector("#menuMobileToggleCheckbox");
-    const body = document.querySelector("body");
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-    menuButton.addEventListener("change", () => {
-        if (menuButton.checked) {
-            body.classList.add("no-scroll-mobile");
-        } else {
-            body.classList.remove("no-scroll-mobile");
-        }
+    menuToggle.addEventListener('click', function () {
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    const menuLinks = document.querySelectorAll('.mobile-menu a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
     });
 });
