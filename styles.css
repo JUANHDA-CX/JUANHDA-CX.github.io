@@ -288,7 +288,7 @@ body {
   position: relative;
   background-color: unset;
   color: var(--palette_text_black);
-  font-family: Londinia;
+  font-family: FunnelSans;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -484,7 +484,7 @@ body.palette_four {
 body.dark-mode {
   background-color: var(--palette_dark_accent_two);
   color: var(--palette_text_white);
-  font-family: Londinia;
+  font-family: FunnelSans;
 }
 
 .no-scroll-mobile {
@@ -497,7 +497,7 @@ body.dark-mode {
 }
 
 @font-face {
-  font-family: Londinia;
+  font-family: FunnelSans;
   src: local("fonts/FunnelSans-VariableFont_wght.ttf"), url("fonts/FunnelSans-VariableFont_wght.ttf");
   font-optical-sizing: auto;
   font-weight: 300;
@@ -2666,20 +2666,27 @@ div strong a :hover div div {
   }
 }
 
+.w3-container span:hover {
+  background-color: var(--palette_dark);
+}
+
+.w3-container span:hover i {
+  color: var(--palette_text_white);
+}
+
 .dark-mode .w3-container span {
   color: var(--palette_text_black);
   background-color: var(--palette_text_white);
 }
 
-.w3-container span:hover {
-  color: var(--palette_text_black);
-  background-color: var(--palette_two_accent);
-}
-
 .dark-mode .w3-container span:hover {
-  color: var(--palette_text_white);
   background-color: var(--palette_dark_accent_one);
 }
+
+.dark-mode .w3-container span:hover i {
+  color: var(--palette_text_white);
+}
+
 
 /*----------------------------modal---------------------------*/
 
@@ -3174,7 +3181,7 @@ form input:focus {
   height: 50px;
   width: 50px;
   border: none;
-  font-family: Londinia;
+  font-family: FunnelSans;
 }
 
 .dark-mode #form-enviar-spa,
@@ -3207,7 +3214,7 @@ form input:focus {
   width: 50px;
   border: none;
   position: relative;
-  font-family: Londinia;
+  font-family: FunnelSans;
 }
 
 .dark-mode #form-reset-spa,
