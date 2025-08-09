@@ -8,95 +8,39 @@ document.addEventListener("DOMContentLoaded", (event) => {
         gsap.from("#art1 > p.spanish", {
             duration: 5,
             text: ""
-
         });
 
-        /* TEXT ART2*/
+        /* TEXTBLOCK ART2, ART3, ART4*/
 
+        const artIDs = ["art2", "art3", "art4"];
+        let blocktext = {};
 
-        let art2, art3, art4;
+        artIDs.forEach((id) => {
+            gsap.set(`#${id}`, { opacity: 1 });
 
-        gsap.set("#art2", { opacity: 1 });
-
-        SplitText.create("#art2", {
-            type: "words,lines",
-            linesClass: "line",
-            autoSplit: true,
-            mask: "lines",
-            onSplit: (self) => {
-                art2 = gsap.from(self.lines, {
-                    duration: 0.6,
-                    yPercent: 100,
-                    opacity: 0,
-                    stagger: 0.1,
-                    ease: "expo.out",
-                    scrollTrigger: {
-                        trigger: "#art2",
-                        start: "top bottom",
-                        end: "bottom top",
-                        toggleActions: "restart none restart none"
-                    },
-                    onComplete: () => self.revert()
-                });
-                return art2;
-            }
-        });
-
-
-        /* TEXT ART3*/
-
-        gsap.set("#art3", { opacity: 1 });
-
-        SplitText.create("#art3", {
-            type: "words,lines",
-            linesClass: "line",
-            autoSplit: true,
-            mask: "lines",
-            onSplit: (self) => {
-                art3 = gsap.from(self.lines, {
-                    duration: 0.6,
-                    yPercent: 100,
-                    opacity: 0,
-                    stagger: 0.1,
-                    ease: "expo.out",
-                    scrollTrigger: {
-                        trigger: "#art3",
-                        start: "top bottom",
-                        end: "bottom top",
-                        toggleActions: "restart none restart none"
-                    },
-                    onComplete: () => self.revert()
-                });
-                return art3;
-            }
-        });
-
-        /* TEXT ART4*/
-
-        gsap.set("#art4", { opacity: 1 });
-
-        SplitText.create("#art4", {
-            type: "words,lines",
-            linesClass: "line",
-            autoSplit: true,
-            mask: "lines",
-            onSplit: (self) => {
-                art4 = gsap.from(self.lines, {
-                    duration: 0.6,
-                    yPercent: 100,
-                    opacity: 0,
-                    stagger: 0.1,
-                    ease: "expo.out",
-                    scrollTrigger: {
-                        trigger: "#art4",
-                        start: "top bottom",
-                        end: "bottom top",
-                        toggleActions: "restart none restart none"
-                    },
-                    onComplete: () => self.revert()
-                });
-                return art4;
-            }
+            SplitText.create(`#${id}`, {
+                type: "words,lines",
+                linesClass: "line",
+                autoSplit: true,
+                mask: "lines",
+                onSplit: (self) => {
+                    blocktext[id] = gsap.from(self.lines, {
+                        duration: 0.6,
+                        yPercent: 100,
+                        opacity: 0,
+                        stagger: 0.1,
+                        ease: "expo.out",
+                        scrollTrigger: {
+                            trigger: `#${id}`,
+                            start: "top bottom",
+                            end: "bottom top",
+                            toggleActions: "restart none restart none"
+                        },
+                        onComplete: () => self.revert()
+                    });
+                    return blocktext[id];
+                }
+            });
         });
 
     });

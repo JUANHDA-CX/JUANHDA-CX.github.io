@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     buzz.forEach((element) => {
         element.addEventListener("click", (event) => {
             navigator.vibrate(100);
-            console.log(" on 'buzz ', vibrate");
+            //console.log("'buzz'");
         });
     });
 });
