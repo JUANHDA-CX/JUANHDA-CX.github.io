@@ -1,1 +1,0 @@
-# JUANHDA-CX.github.io
