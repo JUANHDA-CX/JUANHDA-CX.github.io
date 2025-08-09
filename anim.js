@@ -195,4 +195,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     initializeAnimations(animationConfigs);
 
 
+
+    ////////////////////
+
+
+
 });

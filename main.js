@@ -335,3 +335,40 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", (event) => {
+
+    const cursor = document.querySelector(".cursor-circle");
+
+    // Coordenadas del ratón y del cursor con un valor inicial
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
+
+    // Factor de suavizado para la animación
+    const easingFactor = 0.15;
+
+    // Escucha el evento de movimiento del ratón
+    document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    // Función principal de animación
+    function animateCursor() {
+        // Calcula la posición suavizada del cursor
+        cursorX += (mouseX - cursor.offsetWidth / 2 - cursorX) * easingFactor;
+        cursorY += (mouseY - cursor.offsetHeight / 2 - cursorY) * easingFactor;
+
+        // Actualiza la posición del elemento usando transform
+        cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+
+        // Solicita el siguiente frame de animación
+        requestAnimationFrame(animateCursor);
+    }
+
+    // Inicia la animación
+    animateCursor();
+
+});
