@@ -83,15 +83,16 @@ document.addEventListener("DOMContentLoaded", function () {
 // vibration
 
 document.addEventListener("DOMContentLoaded", function () {
-
     const buzz = document.querySelectorAll(".buzz");
+
     buzz.forEach((element) => {
         element.addEventListener("click", (event) => {
             navigator.vibrate(100);
-            console.log(" 'buzz ', vibrate");
+            console.log(" on 'buzz ', vibrate");
         });
     });
 });
+
 
 // Pantalla de carga
 
