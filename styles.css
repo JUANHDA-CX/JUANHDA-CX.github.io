@@ -2766,8 +2766,13 @@ div strong a :hover div div {
   position: absolute;
   width: 2px;
   height: 10px;
-  background: var(--palette_text_white);
+  background: var(--palette_text_black);
   transition: all 0.3s;
+}
+
+.dark-mode .arrow::before,
+.dark-mode .arrow::after {
+  background: var(--palette_text_white);
 }
 
 .arrow::before {
@@ -3378,6 +3383,9 @@ form input:focus {
 
 .iconSSS .hover {
   margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /*Mobile Device*/
@@ -3396,7 +3404,7 @@ form input:focus {
 /*Mobile Device*/
 @media only screen and (max-width: 600px) {
   .iconSSS a {
-    font-size: 14px;
+    font-size: 10px;
   }
 }
 
