@@ -24,9 +24,15 @@
   <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
   <link rel="icon" href="icons/favicon_contact.png" type="image/x-icon" />
   <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="main.js"></script>
-
+  <script src="menuMobile.js"></script>
+  <!--GSAP-->
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/TextPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollSmoother.min.js"></script>
+  <!--RIVE-->
   <script>
     document.addEventListener("DOMContentLoaded", (event) => {
       const riveLoop = new rive.Rive({
@@ -43,19 +49,9 @@
       });
     });
   </script>
-
-  <script src="menuMobile.js"></script>
-  <!--GSAP-->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/TextPlugin.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/@rive-app/canvas/rive.min.js"></script>
-
-  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <!--E-MAIL
+  <script src="https://smtpjs.com/v3/smtp.js"></script>-->
 
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
@@ -102,37 +98,6 @@
       });
     });
   </script>
-
-
-  <!--Select Option
-  <script>
-    document.addEventListener("DOMContentLoaded", (event) => {
-      const selectSpa = document.getElementById("formSelect-spa");
-      const selectEng = document.getElementById("formSelect-eng");
-
-      // Crear la nueva opción
-      const optionSpa = document.createElement("option");
-      optionSpa.value = "";
-      optionSpa.textContent = "Selecciona una categoría";
-
-      const optionEng = document.createElement("option");
-      optionEng.value = "";
-      optionEng.textContent = "Select a category";
-
-      // Establecer los atributos de la nueva opción
-      optionSpa.selected = true;
-      optionSpa.disabled = true;
-      optionSpa.style.display = "none";
-
-      optionEng.selected = true;
-      optionEng.disabled = true;
-      optionEng.style.display = "none";
-
-      // Agregar la nueva opción al select
-      selectSpa.appendChild(optionSpa);
-      selectEng.appendChild(optionEng);
-    });
-  </script>-->
 
 </head>
 
@@ -258,7 +223,7 @@
 
 
 
-      <!--Formulario 2 inicio ENG-->
+      <!--Formulario inicio-->
       <div>
         <form id="contact-form">
           <div class="formShapes">
@@ -397,7 +362,7 @@
           </div>
         </form>
       </div>
-      <!--Formulario 2 fin ENG-->
+      <!--Formulario fin-->
       <canvas id="DOC"></canvas>
       <!--footer-->
       <footer>
