@@ -4048,7 +4048,7 @@ table tr td {
     width: 90vw;
     height: auto;
     aspect-ratio: 1 / 1;
-    margin-top: 13rem;
+    margin-top: 14rem;
     margin-bottom: -12rem;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -4057,7 +4057,7 @@ table tr td {
   }
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
 
   #DOC {
     margin-top: 32rem;
