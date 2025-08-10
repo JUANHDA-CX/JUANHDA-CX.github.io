@@ -336,39 +336,48 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-document.addEventListener("DOMContentLoaded", (event) => {
 
+//cursor animation
+
+document.addEventListener("DOMContentLoaded", () => {
     const cursor = document.querySelector(".cursor-circle");
 
-    // Coordenadas del ratón y del cursor con un valor inicial
+
+    cursor?.classList.remove("active");
+
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
     let cursorX = mouseX;
     let cursorY = mouseY;
-
-    // Factor de suavizado para la animación
     const easingFactor = 0.15;
+    let animating = false;
 
-    // Escucha el evento de movimiento del ratón
+    function animateCursor() {
+        cursorX += (mouseX - cursor.offsetWidth / 2 - cursorX) * easingFactor;
+        cursorY += (mouseY - cursor.offsetHeight / 2 - cursorY) * easingFactor;
+        cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+        if (animating) requestAnimationFrame(animateCursor);
+    }
+
+    document.addEventListener("pointerdown", (e) => {
+        if (e.pointerType === "mouse" || e.pointerType === "pen") {
+            cursor?.classList.add("active");
+            if (!animating) {
+                animating = true;
+                animateCursor();
+            }
+        } else {
+            cursor?.classList.remove("active");
+            animating = false;
+        }
+    });
+
     document.addEventListener("mousemove", (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
-
-    // Función principal de animación
-    function animateCursor() {
-        // Calcula la posición suavizada del cursor
-        cursorX += (mouseX - cursor.offsetWidth / 2 - cursorX) * easingFactor;
-        cursorY += (mouseY - cursor.offsetHeight / 2 - cursorY) * easingFactor;
-
-        // Actualiza la posición del elemento usando transform
-        cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-
-        // Solicita el siguiente frame de animación
-        requestAnimationFrame(animateCursor);
-    }
-
-    // Inicia la animación
-    animateCursor();
-
 });
+
+
+
+

@@ -4043,6 +4043,11 @@ table tr td {
 }
 
 .cursor-circle {
+  display: none;
+}
+
+.cursor-circle.active {
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
@@ -4057,7 +4062,7 @@ table tr td {
   animation: cur 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.dark-mode .cursor-circle {
+.dark-mode .cursor-circle.active {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
