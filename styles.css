@@ -721,6 +721,7 @@ p.english {
   background-color: rgba(0, 0, 0, 0.1);
   padding: 10px 20px;
   border-radius: 30px;
+  user-select: none;
 }
 
 @media only screen and (max-width: 600px) {
@@ -1333,6 +1334,7 @@ li a span {
   font-family: OxfordStreet;
   text-align: center;
   text-shadow: none;
+  user-select: none;
 }
 
 .dark-mode #art0 {
@@ -1376,6 +1378,7 @@ li a span {
   margin-top: 1rem;
   margin-bottom: 1rem;
   white-space: nowrap;
+  user-select: none;
 }
 
 @media only screen and (max-width: 600px) {
@@ -1630,6 +1633,8 @@ footer {
   width: 32px;
   cursor: pointer;
   cursor: url("src/cursor_pointer.png"), pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /*Mobile Device*/
@@ -2717,6 +2722,7 @@ div strong a :hover div div {
   justify-content: space-between;
   align-items: center;
   height: 40px;
+  user-select: none;
   transition: all 0.3s ease;
 }
 
@@ -2870,7 +2876,6 @@ div strong a :hover div div {
 
 /* contact */
 
-#infoForm-spa,
 #infoForm-eng {
   position: relative;
   color: var(--palette_text_black);
@@ -2879,14 +2884,12 @@ div strong a :hover div div {
   z-index: 1;
 }
 
-.dark-mode #infoForm-spa,
 .dark-mode #infoForm-eng {
   color: var(--palette_text_white);
 }
 
 @media only screen and (max-width: 600px) {
 
-  #infoForm-spa,
   #infoForm-eng {
     height: 100px;
     padding: 15px;
@@ -2895,27 +2898,23 @@ div strong a :hover div div {
 }
 
 /*Tamaño del texto*/
-#infoForm-spa strong p,
 #infoForm-eng strong p {
   font-family: OxfordStreet;
   font-size: 48px;
   color: var(--palette_text_black);
 }
 
-.dark-mode #infoForm-spa strong p,
 .dark-mode #infoForm-eng strong p {
   color: var(--palette_text_white);
 }
 
 @media only screen and (max-width: 600px) {
 
-  #infoForm-spa strong p,
   #infoForm-eng strong p {
     font-size: 1.5rem;
   }
 }
 
-#infoForm-spa p,
 #infoForm-eng p {
   text-align: left;
   font-size: 1rem;
@@ -2923,7 +2922,6 @@ div strong a :hover div div {
 
 @media only screen and (max-width: 600px) {
 
-  #infoForm-spa p,
   #infoForm-eng p {
     font-size: 1rem;
   }
@@ -2971,7 +2969,7 @@ div strong a :hover div div {
 
 .dark-mode .iconSSS .hover:hover a,
 .dark-mode .iconSSS .hover:hover i.fa-brands {
-  color: var(--palette);
+  color: var(--palette_dark_accent_main);
 }
 
 /*Formulario*/
@@ -3121,7 +3119,6 @@ form input:focus {
   border-color: var(--palette_dark_accent_one);
 }
 
-#formSelect-spa,
 #formSelect-eng {
   background-color: hsl(0, 0%, 90%);
   border-radius: 25px;
@@ -3139,7 +3136,6 @@ form input:focus {
   z-index: 1;
 }
 
-.dark-mode #formSelect-spa,
 .dark-mode #formSelect-eng {
   background-color: var(--palette_dark_accent_two);
   border-color: var(--palette_dark_accent_one);
@@ -3156,7 +3152,7 @@ form input:focus {
   color: var(--palette_text_white);
 }
 
-#formText-spa,
+
 #formText-eng {
   background-color: hsl(0, 0%, 90%);
   color: var(--palette_text_black);
@@ -3166,18 +3162,17 @@ form input:focus {
   border-radius: 25px;
   padding: 10px;
   height: 250px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.dark-mode #formText-spa,
 .dark-mode #formText-eng {
   background-color: var(--palette_dark_accent_two);
   color: var(--palette_text_white);
   border-color: var(--palette_dark_accent_one);
 }
 
-#form-enviar-spa,
 #form-enviar-eng,
-#form-enviar-spaM,
 #form-enviar-engM {
   font-size: 1rem;
   border-radius: 10px;
@@ -3189,9 +3184,7 @@ form input:focus {
   font-family: FunnelSans;
 }
 
-.dark-mode #form-enviar-spa,
 .dark-mode #form-enviar-eng,
-.dark-mode #form-enviar-spaM,
 .dark-mode #form-enviar-engM {
   background-color: var(--palette_dark_accent_main);
   color: var(--palette_text_white);
@@ -3199,7 +3192,6 @@ form input:focus {
 
 @media only screen and (max-width: 600px) {
 
-  #form-enviar-spaM,
   #form-enviar-engM {
     width: 65%;
     margin-top: 0;
@@ -3207,9 +3199,7 @@ form input:focus {
   }
 }
 
-#form-reset-spa,
 #form-reset-eng,
-#form-reset-spaM,
 #form-reset-engM {
   font-size: 1rem;
   border-radius: 10px;
@@ -3222,9 +3212,7 @@ form input:focus {
   font-family: FunnelSans;
 }
 
-.dark-mode #form-reset-spa,
 .dark-mode #form-reset-eng,
-.dark-mode #form-reset-spaM,
 .dark-mode #form-reset-engM {
   background-color: var(--palette_dark_accent_main);
   color: var(--palette_text_white);
@@ -3232,7 +3220,6 @@ form input:focus {
 
 @media only screen and (max-width: 600px) {
 
-  #form-reset-spaM,
   #form-reset-engM {
     width: 30%;
     float: right;
@@ -3240,13 +3227,9 @@ form input:focus {
   }
 }
 
-#form-enviar-spa:hover,
 #form-enviar-eng:hover,
-#form-reset-spa:hover,
 #form-reset-eng:hover,
-#form-enviar-spaM:hover,
 #form-enviar-engM:hover,
-#form-reset-spaM:hover,
 #form-reset-engM:hover {
   filter: saturate(64%);
 }
@@ -3265,9 +3248,11 @@ form input:focus {
 }
 
 /*Laptop Device*/
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 601px) {
   .BTsub_resDesktop {
     display: block;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .BTsub_resMobile {
@@ -3338,9 +3323,7 @@ form input:focus {
 }
 
 .shortcuts :nth-child(2) div input#form-reset-eng,
-.shortcuts :nth-child(2) div input#form-reset-spa,
 .shortcuts :nth-child(2) div input#form-reset-engM,
-.shortcuts :nth-child(2) div input#form-reset-spaM,
 .shortcuts :nth-child(2) div a {
   position: absolute;
 }
