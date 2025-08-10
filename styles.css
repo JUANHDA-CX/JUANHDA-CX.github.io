@@ -931,7 +931,7 @@ p.english {
 @media only screen and (min-width: 601px) {
   .Nav-PrimaryH ul>li {
     margin: 0 10px 0 10px;
-    padding: 10px;
+    padding: 14px;
   }
 
   .Nav-PrimaryH ul>li:first-child {
@@ -1022,25 +1022,32 @@ li a span {
   padding-right: 0%;
 }
 
-@media (min-width: 2560px) {
+/*Mobile Device*/
+@media (max-width: 600px) {
   #emergent {
-    padding-right: 25%;
+    display: none;
   }
 }
 
 /*Tablet Device*/
-@media (min-width: 600px) and (max-width: 900px) {
+@media (min-width: 601px) {
   #emergent {
+    display: none;
+  }
+}
+
+/*Tablet Device*/
+@media (min-width: 1024px) {
+  #emergent {
+    display: block;
     padding-right: 5%;
   }
 }
 
-/*Mobile Device*/
-@media (max-width: 600px) {
+
+@media (min-width: 2560px) {
   #emergent {
-    top: 125%;
-    left: 25%;
-    display: none;
+    padding-right: 25%;
   }
 }
 
@@ -1390,6 +1397,12 @@ li a span {
 @media only screen and (min-width: 601px) {
   #art1 {
     font-size: 1.2rem;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  #art1 {
+    font-size: 1.5rem;
   }
 }
 
@@ -2276,6 +2289,7 @@ div strong a :hover div div {
   width: auto;
   height: 500px;
   padding: 25px;
+  outline: solid 0 transparent;
   transition: 0.5s;
 }
 
@@ -2327,10 +2341,9 @@ div strong a :hover div div {
 }
 
 
-
 .Box-style:hover {
   background-color: hsl(0, 0%, 90%);
-  outline: solid 8px var(--palette_dark_accent_main);
+  outline: solid 8px var(--palette_two_accent);
   background-image: none;
   transition: 0.5s;
 }
@@ -3098,6 +3111,25 @@ form input:focus {
 .dark-mode form input:focus {
   background-color: var(--palette_dark_accent_main);
 }
+
+input:focus::placeholder {
+  color: gray;
+}
+
+.dark-mode input:focus::placeholder {
+  color: var(--palette_text_white);
+}
+
+input:-webkit-autofill {
+  color: var(--palette_text_black);
+  box-shadow: 0 0 0px 1000px var(--palette_four_accent) inset;
+}
+
+.dark-mode input:-webkit-autofill {
+  color: var(--palette_text_black);
+  box-shadow: 0 0 0px 1000px var(--palette_dark_accent_main) inset;
+}
+
 
 .formNameMail {
   background-color: hsl(0, 0%, 90%);
@@ -4008,7 +4040,7 @@ table tr td {
   height: 700px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
 
   #DOC {
     position: relative;
@@ -4022,6 +4054,13 @@ table tr td {
     transform: translate(-50%, -50%);
     touch-action: none;
     pointer-events: none;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+
+  #DOC {
+    margin-top: 32rem;
   }
 }
 
