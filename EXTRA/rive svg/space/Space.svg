@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" width="529.4357" height="535.0456" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 529.4357 535.0456">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #79ba38;
+      }
+
+      .cls-2 {
+        fill: #d3f224;
+      }
+
+      .cls-3 {
+        fill: #38ba89;
+      }
+
+      .cls-4 {
+        fill: #0b2026;
+      }
+
+      .cls-5 {
+        fill: #0c332b;
+      }
+
+      .cls-6 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-7 {
+        fill: #2d3b16;
+      }
+
+      .cls-8 {
+        stroke: #1f4d12;
+      }
+
+      .cls-8, .cls-9, .cls-10, .cls-11 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-8, .cls-10, .cls-11 {
+        fill: none;
+        stroke-width: 48px;
+      }
+
+      .cls-9 {
+        fill: #ffd321;
+        stroke: #bfb075;
+        stroke-width: 2px;
+      }
+
+      .cls-12 {
+        fill: #24f273;
+      }
+
+      .cls-10 {
+        stroke: #12454d;
+      }
+
+      .cls-13 {
+        fill: #163b12;
+      }
+
+      .cls-11 {
+        stroke: #124d2d;
+      }
+
+      .cls-14 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <symbol id="Star01" viewBox="0 0 155.2832 155.2832">
+      <g>
+        <polygon class="cls-12" points="58.2278 97.0554 5.7628 77.6416 58.2278 58.2278 77.6416 5.7629 97.0554 58.2278 149.5204 77.6416 97.0554 97.0554 77.6416 149.5204 58.2278 97.0554"/>
+        <path class="cls-3" d="M77.6416,11.5259l17.8574,48.2583,48.2583,17.8574-48.2583,17.8574-17.8574,48.2583-17.8574-48.2583-48.2583-17.8574,48.2583-17.8574,17.8574-48.2583M77.6416,0l-3.7515,10.1377-17.2192,46.5332-46.5332,17.2192-10.1377,3.7515,10.1377,3.7515,46.5332,17.2192,17.2192,46.5332,3.7515,10.1377,3.7515-10.1377,17.2192-46.5332,46.5332-17.2192,10.1377-3.7515-10.1377-3.7515-46.5332-17.2192-17.2192-46.5332-3.7515-10.1377h0Z"/>
+      </g>
+    </symbol>
+    <symbol id="Star02" viewBox="0 0 26.5908 26.5898">
+      <g>
+        <polygon class="cls-2" points="10.4823 16.1075 2.8814 13.2949 10.4823 10.4823 13.2949 2.8814 16.1075 10.4823 23.7084 13.2949 16.1075 16.1075 13.2949 23.7084 10.4823 16.1075"/>
+        <path class="cls-1" d="M13.2949,5.7632l2.0342,5.4976,5.498,2.0342-5.498,2.0342-2.0342,5.4976-2.0342-5.4976-5.4976-2.0342,5.4976-2.0342,2.0342-5.4976M13.2949,0l-1.8755,5.0693-1.7153,4.6348-4.6348,1.7153-5.0693,1.8755,5.0693,1.8755,4.6348,1.7153,1.7153,4.6348,1.8755,5.0693,1.8755-5.0693,1.7153-4.6348,4.6353-1.7153,5.0698-1.8755-5.0698-1.8755-4.6353-1.7153-1.7153-4.6348-1.8755-5.0693h0Z"/>
+      </g>
+    </symbol>
+    <symbol id="Star03" viewBox="0 0 9.7472 9.7472">
+      <circle id="Star03-2" data-name="Star03" class="cls-9" cx="4.8736" cy="4.8736" r="3.8736"/>
+    </symbol>
+    <clipPath id="clippath">
+      <rect x="9.5874" y="13.7998" width="512" height="512"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect x="9.5874" y="13.7998" width="512" height="512"/>
+    </clipPath>
+  </defs>
+  <g id="Space">
+    <g id="BG">
+      <rect x="9.5874" y="13.7998" width="512" height="512"/>
+      <g class="cls-14">
+        <g>
+          <rect x="9.5874" y="13.7998" width="512" height="512"/>
+          <g class="cls-6">
+            <polygon class="cls-4" points="558.4706 289.1756 -28.495 408.2498 -20.0897 560.9449 574.5806 561.6453 558.4706 289.1756"/>
+            <path class="cls-5" d="M-94.3226,287.625l342.1334-119.9602,383.7837-100.6211,77.0676,288.6433s-266.6692,120.5106-468.2206,63.8267c-201.5514-56.6838-319.21,160.7641-319.21,160.7641l-15.5541-292.6528Z"/>
+            <path class="cls-13" d="M-141.166,186.9633L562.8107-174.034l101.5778,377.9373s-56.4988-43.7108-148.4099-29.7718c-91.9111,13.939-177.5958,192.2183-307.0331,116.0788-107.3521-63.1483-286.4295,98.9576-286.4295,98.9576l-63.682-202.2047Z"/>
+            <path class="cls-7" d="M-174.9303-32.716l742.8145-184.6965,21.2809,98.9085s-141.5229,10.9953-179.3254,123.7295c-37.8025,112.7341-260.8639,221.6476-333.168,159.4115C4.3676,102.4008-53.569,192.0718-85.2279,258.4088-133.1488,93.973-174.9303-32.716-174.9303-32.716Z"/>
+          </g>
+        </g>
+        <g id="estelas">
+          <polyline class="cls-10" points="552.8671 401.2454 409.9781 434.1659 309.1153 418.0559 239.7721 439.7694 167.6272 420.8577 89.1783 446.7738 41.5487 439.069 -20.0897 495.8043"/>
+          <polyline class="cls-11" points="-17.2237 386.3051 64.663 294.7791 134.7067 294.0787 190.376 264.6639 293.0052 306.6866 377.0576 277.2682 423.2864 223.3346 536.0566 172.9032"/>
+          <polyline class="cls-8" points="459.0086 -15.5141 360.9476 58.7321 329.4279 118.2692 258.1706 164.7484 177.1734 163.7269 95.9125 204.1973 62.9281 146.2837 -6.1031 167.6585"/>
+        </g>
+      </g>
+    </g>
+    <g id="star">
+      <g>
+        <use width="155.2832" height="155.2832" transform="translate(200.6913 91.5159) scale(.0491)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(425.4605 297.5129) scale(.069)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(289.4016 105.9175) scale(.0687)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(196.7377 427.5385) scale(.0522)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(16.1072 33.0722) scale(.0498)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(238.8382 429.6076) scale(.0569)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(64.6097 72.1876) scale(.0297)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(391.0938 141.0987) scale(.069)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(334.6457 79.4179) scale(.0339)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(201.692 516.0081) scale(.0522)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(199.1082 183.6545) scale(.0569)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(211.833 10.7312) scale(.069)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(231.8498 51.9917) scale(.0498)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(394.2354 441.1037) scale(.0569)" xlink:href="#Star01"/>
+        <use width="155.2832" height="155.2832" transform="translate(34.9331 229.1556) scale(.0532)" xlink:href="#Star01"/>
+      </g>
+      <g>
+        <use width="26.5908" height="26.5898" transform="translate(164.9709 308.0941) scale(.4586)" xlink:href="#Star02"/>
+        <use width="26.5908" height="26.5898" transform="translate(514.1203 99.7884) scale(.4586)" xlink:href="#Star02"/>
+        <use width="26.5908" height="26.5898" transform="translate(3.1199 398.9123) scale(.4586)" xlink:href="#Star02"/>
+        <use width="26.5908" height="26.5898" transform="translate(193.9047 366.1302) scale(.4586)" xlink:href="#Star02"/>
+        <use width="26.5908" height="26.5898" transform="translate(298.7369 417.8807) scale(.4586)" xlink:href="#Star02"/>
+        <use width="26.5908" height="26.5898" transform="translate(139.8733 21.2324) scale(.4586)" xlink:href="#Star02"/>
+        <use width="26.5908" height="26.5898" transform="translate(131.1087 134.5222) scale(.4586)" xlink:href="#Star02"/>
+        <use width="26.5908" height="26.5898" transform="translate(13.2744 120.2392) scale(.4586)" xlink:href="#Star02"/>
+        <use width="26.5908" height="26.5898" transform="translate(387.7947 344.7779)" xlink:href="#Star02"/>
+        <use width="26.5908" height="26.5898" transform="translate(455.7393 296.6504)" xlink:href="#Star02"/>
+        <use width="26.5908" height="26.5898" transform="translate(416.8127 183.4093)" xlink:href="#Star02"/>
+        <use width="26.5908" height="26.5898" transform="translate(445.8307 210.3041)" xlink:href="#Star02"/>
+      </g>
+      <g>
+        <use width="9.7472" height="9.7472" transform="translate(126.2809 206.9699)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(486.6703 386.0132)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(513.279 154.361)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(402.1486 56.5349)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(464.7573 72.9697)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(353.6268 480.7088)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(257.366 516.7088)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(105.5399 439.2306)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(64.0616 376.6219)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(223.7138 248.274)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(299.6268 244.361)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(315.279 312.448)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(381.0181 247.4914)" xlink:href="#Star03"/>
+        <use width="9.7472" height="9.7472" transform="translate(144.6703 8.7958)" xlink:href="#Star03"/>
+      </g>
+    </g>
+  </g>
+</svg>
