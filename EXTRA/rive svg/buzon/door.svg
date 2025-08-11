@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28.07 195.53">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ccf;
+      }
+
+      .cls-2 {
+        fill: #68c;
+      }
+
+      .cls-3 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-4 {
+        fill: #96a2e6;
+      }
+
+      .cls-5 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <polygon class="cls-2" points="0 13.47 2.35 28.8 6.65 27.96 8.61 23.88 15.17 22.23 14.45 15.29 8.24 15.65 4.87 12.38 0 13.47"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <path class="cls-4" d="M9.61,0c11.16,64.68,11.68,128.97,5.4,195.53l6.99-.92C32.79,130.26,27.9,68.77,17.48,0h-7.87Z"/>
+    </clipPath>
+  </defs>
+  <g id="Contact_Graphic">
+    <g id="door">
+      <g id="pop">
+        <polygon class="cls-2" points="0 13.47 2.35 28.8 6.65 27.96 8.61 23.88 15.17 22.23 14.45 15.29 8.24 15.65 4.87 12.38 0 13.47"/>
+        <g class="cls-5">
+          <path class="cls-1" d="M4.58,20.17c1.88,9.1-.37,17.25-5.02,18.21-4.65.96-9.93-5.64-11.81-14.74-1.88-9.1.37-17.25,5.02-18.21,4.65-.96,9.93,5.64,11.81,14.74"/>
+        </g>
+      </g>
+      <g id="door-2" data-name="door">
+        <path class="cls-4" d="M9.61,0c11.16,64.68,11.68,128.97,5.4,195.53l6.99-.92C32.79,130.26,27.9,68.77,17.48,0h-7.87Z"/>
+        <g class="cls-3">
+          <path class="cls-1" d="M9.61-13.08s7.75,27.24,9.23,43.58c1.48,16.34,4.04,38.13,4.04,58.96s-.32,56.39-1.6,72.73c-1.28,16.34-5.14,46.81-5.14,46.81,0,0-21.13-.99-21.13-1.95S-9.8-15-9.8-15l19.41,1.92Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
