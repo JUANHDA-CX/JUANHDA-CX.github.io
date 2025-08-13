@@ -34,9 +34,9 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollSmoother.min.js"></script>
 
 
-  <!--Gallery Expand-->
+  <!--Gallery Expand
 
-  <script src="gallery-mods.js" defer async></script>
+  <script src="gallery-mods.js" defer async></script>-->
 
   <!--Paneo & zoom Gallery-->
   <script>
@@ -198,6 +198,138 @@
     });
   </script>
 
+  <!--Gallery Visor Alternatives-->
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      // Cargar base de datos de imágenes
+      const response = await fetch('gallery-database.json');
+      const galleryData = await response.json();
+
+      const gridItems = document.querySelectorAll(".grid-item.imgGhover");
+      const galleryExpandController = document.getElementById("galleryExpandController");
+      const galleryExpand = document.getElementById("galleryExpand");
+      const galleryExpandBtn = document.getElementById("galleryExpandBtn");
+      const thumbnailsContainer = document.querySelector(".thumbnails-BTN");
+
+      let currentImageCode = null;
+
+      // Solo asigna data-src y alt en el grid, NO src ni title (deja src para el script de lazy)
+      gridItems.forEach((item) => {
+        const codeId = item.getAttribute('code-id');
+        const dataObj = galleryData.find(obj => obj[codeId]);
+        if (dataObj) {
+          const codeData = dataObj[codeId];
+          const thumbLow = codeData["thumbnail-item"]["thumbnail-src-01"];
+          item.setAttribute("data-src", thumbLow);
+          if (codeData["info-t"] && codeData["info-t"].title) {
+            item.setAttribute("alt", codeData["info-t"].title);
+
+            // Añadir el título al banner usando el content de .imgThover::before
+            // Buscar el .imgThover hermano dentro del mismo .hover-wrap
+            const hoverWrap = item.closest('.hover-wrap');
+            if (hoverWrap) {
+              const imgThover = hoverWrap.querySelector('.imgThover');
+              if (imgThover) {
+                imgThover.setAttribute('data-title', codeData["info-t"].title);
+                // El CSS debe usar: .imgThover::before { content: attr(data-title); }
+              }
+            }
+          }
+        }
+      });
+
+      // Función para crear botones de miniaturas tipo "puntitos"
+      function createThumbnailButtons(codeData) {
+        thumbnailsContainer.innerHTML = '';
+        const fullImgVariants = codeData["full-img"];
+        const variantCount = Object.keys(fullImgVariants).length;
+
+        if (variantCount <= 1) {
+          thumbnailsContainer.style.display = 'none';
+          return;
+        }
+        thumbnailsContainer.style.display = 'flex';
+
+        for (let i = 1; i <= variantCount; i++) {
+          const btnNumber = i.toString().padStart(2, '0');
+          const btn = document.createElement('div');
+          btn.className = `img-thumbnail-${btnNumber}`;
+          btn.addEventListener('click', () => {
+            console.log(`[BTN] Click en botón variante: ${btnNumber}`);
+            switchImage(currentImageCode, btnNumber, true);
+          });
+          thumbnailsContainer.appendChild(btn);
+        }
+        // Activar primer botón
+        const firstBtn = thumbnailsContainer.firstChild;
+        if (firstBtn) firstBtn.classList.add('active');
+      }
+
+      // Función para cambiar imagen en el visor
+      function switchImage(codeId, thumbnailNumber, fromButton = false) {
+        const codeData = galleryData.find(obj => obj[codeId])[codeId];
+        const lowResSrc = codeData["thumbnail-item"][`thumbnail-src-${thumbnailNumber}`];
+        const highResSrc = codeData["full-img"][`thumbnail-src-${thumbnailNumber}`];
+
+        // Actualizar botones activos
+        document.querySelectorAll('.thumbnails-BTN div').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        const activeBtn = document.querySelector(`.img-thumbnail-${thumbnailNumber}`);
+        if (activeBtn) activeBtn.classList.add('active');
+
+        // Cargar imagen de baja resolución primero
+        galleryExpand.src = "src/placeholder.webp";
+        const imgLow = new Image();
+        imgLow.src = lowResSrc;
+        imgLow.onload = () => {
+          galleryExpand.src = lowResSrc;
+          console.log(`[VISOR] Imagen baja resolución cargada: ${lowResSrc} (variante: thumbnail-src-${thumbnailNumber}, code: ${codeId})`);
+          // Cargar imagen de alta resolución en segundo plano
+          const imgPreload = new Image();
+          imgPreload.src = highResSrc;
+          imgPreload.onload = () => {
+            galleryExpand.src = highResSrc;
+            console.log(`[VISOR] Imagen ALTA resolución cargada: ${highResSrc} (variante: thumbnail-src-${thumbnailNumber}, code: ${codeId})`);
+          };
+        };
+      }
+
+      // Evento click para imágenes de la galería
+      gridItems.forEach((item) => {
+        item.addEventListener("click", function () {
+          const codeId = this.getAttribute('code-id');
+          if (codeId && galleryData.find(obj => obj[codeId])) {
+            currentImageCode = codeId;
+            const codeData = galleryData.find(obj => obj[codeId])[codeId];
+            createThumbnailButtons(codeData);
+
+            // Precargar todas las variantes de baja resolución al abrir el visor
+            const lowResVariants = codeData["thumbnail-item"];
+            Object.entries(lowResVariants).forEach(([variant, url]) => {
+              const img = new Image();
+              img.src = url;
+              img.onload = () => {
+                console.log(`[PRECARGA] Variante baja resolución lista: ${url} (${variant}, code: ${codeId})`);
+              };
+            });
+
+            switchImage(codeId, '01');
+            galleryExpandController.style.display = "flex";
+            document.body.style.overflow = "hidden";
+          }
+        });
+      });
+
+      // Evento cerrar visor
+      galleryExpandBtn.addEventListener("click", function () {
+        galleryExpandController.style.display = "none";
+        document.body.style.overflow = "";
+        currentImageCode = null;
+      });
+    });
+  </script>
+
   <!--Lazzy Gallery-->
   <script>
     window.addEventListener("load", function () {
@@ -213,7 +345,7 @@
 
       if (useCache) {
         images.forEach(img => {
-          img.src = img.dataset.src;
+          if (img.dataset.src) img.src = img.dataset.src;
         });
       } else {
         let index = 0;
@@ -241,9 +373,6 @@
       }
     });
   </script>
-
-
-
 
 
 
@@ -389,9 +518,15 @@
           </article>
         </section>
 
+
+
         <div id="galleryExpandController">
           <div id="galleryExpandBackground"></div>
           <div class="hiddenC"><img id="galleryExpand" /></div>
+
+          <div class="thumbnails-BTN">
+          </div>
+
           <div id="galleryControls">
             <div id="galleryExpandBtn" class="audioclick">
               <i class="fa-solid fa-plus"></i>
@@ -409,434 +544,366 @@
         </div>
 
         <div class="grid-container audioclick">
-          <img class="grid-item imgGhover Code Code658"
-            data-src="https://cdna.artstation.com/p/assets/images/images/087/511/238/small/juanhda-cx-silver-clay-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Silver Clay" />
-          <img class="grid-itemNO HighReso Code658"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/djnwd4n-2fa07499-c68e-4eef-bef3-91f03527048d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGpud2Q0bi0yZmEwNzQ5OS1jNjhlLTRlZWYtYmVmMy05MWYwMzUyNzA0OGQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.59gMze6r84Xu9I9BjCQF1DWDr-ukek-2dOfE2Xq_Klw"
-            alt="" title="Silver Clay" />
 
-          <img class="grid-item imgGhover Code Code704"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/085/695/555/small/juanhda-cx-rode-tulp-hotel-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Rode Tulp Hotel" />
-          <img class="grid-itemNO HighReso Code704"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/djbis0o-f8c64779-abd0-4f2a-bd06-2e1aff9d8e29.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGpiaXMwby1mOGM2NDc3OS1hYmQwLTRmMmEtYmQwNi0yZTFhZmY5ZDhlMjkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.0VenwaTPdtoNlNZOcGnnKVc9R_5nM0fIWZdqvARyRpg"
-            alt="" title="Rode Tulp Hotel" />
+          <!--Interior Furniture PROPS - VOL.1-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-709" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Silver Clay-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-658" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Rode Tulp Hotel-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-704" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Keyboard Ichigo Cream-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-887" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Yureka Mignon Specialita-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-021" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Woody Snow Bedroom-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-060" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Kea Charlotte Apartment-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-436" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Pipeline Hammer Handmade-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-008" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Cosmograph Daytona Mega Edition-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-043" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Cherry House-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-875" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code Code887"
-            data-src="https://cdna.artstation.com/p/assets/images/images/084/669/006/small/juanhda-cx-keyboard-ichigo-cream-side-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Keyboard Ichigo Cream" />
-          <img class="grid-itemNO HighReso Code887"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dj4k29f-67da975f-c30a-4a81-b52d-63556b3159b7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGo0azI5Zi02N2RhOTc1Zi1jMzBhLTRhODEtYjUyZC02MzU1NmIzMTU5YjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.U6LlflQTnmuEuesNl-Zzx6HfhTmISma124DWghy6aME"
-            alt="" title="Keyboard Ichigo Cream" />
+          <!--Fairfield Breeze Wood-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-160" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code Code21"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/083/473/729/small/juanhda-cx-yureka-mignon-specialita-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Yureka Mignon Specialita" />
-          <img class="grid-itemNO HighReso Code21"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/diwci9q-72a19518-993d-43ce-95b7-76ebfec0aaac.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGl3Y2k5cS03MmExOTUxOC05OTNkLTQzY2UtOTViNy03NmViZmVjMGFhYWMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.L4OTREJTCPG9q1PwRquU6EB1avhfCRs3Pwy5NIi6-iA"
-            alt="" title="Yureka Mignon Specialita" />
+          <!--Hydrogen Yawarakai Hana-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-045" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code Code60"
-            data-src="https://cdna.artstation.com/p/assets/images/images/080/576/334/small/juanhda-cx-woody-snow-bedroom-front-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Woody Snow Bedroom" />
-          <img class="grid-itemNO HighReso Code60"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/diaa91s-867359b1-dc2b-40c4-add2-697db77b411d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGlhYTkxcy04NjczNTliMS1kYzJiLTQwYzQtYWRkMi02OTdkYjc3YjQxMWQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ZTleEZuAaJpvVwUFEvhJi1bdXVqdLvaRU8L1qd7xHwg"
-            alt="" title="Woody Snow Bedroom" />
+          <!--Condensed Stylized Twilight Sea-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-543" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code436"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/080/182/707/small/juanhda-cx-kea-charlotte-apartment-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Kea Charlotte Apartment" />
-          <img class="grid-itemNO HighReso Code436"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/di7jpij-46aea9b1-eb7b-4622-b5cc-def0ec56e758.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGk3anBpai00NmFlYTliMS1lYjdiLTQ2MjItYjVjYy1kZWYwZWM1NmU3NTgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.OzQ0DEDmDU--uBGwQ6HVv7BS5OjJXXKQXg-wYISYH_c"
-            alt="" title="Kea Charlotte Apartment" />
+          <!--Counterposition Interior Bedroom-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-302" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code Code08"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/080/016/967/small/juanhda-cx-mace-cam2-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Pipeline Hammer Handmade" />
-          <img class="grid-itemNO HighReso Code08"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/di6h6sa-45a2e951-1cd0-4a80-acf7-d10a6c7633de.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGk2aDZzYS00NWEyZTk1MS0xY2QwLTRhODAtYWNmNy1kMTBhNmM3NjMzZGUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.u7Uoo6QqvVUOudaZdcIJ28_aK34QrOXRPcVfvpyhFHQ"
-            alt="" title="Pipeline Hammer Handmade" />
+          <!--Mégalomanie - AMBRE D’HIVER-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-147" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code43"
-            data-src="https://cdna.artstation.com/p/assets/images/images/079/756/192/small/juanhda-cx-cosmograph-daytona-mega-edition-cam1-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Cosmograph Daytona Mega Edition" />
-          <img class="grid-itemNO HighReso Code43"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/di4kqz2-c7eb051d-ef48-48cf-a0a2-ac910a8b3297.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGk0a3F6Mi1jN2ViMDUxZC1lZjQ4LTQ4Y2YtYTBhMi1hYzkxMGE4YjMyOTcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.5FnpcLsw-7flAANWnmTd4hbrgGTq1yahLrDoqE0bywc"
-            alt="" title="Cosmograph Daytona Mega Edition" />
+          <!--Bombastic Hug-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-660" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Italian Restaurant, A Culinary Journey-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-748" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code875"
-            data-src="https://cdna.artstation.com/p/assets/images/images/079/618/268/small/juanhda-cx-cherry-house-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Cherry House" />
-          <img class="grid-itemNO HighReso Code875"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/di3n4q7-f170b6a8-490b-4239-9942-aff758359935.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGkzbjRxNy1mMTcwYjZhOC00OTBiLTQyMzktOTk0Mi1hZmY3NTgzNTk5MzUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xOkLsLBb5Ivtfk0Dyb8Ja89TEbnt-mb9HkE9avedpc4"
-            alt="" title="Cherry House" />
+          <!--Soda Fresh-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-986" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code160"
-            data-src="https://cdna.artstation.com/p/assets/images/images/079/554/004/small/juanhda-cx-fairfield-breeze-wood-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Fairfield Breeze Wood" />
-          <img class="grid-itemNO HighReso Code160"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/di36fcm-da7977fc-9a47-45fd-af58-36ccd7459aad.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGkzNmZjbS1kYTc5NzdmYy05YTQ3LTQ1ZmQtYWY1OC0zNmNjZDc0NTlhYWQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.WqBM-AqzIV7-dQlWNWK_-5icBIft-0tH5G_KEVS6YxU"
-            alt="" title="Fairfield Breeze Wood" />
+          <!--Telescope Mega Star U-01-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-746" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code45"
-            data-src="https://cdna.artstation.com/p/assets/images/images/076/819/108/small/juanhda-cx-hydrogen-yawarakai-hana-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Hydrogen Yawarakai Hana" />
-          <img class="grid-itemNO HighReso Code45"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dhk26o0-4656ac2a-6032-4169-9709-6bdf9efae2c9.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGhrMjZvMC00NjU2YWMyYS02MDMyLTQxNjktOTcwOS02YmRmOWVmYWUyYzkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.3_cRTWLTD1s2cYdVnE6lH8b-1pkUhS-Z-oiSzdQfKZw"
-            alt="" title="Hydrogen Yawarakai Hana" />
+          <!--Red Formation-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-631" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code543"
-            data-src="https://cdna.artstation.com/p/assets/images/images/076/818/128/small/juanhda-cx-condensed-stylized-twilight-sea-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Condensed Stylized Twilight Sea" />
-          <img class="grid-itemNO HighReso Code543"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dhk2239-6769c45b-7d41-4c6d-bfc8-0b785b6a833b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGhrMjIzOS02NzY5YzQ1Yi03ZDQxLTRjNmQtYmZjOC0wYjc4NWI2YTgzM2IucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.rIC2OxyH8F528EzIZotvFezhj7V_ZnGRC1RbyE-9Ui8"
-            alt="" title="Condensed Stylized Twilight Sea" />
+          <!--Tree Fallen - [Type: Willow]-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-205" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code302"
-            data-src="https://cdna.artstation.com/p/assets/images/images/075/006/764/small/juanhda-cx-counterposition-interior-bedroom-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Counterposition Interior Bedroom" />
-          <img class="grid-itemNO HighReso Code302"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dh99tq7-254d188a-0865-4d62-bd27-b3fd4aa0afed.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGg5OXRxNy0yNTRkMTg4YS0wODY1LTRkNjItYmQyNy1iM2ZkNGFhMGFmZWQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.c9tcd7IsWZ2NWy4OFkqh3iFKXMvuCP4QdIvWq85KuFU"
-            alt="" title="Counterposition Interior Bedroom" />
+          <!--Aisle in The DEPTHS-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-983" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code147"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/074/567/077/small/juanhda-cx-ambre-dhiver-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Mégalomanie - AMBRE D’HIVER" />
-          <img class="grid-itemNO HighReso Code147"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dh6ozt7-49eeea2c-cd08-412f-865d-6980b83e6649.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGg2b3p0Ny00OWVlZWEyYy1jZDA4LTQxMmYtODY1ZC02OTgwYjgzZTY2NDkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.21GFOOXFewPavnm2utEMnemU7c5B_NLDT9khEf0jCR8"
-            alt="" title="Mégalomanie - AMBRE D’HIVER" />
+          <!--House Bluebright-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-851" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code660"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/074/314/161/small/juanhda-cx-bombastic-hug-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Bombastic Hug" />
-          <img class="grid-itemNO HighReso Code660"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dh52dob-1e73f682-324b-47fe-98b5-3933a7d8562f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGg1MmRvYi0xZTczZjY4Mi0zMjRiLTQ3ZmUtOThiNS0zOTMzYTdkODU2MmYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.9-6MBg9MjfRg3agJ0KSG0NSYo5IvejJUJG_oWjLPD_M"
-            alt="" title="Bombastic Hug" />
+          <!--Fennec Weapon - [KRISS Vector]-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-623" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code748"
-            data-src="https://cdna.artstation.com/p/assets/images/images/074/238/250/small/juanhda-cx-italian-restaurant-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Italian Restaurant, A Culinary Journey" />
-          <img class="grid-itemNO HighReso Code748"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dh4n6wm-70ef614c-8ec8-4965-8b16-de97dd37f1c2.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGg0bjZ3bS03MGVmNjE0Yy04ZWM4LTQ5NjUtOGIxNi1kZTk3ZGQzN2YxYzIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ICBCU5w5cqk82V533MiRzO72Oi6FdlKVn_7FMnZAWuk"
-            alt="Restaurante" title="Italian Restaurant, A Culinary Journey" />
+          <!--Mushroom Iridescence-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-290" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code986"
-            data-src="https://cdna.artstation.com/p/assets/images/images/074/109/098/small/juanhda-cx-soda-fresh-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Soda Fresh" />
-          <img class="grid-itemNO HighReso Code986"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dh3xksg-c05fca4e-cd07-4772-9ad8-3fcb478b2d80.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGgzeGtzZy1jMDVmY2E0ZS1jZDA3LTQ3NzItOWFkOC0zZmNiNDc4YjJkODAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.XTHkrnp3aT_i1vXnvjiAAyd9V1OMWQukcICSqwucOWg"
-            alt="" title="Soda Fresh" />
+          <!--Summer Camp-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-017" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Turntable vintage-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-023" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code746"
-            data-src="https://cdna.artstation.com/p/assets/images/images/074/107/704/small/juanhda-cx-telescope-mega-star-u-01-cam2-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Telescope Mega Star U-01" />
-          <img class="grid-itemNO HighReso Code746"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dh3x1vw-b4358cb4-f84d-43f9-9890-a1ca762006e1.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGgzeDF2dy1iNDM1OGNiNC1mODRkLTQzZjktOTg5MC1hMWNhNzYyMDA2ZTEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.RPsxMQ75085V0iTluY-VfLUM2H0Sr1g6rxWh-9rf_eo"
-            alt="" title="Telescope Mega Star U-01" />
+          <!--Kitchen Interior-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-441" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code631"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/074/046/779/small/juanhda-cx-red-formation-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Red Formation" />
-          <img class="grid-itemNO HighReso Code631"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dh3jm4r-1422d666-a7d8-472a-bbcd-e7824001ccc4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGgzam00ci0xNDIyZDY2Ni1hN2Q4LTQ3MmEtYmJjZC1lNzgyNDAwMWNjYzQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Z0tiA68T2ZpZLjIRVackGSuZa3hXC_pHL4jo5hNCRQs"
-            alt="" title="Red Formation" />
+          <!--Ancient armored medieval shield-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-016" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code205"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/070/530/545/small/juanhda-cx-treefallen-willow-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Tree Fallen - [Type: Willow]" />
-          <img class="grid-itemNO HighReso Code205"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dgl3z9e-888f7d2b-13d6-4041-8c1e-6b815d7a017a.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGdsM3o5ZS04ODhmN2QyYi0xM2Q2LTQwNDEtOGMxZS02YjgxNWQ3YTAxN2EucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.JAvWUdAiI19smurIWvjlReSjI_gWTDiGPXeUmXaAfiA"
-            alt="" title="Tree Fallen - [Type: Willow]" />
+          <!--Antique Lamp-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-274" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code983"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/070/474/303/small/juanhda-cx-up.jpg"
-            src="src/placeholder.webp" alt="" title="Aisle in The DEPTHS" />
-          <img class="grid-itemNO HighReso Code983"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dgl3yy5-e7c67aad-ca10-42f0-9ea5-5f6b00ab40a7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGdsM3l5NS1lN2M2N2FhZC1jYTEwLTQyZjAtOWVhNS01ZjZiMDBhYjQwYTcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.NVLdKN-Eef8vhbrc3mZRRF-lfH4MbvyonpdVbkWHgZY"
-            alt="" title="Aisle in The DEPTHS" />
+          <!--Warm Audio WA-47 (MCX)-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-259" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code851"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/070/179/893/small/juanhda-cx-house-bluebright-day-ff.jpg"
-            src="src/placeholder.webp" alt="" title="House Bluebright" />
-          <img class="grid-itemNO HighReso Code851"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dgl3v9c-e3638201-ec3b-4c01-9883-b7605b460b52.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGdsM3Y5Yy1lMzYzODIwMS1lYzNiLTRjMDEtOTg4My1iNzYwNWI0NjBiNTIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.I3vyaNW--4kGFgYFa4ik6ueRM21GR4maGKMNnBZt_0A"
-            alt="" title="House Bluebright" />
+          <!--Rebot_003-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-068" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code623"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/070/137/021/small/juanhda-cx-fennec-cam2-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Fennec Weapon - [KRISS Vector]" />
-          <img class="grid-itemNO HighReso Code623"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dgl3tmj-95d54208-280f-454d-9116-edb8a02a1c63.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGdsM3Rtai05NWQ1NDIwOC0yODBmLTQ1NGQtOTExNi1lZGI4YTAyYTFjNjMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Z5ZQdUmeuGDmLHgKozAk0FA2MaD583PcOneDw0oYp24"
-            alt="" title="Fennec Weapon - [KRISS Vector]" />
+          <!--TreeMix-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-041" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code290"
-            data-src="https://cdna.artstation.com/p/assets/images/images/067/322/432/small/juanhda-cx-mushroom-iridescence-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Mushroom Iridescence" />
-          <img class="grid-itemNO HighReso Code290"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg9h7wd-97d5bce4-b224-4e1f-b44d-7925e681ef18.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc5aDd3ZC05N2Q1YmNlNC1iMjI0LTRlMWYtYjQ0ZC03OTI1ZTY4MWVmMTgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.I5zeW5Bji2RfjzRWTOk17Ig9spPM6tR6z-Ay_EV-vzU"
-            alt="" title="Mushroom Iridescence" />
+          <!--Flowery sofa-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-003" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code17"
-            data-src="https://cdna.artstation.com/p/assets/images/images/067/006/368/small/juanhda-cx-summer-camp.jpg"
-            src="src/placeholder.webp" alt="" title="Summer Camp" />
-          <img class="grid-itemNO HighReso Code17"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8i4gn-1d94552a-d8d6-4cca-85e2-9e3245d7d864.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4aTRnbi0xZDk0NTUyYS1kOGQ2LTRjY2EtODVlMi05ZTMyNDVkN2Q4NjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.AoAjcApp_1k4N4gRQtnK_lnOH_2raW2urVgJBOsE6JM"
-            alt="" title="Summer Camp" />
+          <!--Ancient ax with a medieval and fantastic style-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-256" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code23"
-            data-src="https://cdna.artstation.com/p/assets/images/images/065/189/808/small/juanhda-cx-turntable-full-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Turntable vintage" />
-          <img class="grid-itemNO HighReso Code23"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8i32z-f945ef4a-c3a5-463e-a91d-b79986feaf5d.png/v1/fill/w_1280,h_1280,q_80,strp/turntable_vintage_by_juanhda_dg8i32z-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4aTMyei1mOTQ1ZWY0YS1jM2E1LTQ2M2UtYTkxZC1iNzk5ODZmZWFmNWQucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.uyKyFbt_JF_pbVOw9EKuIbT5HgGszpfOhj5uofVzpQk"
-            alt="" title="Turntable vintage" />
+          <!--Electric Guitar Re-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-458" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--The Misty Altar-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-899" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code441"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/065/189/629/small/juanhda-cx-kitchen-renderff.jpg"
-            src="src/placeholder.webp" alt="" title="Kitchen Interior" />
-          <img class="grid-itemNO HighReso Code441"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8i2ii-c088f9f5-66b1-4930-b922-3df906ffeba1.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4aTJpaS1jMDg4ZjlmNS02NmIxLTQ5MzAtYjkyMi0zZGY5MDZmZmViYTEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.O9tvPWkzhpWhmsH4IB_cx-y4P1yVnB37FlgiBXnUfIg"
-            alt="" title="Kitchen Interior" />
+          <!--Crystal Snowball 21-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-033" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code16"
-            data-src="https://cdna.artstation.com/p/assets/images/images/065/189/186/small/juanhda-cx-medieval-shield-swords-front-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Ancient armored medieval shield" />
-          <img class="grid-itemNO HighReso Code16"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8hig3-4b27c75d-7d5f-4461-84fd-a3bd09f77cf7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4aGlnMy00YjI3Yzc1ZC03ZDVmLTQ0NjEtODRmZC1hM2JkMDlmNzdjZjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0._pxlYkAKh9Fj78XbZE5fnr2wnjgu6pXQGjE306d_6ig"
-            alt="" title="Ancient armored medieval shield" />
+          <!--The Ring of foundation-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-699" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code274"
-            data-src="https://cdna.artstation.com/p/assets/images/images/064/378/298/small/juanhda-cx-antique-lamp-renderff.jpg"
-            src="src/placeholder.webp" alt="" title="Antique Lamp" />
-          <img class="grid-itemNO HighReso Code274"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8hhbl-80f811c9-ecee-4ced-a414-d94c59516fbc.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4aGhibC04MGY4MTFjOS1lY2VlLTRjZWQtYTQxNC1kOTRjNTk1MTZmYmMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.C0gg8uitkncfqe0LfNFbOc5RIVitNN4BSaodF2hKAqs"
-            alt="" title="Antique Lamp" />
+          <!--Ancient golden compass-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-742" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code259"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/063/893/079/small/juanhda-cx-warm-audio-wa-47-cam1ff.jpg"
-            src="src/placeholder.webp" alt="" title="Warm Audio WA-47 (MCX)" />
-          <img class="grid-itemNO HighReso Code259"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8h7v9-4c81d089-aee3-42b2-b8cc-2db977101efa.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4aDd2OS00YzgxZDA4OS1hZWUzLTQyYjItYjhjYy0yZGI5NzcxMDFlZmEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.M_FHLOeplYB7AWvkHa_tgPm58RNCD31nWS9HXnrAHMo"
-            alt="" title="Warm Audio WA-47 (MCX)" />
+          <!--Planet Decima-9-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-236" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code68"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/063/675/577/small/juanhda-cx-rebot003-finalff.jpg"
-            src="src/placeholder.webp" alt="" title="Rebot_003" />
-          <img class="grid-itemNO HighReso Code68"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8h2y3-bec7fd1f-9d74-40cd-ad59-79711d8136cf.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4aDJ5My1iZWM3ZmQxZi05ZDc0LTQwY2QtYWQ1OS03OTcxMWQ4MTM2Y2YucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.y1WixukAzrkqxxwI_u5V-U7zT_yAbEq-jNWY_IDa5gc"
-            alt="" title="Rebot_003" />
+          <!--Pepper and salt-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-452" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code41"
-            data-src="https://cdna.artstation.com/p/assets/images/images/057/398/304/small/juanhda-cx-treemixff.jpg"
-            src="src/placeholder.webp" alt="" title="TreeMix" />
-          <img class="grid-itemNO HighReso Code41"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8h28z-a44af53d-e3fe-4bcd-8d80-065e1846e0ca.png/v1/fill/w_1280,h_1280,q_80,strp/treemix_by_juanhda_dg8h28z-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4aDI4ei1hNDRhZjUzZC1lM2ZlLTRiY2QtOGQ4MC0wNjVlMTg0NmUwY2EucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.P1wg6wUcqZOqfXRY3Md2bzsb4OAiLv9PmcAfv81-1U0"
-            alt="" title="TreeMix" />
+          <!--Main Row-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-401" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code03"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/057/398/261/small/juanhda-cx-chairff.jpg"
-            src="src/placeholder.webp" alt="" title="Flowery sofa" />
-          <img class="grid-itemNO HighReso Code03"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8h1zz-1245dd2e-c143-45be-ad9d-8e575e7b450e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4aDF6ei0xMjQ1ZGQyZS1jMTQzLTQ1YmUtYWQ5ZC04ZTU3NWU3YjQ1MGUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.5TIVE0f1ItSP8O5ExOFreedUv__joCFqPNlXoWCki7E"
-            alt="" title="Flowery sofa" />
+          <!--Droid-12-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-062" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code256"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/057/398/137/small/juanhda-cx-hachx.jpg"
-            src="src/placeholder.webp" alt="" title="Ancient ax with a medieval and fantastic style" />
-          <img class="grid-itemNO HighReso Code256"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8h0g9-7a6fdc3b-26b2-4dc1-a973-ffc2c5d2e19d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4aDBnOS03YTZmZGMzYi0yNmIyLTRkYzEtYTk3My1mZmMyYzVkMmUxOWQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.gtwTmQ_SvHpi3zRa3PtC2rjmO1AsILeXv0defDe5KVw"
-            alt="" title="Ancient ax with a medieval and fantastic style" />
+          <!--Diamond>-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-096" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code458"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/057/397/989/small/juanhda-cx-guitaraffinity2.jpg"
-            src="src/placeholder.webp" alt="" title="Electric Guitar Re" />
-          <img class="grid-itemNO HighReso Code458"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8gzl1-d83330c0-1512-495e-a37c-d8e11f5399b6.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4Z3psMS1kODMzMzBjMC0xNTEyLTQ5NWUtYTM3Yy1kOGUxMWY1Mzk5YjYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.REEqs2s78EZcgdPD9h9bwO3TmYHskV9QjNe2Tn_I85I"
-            alt="" title="Electric Guitar Re" />
+          <!--Minigun-Machine-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-091" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Christmas Tree-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-864" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code899"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/057/397/935/small/juanhda-cx-the-misty-altarff.jpg"
-            src="src/placeholder.webp" alt="" title="The Misty Altar" />
-          <img class="grid-itemNO HighReso Code899"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8gyc2-906dc578-bfa3-4968-bc83-c6e2825ad033.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4Z3ljMi05MDZkYzU3OC1iZmEzLTQ5NjgtYmM4My1jNmUyODI1YWQwMzMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ePW1SiKAq31oVLG92c8B2iusN7BaIl4wGgyCidTSehY"
-            alt="" title="The Misty Altar" />
+          <!--Wind Power Plant-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-466" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code33"
-            data-src="https://cdna.artstation.com/p/assets/images/images/057/397/564/small/juanhda-cx-snowballff.jpg"
-            src="src/placeholder.webp" alt="" title="Crystal Snowball 21" />
-          <img class="grid-itemNO HighReso Code33"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8gxnt-67699d39-d562-4663-8760-aadea8196ada.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4Z3hudC02NzY5OWQzOS1kNTYyLTQ2NjMtODc2MC1hYWRlYTgxOTZhZGEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.5qc2dHY0LjPaR8RszhDbVKx7xFPvc4nOK7yt23_KNoQ"
-            alt="" title="Crystal Snowball 21" />
+          <!--Miwom Pavilion-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-637" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code699"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/057/362/807/small/juanhda-cx-ring2ff.jpg"
-            src="src/placeholder.webp" alt="" title="The Ring of foundation" />
-          <img class="grid-itemNO HighReso Code699"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8gwte-b0c2e6bb-370a-4a99-8694-726bc0aebe86.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4Z3d0ZS1iMGMyZTZiYi0zNzBhLTRhOTktODY5NC03MjZiYzBhZWJlODYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.hhZH0RTSb2qqniB_qu_BUQ1NpjI-Ftah9eCy3Mrtq38"
-            alt="" title="The Ring of foundation" />
+          <!--Ball Soccer-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-054" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code742"
-            data-src="https://cdna.artstation.com/p/assets/images/images/057/362/678/small/juanhda-cx-compassff.jpg"
-            src="src/placeholder.webp" alt="" title="Ancient golden compass" />
-          <img class="grid-itemNO HighReso Code742"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8gtjh-516c9c2f-e74e-493d-afdc-d4c88dd71edd.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4Z3RqaC01MTZjOWMyZi1lNzRlLTQ5M2QtYWZkYy1kNGM4OGRkNzFlZGQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.dL_xzn3chb8mYF4yyFMHsiwB-05LZ5unnn5GsxnhnBE"
-            alt="" title="Ancient golden compass" />
+          <!--Teddy's playroom-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-038" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code236"
-            data-src="https://cdna.artstation.com/p/assets/images/images/057/362/550/small/juanhda-cx-decima9-cam2-ff.jpg"
-            src="src/placeholder.webp" alt="" title="Planet Decima-9" />
-          <img class="grid-itemNO HighReso Code236"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/dg8gqmq-f8dffc86-f5c3-4801-b644-4f0b4da320e1.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGc4Z3FtcS1mOGRmZmM4Ni1mNWMzLTQ4MDEtYjY0NC00ZjBiNGRhMzIwZTEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ypkDJJSwaS0kv6wl_2hK1hXaY3YmwC_d2xtV-3576zY"
-            alt="" title="Planet Decima-9" />
+          <!--Retro Sci-Fi Weapon-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-664" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code452"
-            data-src="https://cdna.artstation.com/p/assets/images/images/040/741/752/small/juanhda-cx-pepper-salt.jpg"
-            src="src/placeholder.webp" alt="" title="Pepper and salt" />
-          <img class="grid-itemNO HighReso Code452"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/deppeqy-1260aaf3-1cf7-4064-bfc6-cb0ee1128610.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVwcGVxeS0xMjYwYWFmMy0xY2Y3LTQwNjQtYmZjNi1jYjBlZTExMjg2MTAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.H5qiOfcVOW3Bc8ehvDrvK2FFibidwZ1iZlS49kt13Us"
-            alt="" title="Pepper and salt" />
+          <!--Ship in port-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-485" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code401"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/367/small/juanhda-cx-mainrowfinal.jpg"
-            src="src/placeholder.webp" alt="" title="Main Row" />
-          <img class="grid-itemNO HighReso Code401"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/depewir-aaafd71b-9a4a-4df8-8651-dab1f32553b9.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVwZXdpci1hYWFmZDcxYi05YTRhLTRkZjgtODY1MS1kYWIxZjMyNTUzYjkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.eqiAPfVVUjyioiUTwFR4OcAiSYkjrHzaSCN0KKDVs9Y"
-            alt="" title="Main Row" />
+          <!--A light of hope-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-141" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code62"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/287/small/juanhda-cx-droid-12-final.jpg"
-            src="src/placeholder.webp" alt="" title="Droid-12" />
-          <img class="grid-itemNO HighReso Code62"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/depevrc-918fd2a2-e9b8-4f0e-89c4-29e3b4361587.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVwZXZyYy05MThmZDJhMi1lOWI4LTRmMGUtODljNC0yOWUzYjQzNjE1ODcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.y9H5UTmSRQi_pa-ljtt14-FUoi-qJmPhXGskeWMMEns"
-            alt="" title="Droid-12" />
+          <!--Gingerbread House-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-332" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code96"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/331/small/juanhda-cx-diamond-corona.jpg"
-            src="src/placeholder.webp" alt="" title="Diamond>" />
-          <img class="grid-itemNO HighReso Code96"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/deohhxh-deddd4c3-49d5-4394-8dbd-fdeef75f6ac0.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVvaGh4aC1kZWRkZDRjMy00OWQ1LTQzOTQtOGRiZC1mZGVlZjc1ZjZhYzAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.kHfcV4R16zpH1Ty3K4RUGlsL11_vRz_ADaH6IgRV7gQ"
-            alt="" title="Diamond>" />
+          <!--Pumpkin in the dark-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-306" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
+          <!--Japanese Entrance-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-566" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code91"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/571/163/small/juanhda-cx-minigunfrontfinal.jpg"
-            src="src/placeholder.webp" alt="" title="Minigun-Machine" />
-          <img class="grid-itemNO HighReso Code91"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/depev0j-f8f09606-9595-457e-a8e3-f95be930bd18.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVwZXYwai1mOGYwOTYwNi05NTk1LTQ1N2UtYThlMy1mOTViZTkzMGJkMTgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.GcOHkxSFXUdunUZfyYPIAHEeUllfbLFghWhcYMriCRU"
-            alt="" title="Minigun-Machine" />
+          <!--Segment-Camera-CX-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-722" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code864"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/101/925/small/juanhda-cx-treechrismastv2.jpg"
-            src="src/placeholder.webp" alt="" title="Christmas Tree" />
-          <img class="grid-itemNO HighReso Code864"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/deohj7e-f285858a-37a4-424d-a7ea-6fcb54a59bb4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVvaGo3ZS1mMjg1ODU4YS0zN2E0LTQyNGQtYTdlYS02ZmNiNTRhNTliYjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.TlCzJg5fAjXdzU2M-fUaqwBjdd1Pe5fsasvL7aIHPLQ"
-            alt="" title="Christmas Tree" />
+          <!--Bathroom Gold-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-364" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code466"
-            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/894/small/juanhda-cx-power-windf.jpg"
-            src="src/placeholder.webp" alt="" title="Wind Power Plant" />
-          <img class="grid-itemNO HighReso Code466"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/deohjlq-1852e3c4-6f19-468e-a345-cf29433c54bf.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVvaGpscS0xODUyZTNjNC02ZjE5LTQ2OGUtYTM0NS1jZjI5NDMzYzU0YmYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.hAT74T4wEFb8R1WfgiyQif1pPycTMEWQi507b-IsyUU"
-            alt="" title="Wind Power Plant" />
+          <!--Environment Cabin Poly-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-261" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code637"
-            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/858/small/juanhda-cx-miwom-pavilionf.jpg"
-            src="src/placeholder.webp" alt="" title="Miwom Pavilion" />
-          <img class="grid-itemNO HighReso Code637"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/deohj3i-1bae09e2-6804-4ee3-a027-06a0c61c032b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVvaGozaS0xYmFlMDllMi02ODA0LTRlZTMtYTAyNy0wNmEwYzYxYzAzMmIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.OSqlLiP2N2ngYqeM6jugMu_AJVGEHeq9FqOFJz_VVZo"
-            alt="" title="Miwom Pavilion" />
+          <!--Skinned Heart-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-963" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code54"
-            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/812/small/juanhda-cx-ballsoccer.jpg"
-            src="src/placeholder.webp" alt="" title="Ball Soccer" />
-          <img class="grid-itemNO HighReso Code54"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/deohixm-51d3e29a-3dab-496e-afb5-95bf689be9de.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVvaGl4bS01MWQzZTI5YS0zZGFiLTQ5NmUtYWZiNS05NWJmNjg5YmU5ZGUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.tXfpCR8ywBXc23PP3dFj3xg8fTwQtJydH7xqT_in22g"
-            alt="" title="Ball Soccer" />
+          <!--Coffee House at dusk-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-922" src="src/placeholder.webp" alt="" />
+            <div class="imgThover"></div>
+          </span>
 
-          <img class="grid-item imgGhover Code38"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/101/759/small/juanhda-cx-teddy2.jpg"
-            src="src/placeholder.webp" alt="" title="Teddy's playroom" />
-          <img class="grid-itemNO HighReso Code38"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/deohin2-51aa2bfb-76d9-4f5f-b37b-4ba813818d15.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVvaGluMi01MWFhMmJmYi03NmQ5LTRmNWYtYjM3Yi00YmE4MTM4MThkMTUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.OWNwKNoUHjJBve87JTJIxCa8bD6tRjEfeKKvT2RThAw"
-            alt="" title="Teddy's playroom" />
-
-          <img class="grid-item imgGhover Code664"
-            data-src="https://cdna.artstation.com/p/assets/images/images/040/101/194/small/juanhda-cx-armfictionf.jpg"
-            src="src/placeholder.webp" alt="" title="Retro Sci-Fi Weapon" />
-          <img class="grid-itemNO HighReso Code664"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/deohiha-1288aa3a-41e0-434d-9d8c-ed06a3b4403c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVvaGloYS0xMjg4YWEzYS00MWUwLTQzNGQtOWQ4Yy1lZDA2YTNiNDQwM2MucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.lDd6Pg8G9H6ZB9a_TBcMXO45vIDw6_244wMFt3uw6dA"
-            alt="" title="Retro Sci-Fi Weapon" />
-
-          <img class="grid-item imgGhover Code485"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/100/569/small/juanhda-cx-ship-in-port.jpg"
-            src="src/placeholder.webp" alt="" title="Ship in port" />
-          <img class="grid-itemNO HighReso Code485"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/deohiah-312dd02d-15d4-473a-b6fb-6558cdb3edb6.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVvaGlhaC0zMTJkZDAyZC0xNWQ0LTQ3M2EtYjZmYi02NTU4Y2RiM2VkYjYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.92Jx8n_rOEfAEj3xRbOEv_m3z7LFZaK5zK5z-sGYX3g"
-            alt="" title="Ship in port" />
-
-          <img class="grid-item imgGhover Code141"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/040/100/469/small/juanhda-cx-light-hopetop.jpg"
-            src="src/placeholder.webp" alt="" title="A light of hope" />
-          <img class="grid-itemNO HighReso Code141"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/deohi30-d0bb7895-bcd8-4def-8491-d262561c4fc4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGVvaGkzMC1kMGJiNzg5NS1iY2Q4LTRkZWYtODQ5MS1kMjYyNTYxYzRmYzQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.u7Ji0csvgGZBoYDcVrw_202JPRc_KZiqbPTFPi4B14k"
-            alt="" title="A light of hope" />
-
-          <img class="grid-item imgGhover Code332"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/031/642/489/small/juanhda-cx-gingerbrex-house-2020.jpg"
-            src="src/placeholder.webp" alt="" title="Gingerbread House" />
-          <img class="grid-itemNO HighReso Code332"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/de7xv06-2aaae9a3-f46e-49ef-8c86-c89957b901c0.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGU3eHYwNi0yYWFhZTlhMy1mNDZlLTQ5ZWYtOGM4Ni1jODk5NTdiOTAxYzAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.PcynYrHgNy3GAJru8eU78C5SSK5j9WEYXRKd_jRKAmE"
-            alt="" title="Gingerbread House" />
-
-          <img class="grid-item imgGhover Code306"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/031/642/323/small/juanhda-cx-pumpkin-2020-halloween.jpg"
-            src="src/placeholder.webp" alt="" title="Pumpkin in the dark" />
-          <img class="grid-itemNO HighReso Code306"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/de7xut0-ec904c9d-452a-4751-b960-0b2c99d33458.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGU3eHV0MC1lYzkwNGM5ZC00NTJhLTQ3NTEtYjk2MC0wYjJjOTlkMzM0NTgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.QebxdiF6FwMOmPemGqfzP9F78_x0f8MbeziHl_RAoII"
-            alt="" title="Pumpkin in the dark" />
-
-          <img class="grid-item imgGhover Code566"
-            data-src="https://cdna.artstation.com/p/assets/images/images/031/009/074/small/juanhda-cx-japanese-entrance.jpg"
-            src="src/placeholder.webp" alt="" title="Japanese Entrance" />
-          <img class="grid-itemNO HighReso Code566"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/de6m9zy-5ed64571-aed2-425f-8b2b-96f3b5dde8d7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGU2bTl6eS01ZWQ2NDU3MS1hZWQyLTQyNWYtOGIyYi05NmYzYjVkZGU4ZDcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Qk6AuGLNjTbPm0l9640GRFtNvo6eKQJEod6apQEWqG4"
-            alt="" title="Japanese Entrance" />
-
-          <img class="grid-item imgGhover Code722"
-            data-src="https://cdna.artstation.com/p/assets/images/images/026/771/794/small/juanhda-cx-top.jpg"
-            src="src/placeholder.webp" alt="" title="Segment-Camera-CX" />
-          <img class="grid-itemNO HighReso Code722"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/ddxdazm-4e3680e6-b1f8-4e9f-84e6-0435decd6f96.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGR4ZGF6bS00ZTM2ODBlNi1iMWY4LTRlOWYtODRlNi0wNDM1ZGVjZDZmOTYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.BJnYPE8aSwwxPppwDukcRzQSTa82YDqGTXF2qoLoOic"
-            alt="" title="Segment-Camera-CX" />
-
-          <img class="grid-item imgGhover Code364"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/026/416/007/small/juanhda-cx-bathroom-megacx.jpg"
-            src="src/placeholder.webp" alt="" title="Bathroom Gold" />
-          <img class="grid-itemNO HighReso Code364"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/ddwihun-a38d2f55-9bd2-4fb9-9197-7e28d6de13b0.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGR3aWh1bi1hMzhkMmY1NS05YmQyLTRmYjktOTE5Ny03ZTI4ZDZkZTEzYjAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.IW26BYpLgjW5bPbl0Fd2Gs3RHsU8tZTke-lKw6eooys"
-            alt="" title="Bathroom Gold" />
-
-          <img class="grid-item imgGhover Code261"
-            data-src="https://cdnb.artstation.com/p/assets/images/images/026/130/999/small/juanhda-cx-cabinf.jpg"
-            src="src/placeholder.webp" alt="" title="Environment Cabin Poly" />
-          <img class="grid-itemNO HighReso Code261"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/didye4i-70e800bd-df20-43ca-a286-0cc1d1f2e749.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGlkeWU0aS03MGU4MDBiZC1kZjIwLTQzY2EtYTI4Ni0wY2MxZDFmMmU3NDkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.-y4GvfEL6zWfFPjUaMW7MybU-KBF79pVnxQEbDQKA8Q"
-            alt="" title="Environment Cabin Poly" />
-
-          <img class="grid-item imgGhover Code963"
-            data-src="https://cdna.artstation.com/p/assets/images/images/024/256/128/small/juanhda-cx-san-heartf.jpg"
-            src="src/placeholder.webp" alt="" title="Skinned Heart" />
-          <img class="grid-itemNO HighReso Code963"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/ddqj48x-03cc9489-c4f9-4c8c-920f-eca858c02a58.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGRxajQ4eC0wM2NjOTQ4OS1jNGY5LTRjOGMtOTIwZi1lY2E4NThjMDJhNTgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.1s08E_OtfD2eFOWEYadWKHxP7SVQtlFTvgxgWz38P10"
-            alt="" title="Skinned Heart" />
-
-          <img class="grid-item imgGhover Code922"
-            data-src="https://cdna.artstation.com/p/assets/images/images/023/925/438/small/juanhda-cx-coffe-shopfinal.jpg"
-            src="src/placeholder.webp" alt="" title="Coffee House at dusk" />
-          <img class="grid-itemNO HighReso Code922"
-            data-src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/aa45366f-650a-4f2e-bad8-52f7590a938e/ddppccu-5ad56b37-83e2-44b1-acdc-1d7a52dde74b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FhNDUzNjZmLTY1MGEtNGYyZS1iYWQ4LTUyZjc1OTBhOTM4ZVwvZGRwcGNjdS01YWQ1NmIzNy04M2UyLTQ0YjEtYWNkYy0xZDdhNTJkZGU3NGIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.jQEvoizvlBhQrt_TNon64SwgdzPRdL_dEgxtDBKGS5I"
-            alt="" title="Coffee House at dusk" />
         </div>
-
 
 
       </main>

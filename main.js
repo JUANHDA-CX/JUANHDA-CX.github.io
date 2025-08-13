@@ -1,9 +1,10 @@
+
+
 // Dark mode
 
 const themeColorMeta = document.getElementById("theme-color-meta");
 const BarColorLight = themeColorMeta.getAttribute("data-light-color");
 const BarColorDark = "hsl(250, 25%, 25%)";
-
 
 function myFunction() {
     var element = document.body;
@@ -22,6 +23,7 @@ function myFunction() {
         themeColorMeta.setAttribute("content", BarColorLight);
     }
 }
+
 
 window.onload = function () {
     var element = document.body;
@@ -53,9 +55,10 @@ window.onload = function () {
     }
 };
 
-// Sound
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+    // Sound
+
     const audio = new Audio("/sound/click-HeroHero.mp3");
     audio.volume = 0.25;
     const elements = document.querySelectorAll(".audioclick");
@@ -67,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.stopPropagation();
             }
             audio.play();
+            //console.log("'click'");
             setTimeout(() => {
                 if (element.hasAttribute("href")) {
                     if (element.getAttribute("target") === "_blank") {
@@ -78,11 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 500);
         });
     });
-});
 
-// vibration
 
-document.addEventListener("DOMContentLoaded", function () {
+    // vibration
+
     const buzz = document.querySelectorAll(".buzz");
 
     buzz.forEach((element) => {
@@ -91,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
             //console.log("'buzz'");
         });
     });
+
 });
 
 
@@ -104,11 +108,11 @@ window.addEventListener("load", function () {
 // Ocultar boton de desplazamiento
 
 window.addEventListener("scroll", function () {
-    var Fbutton = document.getElementById("Fbutton");
-    if (window.scrollY > 350) {
-        Fbutton.style.display = "block";
-    } else {
-        Fbutton.style.display = "none";
+    const Fbutton = document.getElementById("Fbutton");
+    if (Fbutton) { // Verificar que el botón existe
+        requestAnimationFrame(() => {
+            Fbutton.style.display = window.scrollY > 350 ? "block" : "none";
+        });
     }
 });
 
@@ -377,7 +381,6 @@ document.addEventListener("DOMContentLoaded", () => {
         mouseY = e.clientY;
     });
 });
-
 
 
 

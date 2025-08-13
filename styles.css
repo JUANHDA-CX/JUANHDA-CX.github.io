@@ -188,7 +188,7 @@ a {
   will-change: transform;
 }
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   .parallax-bg-GSAP {
     height: 125vh;
   }
@@ -1023,21 +1023,21 @@ li a span {
 }
 
 /*Mobile Device*/
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   #emergent {
     display: none;
   }
 }
 
 /*Tablet Device*/
-@media (min-width: 601px) {
+@media only screen and (min-width: 601px) {
   #emergent {
     display: none;
   }
 }
 
 /*Tablet Device*/
-@media (min-width: 1024px) {
+@media only screen and (min-width: 1024px) {
   #emergent {
     display: block;
     padding-right: 5%;
@@ -1045,7 +1045,7 @@ li a span {
 }
 
 
-@media (min-width: 2560px) {
+@media only screen and (min-width: 2560px) {
   #emergent {
     padding-right: 25%;
   }
@@ -1191,7 +1191,7 @@ li a span {
 }
 
 .dark-mode .siteicons:hover {
-  background-color: var(--palette_dark_accent_one);
+  background-color: var(--palette_dark_accent_main);
 }
 
 #site1 {
@@ -1413,7 +1413,7 @@ li a span {
 }
 
 #art2 {
-  padding-left: 15%;
+  padding-left: 11.5%;
   padding-right: 50%;
   margin: auto;
   font-size: 2rem;
@@ -1421,13 +1421,13 @@ li a span {
 
 #art3 {
   padding-left: 50%;
-  padding-right: 15%;
+  padding-right: 11.5%;
   margin: auto;
   font-size: 2rem;
 }
 
 #art4 {
-  padding-left: 15%;
+  padding-left: 11.5%;
   padding-right: 50%;
   margin: auto;
   font-size: 2rem;
@@ -1485,6 +1485,15 @@ li a span {
   #art4 {
     padding-left: 8%;
     padding-right: 8%;
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+
+  #art2,
+  #art3,
+  #art4 {
     font-size: 1.5rem;
   }
 }
@@ -3532,6 +3541,12 @@ form input[name="r"] {
 
 @media only screen and (min-width: 1200px) {
   #textGallery {
+    width: 65%;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  #textGallery {
     width: 50%;
   }
 }
@@ -3710,7 +3725,7 @@ table tr td {
   border: solid 0.25rem var(--palette_text_white);
 }
 
-@media (max-width: 900px) {
+@media only screen and (max-width: 900px) {
   .hiddenC {
     border-radius: calc(1.5rem);
     border: solid 0.25rem var(--palette_text_white);
@@ -3719,7 +3734,7 @@ table tr td {
 
 /*Mobile Device*/
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   .hiddenC {
     border-radius: calc(1.5rem);
     border: solid 0.25rem var(--palette_text_white);
@@ -3738,21 +3753,21 @@ table tr td {
   z-index: 3;
 }
 
-@media (min-width: 3001px) {
+@media only screen and (min-width: 3001px) {
   #galleryExpand {
     width: auto;
     height: 80vh;
   }
 }
 
-@media (min-width: 601px) and (max-width: 900px) and (orientation: landscape) {
+@media only screen and (min-width: 601px) and (max-width: 900px) and (orientation: landscape) {
   #galleryExpand {
     width: auto;
     height: 85vh;
   }
 }
 
-@media (min-width: 601px) and (max-width: 900px) and (orientation: portrait) {
+@media only screen and (min-width: 601px) and (max-width: 900px) and (orientation: portrait) {
   #galleryExpand {
     width: 85vw;
     height: auto;
@@ -3761,7 +3776,7 @@ table tr td {
 
 /*Mobile Device*/
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   #galleryExpand {
     width: 90vw;
     height: auto;
@@ -3777,7 +3792,7 @@ table tr td {
   z-index: 3;
 }
 
-@media (min-width: 3001px) {
+@media only screen and (min-width: 3001px) {
   #galleryControls {
     width: 10%;
     height: auto;
@@ -3785,7 +3800,7 @@ table tr td {
   }
 }
 
-@media (min-width: 2001px) and (max-width: 3000px) {
+@media only screen and (min-width: 2001px) and (max-width: 3000px) {
   #galleryControls {
     width: 15%;
     height: auto;
@@ -3793,7 +3808,7 @@ table tr td {
   }
 }
 
-@media (min-width: 1401px) and (max-width: 2000px) {
+@media only screen and (min-width: 1401px) and (max-width: 2000px) {
   #galleryControls {
     width: 15%;
     height: auto;
@@ -3803,7 +3818,7 @@ table tr td {
 
 
 /* Laptop */
-@media (min-width: 901px) and (max-width: 1400px) {
+@media only screen and (min-width: 901px) and (max-width: 1400px) {
   #galleryControls {
     width: 25%;
     height: auto;
@@ -3812,7 +3827,7 @@ table tr td {
 }
 
 /* Tablets */
-@media (min-width: 601px) and (max-width: 900px) and (orientation: landscape) {
+@media only screen and (min-width: 601px) and (max-width: 900px) and (orientation: landscape) {
   #galleryControls {
     width: 30%;
     height: auto;
@@ -3820,7 +3835,7 @@ table tr td {
   }
 }
 
-@media (min-width: 601px) and (max-width: 900px) and (orientation: portrait) {
+@media only screen and (min-width: 601px) and (max-width: 900px) and (orientation: portrait) {
   #galleryControls {
     width: 30%;
     height: auto;
@@ -3830,7 +3845,7 @@ table tr td {
 
 /*Mobile Device*/
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   #galleryControls {
     width: 65%;
     height: auto;
@@ -3916,21 +3931,125 @@ table tr td {
   display: none;
 }
 
+.hover-wrap {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .imgGhover {
   transition: 500ms ease;
 }
 
-.imgGhover:hover {
+.hover-wrap:hover .imgGhover {
   opacity: 0.75;
   transition: 500ms ease;
 }
 
-.dark-mode .imgGhover:hover {
-  opacity: 0.25;
+.imgGhover:hover {
+  filter: brightness(0.75);
 }
 
+.imgThover {
+  position: absolute;
+  width: 100%;
+  height: 25%;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  z-index: 2;
+}
+
+.hover-wrap:hover .imgThover {
+  opacity: 1;
+}
+
+.imgThover::before {
+  content: attr(data-title);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: white;
+}
+
+/*Mobile Device*/
+
+@media only screen and (max-width: 600px) {
+  .imgThover::before {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .imgThover::before {
+    font-size: 1.25rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .imgThover::before {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .imgThover::before {
+    font-size: 2rem;
+  }
+}
+
+.thumbnails-BTN {
+  position: fixed;
+  z-index: 10;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 14%;
+}
+
+@media only screen and (min-width: 1024px) {
+  .thumbnails-BTN {
+    bottom: 14%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .thumbnails-BTN {
+    bottom: 16%;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .thumbnails-BTN {
+    bottom: 14%;
+  }
+}
+
+.thumbnails-BTN div {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  outline: none;
+  margin: 6px;
+  cursor: url("src/cursor_pointer.png"), pointer;
+}
+
+.thumbnails-BTN div:hover {
+  background-color: #ffffff;
+  outline: solid 6px #ffffff50;
+}
+
+
 /*Tablet Device*/
-@media (max-width: 900px) {
+@media only screen and (max-width: 900px) {
   .grid-container {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -3938,7 +4057,7 @@ table tr td {
 
 /*Mobile Device*/
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   .grid-container {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -3955,7 +4074,7 @@ table tr td {
 
 /*Mobile Device*/
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
 
   #blockArt02,
   #blockArt03,
@@ -3966,7 +4085,7 @@ table tr td {
   }
 }
 
-@media (max-width: 1024px) {
+@media only screen and (max-width: 1024px) {
 
   #blockArt02,
   #blockArt03,
@@ -4032,35 +4151,63 @@ table tr td {
 }
 
 #DOC {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10%;
-  width: 700px;
-  height: 700px;
+  aspect-ratio: 1 / 1;
+  touch-action: none;
+  pointer-events: none;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 600px) {
+  #DOC {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    width: 90%;
+    height: auto;
+    margin-top: 4rem;
+  }
+}
+
+@media only screen and (min-width: 601px) {
 
   #DOC {
     position: relative;
     right: auto;
-    width: 90vw;
+    width: 90%;
     height: auto;
-    aspect-ratio: 1 / 1;
-    margin-top: 14rem;
-    margin-bottom: -12rem;
+    margin-top: 4rem;
     left: 50%;
-    transform: translate(-50%, -50%);
-    touch-action: none;
-    pointer-events: none;
+    transform: translateX(-50%);
   }
 }
 
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
-
+@media only screen and (min-width: 1024px) {
   #DOC {
-    margin-top: 32rem;
+    position: relative;
+    width: 700px;
+    height: 700px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #DOC {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10%;
+    left: auto;
+    width: 512px;
+    height: 512px;
+    margin-top: 0;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  #DOC {
+    width: 700px;
+    height: 700px;
   }
 }
 
