@@ -2079,8 +2079,8 @@ div strong a :hover div div {
 /*Tablet Device*/
 @media only screen and (min-width: 601px) {
   .img-services {
-    height: 16rem;
-    width: 100%;
+    height: 24rem;
+    width: 90%;
   }
 }
 
@@ -2152,9 +2152,7 @@ div strong a :hover div div {
     grid-row-gap: 40px;
     padding-left: 5%;
     padding-right: 5%;
-
     padding: 0;
-
     width: 90%;
     grid-gap: 4rem;
     position: relative;
@@ -2171,12 +2169,11 @@ div strong a :hover div div {
     grid-column-gap: 30px;
     grid-row-gap: 25px;
     padding: 0;
-
     width: 80%;
     --auto-grid-min-size: 21rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
-    grid-gap: 1rem;
+    grid-gap: 4rem;
     position: relative;
     left: 50%;
     transform: translate(-50%);
@@ -2595,8 +2592,7 @@ div strong a :hover div div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
-  padding: 0;
+  margin: auto;
   font-size: 18px;
 }
 
@@ -2611,7 +2607,8 @@ div strong a :hover div div {
 
 .w3-container p {
   width: 80%;
-  margin-top: 2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
   color: var(--palette_text_black);
   text-align: left;
 }
@@ -4012,6 +4009,12 @@ table tr td {
   align-items: center;
   justify-content: center;
   bottom: 18%;
+}
+
+@media only screen and (min-width: 601px) {
+  .thumbnails-BTN {
+    bottom: 12%;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
