@@ -3696,7 +3696,7 @@ table tr td {
   -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);
   /* Añade el efecto de desenfoque */
-  z-index: 2;
+  z-index: 3;
   animation: backgroundGallery 2s ease-in-out forwards;
 }
 
@@ -3959,7 +3959,7 @@ table tr td {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
-  z-index: 2;
+  z-index: 1;
 }
 
 .hover-wrap:hover .imgThover {
@@ -4011,7 +4011,7 @@ table tr td {
   display: flex;
   align-items: center;
   justify-content: center;
-  bottom: 14%;
+  bottom: 18%;
 }
 
 @media only screen and (min-width: 1024px) {

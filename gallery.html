@@ -205,6 +205,7 @@
       const galleryExpand = document.getElementById("galleryExpand");
       const galleryExpandBtn = document.getElementById("galleryExpandBtn");
       const thumbnailsContainer = document.querySelector(".thumbnails-BTN");
+      const cursorAnim = document.querySelector(".cursor-circle");
 
       let currentImageCode = null;
 
@@ -233,7 +234,7 @@
         }
       });
 
-      // Función para crear botones de miniaturas tipo "puntitos"
+      // Función para crear botones de miniaturas
       function createThumbnailButtons(codeData) {
         thumbnailsContainer.innerHTML = '';
         const fullImgVariants = codeData["full-img"];
@@ -311,6 +312,7 @@
 
             switchImage(codeId, '01');
             galleryExpandController.style.display = "flex";
+            cursorAnim.style.display = "none";
             document.body.style.overflow = "hidden";
           }
         });
@@ -319,6 +321,7 @@
       // Evento cerrar visor
       galleryExpandBtn.addEventListener("click", function () {
         galleryExpandController.style.display = "none";
+        cursorAnim.style.display = "block";
         document.body.style.overflow = "";
         currentImageCode = null;
       });
