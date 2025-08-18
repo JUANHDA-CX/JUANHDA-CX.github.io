@@ -350,12 +350,17 @@
         function loadNext() {
           if (index < images.length) {
             const src = images[index].dataset.src;
-            if (!src) return index++, loadNext();
+
+            if (!src) {
+              index++;
+              loadNext();
+              return;
+            }
 
             const img = new Image();
             img.src = src;
             img.onload = () => {
-              images[index].src = img.src;
+              images[index].src = src;
               index++;
               loadNext();
             };
@@ -367,6 +372,7 @@
             sessionStorage.setItem("imagesLoaded", "true");
           }
         }
+
         loadNext();
       }
     });
