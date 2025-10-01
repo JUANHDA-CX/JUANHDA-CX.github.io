@@ -328,49 +328,61 @@
     });
   </script>
 
-  <!--Lazzy Gallery-->
+  <!-- Lazy Gallery -->
   <script>
     window.addEventListener("load", function () {
       const images = Array.from(document.querySelectorAll(".grid-item"));
       const hasLoadedBefore = sessionStorage.getItem("imagesLoaded");
 
       if (hasLoadedBefore) {
-        // Segunda vez en adelante: asigna src directo
+        // Segunda vez en adelante: asigna src directo a todos
         images.forEach(img => {
-          if (img.dataset.src) img.src = img.dataset.src;
-        });
-      } else {
-        // Primera vez: carga secuencial
-        let index = 0;
-        function loadNext() {
-          if (index < images.length) {
-            const img = images[index];
-            const src = img.dataset.src;
-
-            if (!src) {
-              index++;
-              loadNext();
-              return;
-            }
-
-            img.src = src; // asigna de inmediato
-
-            const preload = new Image();
-            preload.src = src;
-            preload.onload = preload.onerror = () => {
-              index++;
-              loadNext();
-            };
-          } else {
-            sessionStorage.setItem("imagesLoaded", "true");
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
           }
+        });
+        return;
+      }
+
+      // Primera vez: carga secuencial
+      let index = 0;
+
+      function loadNext() {
+        if (index >= images.length) {
+          // Marca que ya se cargaron todas
+          sessionStorage.setItem("imagesLoaded", "true");
+          return;
         }
 
-        loadNext();
-      }
-    });
+        const img = images[index];
+        const src = img.dataset.src;
 
+        if (!src) {
+          index++;
+          loadNext();
+          return;
+        }
+
+        // Asigna el src de inmediato para que pinte
+        img.src = src;
+
+        // Preload para controlar la secuencia
+        const preload = new Image();
+        preload.onload = () => {
+          index++;
+          loadNext();
+        };
+        preload.onerror = () => {
+          index++;
+          loadNext();
+        };
+        preload.src = src;
+      }
+
+      loadNext();
+    });
   </script>
+
 
 
 
