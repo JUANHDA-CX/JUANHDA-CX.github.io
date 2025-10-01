@@ -193,195 +193,227 @@
     });
   </script>
 
-  <!--Gallery Visor Alternatives-->
+
+
+  <!--Lazzy Gallery2-->
   <script>
-    document.addEventListener("DOMContentLoaded", async function () {
-      // Cargar base de datos de imágenes
-      const response = await fetch('gallery-database.json');
-      const galleryData = await response.json();
+    document.addEventListener("galleryDataReady", function () {
+      console.log("[LazyGallery] Iniciando secuencia…");
 
-      const gridItems = document.querySelectorAll(".grid-item.imgGhover");
-      const galleryExpandController = document.getElementById("galleryExpandController");
-      const galleryExpand = document.getElementById("galleryExpand");
-      const galleryExpandBtn = document.getElementById("galleryExpandBtn");
-      const thumbnailsContainer = document.querySelector(".thumbnails-BTN");
-      const cursorAnim = document.querySelector(".cursor-circle");
+      const images = Array.from(document.querySelectorAll("img.grid-item"));
+      console.log("[LazyGallery] Imágenes encontradas:", images.length);
 
-      let currentImageCode = null;
-
-      // Solo asigna data-src y alt en el grid, NO src ni title (deja src para el script de lazy)
-      gridItems.forEach((item) => {
-        const codeId = item.getAttribute('code-id');
-        const dataObj = galleryData.find(obj => obj[codeId]);
-        if (dataObj) {
-          const codeData = dataObj[codeId];
-          const thumbLow = codeData["thumbnail-item"]["thumbnail-src-01"];
-          item.setAttribute("data-src", thumbLow);
-          if (codeData["info-t"] && codeData["info-t"].title) {
-            item.setAttribute("alt", codeData["info-t"].title);
-
-            // Añadir el título al banner usando el content de .imgThover::before
-            // Buscar el .imgThover hermano dentro del mismo .hover-wrap
-            const hoverWrap = item.closest('.hover-wrap');
-            if (hoverWrap) {
-              const imgThover = hoverWrap.querySelector('.imgThover');
-              if (imgThover) {
-                imgThover.setAttribute('data-title', codeData["info-t"].title);
-                // El CSS debe usar: .imgThover::before { content: attr(data-title); }
-              }
-            }
-          }
-        }
-      });
-
-      // Función para crear botones de miniaturas
-      function createThumbnailButtons(codeData) {
-        thumbnailsContainer.innerHTML = '';
-        const fullImgVariants = codeData["full-img"];
-        const variantCount = Object.keys(fullImgVariants).length;
-
-        if (variantCount <= 1) {
-          thumbnailsContainer.style.display = 'none';
-          return;
-        }
-        thumbnailsContainer.style.display = 'flex';
-
-        for (let i = 1; i <= variantCount; i++) {
-          const btnNumber = i.toString().padStart(2, '0');
-          const btn = document.createElement('div');
-          btn.className = `img-thumbnail-${btnNumber}`;
-          btn.addEventListener('click', () => {
-            console.log(`[BTN] Click en botón variante: ${btnNumber}`);
-            switchImage(currentImageCode, btnNumber, true);
-          });
-          thumbnailsContainer.appendChild(btn);
-        }
-        // Activar primer botón
-        const firstBtn = thumbnailsContainer.firstChild;
-        if (firstBtn) firstBtn.classList.add('active');
-      }
-
-      // Función para cambiar imagen en el visor
-      function switchImage(codeId, thumbnailNumber, fromButton = false) {
-        const codeData = galleryData.find(obj => obj[codeId])[codeId];
-        const lowResSrc = codeData["thumbnail-item"][`thumbnail-src-${thumbnailNumber}`];
-        const highResSrc = codeData["full-img"][`thumbnail-src-${thumbnailNumber}`];
-
-        // Actualizar botones activos
-        document.querySelectorAll('.thumbnails-BTN div').forEach(btn => {
-          btn.classList.remove('active');
-        });
-        const activeBtn = document.querySelector(`.img-thumbnail-${thumbnailNumber}`);
-        if (activeBtn) activeBtn.classList.add('active');
-
-        // Cargar imagen de baja resolución primero
-        galleryExpand.src = "src/placeholder.webp";
-        const imgLow = new Image();
-        imgLow.src = lowResSrc;
-        imgLow.onload = () => {
-          galleryExpand.src = lowResSrc;
-          console.log(`[VISOR] Imagen baja resolución cargada: ${lowResSrc} (variante: thumbnail-src-${thumbnailNumber}, code: ${codeId})`);
-          // Cargar imagen de alta resolución en segundo plano
-          const imgPreload = new Image();
-          imgPreload.src = highResSrc;
-          imgPreload.onload = () => {
-            galleryExpand.src = highResSrc;
-            console.log(`[VISOR] Imagen ALTA resolución cargada: ${highResSrc} (variante: thumbnail-src-${thumbnailNumber}, code: ${codeId})`);
-          };
-        };
-      }
-
-      // Evento click para imágenes de la galería
-      gridItems.forEach((item) => {
-        item.addEventListener("click", function () {
-          const codeId = this.getAttribute('code-id');
-          if (codeId && galleryData.find(obj => obj[codeId])) {
-            currentImageCode = codeId;
-            const codeData = galleryData.find(obj => obj[codeId])[codeId];
-            createThumbnailButtons(codeData);
-
-            // Precargar todas las variantes de baja resolución al abrir el visor
-            const lowResVariants = codeData["thumbnail-item"];
-            Object.entries(lowResVariants).forEach(([variant, url]) => {
-              const img = new Image();
-              img.src = url;
-              img.onload = () => {
-                console.log(`[PRECARGA] Variante baja resolución lista: ${url} (${variant}, code: ${codeId})`);
-              };
-            });
-
-            switchImage(codeId, '01');
-            galleryExpandController.style.display = "flex";
-            cursorAnim.style.display = "none";
-            document.body.style.overflow = "hidden";
-          }
-        });
-      });
-
-      // Evento cerrar visor
-      galleryExpandBtn.addEventListener("click", function () {
-        galleryExpandController.style.display = "none";
-        cursorAnim.style.display = "block";
-        document.body.style.overflow = "";
-        currentImageCode = null;
-      });
-    });
-  </script>
-
-  <!-- Lazy Gallery -->
-  <script>
-    window.addEventListener("load", function () {
-      const images = Array.from(document.querySelectorAll(".grid-item"));
-      const hasLoadedBefore = sessionStorage.getItem("imagesLoaded");
+      const hasLoadedBefore = sessionStorage.getItem("imagesLoaded") === "true";
 
       if (hasLoadedBefore) {
-        // Segunda vez en adelante: asigna src directo a todos
-        images.forEach(img => {
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-          }
-        });
-        return;
+        console.log("[LazyGallery] Segunda visita → asignando en secuencia sin bloquear");
+      } else {
+        console.log("[LazyGallery] Primera visita → placeholders visibles y reemplazo secuencial");
       }
 
-      // Primera vez: carga secuencial
       let index = 0;
 
       function loadNext() {
         if (index >= images.length) {
-          // Marca que ya se cargaron todas
+          console.log("[LazyGallery] Terminó la secuencia.");
           sessionStorage.setItem("imagesLoaded", "true");
           return;
         }
 
-        const img = images[index];
-        const src = img.dataset.src;
+        const el = images[index];
+        const realSrc = el.getAttribute("data-src");
 
-        if (!src) {
+        // Si no hay data-src, sigue sin bloquear
+        if (!realSrc) {
           index++;
-          loadNext();
+          setTimeout(loadNext, 0);
           return;
         }
 
-        // Asigna el src de inmediato para que pinte
-        img.src = src;
-
-        // Preload para controlar la secuencia
+        // Preload: mantener placeholder (src actual) hasta que esté lista
         const preload = new Image();
+        preload.decoding = "async";
         preload.onload = () => {
-          index++;
-          loadNext();
+          // Ceder un microturno al event loop para que el navegador pinte antes del swap
+          setTimeout(() => {
+            el.src = realSrc; // reemplaza el placeholder
+            el.classList.add("loaded");
+            console.log(`[LazyGallery] #${index} → reemplazado: ${realSrc}`);
+            index++;
+            setTimeout(loadNext, 0);
+          }, 0);
         };
         preload.onerror = () => {
+          console.warn(`[LazyGallery] #${index} error: ${realSrc}. Continúo.`);
           index++;
-          loadNext();
+          setTimeout(loadNext, 0);
         };
-        preload.src = src;
+
+        // Timeout defensivo por si onload nunca llega
+        const timeoutMs = 12000;
+        const timer = setTimeout(() => {
+          console.warn(`[LazyGallery] #${index} timeout (${timeoutMs}ms): ${realSrc}. Forzando avance.`);
+          index++;
+          setTimeout(loadNext, 0);
+        }, timeoutMs);
+
+        preload.onload = ((orig) => (...args) => {
+          clearTimeout(timer);
+          orig(...args);
+        })(preload.onload);
+
+        preload.onerror = ((orig) => (...args) => {
+          clearTimeout(timer);
+          orig(...args);
+        })(preload.onerror);
+
+        // Iniciar carga en memoria
+        preload.src = realSrc;
       }
 
-      loadNext();
+      // Arrancar sin bloquear el primer render
+      setTimeout(loadNext, 0);
     });
   </script>
+
+
+
+
+
+  <!--Gallery Visor Alternatives-->
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      try {
+        const response = await fetch("gallery-database.json");
+        const galleryData = await response.json();
+
+        const gridItems = document.querySelectorAll("img.grid-item.imgGhover");
+        const galleryExpandController = document.getElementById("galleryExpandController");
+        const galleryExpand = document.getElementById("galleryExpand");
+        const galleryExpandBtn = document.getElementById("galleryExpandBtn");
+        const thumbnailsContainer = document.querySelector(".thumbnails-BTN");
+        const cursorAnim = document.querySelector(".cursor-circle");
+
+        let currentImageCode = null;
+
+        // Poblar data-src y alt para el grid
+        gridItems.forEach((item, i) => {
+          const codeId = item.getAttribute("code-id");
+          const dataObj = galleryData.find(obj => obj[codeId]);
+          if (!dataObj) {
+            console.warn(`[Visor] No hay datos para code-id=${codeId} (#${i})`);
+            return;
+          }
+          const codeData = dataObj[codeId];
+          const thumbLow = codeData["thumbnail-item"]["thumbnail-src-01"];
+          if (thumbLow) item.setAttribute("data-src", thumbLow);
+
+          const title = codeData?.["info-t"]?.title;
+          if (title) {
+            item.setAttribute("alt", title);
+            const hoverWrap = item.closest(".hover-wrap");
+            const imgThover = hoverWrap ? hoverWrap.querySelector(".imgThover") : null;
+            if (imgThover) imgThover.setAttribute("data-title", title);
+          }
+        });
+
+        // Avisar al lazy que ya hay data-src en el DOM
+        document.dispatchEvent(new Event("galleryDataReady"));
+        console.log("[Visor] Disparado galleryDataReady");
+
+        // ---- Lógica del visor (clic en cada card) ----
+        function createThumbnailButtons(codeData) {
+          thumbnailsContainer.innerHTML = "";
+          const fullImgVariants = codeData["full-img"];
+          const variantCount = Object.keys(fullImgVariants).length;
+
+          if (variantCount <= 1) {
+            thumbnailsContainer.style.display = "none";
+            return;
+          }
+          thumbnailsContainer.style.display = "flex";
+
+          for (let i = 1; i <= variantCount; i++) {
+            const btnNumber = i.toString().padStart(2, "0");
+            const btn = document.createElement("div");
+            btn.className = `img-thumbnail-${btnNumber}`;
+            btn.addEventListener("click", () => {
+              switchImage(currentImageCode, btnNumber);
+            });
+            thumbnailsContainer.appendChild(btn);
+          }
+          const firstBtn = thumbnailsContainer.firstChild;
+          if (firstBtn) firstBtn.classList.add("active");
+        }
+
+        function switchImage(codeId, thumbnailNumber) {
+          const codeData = galleryData.find(obj => obj[codeId])[codeId];
+          const lowResSrc = codeData["thumbnail-item"][`thumbnail-src-${thumbnailNumber}`];
+          const highResSrc = codeData["full-img"][`thumbnail-src-${thumbnailNumber}`];
+
+          document.querySelectorAll(".thumbnails-BTN div").forEach(btn => btn.classList.remove("active"));
+          const activeBtn = document.querySelector(`.img-thumbnail-${thumbnailNumber}`);
+          if (activeBtn) activeBtn.classList.add("active");
+
+          // Placeholder del visor siempre visible
+          galleryExpand.src = "src/placeholder.webp";
+
+          const imgLow = new Image();
+          imgLow.decoding = "async";
+          imgLow.onload = () => {
+            galleryExpand.src = lowResSrc;
+            const imgPreload = new Image();
+            imgPreload.decoding = "async";
+            imgPreload.onload = () => {
+              galleryExpand.src = highResSrc;
+            };
+            imgPreload.src = highResSrc;
+          };
+          imgLow.src = lowResSrc;
+        }
+
+        gridItems.forEach((item) => {
+          item.addEventListener("click", function () {
+            const codeId = this.getAttribute("code-id");
+            const dataObj = galleryData.find(obj => obj[codeId]);
+            if (!codeId || !dataObj) return;
+
+            currentImageCode = codeId;
+            const codeData = dataObj[codeId];
+            createThumbnailButtons(codeData);
+
+            // Precargar variantes de baja resolución (no bloquea el visor)
+            Object.values(codeData["thumbnail-item"]).forEach(url => {
+              const img = new Image();
+              img.decoding = "async";
+              img.src = url;
+            });
+
+            switchImage(codeId, "01");
+            galleryExpandController.style.display = "flex";
+            cursorAnim.style.display = "none";
+            document.body.style.overflow = "hidden";
+          });
+        });
+
+        galleryExpandBtn.addEventListener("click", function () {
+          galleryExpandController.style.display = "none";
+          cursorAnim.style.display = "block";
+          document.body.style.overflow = "";
+          currentImageCode = null;
+        });
+      } catch (e) {
+        console.error("[Visor] Error cargando gallery-database.json:", e);
+        // Aun así dispara el evento para que el lazy no quede esperando
+        document.dispatchEvent(new Event("galleryDataReady"));
+      }
+    });
+  </script>
+
+
+
+
+
 
 
 
