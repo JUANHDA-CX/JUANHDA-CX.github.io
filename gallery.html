@@ -334,15 +334,7 @@
       const images = Array.from(document.querySelectorAll(".grid-item"));
       const hasLoadedBefore = sessionStorage.getItem("imagesLoaded");
 
-      // Verifica si ya están en cache
-      const cachedImages = performance.getEntriesByType("resource").filter(entry =>
-        entry.initiatorType === "img" &&
-        images.some(img => img.dataset.src === entry.name)
-      );
-
-      const useCache = hasLoadedBefore && cachedImages.length > 0;
-
-      if (useCache) {
+      if (hasLoadedBefore) {
         // Segunda vez en adelante: asigna src directo
         images.forEach(img => {
           if (img.dataset.src) img.src = img.dataset.src;
@@ -361,22 +353,15 @@
               return;
             }
 
-            // Asigna el src de inmediato para que pinte
-            img.src = src;
+            img.src = src; // asigna de inmediato
 
-            // Preload para controlar la secuencia
             const preload = new Image();
             preload.src = src;
-            preload.onload = () => {
-              index++;
-              loadNext();
-            };
-            preload.onerror = () => {
+            preload.onload = preload.onerror = () => {
               index++;
               loadNext();
             };
           } else {
-            // Marca que ya se cargaron todas
             sessionStorage.setItem("imagesLoaded", "true");
           }
         }
@@ -384,8 +369,8 @@
         loadNext();
       }
     });
-  </script>
 
+  </script>
 
 
 
