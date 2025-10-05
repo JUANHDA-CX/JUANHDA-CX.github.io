@@ -194,28 +194,27 @@
   </script>
 
 
-
   <!--Lazzy Gallery2-->
   <script>
     document.addEventListener("galleryDataReady", function () {
-      console.log("[LazyGallery] Iniciando secuencia…");
+      //console.log("[LazyGallery] Iniciando secuencia…");
 
       const images = Array.from(document.querySelectorAll("img.grid-item"));
-      console.log("[LazyGallery] Imágenes encontradas:", images.length);
+      //console.log("[LazyGallery] Imágenes encontradas:", images.length);
 
       const hasLoadedBefore = sessionStorage.getItem("imagesLoaded") === "true";
 
       if (hasLoadedBefore) {
-        console.log("[LazyGallery] Segunda visita → asignando en secuencia sin bloquear");
+        //console.log("[LazyGallery] Segunda visita → asignando en secuencia sin bloquear");
       } else {
-        console.log("[LazyGallery] Primera visita → placeholders visibles y reemplazo secuencial");
+        //console.log("[LazyGallery] Primera visita → placeholders visibles y reemplazo secuencial");
       }
 
       let index = 0;
 
       function loadNext() {
         if (index >= images.length) {
-          console.log("[LazyGallery] Terminó la secuencia.");
+          //console.log("[LazyGallery] Terminó la secuencia.");
           sessionStorage.setItem("imagesLoaded", "true");
           return;
         }
@@ -238,7 +237,7 @@
           setTimeout(() => {
             el.src = realSrc; // reemplaza el placeholder
             el.classList.add("loaded");
-            console.log(`[LazyGallery] #${index} → reemplazado: ${realSrc}`);
+            //console.log(`[LazyGallery] #${index} → reemplazado: ${realSrc}`);
             index++;
             setTimeout(loadNext, 0);
           }, 0);
@@ -275,9 +274,6 @@
       setTimeout(loadNext, 0);
     });
   </script>
-
-
-
 
 
   <!--Gallery Visor Alternatives-->
@@ -319,7 +315,7 @@
 
         // Avisar al lazy que ya hay data-src en el DOM
         document.dispatchEvent(new Event("galleryDataReady"));
-        console.log("[Visor] Disparado galleryDataReady");
+        //console.log("[Visor] Disparado galleryDataReady");
 
         // ---- Lógica del visor (clic en cada card) ----
         function createThumbnailButtons(codeData) {
@@ -409,13 +405,6 @@
       }
     });
   </script>
-
-
-
-
-
-
-
 
 
 </head>
@@ -967,8 +956,6 @@
 
 
       </main>
-
-
 
 
       <footer>
