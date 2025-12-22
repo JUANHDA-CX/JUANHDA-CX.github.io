@@ -6,264 +6,264 @@
 
   // === SETTINGS ===
   const config = {
-    // mobile : PC
     darkSnowPath: "./src/snowflakeWhite.svg",
     whiteSnowPath: "./src/snowflakeDark.svg",
-    amount: isMobile ? 25 : 100,
-    baseSpeed: isMobile ? 1.0 : 1.25,
-    windAngle: 85, // degrees
+    amount: isMobile ? 30 : 120, // Un poco más de cantidad
+    baseSpeed: 50, // Pixeles por segundo (adaptado a Delta Time)
+    windAngle: 85,
     turbulence: isMobile ? 0.5 : 1.0,
-    maxRotationSpeed: 0.045,
-    minSize: 10,
-    maxSize: 25,
-    minOpacity: 0.1,
-    maxOpacity: 0.4,
-    zIndex: 3,
+    maxRotationSpeed: 2.0, // Radianes por segundo
+    minSize: 8,
+    maxSize: 26,
+    minOpacity: 0.2,
+    maxOpacity: 0.8,
+    zIndex: 9999, // Asegurar que se vea
   };
 
-  let canvas, ctx, cssWidth, cssHeight, pxWidth, pxHeight;
+  let canvas, ctx, cssWidth, cssHeight;
   const flakes = [];
-  let windVec = getWindVector(config.windAngle);
 
-  // Images storage
+  // Pre-calcular vector de viento normalizado
+  let windVec = { x: 0, y: 0 };
+  updateWindVector(config.windAngle);
+
+  // Imágenes
   const imgWhite = new Image();
   const imgDark = new Image();
-  let currentImage = null;
-  let currentThemeCache = "";
-  let bitmapWhite = null;
-  let bitmapDark = null;
+  let currentImage = null; // La imagen activa (bitmap o elemento)
 
-  // Control status
-  let running = true;
+  // Control de tiempo (Delta Time)
+  let lastTime = 0;
+  let running = false;
   let rafId = null;
   let resizeTimer = null;
-  let prevWidth = window.innerWidth;
 
-  // --- Winds preload ---
-  function getWindVector(angleDeg) {
+  // --- Helpers ---
+  function updateWindVector(angleDeg) {
     const rad = (angleDeg * Math.PI) / 180;
-    // Normalize to 1
-    const x = Math.cos(rad);
-    const y = Math.sin(rad);
-    const mag = Math.hypot(x, y) || 1;
-    return { x: x / mag, y: y / mag };
+    windVec.x = Math.cos(rad);
+    windVec.y = Math.sin(rad);
   }
 
-  // --- Theme status ---
-  function detectImageByTheme() {
+  // --- Gestión de Tema (Optimizado) ---
+  // Eliminamos el polling y usamos eventos o llamadas directas
+  function getThemeImage() {
     const theme = localStorage.getItem("theme") || "light";
-    currentThemeCache = theme;
-    return theme === "dark" ? bitmapWhite || imgWhite : bitmapDark || imgDark;
+    return theme === "dark" ? imgWhite : imgDark;
   }
 
-  function updateThemeIfChanged() {
-    const currentTheme = localStorage.getItem("theme") || "light";
-    if (currentTheme !== currentThemeCache) {
-      currentThemeCache = currentTheme;
-      currentImage = detectImageByTheme();
-    }
+  function updateTheme() {
+    currentImage = getThemeImage();
   }
 
-  window.updateSnowTheme = function () {
-    updateThemeIfChanged();
-  };
+  // Exponer función global para que tu UI la llame al cambiar el toggle
+  window.updateSnowTheme = updateTheme;
 
-  // --- Setup canvas DPR ---
+  // --- Configuración Canvas ---
   function createCanvas() {
     canvas = document.createElement("canvas");
-    canvas.id = "canvas-nieve-navidad"; // ID kept as is to preserve potential CSS styling
-    canvas.style.position = "fixed";
-    canvas.style.top = "0";
-    canvas.style.left = "0";
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
-    canvas.style.pointerEvents = "none";
-    canvas.style.zIndex = config.zIndex;
+    canvas.id = "canvas-nieve-navidad";
+    Object.assign(canvas.style, {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      width: "100%",
+      height: "100%",
+      pointerEvents: "none",
+      zIndex: config.zIndex,
+    });
     document.body.appendChild(canvas);
-    ctx = canvas.getContext("2d", { alpha: true });
-    adjustSizes();
+    ctx = canvas.getContext("2d", { alpha: true, desynchronized: true });
+    // 'desynchronized' ayuda a reducir latencia en algunos navegadores
+
+    resize();
   }
 
-  function adjustSizes() {
+  function resize() {
     cssWidth = window.innerWidth;
     cssHeight = window.innerHeight;
-    pxWidth = Math.floor(cssWidth * dpr);
-    pxHeight = Math.floor(cssHeight * dpr);
-    canvas.width = pxWidth;
-    canvas.height = pxHeight;
-    // Transform draw CSS, rendering at pixels
+
+    // Evitamos reasignar width/height si no cambiaron drásticamente para no parpadear
+    canvas.width = Math.floor(cssWidth * dpr);
+    canvas.height = Math.floor(cssHeight * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  // --- Flake Class ---
+  // --- Clase Copo ---
   class Flake {
-    constructor(start = true) {
-      this.init(start);
+    constructor() {
+      this.init(true);
     }
 
-    init(start = false) {
-      // Initial position
+    init(randomY = false) {
       this.x = Math.random() * cssWidth;
-      this.y = start ? Math.random() * cssHeight : -config.maxSize;
+      this.y = randomY ? Math.random() * cssHeight : -config.maxSize - 10;
 
-      // Size and speed
-      this.size =
-        Math.random() * (config.maxSize - config.minSize) + config.minSize;
-      this.speed = (Math.random() * 0.5 + 0.8) * config.baseSpeed;
+      // PARALAJE: El tamaño define la velocidad y opacidad.
+      // Más grande = Más cerca = Más rápido y visible.
+      const depth = Math.random(); // 0 (lejos) a 1 (cerca)
 
-      // Smooth lateral movement
+      this.size = config.minSize + depth * (config.maxSize - config.minSize);
+
+      // Velocidad basada en profundidad (depth)
+      const speedMult = 0.5 + depth * 0.8;
+      this.speed = config.baseSpeed * speedMult;
+
+      // Turbulencia
       this.turbulenceAngle = Math.random() * Math.PI * 2;
-      this.turbulenceSpeed = Math.random() * 0.05 + 0.01;
-      this.amplitude = Math.random() * config.turbulence;
+      this.turbulenceSpeed = (0.5 + Math.random()) * 2; // Rads por segundo
+      this.amplitude = config.turbulence * (depth * 20); // Más amplitud si está cerca
 
-      // Rotation
+      // Rotación
       this.rotation = Math.random() * Math.PI * 2;
-      this.spinSpeed = (Math.random() * 2 - 1) * config.maxRotationSpeed;
+      this.spinSpeed = (Math.random() - 0.5) * config.maxRotationSpeed;
 
-      // Opacity
-      this.globalAlpha =
-        Math.random() * (config.maxOpacity - config.minOpacity) +
-        config.minOpacity;
+      this.alpha =
+        config.minOpacity + depth * (config.maxOpacity - config.minOpacity);
     }
 
-    update() {
-      this.turbulenceAngle += this.turbulenceSpeed;
-      const oscillation = Math.cos(this.turbulenceAngle) * this.amplitude;
+    update(dt) {
+      // Avanzar ángulo de turbulencia
+      this.turbulenceAngle += this.turbulenceSpeed * dt;
 
-      this.x += windVec.x * this.speed + oscillation;
-      this.y += windVec.y * this.speed;
-      this.rotation += this.spinSpeed;
+      // Movimiento
+      const sway = Math.cos(this.turbulenceAngle) * this.amplitude * dt; // Oscilación lateral
+      const windX = windVec.x * this.speed * dt;
+      const windY = windVec.y * this.speed * dt;
 
-      // Smooth recycling
-      const margin = config.maxSize + 10;
-      if (this.x > cssWidth + margin) this.x = -margin;
-      else if (this.x < -margin) this.x = cssWidth + margin;
+      this.x += windX + sway;
+      this.y += windY; // Gravedad/Viento vertical
 
-      if (this.y > cssHeight + margin) this.y = -margin;
-      else if (this.y < -margin) this.y = cssHeight + margin;
+      this.rotation += this.spinSpeed * dt;
+
+      // Reciclaje (Resetear si sale de pantalla)
+      const buffer = config.maxSize + 20;
+
+      // Chequeo límites optimizado
+      if (this.y > cssHeight + buffer) {
+        this.init(false); // Reiniciar arriba
+      } else if (this.x > cssWidth + buffer) {
+        this.x = -buffer;
+      } else if (this.x < -buffer) {
+        this.x = cssWidth + buffer;
+      }
     }
 
     draw() {
-      const img = currentImage;
-      if (!img) return;
+      // Pequeña optimización: No dibujar si está fuera de vista (aunque el update lo maneja)
+      if (this.y < -config.maxSize * 2) return;
+
       ctx.save();
-      ctx.globalAlpha = this.globalAlpha;
+      ctx.globalAlpha = this.alpha;
       ctx.translate(this.x, this.y);
       ctx.rotate(this.rotation);
-      ctx.drawImage(img, -this.size / 2, -this.size / 2, this.size, this.size);
+      // Dibujamos centrado
+      ctx.drawImage(
+        currentImage,
+        -this.size / 2,
+        -this.size / 2,
+        this.size,
+        this.size
+      );
       ctx.restore();
     }
   }
 
-  // --- Resize with debounce and intelligence ---
-  function onResize() {
-    if (resizeTimer) return;
-    resizeTimer = setTimeout(() => {
-      resizeTimer = null;
-      const newWidth = window.innerWidth;
-      const newHeight = window.innerHeight;
-
-      const widthChanged = newWidth !== prevWidth;
-      prevWidth = newWidth;
-
-      adjustSizes();
-
-      // Redistribute only if width changed (rotation/spin) or large variation
-      if (widthChanged || Math.abs(newHeight - cssHeight) > 60) {
-        for (let i = 0; i < flakes.length; i++) flakes[i].init(true);
-      }
-    }, 120); // Short debounce to avoid too many calculations
-  }
-
-  // --- Loop and visibility ---
-  function loop() {
+  // --- Loop Principal ---
+  function loop(timestamp) {
     if (!running) return;
+
+    // Calcular Delta Time (dt) en segundos
+    // Limitamos dt para evitar saltos enormes si la pestaña estuvo inactiva
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.1);
+    lastTime = timestamp;
+
     ctx.clearRect(0, 0, cssWidth, cssHeight);
+
+    // Iteración inversa (micro-optimización en JS, aunque hoy día V8 lo maneja bien)
+    // Usamos for clásico que es más rápido que forEach
     for (let i = 0; i < flakes.length; i++) {
-      const f = flakes[i];
-      f.update();
-      f.draw();
+      flakes[i].update(dt);
+      flakes[i].draw();
     }
+
     rafId = requestAnimationFrame(loop);
   }
 
+  // --- Eventos y Control ---
+  function onResize() {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      // Solo reiniciamos tamaños, no los copos (para que no desaparezcan de golpe)
+      const oldH = cssHeight;
+      resize();
+      // Si la pantalla creció mucho verticalmente, quizás queramos rellenar huecos,
+      // pero por fluidez es mejor dejar que caigan.
+    }, 200);
+  }
+
   function onVisibilityChange() {
-    const hidden = document.hidden;
-    if (hidden) {
+    if (document.hidden) {
       running = false;
-      if (rafId) cancelAnimationFrame(rafId);
+      cancelAnimationFrame(rafId);
     } else {
       running = true;
+      lastTime = performance.now();
       rafId = requestAnimationFrame(loop);
     }
   }
 
-  // --- Start ---
+  // --- Inicialización ---
   async function init() {
-    if (!document.body) {
-      requestAnimationFrame(init);
-      return;
-    }
-
     createCanvas();
 
-    // Load images with decode and createImageBitmap
-    imgWhite.src = config.whiteSnowPath;
-    imgDark.src = config.darkSnowPath;
+    // Cargar imágenes
+    const p1 = new Promise((r) => {
+      imgWhite.onload = r;
+      imgWhite.src = config.whiteSnowPath;
+    });
+    const p2 = new Promise((r) => {
+      imgDark.onload = r;
+      imgDark.src = config.darkSnowPath;
+    });
 
+    // Esperar a que carguen (evita parpadeo inicial)
     try {
-      await imgWhite.decode();
-    } catch {}
-    try {
-      await imgDark.decode();
-    } catch {}
+      await Promise.all([p1, p2]);
+    } catch (e) {
+      console.warn("Error cargando nieve", e);
+    }
 
-    try {
-      bitmapWhite = await createImageBitmap(imgWhite);
-    } catch {}
-    try {
-      bitmapDark = await createImageBitmap(imgDark);
-    } catch {}
+    // Usamos createImageBitmap si está disponible para mejor rendimiento GPU
+    // NOTA: Para simplificar y evitar problemas de CORS o compatibilidad SVG,
+    // usamos el objeto Image directamente que es muy rápido una vez cacheado.
 
-    currentImage = detectImageByTheme();
+    updateTheme();
 
-    // Precalculate wind (if you want to animate wind later, update windVec)
-    windVec = getWindVector(config.windAngle);
+    // Crear copos
+    for (let i = 0; i < config.amount; i++) {
+      flakes.push(new Flake());
+    }
 
-    // Create flakes
-    for (let i = 0; i < config.amount; i++) flakes.push(new Flake(true));
-
-    // Events
+    // Listeners
     window.addEventListener("resize", onResize, { passive: true });
     document.addEventListener("visibilitychange", onVisibilityChange, {
       passive: true,
     });
 
-    // If theme changes in another tab
+    // Listener de almacenamiento (para pestañas cruzadas)
     window.addEventListener(
       "storage",
-      function (e) {
-        if (e.key === "theme") updateThemeIfChanged();
+      (e) => {
+        if (e.key === "theme") updateTheme();
       },
       { passive: true }
     );
 
-    // Lightweight poll in case your UI doesn't emit events (you can remove it if using updateSnowTheme())
-    const themeInterval = setInterval(updateThemeIfChanged, 100);
-
-    // Start
+    // Arrancar
     running = true;
-    loop();
-
-    // Optional cleanup when page unloads
-    window.addEventListener(
-      "beforeunload",
-      () => {
-        clearInterval(themeInterval);
-        cancelAnimationFrame(rafId);
-      },
-      { passive: true }
-    );
+    lastTime = performance.now();
+    rafId = requestAnimationFrame(loop);
   }
 
   if (document.readyState === "loading") {
