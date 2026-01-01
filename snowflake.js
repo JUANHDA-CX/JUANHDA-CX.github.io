@@ -70,7 +70,7 @@
       zIndex: config.zIndex,
     });
     document.body.appendChild(canvas);
-    ctx = canvas.getContext("2d", { alpha: true, desynchronized: true });
+    ctx = canvas.getContext("2d", { alpha: true });
 
     resize();
   }
