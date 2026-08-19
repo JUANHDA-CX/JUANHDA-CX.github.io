@@ -176,8 +176,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     function initializeAnimations(configs) {
+        if (typeof rive === "undefined") return; // CDN caída: degradar sin error
         configs.forEach(config => {
-            createRiveInstance(config);
+            try {
+                createRiveInstance(config);
+            } catch (err) {
+                console.warn("Rive no disponible para", config.canvasId, err);
+            }
         });
     }
 
