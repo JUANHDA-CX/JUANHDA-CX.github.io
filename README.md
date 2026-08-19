@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-  Personal portfolio website of Juan David Tovar Muñoz — 3D artist, web developer and designer
+  Personal portfolio website of JUANHDA CX — 3D artist, web developer and designer
 </h3>
 
 <p align="center">
