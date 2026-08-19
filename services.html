@@ -50,6 +50,33 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollSmoother.min.js" defer></script>
   <script src="anim.js" defer></script>
 
+  <!--Cierre de modales: Escape o clic en el fondo oscuro-->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const modals = document.querySelectorAll(".w3-modal");
+
+      function closeModal(modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key !== "Escape") return;
+        modals.forEach(function (m) {
+          if (m.style.display === "flex") closeModal(m);
+        });
+      });
+
+      modals.forEach(function (m) {
+        m.addEventListener("click", function (event) {
+          // Solo si el clic fue directamente sobre el fondo oscuro,
+          // no sobre la tarjeta ni sus hijos.
+          if (event.target === m) closeModal(m);
+        });
+      });
+    });
+  </script>
+
   <!--<script src="snowflake.js"></script>-->
 
 </head>
