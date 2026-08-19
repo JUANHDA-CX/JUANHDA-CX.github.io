@@ -2,40 +2,65 @@
 <html lang="es">
 
 <head>
+  <script>
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark-mode");
+      }
+      if (localStorage.getItem("language") === "English") {
+        document.documentElement.lang = "en";
+      }
+    })();
+  </script>
+  <script>
+    // Loader safety net: if DOMContentLoaded never fires (hung resource), hide it anyway
+    setTimeout(function () {
+      var l = document.querySelector(".loader");
+      if (l && l.className.indexOf("hidden") === -1) l.className += " hidden";
+    }, 2000);
+  </script>
   <meta id="theme-color-meta" name="theme-color" content="cccccc" data-light-color="#b8b9ff">
   <meta charset="utf-8" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <link rel="canonical" href="https://juanhda-cx.github.io/services.html">
   <meta name="description"
-    content="Mega CX Studios, servicios de diseño web, modelado 3D, edición de video y más. ¡Bienvenido!" />
-  <meta name="description"
-    content="Mega CX Studios, web design services, 3D modeling, video editing, and more. Welcome!" />
-  <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D Model, Web, Programs, Software" />
+    content="Descubre los servicios de Mega CX Studios: diseño web, modelado 3D, edición de video, fotografía y desarrollo." />
   <meta name="keywords"
     content="Edición de Video, Edición de Fotos, Juegos, Películas, Diseño, Modelado 3D, Web, Programas, Software" />
   <!-- Metaetiquetas - Open Graph -->
   <meta property="og:title" content="Servicios | Mega CX Studios" />
   <meta property="og:description"
     content="Mega CX Studios, servicios de diseño web, modelado 3D, edición de video y más. ¡Bienvenido!" />
-  <meta property="og:image" content="src/mega_v4_notCX.webp" />
-  <meta property="og:url" content="contact.html" />
+  <meta property="og:image" content="https://juanhda-cx.github.io/src/mega_v4_notCX.webp" />
+  <meta property="og:url" content="https://juanhda-cx.github.io/services.html" />
   <meta name="author" content="Mega CX" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mega CX Studios | Services</title>
+  <title>Mega CX Studios | Servicios</title>
   <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-  <link rel="icon" href="icons/favicon_services.png" type="image/x-icon" />
-  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
-  <script src="main.js"></script>
-  <script src="menuMobile.js"></script>
+  <link rel="icon" href="icons/favicon_services.png" type="image/png" />
+  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous" defer></script>
+  <script src="main.js" defer></script>
+  <script src="menuMobile.js" defer></script>
   <!--GSAP-->
-  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/SplitText.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/TextPlugin.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollSmoother.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/TextPlugin.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollSmoother.min.js" defer></script>
+  <script src="anim.js" defer></script>
+
+  <!--<script src="snowflake.js"></script>-->
 
 </head>
 
 <body class="palette_two">
+  <script>
+    // Anti-FOUC: copia el tema al body antes del primer paint (body.dark-mode)
+    if (document.documentElement.classList.contains("dark-mode")) {
+      document.body.classList.add("dark-mode");
+    }
+  </script>
   <div id="scroll"></div>
   <div id="smooth-wrapper">
     <div id="smooth-content">
@@ -45,28 +70,28 @@
           <div class="Nav-Component backdrop palette_two">
             <nav class="Nav-PrimaryH">
               <ul>
-                <li onclick="window.location.href='index.html';">
+                <li>
                   <a href="index.html" class="audioclick">
                     <i class="fa-solid fa-house"></i>
                     <span class="menu-spanish">Inicio</span>
                     <span class="menu-english">Home</span>
                   </a>
                 </li>
-                <li onclick="window.location.href='services.html';">
+                <li>
                   <a href="services.html" class="audioclick">
                     <i class="fa-solid fa-user-gear"></i>
                     <span class="menu-spanish">Servicios</span>
                     <span class="menu-english">Services</span>
                   </a>
                 </li>
-                <li onclick="window.location.href='gallery.html';">
+                <li>
                   <a href="gallery.html" class="audioclick">
                     <i class="fa-solid fa-images"></i>
                     <span class="menu-spanish">Galería</span>
                     <span class="menu-english">Gallery</span>
                   </a>
                 </li>
-                <li onclick="window.location.href='contact.html';">
+                <li>
                   <a href="contact.html" class="audioclick">
                     <i class="fa-solid fa-envelope-open-text"></i>
                     <span class="menu-spanish">Contacto</span>
@@ -531,11 +556,14 @@
             <div id="language-switch-button"></div>
           </div>
           <br /><br />
-          <p class="spanish">Todos los derechos reservados @2025 [MMXXV]</p>
-          <p class="english">All rights reserved @2025 [MMXXV]</p>
+          <p class="spanish">Todos los derechos reservados ©2026 [MMXXVI]</p>
+          <p class="english">All rights reserved ©2026 [MMXXVI]</p>
           <br />
           <p class="spanish">Creado por JUANHDA CX.</p>
           <p class="english">Created by JUANHDA CX.</p>
+          <br />
+          <p class="spanish">Versión 3.6</p>
+          <p class="english">Version 3.6</p>
           <br />
           <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
           <p></p>
@@ -543,12 +571,15 @@
       </footer>
     </div>
   </div>
+
+  <button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup"
+      src="icons/arrow_to_up.svg" /></button>
+
+  <div class="cursor-circle"></div>
+  <div class="loader"></div>
+
 </body>
 
-<button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup"
-    src="icons/arrow_to_up.svg" /></button>
 
-<div class="cursor-circle"></div>
-<div class="loader"></div>
 
 </html>
