@@ -158,7 +158,7 @@ a {
 
 @media only screen and (min-width: 2500px) {
   .MainH1 {
-    margin-left: 25%;
+    margin-left: 15%;
   }
 }
 
@@ -1638,7 +1638,7 @@ footer {
 
 @media only screen and (min-width: 2500px) {
   footer {
-    height: 300pt;
+    height: auto;
     width: auto;
     margin-top: 200px;
     padding: 2%;
@@ -2236,8 +2236,7 @@ div strong a :hover div div {
     padding-left: 5%;
     padding-right: 5%;
     padding: 0;
-
-    width: 80%;
+    width: 70%;
     --auto-grid-min-size: 24rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
@@ -2350,7 +2349,9 @@ div strong a :hover div div {
 @media only screen and (min-width: 2500px) {
   .Box-style {
     width: auto;
-    height: 650px;
+    height: 750px;
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
 }
 
@@ -2588,6 +2589,14 @@ div strong a :hover div div {
   }
 }
 
+/*1440p Device*/
+@media only screen and (min-width: 1600px) {
+  .img-modal>img {
+    width: 600px;
+    height: 600px;
+  }
+}
+
 .w3-container {
   display: flex;
   height: 100%;
@@ -2600,7 +2609,7 @@ div strong a :hover div div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
+  margin: 10% 0 10% 0;
   font-size: 18px;
 }
 
@@ -2693,8 +2702,8 @@ div strong a :hover div div {
 @media only screen and (min-width: 2500px) {
   .w3-container span {
     font-size: 21px;
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
   }
 }
 
@@ -3081,7 +3090,7 @@ form {
     padding: 30px 30px 550px 30px;
     padding: 0;
     margin: auto;
-    margin-left: 25%;
+    margin-left: 15%;
   }
 }
 
@@ -4247,7 +4256,7 @@ table tr td {
 @media only screen and (min-width: 1400px) {
   #DOC {
     position: absolute;
-    top: 50%;
+    top: 42.5%;
     transform: translateY(-50%);
     right: 10%;
     left: auto;
