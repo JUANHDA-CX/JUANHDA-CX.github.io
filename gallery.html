@@ -1,40 +1,74 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
+  <script>
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark-mode");
+      }
+      if (localStorage.getItem("language") === "English") {
+        document.documentElement.lang = "en";
+      }
+    })();
+  </script>
+  <script>
+    // Loader safety net: if DOMContentLoaded never fires (hung resource), hide it anyway
+    setTimeout(function () {
+      var l = document.querySelector(".loader");
+      if (l && l.className.indexOf("hidden") === -1) l.className += " hidden";
+    }, 2000);
+  </script>
   <meta id="theme-color-meta" name="theme-color" content="cccccc" data-light-color="#a7ffba">
   <meta charset="utf-8" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <link rel="canonical" href="https://juanhda-cx.github.io/gallery.html">
   <meta name="description"
-    content="Mega CX Studios, servicios de diseño web, modelado 3D, edición de video y más. ¡Bienvenido!" />
-  <meta name="description"
-    content="Mega CX Studios, web design services, 3D modeling, video editing, and more. Welcome!" />
-  <meta name="keywords" content="Video Edit, Photo Edit, Games, Movies, Design, 3D Model, Web, Programs, Software" />
+    content="Explora el portafolio de Mega CX Studios: proyectos de diseño, modelado 3D, arte digital y más." />
   <meta name="keywords"
     content="Edición de Video, Edición de Fotos, Juegos, Películas, Diseño, Modelado 3D, Web, Programas, Software" />
   <!-- Metaetiquetas - Open Graph -->
-  <meta property="og:title" content="Galeria | Mega CX Studios" />
+  <meta property="og:title" content="Galería | Mega CX Studios" />
   <meta property="og:description"
     content="Mega CX Studios, servicios de diseño web, modelado 3D, edición de video y más. ¡Bienvenido!" />
-  <meta property="og:image" content="src/mega_v4_notCX.webp" />
-  <meta property="og:url" content="contact.html" />
+  <meta property="og:image" content="https://juanhda-cx.github.io/src/mega_v4_notCX.webp" />
+  <meta property="og:url" content="https://juanhda-cx.github.io/gallery.html" />
   <meta name="author" content="Mega CX" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mega CX Studios | Gallery</title>
+  <title>Mega CX Studios | Galería</title>
   <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
-  <link rel="icon" href="icons/favicon_gallery.png" type="image/x-icon" />
-  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous"></script>
-  <script src="main.js"></script>
-  <script src="menuMobile.js"></script>
+  <link rel="icon" href="icons/favicon_gallery.png" type="image/png" />
+  <script src="https://kit.fontawesome.com/ae03bf6f9c.js" crossorigin="anonymous" defer></script>
+  <script src="main.js" defer></script>
+  <script src="menuMobile.js" defer></script>
   <!--GSAP-->
-  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/SplitText.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/TextPlugin.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollSmoother.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/SplitText.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/TextPlugin.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollSmoother.min.js" defer></script>
+  <script src="anim.js" defer></script>
 
   <!--Paneo & zoom Gallery-->
   <script>
+    // Toggle de ScrollSmoother: el visor usa position:fixed y ScrollSmoother
+    // transforma #smooth-content (lo que rompe el fixed). Se mata al abrir
+    // el visor y se recrea al cerrarlo, así conviven scroll suave y galería.
+    function disableSmoothScroll() {
+      if (typeof ScrollSmoother === "undefined") return; // CDN caída: degradar
+      const s = ScrollSmoother.get();
+      if (s) s.kill();
+    }
+
+    function enableSmoothScroll() {
+      if (typeof ScrollSmoother === "undefined") return;
+      if (!ScrollSmoother.get()) {
+        ScrollSmoother.create({ wrapper: "#smooth-wrapper", content: "#smooth-content", smooth: 1, effects: true });
+      }
+      if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
       const galleryExpand = document.getElementById("galleryExpand");
       const zoomInBtn = document.getElementById("galleryZOOMinBtn");
@@ -42,6 +76,7 @@
       const resetBtn = document.getElementById("galleryRESETzBtn");
       const galleryExpandBtn = document.getElementById("galleryExpandBtn");
       const galleryExpandController = document.getElementById("galleryExpandController");
+      const galleryExpandBackground = document.getElementById("galleryExpandBackground");
       const gridItems = document.querySelectorAll(".grid-item");
       const Fbutton = document.getElementById("Fbutton");
 
@@ -58,7 +93,9 @@
 
       gridItems.forEach((item) => {
         item.addEventListener("click", function () {
+          disableSmoothScroll();
           galleryExpand.src = this.src;
+          document.dispatchEvent(new CustomEvent("viewerOpen", { detail: { item: this } }));
           galleryExpandController.style.display = "flex";
           document.body.style.overflow = "hidden";
           Fbutton.style.display = "none";
@@ -72,6 +109,9 @@
       galleryExpandBtn.addEventListener("click", function () {
         galleryExpandController.style.display = "none";
         document.body.style.overflow = "";
+        const cursorAnim = document.querySelector(".cursor-circle");
+        if (cursorAnim) cursorAnim.style.display = "block";
+        document.dispatchEvent(new CustomEvent("viewerClose"));
         if (window.pageYOffset > 300) {
           Fbutton.style.display = "block";
         }
@@ -79,6 +119,20 @@
           gridItem.classList.add('imgGhover');
         });
         window.dispatchEvent(new Event("scroll"));
+        enableSmoothScroll();
+      });
+
+      // Cerrar con Escape o clic en el fondo oscuro
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && galleryExpandController.style.display === "flex") {
+          galleryExpandBtn.click();
+        }
+      });
+
+      galleryExpandBackground.addEventListener("click", function () {
+        if (galleryExpandController.style.display === "flex") {
+          galleryExpandBtn.click();
+        }
       });
 
       zoomInBtn.addEventListener("click", function () {
@@ -156,11 +210,18 @@
       });
 
 
-      // Zoom con la rueda del mouse
+      // Zoom con la rueda del mouse: exponencial y centrado en el cursor
       galleryExpand.addEventListener("wheel", function (event) {
         event.preventDefault();
-        scale += event.deltaY * -0.01;
-        scale = Math.min(Math.max(minScale, scale), maxScale);
+        const previousScale = scale;
+        const nextScale = Math.min(maxScale, Math.max(minScale, scale * Math.exp(event.deltaY * -0.0015)));
+        if (nextScale === previousScale) return;
+        const rect = galleryExpand.getBoundingClientRect();
+        const ratio = nextScale / previousScale;
+        // Ajusta los offsets para que el punto bajo el cursor quede fijo
+        originX = originX + (1 - ratio) * (event.clientX - rect.left - rect.width / 2);
+        originY = originY + (1 - ratio) * (event.clientY - rect.top - rect.height / 2);
+        scale = nextScale;
         updateTransform();
       });
 
@@ -205,9 +266,12 @@
       const hasLoadedBefore = sessionStorage.getItem("imagesLoaded") === "true";
 
       if (hasLoadedBefore) {
-        //console.log("[LazyGallery] Segunda visita → asignando en secuencia sin bloquear");
-      } else {
-        //console.log("[LazyGallery] Primera visita → placeholders visibles y reemplazo secuencial");
+        // Segunda visita: los reales ya están en caché, asignar directo
+        images.forEach(el => {
+          const realSrc = el.getAttribute("data-src");
+          if (realSrc) el.src = realSrc;
+        });
+        return;
       }
 
       let index = 0;
@@ -284,13 +348,13 @@
         const galleryData = await response.json();
 
         const gridItems = document.querySelectorAll("img.grid-item.imgGhover");
-        const galleryExpandController = document.getElementById("galleryExpandController");
         const galleryExpand = document.getElementById("galleryExpand");
-        const galleryExpandBtn = document.getElementById("galleryExpandBtn");
         const thumbnailsContainer = document.querySelector(".thumbnails-BTN");
         const cursorAnim = document.querySelector(".cursor-circle");
 
         let currentImageCode = null;
+        let switchRequestId = 0;
+        const VIEWER_PLACEHOLDER = "data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==";
 
         // Poblar data-src y alt para el grid
         gridItems.forEach((item, i) => {
@@ -343,59 +407,74 @@
         }
 
         function switchImage(codeId, thumbnailNumber) {
-          const codeData = galleryData.find(obj => obj[codeId])[codeId];
-          const lowResSrc = codeData["thumbnail-item"][`thumbnail-src-${thumbnailNumber}`];
-          const highResSrc = codeData["full-img"][`thumbnail-src-${thumbnailNumber}`];
+          const dataObj = galleryData.find(obj => obj[codeId]);
+          if (!dataObj) return; // guard: código sin datos
+          const codeData = dataObj[codeId];
+          const lowResSrc = codeData["thumbnail-item"]?.[`thumbnail-src-${thumbnailNumber}`];
+          const highResSrc = codeData["full-img"]?.[`thumbnail-src-${thumbnailNumber}`];
+          if (!lowResSrc || !highResSrc) return; // guard: variante incompleta
 
           document.querySelectorAll(".thumbnails-BTN div").forEach(btn => btn.classList.remove("active"));
           const activeBtn = document.querySelector(`.img-thumbnail-${thumbnailNumber}`);
           if (activeBtn) activeBtn.classList.add("active");
 
-          // Placeholder del visor siempre visible
-          galleryExpand.src = "src/placeholder.webp";
+          const title = codeData?.["info-t"]?.title;
+          if (title) galleryExpand.alt = title;
 
-          const imgLow = new Image();
-          imgLow.decoding = "async";
-          imgLow.onload = () => {
+          const reqId = ++switchRequestId; // ignora onload de pedidos anteriores
+
+          const applyLow = () => {
+            if (reqId !== switchRequestId) return;
             galleryExpand.src = lowResSrc;
             const imgPreload = new Image();
             imgPreload.decoding = "async";
             imgPreload.onload = () => {
+              if (reqId !== switchRequestId) return;
               galleryExpand.src = highResSrc;
             };
             imgPreload.src = highResSrc;
           };
+
+          // Si el low-res ya está visible (apertura), saltar el placeholder
+          if (galleryExpand.src === lowResSrc) {
+            applyLow();
+            return;
+          }
+          galleryExpand.src = VIEWER_PLACEHOLDER;
+          const imgLow = new Image();
+          imgLow.decoding = "async";
+          imgLow.onload = applyLow;
+          imgLow.onerror = () => {
+            if (reqId === switchRequestId) galleryExpand.src = highResSrc;
+          };
           imgLow.src = lowResSrc;
         }
 
-        gridItems.forEach((item) => {
-          item.addEventListener("click", function () {
-            const codeId = this.getAttribute("code-id");
-            const dataObj = galleryData.find(obj => obj[codeId]);
-            if (!codeId || !dataObj) return;
+        document.addEventListener("viewerOpen", function (e) {
+          const codeId = e.detail.item.getAttribute("code-id");
+          const dataObj = galleryData.find(obj => obj[codeId]);
+          if (!codeId || !dataObj) return;
 
-            currentImageCode = codeId;
-            const codeData = dataObj[codeId];
-            createThumbnailButtons(codeData);
+          currentImageCode = codeId;
+          const codeData = dataObj[codeId];
+          createThumbnailButtons(codeData);
 
-            // Precargar variantes de baja resolución (no bloquea el visor)
-            Object.values(codeData["thumbnail-item"]).forEach(url => {
-              const img = new Image();
-              img.decoding = "async";
-              img.src = url;
-            });
-
-            switchImage(codeId, "01");
-            galleryExpandController.style.display = "flex";
-            cursorAnim.style.display = "none";
-            document.body.style.overflow = "hidden";
+          // Precargar variantes de baja resolución (no bloquea el visor)
+          Object.values(codeData["thumbnail-item"]).forEach(url => {
+            const img = new Image();
+            img.decoding = "async";
+            img.src = url;
           });
+
+          // La grilla ya mostró la low-res: encadenar el swap a full-res sin placeholder
+          const lowFirst = codeData["thumbnail-item"]?.["thumbnail-src-01"];
+          if (lowFirst) galleryExpand.src = lowFirst;
+          switchImage(codeId, "01");
+          cursorAnim.style.display = "none";
         });
 
-        galleryExpandBtn.addEventListener("click", function () {
-          galleryExpandController.style.display = "none";
+        document.addEventListener("viewerClose", function () {
           cursorAnim.style.display = "block";
-          document.body.style.overflow = "";
           currentImageCode = null;
         });
       } catch (e) {
@@ -405,11 +484,17 @@
       }
     });
   </script>
-
+  <!--<script src="snowflake.js"></script>-->
 
 </head>
 
 <body class="palette_three">
+  <script>
+    // Anti-FOUC: copia el tema al body antes del primer paint (body.dark-mode)
+    if (document.documentElement.classList.contains("dark-mode")) {
+      document.body.classList.add("dark-mode");
+    }
+  </script>
   <div id="scroll"></div>
   <div id="smooth-wrapper">
     <div id="smooth-content">
@@ -419,28 +504,28 @@
           <div class="Nav-Component backdrop palette_three">
             <nav class="Nav-PrimaryH">
               <ul>
-                <li onclick="window.location.href='index.html';">
+                <li>
                   <a href="index.html" class="audioclick">
                     <i class="fa-solid fa-house"></i>
                     <span class="menu-spanish">Inicio</span>
                     <span class="menu-english">Home</span>
                   </a>
                 </li>
-                <li onclick="window.location.href='services.html';">
+                <li>
                   <a href="services.html" class="audioclick">
                     <i class="fa-solid fa-user-gear"></i>
                     <span class="menu-spanish">Servicios</span>
                     <span class="menu-english">Services</span>
                   </a>
                 </li>
-                <li onclick="window.location.href='gallery.html';">
+                <li>
                   <a href="gallery.html" class="audioclick">
                     <i class="fa-solid fa-images"></i>
                     <span class="menu-spanish">Galería</span>
                     <span class="menu-english">Gallery</span>
                   </a>
                 </li>
-                <li onclick="window.location.href='contact.html';">
+                <li>
                   <a href="contact.html" class="audioclick">
                     <i class="fa-solid fa-envelope-open-text"></i>
                     <span class="menu-spanish">Contacto</span>
@@ -517,7 +602,7 @@
 
       <main>
         <h1 class="MainH1">
-          <span class="spanish">PORTAFOLIO DE PROJECTOS 3D</span>
+          <span class="spanish">PORTAFOLIO DE PROYECTOS 3D</span>
           <span class="english">3D PROJECTS PORTFOLIO</span>
         </h1>
 
@@ -527,24 +612,20 @@
             <h2 class="english">私 About Me.</h2>
             <br>
             <p class="spanish">
-              Soy un Artista 3D freelance, con experiencia en una variedad de campos, desde la creación de productos y
-              arquitectura hasta la producción de assets para videojuegos y escenas. Trabajo con herramientas como
-              Cinema
-              4D, Blender, V-ray, Substance para dar vida a mis obras. Puedes seguirme en plataformas como ArtStation,
-              Behance, dribble, Devian Art para ver mis nuevos proyectos. Si necesitas servicios de modelado,
-              renderizado o
-              diseño, no dudes en contactarme.
+              Soy un Artista 3D freelance con experiencia en la creación de productos, arquitectura y assets para
+              videojuegos y escenas digitales. Mi trabajo combina técnica y creatividad, utilizando herramientas como
+              Cinema 4D, Blender, ZBrush, V-Ray y Substance para dar vida a proyectos visuales de alta calidad.
+              <br><br>
+              En esta galería encontrarás una selección unificada de mis trabajos más recientes, que reflejan mi
+              compromiso con la excelencia y la innovación en cada pieza.
             </p>
             <p class="english">
-              I'm a freelance 3D Artist, with experience in a variety of fields, from product creation and architecture
-              to
-              the production of architecture to the production of assets for videogames and scenes. I work with tools
-              like
-              Cinema 4D, Blender, V-ray, Substance to give life to my works. You can follow me on platforms like
-              ArtStation,
-              Behance, dribble, Devian Art to see my new projects. If you need modeling, rendering or design services,
-              don't
-              hesitate to design, don't hesitate to contact me.
+              I am a freelance 3D artist with experience in creating products, architecture, and assets for video games
+              and digital scenes. My work combines technique and creativity, using tools such as Cinema 4D, Blender,
+              ZBrush, V-Ray, and Substance to bring high-quality visual projects to life.
+              <br><br>
+              In this gallery, you will find a unified selection of my most recent work, reflecting my commitment to
+              excellence and innovation in every piece.
             </p>
           </article>
         </section>
@@ -576,385 +657,486 @@
 
         <div class="grid-container audioclick">
 
+          <!--Lautaro Condominium-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-785"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
+            <div class="imgThover"></div>
+          </span>
+
+          <!--Living Space Studio-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-255"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
+            <div class="imgThover"></div>
+          </span>
+
+          <!--Azure Dawn-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-430"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
+            <div class="imgThover"></div>
+          </span>
+
+          <!--Oh! Oh! Oreo - POP-UP Stand-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-808"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
+            <div class="imgThover"></div>
+          </span>
+
+          <!--Fractal Alligator Handbag-->
+          <span class="hover-wrap">
+            <img class="grid-item imgGhover" code-id="code-845"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
+            <div class="imgThover"></div>
+          </span>
+
           <!--Eclectic Cuisine-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-283" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-283"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Ope Character-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-747" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-747"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--KAWA Grape Coralrose-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-297" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-297"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--ZAGA SELVAGGIO-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-831" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-831"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Interior Furniture PROPS - VOL.1-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-709" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-709"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Silver Clay-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-658" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-658"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Rode Tulp Hotel-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-704" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-704"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Keyboard Ichigo Cream-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-887" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-887"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Yureka Mignon Specialita-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-021" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-021"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Woody Snow Bedroom-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-060" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-060"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Kea Charlotte Apartment-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-436" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-436"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Pipeline Hammer Handmade-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-008" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-008"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Cosmograph Daytona Mega Edition-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-043" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-043"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Cherry House-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-875" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-875"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Fairfield Breeze Wood-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-160" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-160"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Hydrogen Yawarakai Hana-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-045" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-045"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Condensed Stylized Twilight Sea-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-543" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-543"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Counterposition Interior Bedroom-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-302" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-302"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Mégalomanie - AMBRE D’HIVER-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-147" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-147"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Bombastic Hug-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-660" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-660"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Italian Restaurant, A Culinary Journey-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-748" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-748"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Soda Fresh-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-986" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-986"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Telescope Mega Star U-01-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-746" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-746"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Red Formation-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-631" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-631"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Tree Fallen - [Type: Willow]-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-205" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-205"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Aisle in The DEPTHS-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-983" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-983"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--House Bluebright-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-851" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-851"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Fennec Weapon - [KRISS Vector]-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-623" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-623"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Mushroom Iridescence-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-290" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-290"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Summer Camp-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-017" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-017"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Turntable vintage-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-023" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-023"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Kitchen Interior-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-441" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-441"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Ancient armored medieval shield-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-016" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-016"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Antique Lamp-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-274" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-274"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Warm Audio WA-47 (MCX)-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-259" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-259"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Rebot_003-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-068" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-068"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--TreeMix-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-041" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-041"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Flowery sofa-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-003" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-003"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Ancient ax with a medieval and fantastic style-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-256" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-256"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Electric Guitar Re-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-458" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-458"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--The Misty Altar-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-899" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-899"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Crystal Snowball 21-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-033" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-033"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--The Ring of foundation-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-699" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-699"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Ancient golden compass-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-742" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-742"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Planet Decima-9-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-236" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-236"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Pepper and salt-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-452" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-452"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Main Row-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-401" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-401"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Droid-12-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-062" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-062"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Diamond>-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-096" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-096"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Minigun-Machine-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-091" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-091"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Christmas Tree-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-864" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-864"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Wind Power Plant-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-466" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-466"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Miwom Pavilion-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-637" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-637"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Ball Soccer-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-054" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-054"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Teddy's playroom-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-038" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-038"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Retro Sci-Fi Weapon-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-664" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-664"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Ship in port-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-485" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-485"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--A light of hope-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-141" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-141"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Gingerbread House-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-332" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-332"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Pumpkin in the dark-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-306" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-306"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
           <!--Japanese Entrance-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-566" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-566"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Segment-Camera-CX-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-722" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-722"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Bathroom Gold-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-364" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-364"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Environment Cabin Poly-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-261" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-261"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Skinned Heart-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-963" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-963"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
           <!--Coffee House at dusk-->
           <span class="hover-wrap">
-            <img class="grid-item imgGhover" code-id="code-922" src="src/placeholder.webp" alt="" />
+            <img class="grid-item imgGhover" code-id="code-922"
+              src="data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvB8ABEAcQERGIiP4HAA==" alt="" />
             <div class="imgThover"></div>
           </span>
 
@@ -974,11 +1156,14 @@
             <div id="language-switch-button"></div>
           </div>
           <br /><br />
-          <p class="spanish">Todos los derechos reservados @2025 [MMXXV]</p>
-          <p class="english">All rights reserved @2025 [MMXXV]</p>
+          <p class="spanish">Todos los derechos reservados ©2026 [MMXXVI]</p>
+          <p class="english">All rights reserved ©2026 [MMXXVI]</p>
           <br />
           <p class="spanish">Creado por JUANHDA CX.</p>
           <p class="english">Created by JUANHDA CX.</p>
+          <br />
+          <p class="spanish">Versión 3.6</p>
+          <p class="english">Version 3.6</p>
           <br />
           <p><a href="mailto:juan153v0@outlook.com" class="audioclick palette_one">Juan153v0@outlook.com</a></p>
           <p></p>
@@ -986,12 +1171,15 @@
       </footer>
     </div>
   </div>
+
+  <button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup"
+      src="icons/arrow_to_up.svg" /></button>
+
+  <div class="cursor-circle"></div>
+  <div class="loader"></div>
+
 </body>
 
-<button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup"
-    src="icons/arrow_to_up.svg" /></button>
 
-<div class="cursor-circle"></div>
-<div class="loader"></div>
 
 </html>
