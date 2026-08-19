@@ -140,7 +140,7 @@ The footer version is bumped per release (`Version 3.6` on every page, plus a gi
 
 ## License
 
-[MIT](LICENSE.md) © 2025 Juanda MCX
+[MIT](LICENSE.md) © 2026 JUANHDA CX
 
 <p align="center">
   <sub>Built with care for the craft — design, 3D, code.</sub>
