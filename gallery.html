@@ -52,23 +52,10 @@
 
   <!--Paneo & zoom Gallery-->
   <script>
-    // Toggle de ScrollSmoother: el visor usa position:fixed y ScrollSmoother
-    // transforma #smooth-content (lo que rompe el fixed). Se mata al abrir
-    // el visor y se recrea al cerrarlo, así conviven scroll suave y galería.
-    function disableSmoothScroll() {
-      if (typeof ScrollSmoother === "undefined") return; // CDN caída: degradar
-      const s = ScrollSmoother.get();
-      if (s) s.kill();
-    }
-
-    function enableSmoothScroll() {
-      if (typeof ScrollSmoother === "undefined") return;
-      if (!ScrollSmoother.get()) {
-        ScrollSmoother.create({ wrapper: "#smooth-wrapper", content: "#smooth-content", smooth: 1, effects: true });
-      }
-      if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
-    }
-
+    // El visor vive FUERA de #smooth-wrapper: ScrollSmoother transforma el
+    // contenido y eso rompe position:fixed. Al estar fuera, el visor funciona
+    // sin matar ni recrear ScrollSmoother (evita el salto de scroll del
+    // kill/create y la reinicialización de los ScrollTriggers).
     document.addEventListener("DOMContentLoaded", function () {
       const galleryExpand = document.getElementById("galleryExpand");
       const zoomInBtn = document.getElementById("galleryZOOMinBtn");
@@ -93,7 +80,6 @@
 
       gridItems.forEach((item) => {
         item.addEventListener("click", function () {
-          disableSmoothScroll();
           galleryExpand.src = this.src;
           document.dispatchEvent(new CustomEvent("viewerOpen", { detail: { item: this } }));
           galleryExpandController.style.display = "flex";
@@ -119,7 +105,6 @@
           gridItem.classList.add('imgGhover');
         });
         window.dispatchEvent(new Event("scroll"));
-        enableSmoothScroll();
       });
 
       // Cerrar con Escape o clic en el fondo oscuro
@@ -629,31 +614,6 @@
             </p>
           </article>
         </section>
-
-
-
-        <div id="galleryExpandController">
-          <div id="galleryExpandBackground"></div>
-          <div class="hiddenC"><img id="galleryExpand" /></div>
-
-          <div class="thumbnails-BTN">
-          </div>
-
-          <div id="galleryControls">
-            <div id="galleryExpandBtn" class="audioclick">
-              <i class="fa-solid fa-plus"></i>
-            </div>
-            <div id="galleryZOOMoutBtn" class="audioclick">
-              <i class="fa-solid fa-magnifying-glass-minus"></i>
-            </div>
-            <div id="galleryZOOMinBtn" class="audioclick">
-              <i class="fa-solid fa-magnifying-glass-plus"></i>
-            </div>
-            <div id="galleryRESETzBtn" class="audioclick">
-              <i class="fa-solid fa-rotate-right"></i>
-            </div>
-          </div>
-        </div>
 
         <div class="grid-container audioclick">
 
@@ -1169,6 +1129,29 @@
           <p></p>
         </div>
       </footer>
+    </div>
+  </div>
+
+  <div id="galleryExpandController">
+    <div id="galleryExpandBackground"></div>
+    <div class="hiddenC"><img id="galleryExpand" /></div>
+
+    <div class="thumbnails-BTN">
+    </div>
+
+    <div id="galleryControls">
+      <div id="galleryExpandBtn" class="audioclick">
+        <i class="fa-solid fa-plus"></i>
+      </div>
+      <div id="galleryZOOMoutBtn" class="audioclick">
+        <i class="fa-solid fa-magnifying-glass-minus"></i>
+      </div>
+      <div id="galleryZOOMinBtn" class="audioclick">
+        <i class="fa-solid fa-magnifying-glass-plus"></i>
+      </div>
+      <div id="galleryRESETzBtn" class="audioclick">
+        <i class="fa-solid fa-rotate-right"></i>
+      </div>
     </div>
   </div>
 

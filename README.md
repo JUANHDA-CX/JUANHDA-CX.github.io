@@ -32,7 +32,7 @@
 - **Bilingual by default.** Full Spanish/English experience with per-language SEO meta, titles and keywords. The first visit auto-detects the browser language.
 - **Flash-free dark mode.** The theme is painted on `<body>` before first paint, so the dark palette never flashes — regardless of connection speed.
 - **A gallery that behaves like an app.** Behance-backed 3D portfolio with a full viewer: exponential wheel zoom anchored to the cursor, Escape/background close, race-safe variant switching and instant second visits via cached images.
-- **Smooth scrolling everywhere.** GSAP ScrollSmoother across the site — intelligently killed while the gallery viewer is open so fixed positioning keeps working.
+- **Smooth scrolling everywhere.** GSAP ScrollSmoother across the site. The gallery viewer lives *outside* the smooth-scroll wrapper, so fixed positioning works without ever killing or recreating the smoother — no scroll jumps.
 - **Crafted details.** Custom cursor that follows only mouse/pen devices, click sounds that gate navigation, a loader that hides when the page is functional (not when the last image downloads), and a winter snow effect on canvas.
 - **SEO-ready.** Canonical URLs, Open Graph tags, `robots.txt` and `sitemap.xml` for search engines.
 
@@ -45,7 +45,7 @@ Portfolio work used to live scattered across Behance, with no single place to sh
 | Projects scattered across platforms | A central gallery driven by `gallery-database.json` that pulls Behance renditions |
 | Slow gallery: every image downloaded up front | Lazy loading with data-URI placeholders — no placeholder network request, zero flash |
 | Dark mode flashed light for a second on slow connections | Theme class applied pre-paint via an inline script, mirrored to `body` before rendering |
-| Fixed-position viewer broken by scroll transforms | ScrollSmoother is killed on viewer open and recreated on close |
+| Fixed-position viewer broken by scroll transforms | Viewer moved outside the `#smooth-wrapper` transform — ScrollSmoother stays alive and the scroll never jumps |
 | Navigation delayed or skipped while the click sound plays | Navigation is gated by the audio `ended` event with a 1s safety timeout and last-click-wins logic |
 
 ## Tech Stack
@@ -121,7 +121,7 @@ The footer version is bumped per release (`Version 3.6` on every page, plus a gi
 **3.6 highlights**
 
 - Rebuilt gallery viewer: zoom-to-cursor wheel, Escape/background close, race-safe variant switching, dynamic alt text, data-URI placeholders and instant second visits
-- ScrollSmoother toggled around the viewer so smooth scroll and fixed positioning coexist
+- Gallery viewer relocated outside the scroll-smoother wrapper so `position:fixed` coexists with GSAP without kill/recreate jumps
 - Dark-theme flash eliminated with a pre-paint `body` class
 - Click-sound gated navigation with a safety timeout and menu `li` support
 - Language auto-detection and per-language title/description/keywords
