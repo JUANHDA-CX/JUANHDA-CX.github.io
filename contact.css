@@ -165,7 +165,6 @@ body.palette_four {
   color: var(--palette_text_white);
 }
 @media only screen and (max-width: 600px) {
-
   #infoForm-eng {
     height: 100px;
     padding: 15px;
@@ -182,7 +181,6 @@ body.palette_four {
   color: var(--palette_text_white);
 }
 @media only screen and (max-width: 600px) {
-
   #infoForm-eng strong p {
     font-size: 1.5rem;
   }
@@ -192,7 +190,6 @@ body.palette_four {
   font-size: 1rem;
 }
 @media only screen and (max-width: 600px) {
-
   #infoForm-eng p {
     font-size: 1rem;
   }
@@ -306,7 +303,6 @@ body.palette_four {
   color: var(--palette_text_white);
 }
 @media only screen and (max-width: 600px) {
-
   #form-enviar-engM {
     width: 65%;
     margin-top: 0;
@@ -331,7 +327,6 @@ body.palette_four {
   color: var(--palette_text_white);
 }
 @media only screen and (max-width: 600px) {
-
   #form-reset-engM {
     width: 30%;
     float: right;
@@ -388,7 +383,6 @@ body.palette_four {
   background-color: var(--palette_dark_accent_one);
   box-shadow: 5px 5px 15px #00000080;
   outline: solid 2px var(--palette_dark);
-  ;
 }
 /*Mobile Device*/
 @media only screen and (max-width: 600px) {
@@ -521,7 +515,6 @@ body.palette_four {
   }
 }
 @media only screen and (min-width: 601px) {
-
   #DOC {
     position: relative;
     right: auto;
@@ -561,5 +554,6 @@ body.palette_four {
 }
 
 /* Fix dark theme override after split */
-body.dark-mode { background-color: var(--palette_dark_accent_two) !important; }
-
+body.dark-mode {
+  background-color: var(--palette_dark_accent_two) !important;
+}

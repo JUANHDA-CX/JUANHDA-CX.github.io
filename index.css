@@ -24,27 +24,27 @@
   }
 }
 .parallax-bg-GSAP.far {
-  background-image: url('src/parallax_Far_LIGHT.webp');
+  background-image: url("src/parallax_Far_LIGHT.webp");
   z-index: 1;
 }
 .parallax-bg-GSAP.mid {
-  background-image: url('src/parallax_Medium_LIGHT.webp');
+  background-image: url("src/parallax_Medium_LIGHT.webp");
   z-index: 2;
 }
 .parallax-bg-GSAP.close {
-  background-image: url('src/parallax_Near_LIGHT.webp');
+  background-image: url("src/parallax_Near_LIGHT.webp");
   z-index: 3;
 }
 .dark-mode .parallax-bg-GSAP.far {
-  background-image: url('src/parallax_Far_DARK.webp');
+  background-image: url("src/parallax_Far_DARK.webp");
   z-index: 1;
 }
 .dark-mode .parallax-bg-GSAP.mid {
-  background-image: url('src/parallax_Medium_DARK.webp');
+  background-image: url("src/parallax_Medium_DARK.webp");
   z-index: 2;
 }
 .dark-mode .parallax-bg-GSAP.close {
-  background-image: url('src/parallax_Near_DARK.webp');
+  background-image: url("src/parallax_Near_DARK.webp");
   z-index: 3;
 }
 .banner-tittle-content-GSAP {
@@ -78,7 +78,7 @@
     display: none !important;
   }
 }
-#Nav_secondary ul>li {
+#Nav_secondary ul > li {
   list-style: none;
   display: inline;
   color: white;
@@ -94,7 +94,7 @@
   user-select: none;
 }
 @media only screen and (max-width: 600px) {
-  #Nav_secondary ul>li {
+  #Nav_secondary ul > li {
     margin: 0;
     padding: 16px;
     width: auto;
@@ -102,7 +102,7 @@
     justify-content: center;
   }
 }
-.dark-mode #Nav_secondary ul>li {
+.dark-mode #Nav_secondary ul > li {
   background-color: var(--palette_text_black);
   box-shadow: 5px 5px 15px #00000020;
 }
@@ -193,23 +193,23 @@
   opacity: 30%;
   transform: translate(-50%, -50%) scale(15);
 }
-#hexeBG>a {
+#hexeBG > a {
   color: var(--palette_text_black);
   transform: rotate(0deg);
   transition: transform 0.3s ease-in-out;
   /*
   animation: BTsite1 5s infinite ease-in-out;*/
 }
-.dark-mode #hexeBG>a {
+.dark-mode #hexeBG > a {
   color: var(--palette_text_white);
 }
-#hexeBG>a>i {
+#hexeBG > a > i {
   font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#hexeBG>a>i:hover::after {
+#hexeBG > a > i:hover::after {
   font-size: 14px;
 }
 #flex {
@@ -221,7 +221,7 @@
   transition: width 1s;
   transition-timing-function: ease;
 }
-.siteicons>a {
+.siteicons > a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -230,10 +230,10 @@
   text-decoration: none;
   cursor: url("src/cursor_pointer.png"), pointer;
 }
-.dark-mode .siteicons>a {
+.dark-mode .siteicons > a {
   color: var(--palette_text_white);
 }
-.siteicons>a>i {
+.siteicons > a > i {
   font-size: 18px;
   cursor: url("src/cursor_pointer.png"), pointer;
 }
@@ -254,7 +254,7 @@
 .siteicons:hover {
   background-color: var(--palette_text_white);
 }
-.dark-mode .siteicons>a:hover {
+.dark-mode .siteicons > a:hover {
   color: var(--palette_dark_accent_two);
 }
 .dark-mode .siteicons:hover {
@@ -457,10 +457,8 @@
 .dark-mode #art3 span,
 .dark-mode #art4 span {
   color: var(--palette_dark_accent_main);
-
 }
 @media only screen and (max-width: 600px) {
-
   #art2 span,
   #art3 span,
   #art4 span {
@@ -469,7 +467,6 @@
   }
 }
 @media only screen and (max-width: 600px) {
-
   #art2,
   #art3,
   #art4 {
@@ -480,7 +477,6 @@
 }
 /*Tablet Device*/
 @media only screen and (max-width: 1024px) {
-
   #art2,
   #art3,
   #art4 {
@@ -490,7 +486,6 @@
   }
 }
 @media only screen and (max-width: 1600px) {
-
   #art2,
   #art3,
   #art4 {
@@ -506,7 +501,6 @@
   align-items: center;
 }
 @media only screen and (max-width: 600px) {
-
   #blockArt02,
   #blockArt03,
   #blockArt04 {
@@ -516,7 +510,6 @@
   }
 }
 @media only screen and (max-width: 1024px) {
-
   #blockArt02,
   #blockArt03,
   #blockArt04 {
@@ -549,7 +542,6 @@
   margin-left: 0;
 }
 @media only screen and (max-width: 600px) {
-
   #CanvasPerson,
   #CanvasServices,
   #CanvasContact {
@@ -562,7 +554,6 @@
   }
 }
 @media only screen and (max-width: 1024px) {
-
   #CanvasPerson,
   #CanvasServices,
   #CanvasContact {
@@ -576,6 +567,6 @@
 }
 
 /* Fix dark theme override after split */
-body.dark-mode { background-color: var(--palette_dark_accent_two) !important; }
-
-
+body.dark-mode {
+  background-color: var(--palette_dark_accent_two) !important;
+}

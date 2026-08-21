@@ -8,13 +8,13 @@ body.palette_three {
 #textGallery {
   position: relative;
 }
-#textGallery>article>h2 {
+#textGallery > article > h2 {
   color: var(--palette_text_black);
   font-size: 48px;
   font-family: OxfordStreet;
 }
-.dark-mode #textGallery>article>h1,
-.dark-mode #textGallery>article>h2 {
+.dark-mode #textGallery > article > h1,
+.dark-mode #textGallery > article > h2 {
   color: var(--palette_dark_accent_main);
 }
 @media only screen and (max-width: 600px) {
@@ -361,5 +361,6 @@ body.palette_three {
 }
 
 /* Fix dark theme override after split */
-body.dark-mode { background-color: var(--palette_dark_accent_two) !important; }
-
+body.dark-mode {
+  background-color: var(--palette_dark_accent_two) !important;
+}
