@@ -559,3 +559,7 @@ body.palette_four {
     height: 700px;
   }
 }
+
+/* Fix dark theme override after split */
+body.dark-mode { background-color: var(--palette_dark_accent_two) !important; }
+

@@ -625,3 +625,7 @@ body.palette_two {
 .dark-mode .w3-container span:hover i {
   color: var(--palette_text_white);
 }
+
+/* Fix dark theme override after split */
+body.dark-mode { background-color: var(--palette_dark_accent_two) !important; }
+

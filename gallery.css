@@ -359,3 +359,7 @@ body.palette_three {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Fix dark theme override after split */
+body.dark-mode { background-color: var(--palette_dark_accent_two) !important; }
+
