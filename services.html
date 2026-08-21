@@ -50,7 +50,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap/dist/ScrollSmoother.min.js" defer></script>
   <script src="anim.js" defer></script>
 
-  <!--Cierre de modales: Escape o clic en el fondo oscuro-->
+  <!--Modales servicios: apertura con carga bajo demanda + cierre Escape/fondo-->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const modals = document.querySelectorAll(".w3-modal");
@@ -59,6 +59,24 @@
         modal.style.display = "none";
         document.body.style.overflow = "";
       }
+
+      function openModal(id) {
+        const m = document.getElementById(id);
+        if (!m) return;
+        const img = m.querySelector('img[data-src]');
+        if (img && img.dataset.src) {
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+        }
+        m.style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+
+      document.querySelectorAll(".Box-buttonModal[data-modal]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          openModal(btn.dataset.modal);
+        });
+      });
 
       document.addEventListener("keydown", function (event) {
         if (event.key !== "Escape") return;
@@ -69,8 +87,6 @@
 
       modals.forEach(function (m) {
         m.addEventListener("click", function (event) {
-          // Solo si el clic fue directamente sobre el fondo oscuro,
-          // no sobre la tarjeta ni sus hijos.
           if (event.target === m) closeModal(m);
         });
       });
@@ -199,7 +215,7 @@
           <!--Box1-->
           <div class="box-grid-item">
             <div class="Box-style">
-              <div class="img-services"><img src="src/Service_3D.png" alt="Service 3D" /></div>
+              <div class="img-services"><img src="src/Service_3D.png" alt="Service 3D" width="384" height="384" loading="eager" decoding="async" fetchpriority="high" /></div>
 
               <span class="box-text">
                 <strong class="box-tittle spanish">Modelado 3D</strong>
@@ -214,8 +230,7 @@
                   (3D printing not included).
                 </p>
               </span>
-              <div class="Box-buttonModal audioclick buzz w3-button w3-black"
-                onclick="document.getElementById('id01').style.display='flex'; document.body.style.overflow='hidden'">
+              <div class="Box-buttonModal audioclick buzz w3-button w3-black" data-modal="id01">
                 <i class="fas fa-plus"></i>
               </div>
             </div>
@@ -224,7 +239,7 @@
           <!--Box2-->
           <div class="box-grid-item">
             <div class="Box-style">
-              <div class="img-services"><img src="src/Service_Design.png" alt="Service Design" /></div>
+              <div class="img-services"><img src="src/Service_Design.png" alt="Service Design" width="384" height="384" loading="eager" decoding="async" fetchpriority="high" /></div>
 
               <span class="box-text">
                 <strong class="box-tittle spanish">Diseño</strong>
@@ -240,8 +255,7 @@
                   your website.
                 </p>
               </span>
-              <div class="Box-buttonModal audioclick buzz w3-button w3-black"
-                onclick="document.getElementById('id02').style.display='flex'; document.body.style.overflow='hidden'">
+              <div class="Box-buttonModal audioclick buzz w3-button w3-black" data-modal="id02">
                 <i class="fas fa-plus"></i>
               </div>
             </div>
@@ -250,7 +264,7 @@
           <!--Box3-->
           <div class="box-grid-item">
             <div class="Box-style">
-              <div class="img-services"><img src="src/Service_Video.png" alt="Service Video" /></div>
+              <div class="img-services"><img src="src/Service_Video.png" alt="Service Video" width="384" height="384" loading="eager" decoding="async" fetchpriority="high" /></div>
 
               <span class="box-text">
                 <strong class="box-tittle spanish">Edición de Video</strong>
@@ -265,8 +279,7 @@
                   the original base files).
                 </p>
               </span>
-              <div class="Box-buttonModal audioclick buzz w3-button w3-black"
-                onclick="document.getElementById('id03').style.display='flex'; document.body.style.overflow='hidden'">
+              <div class="Box-buttonModal audioclick buzz w3-button w3-black" data-modal="id03">
                 <i class="fas fa-plus"></i>
               </div>
             </div>
@@ -275,7 +288,7 @@
           <!--Box4-->
           <div class="box-grid-item">
             <div class="Box-style">
-              <div class="img-services"><img src="src/Service_Photo.png" alt="Service Photo" /></div>
+              <div class="img-services"><img src="src/Service_Photo.png" alt="Service Photo" width="384" height="384" loading="lazy" decoding="async" /></div>
 
               <span class="box-text">
                 <strong class="box-tittle spanish">Edición Fotográfica</strong>
@@ -290,8 +303,7 @@
                   printing not included).
                 </p>
               </span>
-              <div class="Box-buttonModal audioclick buzz w3-button w3-black"
-                onclick="document.getElementById('id04').style.display='flex'; document.body.style.overflow='hidden'">
+              <div class="Box-buttonModal audioclick buzz w3-button w3-black" data-modal="id04">
                 <i class="fas fa-plus"></i>
               </div>
             </div>
@@ -300,7 +312,7 @@
           <!--Box5-->
           <div class="box-grid-item">
             <div class="Box-style">
-              <div class="img-services"><img src="src/Service_Development.png" alt="Service Development" /></div>
+              <div class="img-services"><img src="src/Service_Development.png" alt="Service Development" width="384" height="384" loading="lazy" decoding="async" /></div>
 
               <span class="box-text">
                 <strong class="box-tittle spanish">Desarrollo</strong>
@@ -317,8 +329,7 @@
                   installation.
                 </p>
               </span>
-              <div class="Box-buttonModal audioclick buzz w3-button w3-black"
-                onclick="document.getElementById('id05').style.display='flex'; document.body.style.overflow='hidden'">
+              <div class="Box-buttonModal audioclick buzz w3-button w3-black" data-modal="id05">
                 <i class="fas fa-plus"></i>
               </div>
             </div>
@@ -327,7 +338,7 @@
           <!--Box6-->
           <div class="box-grid-item">
             <div class="Box-style">
-              <div class="img-services"><img src="src/Service_Utilities.png" alt="Service Utilities" /></div>
+              <div class="img-services"><img src="src/Service_Utilities.png" alt="Service Utilities" width="384" height="384" loading="lazy" decoding="async" /></div>
 
               <span class="box-text">
                 <strong class="box-tittle spanish">Utilidades</strong>
@@ -341,8 +352,7 @@
                   cleaning, updating, configuration, etc.
                 </p>
               </span>
-              <div class="Box-buttonModal audioclick buzz w3-button w3-black"
-                onclick="document.getElementById('id06').style.display='flex'; document.body.style.overflow='hidden'">
+              <div class="Box-buttonModal audioclick buzz w3-button w3-black" data-modal="id06">
                 <i class="fas fa-plus"></i>
               </div>
             </div>
@@ -381,219 +391,219 @@
     </div>
   </div>
 
-        <!--Modal Content1-->
-        <div id="id01" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span onclick="document.getElementById('id01').style.display='none'; document.body.style.overflow='';"
-                class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
-              <div class="img-modal"><img src="src/P_3D.webp" alt="Service 3D" /></div>
-              <div class="w3-textblock">
-                <p class="spanish">Detalles del Servicio:</p>
-                <p class="english">Service Details:</p>
-                <p class="spanish">
-                  Inmuebles, productos, arquitectura y cualquier espacio que se pueda imaginar, incluye texturizacion,
-                  archivos, assets, accesorios y render.
-                </p>
-                <p class="english">
-                  Real estate, products, architecture, and any space you can imagine, including texturing,
-                  files, assets, props and rendering.
-                </p>
-                <p class="spanish">
-                  Si tiene la idea de un producto o un concepto se puede recrear en 3D, espacios interiores para la
-                  venta
-                  o
-                  efectos visuales y próximamente recorridos virtuales, en formato de video, o tiempo real (si dispone
-                  de
-                  un
-                  equipo compatible), lo precios pueden variar ampliamente dependiendo el tamaño del proyecto, fechas,
-                  revisiones y el formato en que lo necesite renders estáticos o recorridos virtuales.
-                </p>
-                <p class="english">
-                  If you have an idea for a product or a concept, it can be recreated in 3D, interior spaces for sale or
-                  visual effects, and soon virtual tours, in video format, or real time (if you have a compatible
-                  device).
-                  Prices can vary widely depending on the size of the project, dates, revisions, and the format in which
-                  you
-                  need it - static renders or virtual tours.
-                </p>
-              </div>
-            </div>
-          </div>
+  <!--Modal Content1-->
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id01').style.display='none'; document.body.style.overflow='';"
+          class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
+        <div class="img-modal"><img data-src="src/P_3D.webp" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Service 3D" width="1024" height="1024" loading="lazy" decoding="async" /></div>
+        <div class="w3-textblock">
+          <p class="spanish">Detalles del Servicio:</p>
+          <p class="english">Service Details:</p>
+          <p class="spanish">
+            Inmuebles, productos, arquitectura y cualquier espacio que se pueda imaginar, incluye texturizacion,
+            archivos, assets, accesorios y render.
+          </p>
+          <p class="english">
+            Real estate, products, architecture, and any space you can imagine, including texturing,
+            files, assets, props and rendering.
+          </p>
+          <p class="spanish">
+            Si tiene la idea de un producto o un concepto se puede recrear en 3D, espacios interiores para la
+            venta
+            o
+            efectos visuales y próximamente recorridos virtuales, en formato de video, o tiempo real (si dispone
+            de
+            un
+            equipo compatible), lo precios pueden variar ampliamente dependiendo el tamaño del proyecto, fechas,
+            revisiones y el formato en que lo necesite renders estáticos o recorridos virtuales.
+          </p>
+          <p class="english">
+            If you have an idea for a product or a concept, it can be recreated in 3D, interior spaces for sale or
+            visual effects, and soon virtual tours, in video format, or real time (if you have a compatible
+            device).
+            Prices can vary widely depending on the size of the project, dates, revisions, and the format in which
+            you
+            need it - static renders or virtual tours.
+          </p>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <!--Modal Content2-->
-        <div id="id02" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span onclick="document.getElementById('id02').style.display='none'; document.body.style.overflow='';"
-                class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
-              <div class="img-modal"><img src="src/P_Design.webp" alt="Service Design" /></div>
-              <div class="w3-textblock">
-                <p class="spanish">Detalles del Servicio:</p>
-                <p class="english">Service Details:</p>
-                <p class="spanish">
-                  Ofrecemos soluciones de diseño gráfico, incluyendo creación de marcas, banners, letreros, tarjetas
-                  de negocios, volantes para medios digitales y fisicos, así como conceptualización y diseño de sitios
-                  web y aplicaciones, garantizando resultados creativos, funcionales y alineados con la esencia de su
-                  marca.
-                </p>
-                <p class="english">
-                  We offer graphic design solutions, including brand creation, banners, signs, business cards,
-                  flyers for digital and physical media, as well as website and app conceptualization and design,
-                  guaranteeing creative, functional results that are aligned with the essence of your brand.
-                </p>
-                <p class="spanish">
-                  Prepararemos un paquete personalizado a tus necesidades, con los precios del proyecto, en la seccion
-                  de contacto puedes enviar toda la informacion.
-                </p>
-                <p class="english">
-                  We will prepare a package tailored to your needs, with the project prices. You can send all the
-                  information in the contact section.
-                </p>
-              </div>
-            </div>
-          </div>
+  <!--Modal Content2-->
+  <div id="id02" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id02').style.display='none'; document.body.style.overflow='';"
+          class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
+        <div class="img-modal"><img data-src="src/P_Design.webp" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Service Design" width="1024" height="1024" loading="lazy" decoding="async" /></div>
+        <div class="w3-textblock">
+          <p class="spanish">Detalles del Servicio:</p>
+          <p class="english">Service Details:</p>
+          <p class="spanish">
+            Ofrecemos soluciones de diseño gráfico, incluyendo creación de marcas, banners, letreros, tarjetas
+            de negocios, volantes para medios digitales y fisicos, así como conceptualización y diseño de sitios
+            web y aplicaciones, garantizando resultados creativos, funcionales y alineados con la esencia de su
+            marca.
+          </p>
+          <p class="english">
+            We offer graphic design solutions, including brand creation, banners, signs, business cards,
+            flyers for digital and physical media, as well as website and app conceptualization and design,
+            guaranteeing creative, functional results that are aligned with the essence of your brand.
+          </p>
+          <p class="spanish">
+            Prepararemos un paquete personalizado a tus necesidades, con los precios del proyecto, en la seccion
+            de contacto puedes enviar toda la informacion.
+          </p>
+          <p class="english">
+            We will prepare a package tailored to your needs, with the project prices. You can send all the
+            information in the contact section.
+          </p>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <!--Modal Content3-->
-        <div id="id03" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span onclick="document.getElementById('id03').style.display='none'; document.body.style.overflow='';"
-                class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
-              <div class="img-modal"><img src="src/P_Video.webp" alt="Service Video" /></div>
-              <div class="w3-textblock">
-                <p class="spanish">Detalles del Servicio:</p>
-                <p class="english">Service Details:</p>
-                <p class="spanish">
-                  Ofrezco edición de video profesional para publicidad, eventos, cortometrajes, animaciones y proyectos
-                  audiovisuales, transformando el material original para llegar al publico y optimizándolo a cualquier
-                  formato o medio.
-                </p>
-                <p class="english">
-                  I offer professional video editing for advertising, events, short films, animations, and audiovisual
-                  projects,
-                  transforming the original material to reach the audience and optimizing it for any format or medium.
-                </p>
-                <p class="spanish">
-                  Tambien podemos ofrecer una versión con un enfoque más empresarial, cercano o cinematico para que
-                  conecte mejor con clientes potenciales.
-                </p>
-                <p class="english">
-                  We can also offer a version with a more business-oriented, approachable, or cinematic focus to better
-                  connect with potential customers.
-                </p>
-              </div>
-            </div>
-          </div>
+  <!--Modal Content3-->
+  <div id="id03" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id03').style.display='none'; document.body.style.overflow='';"
+          class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
+        <div class="img-modal"><img data-src="src/P_Video.webp" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Service Video" width="1024" height="1024" loading="lazy" decoding="async" /></div>
+        <div class="w3-textblock">
+          <p class="spanish">Detalles del Servicio:</p>
+          <p class="english">Service Details:</p>
+          <p class="spanish">
+            Ofrezco edición de video profesional para publicidad, eventos, cortometrajes, animaciones y proyectos
+            audiovisuales, transformando el material original para llegar al publico y optimizándolo a cualquier
+            formato o medio.
+          </p>
+          <p class="english">
+            I offer professional video editing for advertising, events, short films, animations, and audiovisual
+            projects,
+            transforming the original material to reach the audience and optimizing it for any format or medium.
+          </p>
+          <p class="spanish">
+            Tambien podemos ofrecer una versión con un enfoque más empresarial, cercano o cinematico para que
+            conecte mejor con clientes potenciales.
+          </p>
+          <p class="english">
+            We can also offer a version with a more business-oriented, approachable, or cinematic focus to better
+            connect with potential customers.
+          </p>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <!--Modal Content4-->
-        <div id="id04" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span onclick="document.getElementById('id04').style.display='none'; document.body.style.overflow='';"
-                class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
-              <div class="img-modal"><img src="src/P_Photo.webp" alt="Service Photo" /></div>
-              <div class="w3-textblock">
-                <p class="spanish">Detalles del Servicio:</p>
-                <p class="english">Service Details:</p>
-                <p class="spanish">
-                  Servicio de edición y postproducción fotográfica Corrección de color, retoque avanzado, fotomontajes
-                  creativos, montaje de panoramas 180° y 360°, empezando desde el revelado RAW hasta el montaje listo
-                  para impresión y medios digitales.
-                </p>
-                <p class="english">
-                  Photo editing and post-production service Color correction, advanced retouching, creative
-                  photomontages,
-                  180° and 360° panorama montages, from RAW development to montage ready for printing and digital media.
-                </p>
-                <p class="spanish">
-                  Cada proyecto se desarrolla de manera personalizada, considerando los requerimientos, volumen y el
-                  acabado visual que se busca lograr. Imagenes individualuales o lotes completos de un evento,
-                  el objetivo es ofrecer resultados estéticamente impecables, coherentes y listos para su publicación o
-                  impresión.
-                </p>
-                <p class="english">
-                  Each project is developed in a personalized manner, taking into account the requirements, volume, and
-                  visual finish to be achieved. Whether individual images or complete batches from an event, the goal is
-                  to deliver aesthetically flawless, consistent results that are ready for publication or printing.
-                </p>
-              </div>
-            </div>
-          </div>
+  <!--Modal Content4-->
+  <div id="id04" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id04').style.display='none'; document.body.style.overflow='';"
+          class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
+        <div class="img-modal"><img data-src="src/P_Photo.webp" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Service Photo" width="1024" height="1024" loading="lazy" decoding="async" /></div>
+        <div class="w3-textblock">
+          <p class="spanish">Detalles del Servicio:</p>
+          <p class="english">Service Details:</p>
+          <p class="spanish">
+            Servicio de edición y postproducción fotográfica Corrección de color, retoque avanzado, fotomontajes
+            creativos, montaje de panoramas 180° y 360°, empezando desde el revelado RAW hasta el montaje listo
+            para impresión y medios digitales.
+          </p>
+          <p class="english">
+            Photo editing and post-production service Color correction, advanced retouching, creative
+            photomontages,
+            180° and 360° panorama montages, from RAW development to montage ready for printing and digital media.
+          </p>
+          <p class="spanish">
+            Cada proyecto se desarrolla de manera personalizada, considerando los requerimientos, volumen y el
+            acabado visual que se busca lograr. Imagenes individualuales o lotes completos de un evento,
+            el objetivo es ofrecer resultados estéticamente impecables, coherentes y listos para su publicación o
+            impresión.
+          </p>
+          <p class="english">
+            Each project is developed in a personalized manner, taking into account the requirements, volume, and
+            visual finish to be achieved. Whether individual images or complete batches from an event, the goal is
+            to deliver aesthetically flawless, consistent results that are ready for publication or printing.
+          </p>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <!--Modal Content5-->
-        <div id="id05" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span onclick="document.getElementById('id05').style.display='none'; document.body.style.overflow='';"
-                class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
-              <div class="img-modal"><img src="src/P_Develop.webp" alt="Service Develop" /></div>
-              <div class="w3-textblock">
-                <p class="spanish">Detalles del Servicio:</p>
-                <p class="english">Service Details:</p>
-                <p class="spanish">
-                  Desarrollo sitios web usando tecnologias como HTML, CSS, JavaScript para crear el fronted junto a PHP
-                  para el backend, para dar vida a landing pages e interfaces responsivas optimizadas para rendimiento,
-                  accesibilidad y SEO.
-                </p>
-                <p class="english">
-                  I develop websites using technologies such as HTML, CSS, and JavaScript to create the front end, along
-                  with PHP for the back end, to bring to life landing pages and responsive interfaces optimized for
-                  performance, accessibility, and SEO.
-                </p>
-                <p class="spanish">
-                  Creo sitios web a la medida con los requisitos de tu proyecto para destacar, tu negocio, plataforma o
-                  tu persona.
-                </p>
-                <p class="english">
-                  I create custom websites tailored to your project's requirements to highlight your business, platform,
-                  or yourself.
-                </p>
-              </div>
-            </div>
-          </div>
+  <!--Modal Content5-->
+  <div id="id05" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id05').style.display='none'; document.body.style.overflow='';"
+          class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
+        <div class="img-modal"><img data-src="src/P_Develop.webp" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Service Develop" width="1024" height="1024" loading="lazy" decoding="async" /></div>
+        <div class="w3-textblock">
+          <p class="spanish">Detalles del Servicio:</p>
+          <p class="english">Service Details:</p>
+          <p class="spanish">
+            Desarrollo sitios web usando tecnologias como HTML, CSS, JavaScript para crear el fronted junto a PHP
+            para el backend, para dar vida a landing pages e interfaces responsivas optimizadas para rendimiento,
+            accesibilidad y SEO.
+          </p>
+          <p class="english">
+            I develop websites using technologies such as HTML, CSS, and JavaScript to create the front end, along
+            with PHP for the back end, to bring to life landing pages and responsive interfaces optimized for
+            performance, accessibility, and SEO.
+          </p>
+          <p class="spanish">
+            Creo sitios web a la medida con los requisitos de tu proyecto para destacar, tu negocio, plataforma o
+            tu persona.
+          </p>
+          <p class="english">
+            I create custom websites tailored to your project's requirements to highlight your business, platform,
+            or yourself.
+          </p>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <!--Modal Content6-->
-        <div id="id06" class="w3-modal">
-          <div class="w3-modal-content">
-            <div class="w3-container">
-              <span onclick="document.getElementById('id06').style.display='none'; document.body.style.overflow='';"
-                class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
-              <div class="img-modal"><img src="src/P_Utilities.webp" alt="Service Utilities" /></div>
-              <div class="w3-textblock">
-                <p class="spanish">Detalles del Servicio:</p>
-                <p class="english">Service Details:</p>
-                <p class="spanish">
-                  Nos especializamos en el mantenimiento y optimización de equipos informáticos. Ofrecemos una amplia
-                  gama de soluciones para PC de escritorio, laptops, dispositivos móviles. Nuestros servicios
-                  principales incluyen el formateo y la instalación de sistemas operativos como Windows,
-                  Linux, macOS y ROMs en dispositivos Android compatibles, así como la asesoramiento en la
-                  instalación de programas y videojuegos.
-                </p>
-                <p class="english">
-                  We specialize in the maintenance and optimization of computer equipment. We offer a wide
-                  range of solutions for desktop PCs, laptops, and mobile devices. Our main services
-                  include formatting and installing operating systems such as Windows,
-                  Linux, macOS, and ROMs on compatible Android devices, as well as advising on the
-                  installation of programs and video games.
-                </p>
-                <p class="spanish">
-                  Adicionalmente, nos enfocamos en la seguridad y la protección de datos. Nuestro objetivo es ofrecer un
-                  servicio profesional, adaptado a las necesidades de cada cliente.
-                </p>
-                <p class="english">
-                  In addition, we focus on security and data protection. Our goal is to offer a professional service
-                  tailored to the needs of each client.
-                </p>
-              </div>
-            </div>
-          </div>
+  <!--Modal Content6-->
+  <div id="id06" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id06').style.display='none'; document.body.style.overflow='';"
+          class="w3-button w3-display-topright audioclick"><i class="fas fa-plus"></i></span>
+        <div class="img-modal"><img data-src="src/P_Utilities.webp" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Service Utilities" width="1024" height="1024" loading="lazy" decoding="async" /></div>
+        <div class="w3-textblock">
+          <p class="spanish">Detalles del Servicio:</p>
+          <p class="english">Service Details:</p>
+          <p class="spanish">
+            Nos especializamos en el mantenimiento y optimización de equipos informáticos. Ofrecemos una amplia
+            gama de soluciones para PC de escritorio, laptops, dispositivos móviles. Nuestros servicios
+            principales incluyen el formateo y la instalación de sistemas operativos como Windows,
+            Linux, macOS y ROMs en dispositivos Android compatibles, así como la asesoramiento en la
+            instalación de programas y videojuegos.
+          </p>
+          <p class="english">
+            We specialize in the maintenance and optimization of computer equipment. We offer a wide
+            range of solutions for desktop PCs, laptops, and mobile devices. Our main services
+            include formatting and installing operating systems such as Windows,
+            Linux, macOS, and ROMs on compatible Android devices, as well as advising on the
+            installation of programs and video games.
+          </p>
+          <p class="spanish">
+            Adicionalmente, nos enfocamos en la seguridad y la protección de datos. Nuestro objetivo es ofrecer un
+            servicio profesional, adaptado a las necesidades de cada cliente.
+          </p>
+          <p class="english">
+            In addition, we focus on security and data protection. Our goal is to offer a professional service
+            tailored to the needs of each client.
+          </p>
         </div>
+      </div>
+    </div>
+  </div>
 
 
   <button id="Fbutton" class="audioclick" type="button" title="btn"><img alt="arrowup" id="arrowup"
