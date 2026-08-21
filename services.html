@@ -63,13 +63,46 @@
       function openModal(id) {
         const m = document.getElementById(id);
         if (!m) return;
+        const show = function () {
+          m.style.display = "flex";
+          document.body.style.overflow = "hidden";
+        };
         const img = m.querySelector('img[data-src]');
         if (img && img.dataset.src) {
-          img.src = img.dataset.src;
+          const src = img.dataset.src;
           img.removeAttribute('data-src');
+          let done = false;
+          const finish = function () {
+            if (done) return;
+            done = true;
+            img.src = src;
+            if (img.decode) {
+              img.decode().then(show).catch(show);
+            } else {
+              show();
+            }
+          };
+          const pre = new Image();
+          pre.decoding = "async";
+          let preDone = false;
+          const preFinish = function () {
+            if (preDone) return;
+            preDone = true;
+            finish();
+          };
+          if (pre.decode) {
+            pre.src = src;
+            pre.decode().then(preFinish).catch(preFinish);
+          } else {
+            pre.onload = preFinish;
+            pre.onerror = preFinish;
+            pre.src = src;
+            if (pre.complete) preFinish();
+          }
+          setTimeout(preFinish, 2500);
+        } else {
+          show();
         }
-        m.style.display = "flex";
-        document.body.style.overflow = "hidden";
       }
 
       document.querySelectorAll(".Box-buttonModal[data-modal]").forEach(function (btn) {
