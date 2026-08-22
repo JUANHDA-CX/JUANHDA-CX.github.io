@@ -154,18 +154,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const canvasEl = document.getElementById(triggerId);
         let isVisible = false;
 
-        // Solo renderiza el canvas visible -> ahorra CPU/GPU, mantiene el progreso por scroll
+        // Pausa el render cuando el canvas no se ve, pero mantiene el progreso del scroll
         if (canvasEl && 'IntersectionObserver' in window) {
             const observer = new IntersectionObserver(
                 function (entries) {
                     isVisible = entries[0].isIntersecting;
-                    if (isVisible) {
-                        riveInstance.play();
-                        canvasEl.style.willChange = 'transform';
-                    } else {
-                        riveInstance.pause();
-                        canvasEl.style.willChange = 'auto';
-                    }
+                    if (isVisible) riveInstance.play();
+                    else riveInstance.pause();
                 },
                 { threshold: 0.1 }
             );
@@ -179,12 +174,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 trigger: `#${triggerId}`,
                 start: 'top bottom',
                 end: 'bottom top',
-                scrub: 1,
-                onUpdate: function (self) {
-                    // Actualiza el progreso siempre, dibuja solo si es visible
-                    progressInput.value = self.progress * 100;
-                    if (isVisible) riveInstance.play();
-                }
+                scrub: 1
             }
         });
 
