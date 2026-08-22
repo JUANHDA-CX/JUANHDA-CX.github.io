@@ -63,12 +63,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         gsap.to(parallaxBg, {
             ease: "none",
-            force3D: true,
             scrollTrigger: {
                 trigger: ".banner-container-GSAP",
                 start: "top top",
                 end: "bottom top",
-                scrub: 0.8
+                scrub: true
             }
         });
     }
@@ -90,35 +89,28 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     setupParallax();
 
-    // Refrescar medidas tras carga de imágenes y fuentes — evita salto por altura dvh
-    window.addEventListener("load", () => ScrollTrigger.refresh());
-    document.fonts.ready.then(() => ScrollTrigger.refresh());
-
-    // Animación para múltiples capas de parallax — misma Y, solo scrub más suave para móvil sin alterar alineación
+    // Animación para múltiples capas de parallax
     gsap.to(".far", {
         yPercent: 100,
         ease: "none",
-        force3D: true,
         scrollTrigger: {
-            scrub: 0.8
+            scrub: true
         }
     });
 
     gsap.to(".mid", {
         yPercent: 200,
         ease: "none",
-        force3D: true,
         scrollTrigger: {
-            scrub: 0.8
+            scrub: true
         }
     });
 
     gsap.to(".close", {
         yPercent: 300,
         ease: "none",
-        force3D: true,
         scrollTrigger: {
-            scrub: 0.8
+            scrub: true
         }
     });
 
@@ -159,6 +151,28 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     function setupScrollTrigger(riveInstance, stateMachineName, triggerId) {
         const progressInput = useStateMachineInput(riveInstance, stateMachineName, 'progress', 0); // nombre del input numerico en el stateMachine de Rive editor
+        const canvasEl = document.getElementById(triggerId);
+        let isVisible = false;
+
+        // Solo renderiza el canvas visible -> ahorra CPU/GPU, mantiene el progreso por scroll
+        if (canvasEl && 'IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(
+                function (entries) {
+                    isVisible = entries[0].isIntersecting;
+                    if (isVisible) {
+                        riveInstance.play();
+                        canvasEl.style.willChange = 'transform';
+                    } else {
+                        riveInstance.pause();
+                        canvasEl.style.willChange = 'auto';
+                    }
+                },
+                { threshold: 0.1 }
+            );
+            observer.observe(canvasEl);
+        } else {
+            isVisible = true;
+        }
 
         const animationTimeline = gsap.timeline({
             scrollTrigger: {
@@ -166,18 +180,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 start: 'top bottom',
                 end: 'bottom top',
                 scrub: 1,
+                onUpdate: function (self) {
+                    // Actualiza el progreso siempre, dibuja solo si es visible
+                    progressInput.value = self.progress * 100;
+                    if (isVisible) riveInstance.play();
+                }
             }
         });
 
         animationTimeline.to(progressInput, {
             value: 100,
-            onUpdate: () => {
-                riveInstance.play();
+            onUpdate: function () {
+                if (isVisible) riveInstance.play();
             },
-            onStart: () => {
-                riveInstance.play();
+            onStart: function () {
+                if (isVisible) riveInstance.play();
             },
-            onComplete: () => {
+            onComplete: function () {
                 riveInstance.pause();
             }
         });
