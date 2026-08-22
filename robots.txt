@@ -1,4 +1,15 @@
+# Mega CX Studios - robots.txt
+# Best practice 2026: allow CSS/JS for rendering, disallow tool cache
 User-agent: *
 Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /src/
+Allow: /icons/
+
+# Tool cache and drafts - not for indexing
+Disallow: /.atl/
+Disallow: /EXTRA/
 
 Sitemap: https://juanhda-cx.github.io/sitemap.xml
+Host: https://juanhda-cx.github.io
