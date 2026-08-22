@@ -63,11 +63,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         gsap.to(parallaxBg, {
             ease: "none",
+            force3D: true,
             scrollTrigger: {
                 trigger: ".banner-container-GSAP",
                 start: "top top",
                 end: "bottom top",
-                scrub: true
+                scrub: 0.8
             }
         });
     }
@@ -89,28 +90,35 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     setupParallax();
 
-    // Animación para múltiples capas de parallax
+    // Refrescar medidas tras carga de imágenes y fuentes — evita salto por altura dvh
+    window.addEventListener("load", () => ScrollTrigger.refresh());
+    document.fonts.ready.then(() => ScrollTrigger.refresh());
+
+    // Animación para múltiples capas de parallax — misma Y, solo scrub más suave para móvil sin alterar alineación
     gsap.to(".far", {
         yPercent: 100,
         ease: "none",
+        force3D: true,
         scrollTrigger: {
-            scrub: true
+            scrub: 0.8
         }
     });
 
     gsap.to(".mid", {
         yPercent: 200,
         ease: "none",
+        force3D: true,
         scrollTrigger: {
-            scrub: true
+            scrub: 0.8
         }
     });
 
     gsap.to(".close", {
         yPercent: 300,
         ease: "none",
+        force3D: true,
         scrollTrigger: {
-            scrub: true
+            scrub: 0.8
         }
     });
 
