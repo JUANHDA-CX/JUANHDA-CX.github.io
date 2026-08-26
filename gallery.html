@@ -90,6 +90,78 @@
         galleryExpand.style.transformOrigin = "center";
       }
 
+      // Zoom suavizado: la rueda/botones mueven un objetivo y un loop RAF
+      // interpola scale/origin hacia él (~250ms). El clamp de updateTransform
+      // se aplica en cada frame, así la imagen siempre cubre el marco.
+      let targetScale = scale;
+      let targetOriginX = 0;
+      let targetOriginY = 0;
+      let zoomRafId = null;
+      let zoomLastTime = null;
+      const ZOOM_TAU = 83; // ms: alcanza ~95% del camino en ~250ms
+
+      function zoomAnimationFrame(now) {
+        if (zoomLastTime === null) zoomLastTime = now;
+        const dt = Math.min(64, now - zoomLastTime);
+        zoomLastTime = now;
+        const f = 1 - Math.exp(-dt / ZOOM_TAU);
+        scale += (targetScale - scale) * f;
+        originX += (targetOriginX - originX) * f;
+        originY += (targetOriginY - originY) * f;
+        updateTransform();
+        if (
+          Math.abs(targetScale - scale) < 0.001 &&
+          Math.abs(targetOriginX - originX) < 0.1 &&
+          Math.abs(targetOriginY - originY) < 0.1
+        ) {
+          scale = targetScale;
+          originX = targetOriginX;
+          originY = targetOriginY;
+          updateTransform();
+          zoomRafId = null;
+          zoomLastTime = null;
+          return;
+        }
+        zoomRafId = requestAnimationFrame(zoomAnimationFrame);
+      }
+
+      function startZoomAnimation() {
+        if (zoomRafId === null) {
+          zoomLastTime = null;
+          zoomRafId = requestAnimationFrame(zoomAnimationFrame);
+        }
+      }
+
+      // Sincroniza objetivos con el estado actual y corta la animación
+      // (se usa al empezar a arrastrar, hacer pinch o cerrar el visor).
+      function cancelZoomAnimation() {
+        if (zoomRafId !== null) {
+          cancelAnimationFrame(zoomRafId);
+          zoomRafId = null;
+          zoomLastTime = null;
+        }
+        targetScale = scale;
+        targetOriginX = originX;
+        targetOriginY = originY;
+      }
+
+      function animateZoomTo(nextTargetScale, anchorX, anchorY) {
+        nextTargetScale = Math.min(maxScale, Math.max(minScale, nextTargetScale));
+        if (nextTargetScale === targetScale) return;
+        const ratio = nextTargetScale / targetScale;
+        if (anchorX !== undefined && anchorX !== null) {
+          const rect = galleryExpand.getBoundingClientRect();
+          targetOriginX += (1 - ratio) * (anchorX - rect.left - rect.width / 2);
+          targetOriginY += (1 - ratio) * (anchorY - rect.top - rect.height / 2);
+        }
+        targetScale = nextTargetScale;
+        if (targetScale <= minScale) {
+          targetOriginX = 0;
+          targetOriginY = 0;
+        }
+        startZoomAnimation();
+      }
+
       gridItems.forEach((item) => {
         item.addEventListener("click", function () {
           galleryExpand.src = this.src;
@@ -100,11 +172,16 @@
           scale = minScale;
           originX = 0;
           originY = 0;
+          targetScale = minScale;
+          targetOriginX = 0;
+          targetOriginY = 0;
+          cancelZoomAnimation();
           updateTransform();
         });
       });
 
       galleryExpandBtn.addEventListener("click", function () {
+        cancelZoomAnimation();
         galleryExpandController.style.display = "none";
         document.body.style.overflow = "";
         const cursorAnim = document.querySelector(".cursor-circle");
@@ -133,26 +210,15 @@
       });
 
       zoomInBtn.addEventListener("click", function () {
-        scale *= 1.2;
-        scale = Math.min(maxScale, scale);
-        updateTransform();
+        animateZoomTo(targetScale * 1.2);
       });
 
       zoomOutBtn.addEventListener("click", function () {
-        if (scale > minScale) {
-          scale /= 1.2;
-          if (scale < minScale) {
-            scale = minScale;
-          }
-          updateTransform();
-        }
+        animateZoomTo(targetScale / 1.2);
       });
 
       resetBtn.addEventListener("click", function () {
-        scale = minScale;
-        originX = 0;
-        originY = 0;
-        updateTransform();
+        animateZoomTo(minScale);
       });
 
       // Paneo
@@ -162,6 +228,7 @@
       galleryExpand.addEventListener("mousedown", function (event) {
         event.stopPropagation();
         event.preventDefault();
+        cancelZoomAnimation();
         isDragging = true;
         startX = event.clientX - originX;
         startY = event.clientY - originY;
@@ -185,6 +252,7 @@
       galleryExpand.addEventListener("touchstart", function (event) {
         event.stopPropagation();
         event.preventDefault();
+        cancelZoomAnimation();
         if (event.touches.length === 1) {
           isDragging = true;
           startX = event.touches[0].clientX - originX;
@@ -207,19 +275,18 @@
       });
 
 
-      // Zoom con la rueda del mouse: exponencial y centrado en el cursor
+      // Zoom con la rueda del mouse: exponencial, anclado al cursor y suavizado.
+      // Solo mueve el objetivo; el loop RAF interpola hacia él (~250ms).
       galleryExpand.addEventListener("wheel", function (event) {
         event.preventDefault();
-        const previousScale = scale;
-        const nextScale = Math.min(maxScale, Math.max(minScale, scale * Math.exp(event.deltaY * -0.0015)));
-        if (nextScale === previousScale) return;
-        const rect = galleryExpand.getBoundingClientRect();
-        const ratio = nextScale / previousScale;
-        // Ajusta los offsets para que el punto bajo el cursor quede fijo
-        originX = originX + (1 - ratio) * (event.clientX - rect.left - rect.width / 2);
-        originY = originY + (1 - ratio) * (event.clientY - rect.top - rect.height / 2);
-        scale = nextScale;
-        updateTransform();
+        let deltaY = event.deltaY;
+        if (event.deltaMode === 1) deltaY *= 16; // líneas -> píxeles
+        else if (event.deltaMode === 2) deltaY *= 100; // páginas -> píxeles
+        animateZoomTo(
+          targetScale * Math.exp(deltaY * -0.0015),
+          event.clientX,
+          event.clientY
+        );
       });
 
       // Zoom con gesto de pellizco en pantallas táctiles
@@ -235,6 +302,10 @@
             scale *= currentDistance / initialDistance;
             scale = Math.min(Math.max(minScale, scale), maxScale);
             updateTransform();
+            // El pinch manda: sincroniza objetivos con el estado actual
+            targetScale = scale;
+            targetOriginX = originX;
+            targetOriginY = originY;
           }
 
           initialDistance = currentDistance;
