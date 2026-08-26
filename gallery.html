@@ -96,6 +96,7 @@
       let targetScale = scale;
       let targetOriginX = 0;
       let targetOriginY = 0;
+      let zoomGesture = null; // gesto activo: { s0, ox0, oy0, ax, ay } para el ancla exacta
       let zoomRafId = null;
       let zoomLastTime = null;
       const ZOOM_TAU = 83; // ms: alcanza ~95% del camino en ~250ms
@@ -106,20 +107,31 @@
         zoomLastTime = now;
         const f = 1 - Math.exp(-dt / ZOOM_TAU);
         scale += (targetScale - scale) * f;
-        originX += (targetOriginX - originX) * f;
-        originY += (targetOriginY - originY) * f;
+        if (zoomGesture) {
+          // Ancla exacta al cursor: con pos(p) = K + s*(p - c + o), mantener
+          // p fijo en pantalla exige o = (s0/s)*(o0 + A) - A, con A = p0 - c.
+          const g = zoomGesture;
+          originX = (g.s0 / scale) * (g.ax + g.ox0) - g.ax;
+          originY = (g.s0 / scale) * (g.ay + g.oy0) - g.ay;
+        } else {
+          originX += (targetOriginX - originX) * f;
+          originY += (targetOriginY - originY) * f;
+        }
         updateTransform();
-        if (
-          Math.abs(targetScale - scale) < 0.001 &&
-          Math.abs(targetOriginX - originX) < 0.1 &&
-          Math.abs(targetOriginY - originY) < 0.1
-        ) {
+        if (Math.abs(targetScale - scale) < 0.001) {
           scale = targetScale;
-          originX = targetOriginX;
-          originY = targetOriginY;
+          if (zoomGesture) {
+            const g = zoomGesture;
+            originX = (g.s0 / scale) * (g.ax + g.ox0) - g.ax;
+            originY = (g.s0 / scale) * (g.ay + g.oy0) - g.ay;
+          } else {
+            originX = targetOriginX;
+            originY = targetOriginY;
+          }
           updateTransform();
           zoomRafId = null;
           zoomLastTime = null;
+          zoomGesture = null;
           return;
         }
         zoomRafId = requestAnimationFrame(zoomAnimationFrame);
@@ -140,6 +152,7 @@
           zoomRafId = null;
           zoomLastTime = null;
         }
+        zoomGesture = null;
         targetScale = scale;
         targetOriginX = originX;
         targetOriginY = originY;
@@ -147,17 +160,28 @@
 
       function animateZoomTo(nextTargetScale, anchorX, anchorY) {
         nextTargetScale = Math.min(maxScale, Math.max(minScale, nextTargetScale));
-        if (nextTargetScale === targetScale) return;
-        const ratio = nextTargetScale / targetScale;
-        if (anchorX !== undefined && anchorX !== null) {
-          const rect = galleryExpand.getBoundingClientRect();
-          targetOriginX += (1 - ratio) * (anchorX - rect.left - rect.width / 2);
-          targetOriginY += (1 - ratio) * (anchorY - rect.top - rect.height / 2);
-        }
+        if (nextTargetScale === targetScale && !zoomGesture) return;
         targetScale = nextTargetScale;
+        if (anchorX !== undefined && anchorX !== null) {
+          // Ancla: fracción de contenido bajo el cursor, en coords locales centradas
+          const rect = galleryExpand.getBoundingClientRect();
+          const fx = (anchorX - rect.left) / rect.width - 0.5;
+          const fy = (anchorY - rect.top) / rect.height - 0.5;
+          zoomGesture = {
+            s0: scale,
+            ox0: originX,
+            oy0: originY,
+            ax: galleryExpand.offsetWidth * fx,
+            ay: galleryExpand.offsetHeight * fy
+          };
+        } else {
+          zoomGesture = null;
+        }
         if (targetScale <= minScale) {
+          // Al llegar a 1x el recentrado manda: origen objetivo en 0
           targetOriginX = 0;
           targetOriginY = 0;
+          zoomGesture = null;
         }
         startZoomAnimation();
       }
