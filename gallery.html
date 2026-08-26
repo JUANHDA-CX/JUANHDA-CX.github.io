@@ -209,7 +209,7 @@
         galleryExpandController.style.display = "none";
         document.body.style.overflow = "";
         const cursorAnim = document.querySelector(".cursor-circle");
-        if (cursorAnim) cursorAnim.style.display = "block";
+        if (cursorAnim) cursorAnim.style.display = "";
         document.dispatchEvent(new CustomEvent("viewerClose"));
         if (window.pageYOffset > 300) {
           Fbutton.style.display = "block";
@@ -574,7 +574,7 @@
         });
 
         document.addEventListener("viewerClose", function () {
-          cursorAnim.style.display = "block";
+          cursorAnim.style.display = "";
           currentImageCode = null;
         });
       } catch (e) {
