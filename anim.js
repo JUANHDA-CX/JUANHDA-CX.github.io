@@ -89,29 +89,42 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     setupParallax();
 
-    // Animación para múltiples capas de parallax
-    gsap.to(".far", {
-        yPercent: 100,
-        ease: "none",
-        scrollTrigger: {
-            scrub: true
-        }
+    // Parallax del banner: en touch suavizado con cola (~0.8s) para evitar el corte
+    // seco al frenar; en desktop se mantiene 1:1 como hasta ahora.
+    const mm = gsap.matchMedia();
+    mm.add("(hover: none) and (pointer: coarse)", () => {
+        gsap.to(".far", {
+            yPercent: 100,
+            ease: "none",
+            scrollTrigger: { scrub: 0.8 }
+        });
+        gsap.to(".mid", {
+            yPercent: 200,
+            ease: "none",
+            scrollTrigger: { scrub: 0.8 }
+        });
+        gsap.to(".close", {
+            yPercent: 300,
+            ease: "none",
+            scrollTrigger: { scrub: 0.8 }
+        });
     });
-
-    gsap.to(".mid", {
-        yPercent: 200,
-        ease: "none",
-        scrollTrigger: {
-            scrub: true
-        }
-    });
-
-    gsap.to(".close", {
-        yPercent: 300,
-        ease: "none",
-        scrollTrigger: {
-            scrub: true
-        }
+    mm.add("(hover: hover)", () => {
+        gsap.to(".far", {
+            yPercent: 100,
+            ease: "none",
+            scrollTrigger: { scrub: true }
+        });
+        gsap.to(".mid", {
+            yPercent: 200,
+            ease: "none",
+            scrollTrigger: { scrub: true }
+        });
+        gsap.to(".close", {
+            yPercent: 300,
+            ease: "none",
+            scrollTrigger: { scrub: true }
+        });
     });
 
 
@@ -121,6 +134,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 
     const riveInstances = [];
+    const riveVisibility = new Map();
+    let scrollPauseTimeout = null;
+
+    window.addEventListener(
+        'scroll',
+        function () {
+            riveInstances.forEach(function (r) {
+                if (riveVisibility.get(r)) r.play();
+            });
+            clearTimeout(scrollPauseTimeout);
+            scrollPauseTimeout = setTimeout(function () {
+                riveInstances.forEach(function (r) {
+                    r.pause();
+                });
+            }, 150);
+        },
+        { passive: true }
+    );
 
     function createRiveInstance(config) {
         const { canvasId, artboard, stateMachine, triggerId } = config;
@@ -153,12 +184,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const progressInput = useStateMachineInput(riveInstance, stateMachineName, 'progress', 0); // nombre del input numerico en el stateMachine de Rive editor
         const canvasEl = document.getElementById(triggerId);
         let isVisible = false;
+        riveVisibility.set(riveInstance, false);
 
         // Pausa el render cuando el canvas no se ve, pero mantiene el progreso del scroll
         if (canvasEl && 'IntersectionObserver' in window) {
             const observer = new IntersectionObserver(
                 function (entries) {
                     isVisible = entries[0].isIntersecting;
+                    riveVisibility.set(riveInstance, isVisible);
                     if (isVisible) riveInstance.play();
                     else riveInstance.pause();
                 },
@@ -167,6 +200,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             observer.observe(canvasEl);
         } else {
             isVisible = true;
+            riveVisibility.set(riveInstance, true);
         }
 
         const animationTimeline = gsap.timeline({
@@ -174,15 +208,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 trigger: `#${triggerId}`,
                 start: 'top bottom',
                 end: 'bottom top',
-                scrub: 1
+                scrub: true
             }
         });
 
         animationTimeline.to(progressInput, {
             value: 100,
-            onUpdate: function () {
-                if (isVisible) riveInstance.play();
-            },
             onStart: function () {
                 if (isVisible) riveInstance.play();
             },
