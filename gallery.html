@@ -77,6 +77,15 @@
       const maxScale = 5;
 
       function updateTransform() {
+        // Clamp del pan: la imagen nunca puede dejar de cubrir el marco.
+        // El translate(ox,oy) se aplica antes del scale (se multiplica por él),
+        // así que el límite es w*(s-1)/(2s); con s=1 no hay pan permitido.
+        const w = galleryExpand.offsetWidth;
+        const h = galleryExpand.offsetHeight;
+        const maxX = (w * (scale - 1)) / (2 * scale);
+        const maxY = (h * (scale - 1)) / (2 * scale);
+        originX = Math.max(-maxX, Math.min(maxX, originX));
+        originY = Math.max(-maxY, Math.min(maxY, originY));
         galleryExpand.style.transform = `translate(-50%, 0%) scale(${scale}) translate(${originX}px, ${originY}px)`;
         galleryExpand.style.transformOrigin = "center";
       }
