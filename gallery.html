@@ -248,21 +248,27 @@
       // Paneo
       let isDragging = false;
       let startX, startY;
+      let grabOriginX, grabOriginY;
 
       galleryExpand.addEventListener("mousedown", function (event) {
         event.stopPropagation();
         event.preventDefault();
         cancelZoomAnimation();
         isDragging = true;
-        startX = event.clientX - originX;
-        startY = event.clientY - originY;
+        grabOriginX = originX;
+        grabOriginY = originY;
+        startX = event.clientX;
+        startY = event.clientY;
         galleryExpand.style.cursor = 'grabbing';
       });
 
       document.addEventListener("mousemove", function (event) {
         if (isDragging) {
-          originX = event.clientX - startX;
-          originY = event.clientY - startY;
+          // El translate(ox,oy) va dentro del scale: el desplazamiento visual
+          // es s*origin, así que el delta del cursor se divide por scale
+          // para que la imagen siga al cursor 1:1.
+          originX = grabOriginX + (event.clientX - startX) / scale;
+          originY = grabOriginY + (event.clientY - startY) / scale;
           updateTransform();
         }
       });
@@ -279,16 +285,18 @@
         cancelZoomAnimation();
         if (event.touches.length === 1) {
           isDragging = true;
-          startX = event.touches[0].clientX - originX;
-          startY = event.touches[0].clientY - originY;
+          grabOriginX = originX;
+          grabOriginY = originY;
+          startX = event.touches[0].clientX;
+          startY = event.touches[0].clientY;
           galleryExpand.style.cursor = 'grabbing';
         }
       });
 
       document.addEventListener("touchmove", function (event) {
         if (isDragging && event.touches.length === 1) {
-          originX = event.touches[0].clientX - startX;
-          originY = event.touches[0].clientY - startY;
+          originX = grabOriginX + (event.touches[0].clientX - startX) / scale;
+          originY = grabOriginY + (event.touches[0].clientY - startY) / scale;
           updateTransform();
         }
       });
