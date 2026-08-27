@@ -2,55 +2,61 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  height: 100dvh;
   overflow: hidden;
 }
+
 @media only screen and (max-width: 600px) {
   .banner-container-GSAP {
     position: relative;
   }
 }
+
 .parallax-bg-GSAP {
   position: absolute;
   width: 100% !important;
   height: 100vh;
-  height: 100dvh;
   /*125vh*/
   background-size: cover;
   background-position: center;
   will-change: transform;
-  transform: translateZ(0);
 }
+
 @media only screen and (max-width: 600px) {
   .parallax-bg-GSAP {
     height: 125vh;
-    height: 125dvh;
   }
 }
+
 .parallax-bg-GSAP.far {
   background-image: url("src/parallax_Far_LIGHT.webp");
   z-index: 1;
 }
+
 .parallax-bg-GSAP.mid {
   background-image: url("src/parallax_Medium_LIGHT.webp");
   z-index: 2;
 }
+
 .parallax-bg-GSAP.close {
   background-image: url("src/parallax_Near_LIGHT.webp");
   z-index: 3;
 }
+
 .dark-mode .parallax-bg-GSAP.far {
   background-image: url("src/parallax_Far_DARK.webp");
   z-index: 1;
 }
+
 .dark-mode .parallax-bg-GSAP.mid {
   background-image: url("src/parallax_Medium_DARK.webp");
   z-index: 2;
 }
+
 .dark-mode .parallax-bg-GSAP.close {
   background-image: url("src/parallax_Near_DARK.webp");
   z-index: 3;
 }
+
 .banner-tittle-content-GSAP {
   position: absolute;
   height: 100%;
@@ -61,12 +67,14 @@
   align-items: center;
   z-index: 4;
 }
+
 /*Menu secondario*/
 #Nav_secondary {
   position: relative;
   top: 0;
   z-index: 1;
 }
+
 /*Mobile Device*/
 @media only screen and (max-width: 600px) {
   #Nav_secondary ul {
@@ -76,13 +84,15 @@
     gap: 16px;
   }
 }
+
 /*Desktop Device*/
 @media only screen and (min-width: 601px) {
   .HomeGnavMobile {
     display: none !important;
   }
 }
-#Nav_secondary ul > li {
+
+#Nav_secondary ul>li {
   list-style: none;
   display: inline;
   color: white;
@@ -97,8 +107,9 @@
   -webkit-user-select: none;
   user-select: none;
 }
+
 @media only screen and (max-width: 600px) {
-  #Nav_secondary ul > li {
+  #Nav_secondary ul>li {
     margin: 0;
     padding: 16px;
     width: auto;
@@ -106,10 +117,12 @@
     justify-content: center;
   }
 }
-.dark-mode #Nav_secondary ul > li {
+
+.dark-mode #Nav_secondary ul>li {
   background-color: var(--palette_text_black);
   box-shadow: 5px 5px 15px #00000020;
 }
+
 #Nav_secondary li a {
   text-decoration: none;
   color: var(--palette_text_black);
@@ -117,14 +130,17 @@
   font-size: 18px;
   cursor: url("src/cursor_pointer.png"), pointer;
 }
+
 @media only screen and (max-width: 600px) {
   #Nav_secondary li a {
     font-size: 24px;
   }
 }
+
 .dark-mode #Nav_secondary li a {
   color: var(--palette_text_white);
 }
+
 /*Menu retractil*/
 #emergent {
   position: relative;
@@ -134,18 +150,21 @@
   margin-right: 0px;
   padding-right: 0%;
 }
+
 /*Mobile Device*/
 @media only screen and (max-width: 600px) {
   #emergent {
     display: none;
   }
 }
+
 /*Tablet Device*/
 @media only screen and (min-width: 601px) {
   #emergent {
     display: none;
   }
 }
+
 /*Tablet Device*/
 @media only screen and (min-width: 1024px) {
   #emergent {
@@ -153,11 +172,13 @@
     padding-right: 5%;
   }
 }
+
 @media only screen and (min-width: 2560px) {
   #emergent {
     padding-right: 25%;
   }
 }
+
 #hexeBG {
   width: 50px;
   height: 50px;
@@ -171,10 +192,12 @@
   z-index: 5;
   cursor: url("src/cursor_pointer.png"), pointer;
 }
+
 .dark-mode #hexeBG {
   background-color: var(--palette_dark_accent_main);
   box-shadow: 5px 5px 15px #00000080;
 }
+
 #hexeBG::after {
   content: "";
   position: absolute;
@@ -190,32 +213,39 @@
   transition: 1s;
   z-index: 4;
 }
+
 .dark-mode #hexeBG::after {
   background-color: var(--palette_dark_accent_one);
 }
+
 #hexeBG:hover::after {
   opacity: 30%;
   transform: translate(-50%, -50%) scale(15);
 }
-#hexeBG > a {
+
+#hexeBG>a {
   color: var(--palette_text_black);
   transform: rotate(0deg);
   transition: transform 0.3s ease-in-out;
   /*
   animation: BTsite1 5s infinite ease-in-out;*/
 }
-.dark-mode #hexeBG > a {
+
+.dark-mode #hexeBG>a {
   color: var(--palette_text_white);
 }
-#hexeBG > a > i {
+
+#hexeBG>a>i {
   font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#hexeBG > a > i:hover::after {
+
+#hexeBG>a>i:hover::after {
   font-size: 14px;
 }
+
 #flex {
   width: 0px;
   height: 50px;
@@ -225,7 +255,8 @@
   transition: width 1s;
   transition-timing-function: ease;
 }
-.siteicons > a {
+
+.siteicons>a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -234,13 +265,16 @@
   text-decoration: none;
   cursor: url("src/cursor_pointer.png"), pointer;
 }
-.dark-mode .siteicons > a {
+
+.dark-mode .siteicons>a {
   color: var(--palette_text_white);
 }
-.siteicons > a > i {
+
+.siteicons>a>i {
   font-size: 18px;
   cursor: url("src/cursor_pointer.png"), pointer;
 }
+
 .siteicons {
   width: 30px;
   height: 30px;
@@ -252,74 +286,92 @@
   z-index: 4;
   cursor: url("src/cursor_pointer.png"), pointer;
 }
+
 .dark-mode .siteicons {
   background-color: var(--palette_dark_accent_two);
 }
+
 .siteicons:hover {
   background-color: var(--palette_text_white);
 }
-.dark-mode .siteicons > a:hover {
+
+.dark-mode .siteicons>a:hover {
   color: var(--palette_dark_accent_two);
 }
+
 .dark-mode .siteicons:hover {
   background-color: var(--palette_dark_accent_main);
 }
+
 #site1 {
   right: 0%;
 }
+
 #site2 {
   right: 25%;
 }
+
 #site3 {
   right: 50%;
 }
+
 #site4 {
   right: 75%;
 }
+
 #site5 {
   right: 100%;
 }
+
 #site6 {
   right: 125%;
 }
+
 /*Tablet Device*/
 @media only screen and (max-width: 900px) {
   #site2 {
     right: 22%;
   }
 }
+
 @media only screen and (max-width: 900px) {
   #site3 {
     right: 44%;
   }
 }
+
 @media only screen and (max-width: 900px) {
   #site4 {
     right: 66%;
   }
 }
+
 @media only screen and (max-width: 900px) {
   #site5 {
     right: 88%;
   }
 }
+
 @media only screen and (max-width: 900px) {
   #site6 {
     right: 110%;
   }
 }
+
 .logocx {
   height: 200px;
   width: auto;
   -webkit-user-select: none;
   user-select: none;
 }
+
 /*Tablet Device*/
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
   .logocx {
     height: 250px;
   }
 }
+
 .tittle-one {
   background-color: var(--palette_text_black);
   background-image: none;
@@ -327,7 +379,7 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: OxfordStreet;
-  font-weight: bold;
+  font-weight: 900;
   text-align: center;
   letter-spacing: 5px;
   -webkit-transition-property: all;
@@ -337,27 +389,33 @@
   -webkit-user-select: none;
   user-select: none;
 }
+
 .dark-mode .tittle-one {
   background-image: linear-gradient(270deg, #b90f10, #4b1eff);
 }
+
 .tittle-one {
   animation: tittle-one 3s infinite;
 }
+
 @media only screen and (max-width: 600px) {
   .tittle-one {
     font-size: 2.2rem;
   }
 }
+
 @media only screen and (min-width: 601px) {
   .tittle-one {
     font-size: 3rem;
   }
 }
+
 @media only screen and (min-width: 1024px) {
   .tittle-one {
     font-size: 4rem;
   }
 }
+
 #art0 {
   position: relative;
   color: var(--palette_text_black);
@@ -365,17 +423,22 @@
   text-align: center;
   text-shadow: none;
   user-select: none;
+  font-weight: bold;
 }
+
 .dark-mode #art0 {
   color: var(--palette_text_white);
   text-shadow: 0px 0px 32px hsla(0, 0%, 0%, 0.5);
 }
+
 @media only screen and (max-width: 600px) {
   #art0 {
     font-size: 6rem;
-    height: 10.5rem;
+    height: 12.5rem;
+    line-height: 6rem;
   }
 }
+
 @media only screen and (min-width: 601px) {
   #art0 {
     font-size: 8rem;
@@ -383,6 +446,7 @@
     line-height: 8rem;
   }
 }
+
 @media only screen and (min-width: 720px) {
   #art0 {
     font-size: 6rem;
@@ -390,12 +454,14 @@
     white-space: nowrap;
   }
 }
+
 @media only screen and (min-width: 1024px) {
   #art0 {
     font-size: 8rem;
-    height: 6rem;
+    height: 8rem;
   }
 }
+
 #art1 {
   position: relative;
   color: var(--palette_text_black);
@@ -405,50 +471,59 @@
   white-space: nowrap;
   user-select: none;
 }
+
 @media only screen and (max-width: 600px) {
   #art1 {
     font-size: 1rem;
   }
 }
+
 @media only screen and (min-width: 601px) {
   #art1 {
     font-size: 1.2rem;
   }
 }
+
 @media only screen and (min-width: 720px) {
   #art1 {
     font-size: 1.5rem;
   }
 }
+
 @media only screen and (min-width: 1024px) {
   #art1 {
     font-size: 2rem;
   }
 }
+
 #art2 {
   padding-left: 11.5%;
   padding-right: 50%;
   margin: auto;
   font-size: 2rem;
 }
+
 #art3 {
   padding-left: 50%;
   padding-right: 11.5%;
   margin: auto;
   font-size: 2rem;
 }
+
 #art4 {
   padding-left: 11.5%;
   padding-right: 50%;
   margin: auto;
   font-size: 2rem;
 }
+
 .dark-mode #art1,
 .dark-mode #art2,
 .dark-mode #art3,
 .dark-mode #art4 {
   color: var(--palette_text_white);
 }
+
 #art2 span,
 #art3 span,
 #art4 span {
@@ -457,12 +532,15 @@
   font-family: OxfordStreet;
   font-weight: bold;
 }
+
 .dark-mode #art2 span,
 .dark-mode #art3 span,
 .dark-mode #art4 span {
   color: var(--palette_dark_accent_main);
 }
+
 @media only screen and (max-width: 600px) {
+
   #art2 span,
   #art3 span,
   #art4 span {
@@ -470,7 +548,9 @@
     margin-bottom: 100px;
   }
 }
+
 @media only screen and (max-width: 600px) {
+
   #art2,
   #art3,
   #art4 {
@@ -479,8 +559,10 @@
     font-size: 1rem;
   }
 }
+
 /*Tablet Device*/
 @media only screen and (max-width: 1024px) {
+
   #art2,
   #art3,
   #art4 {
@@ -489,13 +571,16 @@
     font-size: 1.5rem;
   }
 }
+
 @media only screen and (max-width: 1600px) {
+
   #art2,
   #art3,
   #art4 {
     font-size: 1.5rem;
   }
 }
+
 #blockArt02,
 #blockArt03,
 #blockArt04 {
@@ -504,7 +589,9 @@
   display: flex;
   align-items: center;
 }
+
 @media only screen and (max-width: 600px) {
+
   #blockArt02,
   #blockArt03,
   #blockArt04 {
@@ -513,7 +600,9 @@
     flex-direction: column;
   }
 }
+
 @media only screen and (max-width: 1024px) {
+
   #blockArt02,
   #blockArt03,
   #blockArt04 {
@@ -522,6 +611,7 @@
     flex-direction: column;
   }
 }
+
 #CanvasPerson,
 #CanvasServices,
 #CanvasContact {
@@ -534,18 +624,22 @@
   align-items: center;
   justify-content: center;
 }
+
 #CanvasPerson,
 #CanvasContact {
   right: 0;
   left: auto;
   margin-right: 0;
 }
+
 #CanvasServices {
   right: auto;
   left: 0;
   margin-left: 0;
 }
+
 @media only screen and (max-width: 600px) {
+
   #CanvasPerson,
   #CanvasServices,
   #CanvasContact {
@@ -557,7 +651,9 @@
     margin: 0;
   }
 }
+
 @media only screen and (max-width: 1024px) {
+
   #CanvasPerson,
   #CanvasServices,
   #CanvasContact {
@@ -567,6 +663,22 @@
     position: relative;
     right: auto;
     margin: 0;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+
+  #CanvasPerson,
+  #CanvasContact {
+    right: 0;
+    left: auto;
+    margin-right: 5%;
+  }
+
+  #CanvasServices {
+    right: auto;
+    left: 0;
+    margin-left: 5%;
   }
 }
 

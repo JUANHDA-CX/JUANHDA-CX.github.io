@@ -493,12 +493,12 @@ body.dark-mode {
 
 @font-face {
   font-family: OxfordStreet;
-  src: local("fonts/OxfordStreet.ttf"), url("fonts/OxfordStreet.ttf");
+  src: local("fonts/dosis-latin-wght-normal.woff2"), url("fonts/dosis-latin-wght-normal.woff2");
 }
 
 @font-face {
   font-family: FunnelSans;
-  src: local("fonts/FunnelSans-VariableFont_wght.ttf"), url("fonts/FunnelSans-VariableFont_wght.ttf");
+  src: local("fonts/funnel-sans-latin-wght-normal.woff2"), url("fonts/funnel-sans-latin-wght-normal.woff2");
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;

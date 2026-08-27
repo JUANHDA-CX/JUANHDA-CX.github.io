@@ -21,8 +21,8 @@ _Del concepto a la imagen final con render de alta fidelidad._
 **PARA:**Diseño de producto, arquitectura, videojuegos o impresión 3D.
 **FOR:**Product design, architecture, video games or 3D printing.
 
-> ¿Listo para empezar? Escribinos en [Contacto](../contact.html) y creamos el servicio a tu medida.
-> Ready to start? Write to us at [Contact](../contact.html) and we will create the service tailored for you.
+> ¿Listo para empezar? Escribinos en [Contacto](contact.html) y creamos el servicio a tu medida.
+> Ready to start? Write to us at [Contact](contact.html) and we will create the service tailored for you.
 
 ---
 
@@ -45,8 +45,8 @@ _Identidad que comunica en digital e impreso._
 **PARA:**Emprendedores y pymes.
 **FOR:**Entrepreneurs and SMEs.
 
-> ¿Listo para empezar? Escribinos en [Contacto](../contact.html) y creamos el servicio a tu medida.
-> Ready to start? Write to us at [Contact](../contact.html) and we will create the service tailored for you.
+> ¿Listo para empezar? Escribinos en [Contacto](contact.html) y creamos el servicio a tu medida.
+> Ready to start? Write to us at [Contact](contact.html) and we will create the service tailored for you.
 
 ---
 
@@ -69,8 +69,8 @@ _Ritmo, color y entrega optimizada por plataforma._
 **PARA:**Usuarios y pymes.
 **FOR:**Users and SMEs.
 
-> ¿Listo para empezar? Escribinos en [Contacto](../contact.html) y creamos el servicio a tu medida.
-> Ready to start? Write to us at [Contact](../contact.html) and we will create the service tailored for you.
+> ¿Listo para empezar? Escribinos en [Contacto](contact.html) y creamos el servicio a tu medida.
+> Ready to start? Write to us at [Contact](contact.html) and we will create the service tailored for you.
 
 ---
 
@@ -93,8 +93,8 @@ _Del RAW al arte final listo para imprimir o publicar._
 **PARA:**Usuarios y pymes.
 **FOR:**Users and SMEs.
 
-> ¿Listo para empezar? Escribinos en [Contacto](../contact.html) y creamos el servicio a tu medida.
-> Ready to start? Write to us at [Contact](../contact.html) and we will create the service tailored for you.
+> ¿Listo para empezar? Escribinos en [Contacto](contact.html) y creamos el servicio a tu medida.
+> Ready to start? Write to us at [Contact](contact.html) and we will create the service tailored for you.
 
 ---
 
@@ -117,8 +117,8 @@ _Rápidas, accesibles y pensadas para transmitir._
 **PARA:**Emprendedores y pymes.
 **FOR:**Entrepreneurs and SMEs.
 
-> ¿Listo para empezar? Escribinos en [Contacto](../contact.html) y creamos el servicio a tu medida.
-> Ready to start? Write to us at [Contact](../contact.html) and we will create the service tailored for you.
+> ¿Listo para empezar? Escribinos en [Contacto](contact.html) y creamos el servicio a tu medida.
+> Ready to start? Write to us at [Contact](contact.html) and we will create the service tailored for you.
 
 ---
 
@@ -138,5 +138,5 @@ _Equipos rápidos, seguros y al día._
 **PARA:**Usuarios y pymes.
 **FOR:**Users and SMEs.
 
-> ¿Listo para empezar? Escribinos en [Contacto](../contact.html) y creamos el servicio a tu medida.
-> Ready to start? Write to us at [Contact](../contact.html) and we will create the service tailored for you.
+> ¿Listo para empezar? Escribinos en [Contacto](contact.html) y creamos el servicio a tu medida.
+> Ready to start? Write to us at [Contact](contact.html) and we will create the service tailored for you.
