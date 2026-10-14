@@ -19,7 +19,7 @@
 <p align="center">
   <a href="https://juanhda-cx.github.io/index.html"><img alt="Website status" src="https://img.shields.io/website-up-down-green-red/https/juanhda-cx.github.io.svg?colorA=24292f&colorB=2ea44f"></a>
   <img alt="Version" src="https://img.shields.io/badge/version-3.6-blue?colorA=24292f">
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-green?colorA=24292f&colorB=2ea44f">
+  <img alt="License" src="https://img.shields.io/badge/license-All_Rights_Reserved-red?colorA=24292f">
   <img alt="Stack" src="https://img.shields.io/badge/stack-HTML%20%7C%20CSS%20%7C%20JS%20%7C%20GSAP%20%7C%20Rive-blue?colorA=24292f">
 </p>
 
@@ -140,7 +140,7 @@ The footer version is bumped per release (`Version 3.6` on every page, plus a gi
 
 ## License
 
-[MIT](LICENSE.md) © 2026 JUANHDA CX
+© 2026 JUANHDA CX — All Rights Reserved. See [LICENSE.md](LICENSE.md).
 
 <p align="center">
   <sub>Built with care for the craft — design, 3D, code.</sub>
