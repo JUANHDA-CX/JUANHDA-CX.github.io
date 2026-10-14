@@ -3,3 +3,6 @@ EXTRA/
 .atl/
 .claude/
 docs/
+*.bak
+*.preformat.bak
+skills-lock.json
