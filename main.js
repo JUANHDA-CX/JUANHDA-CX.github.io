@@ -522,8 +522,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".cursor-circle");
+  if (!cursor) return;
 
-  cursor?.classList.remove("active");
+  const SHOW_CLASS = "is-visible";
+  const IDLE_TIMEOUT = 5000; // sin actividad del puntero, se desvanece
+  const WHEEL_GRACE = 200; // ventana para distinguir rueda de barra de scroll
+  const PROGRAMMATIC_SCROLL_GRACE = 1200; // p. ej. botón "volver arriba"
+
+  // Arranca oculto: nada de círculo en la esquina antes del primer movimiento.
+  cursor.classList.remove("active", SHOW_CLASS);
 
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
@@ -533,10 +540,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // Distancia en px para considerar que el círculo alcanzó al mouse
   const arriveThreshold = 0.5;
   let animating = false;
+  let needsSnap = true;
+  let idleTimer = null;
+  // -Infinity = "todavía no hubo evento"; 0 rompía los guards al inicio de la página.
+  let lastWheelTime = -Infinity;
+  let lastClickTime = -Infinity;
 
   function animateCursor() {
     const targetX = mouseX - cursor.offsetWidth / 2;
     const targetY = mouseY - cursor.offsetHeight / 2;
+
+    // Al reaparecer, saltar directo al puntero: nunca animar desde la esquina.
+    if (needsSnap) {
+      cursorX = targetX;
+      cursorY = targetY;
+      needsSnap = false;
+    }
+
     cursorX += (targetX - cursorX) * easingFactor;
     cursorY += (targetY - cursorY) * easingFactor;
     // Agrandado durante el click (scale), posición con easing
@@ -565,26 +585,98 @@ document.addEventListener("DOMContentLoaded", () => {
     animating = false;
   }
 
+  function restartIdleTimer() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(hideCursor, IDLE_TIMEOUT);
+  }
+
+  function showCursor() {
+    if (!cursor.classList.contains(SHOW_CLASS)) {
+      needsSnap = true;
+      cursor.classList.add(SHOW_CLASS);
+    }
+    startCursorLoop();
+    restartIdleTimer();
+  }
+
+  function hideCursor() {
+    clearTimeout(idleTimer);
+    cursor.classList.remove(SHOW_CLASS, "active");
+    stopCursorLoop();
+  }
+
+  // El gutter de la barra de scroll queda fuera del área de contenido.
+  function pointerOverScrollbar(e) {
+    const doc = document.documentElement;
+    return e.clientX >= doc.clientWidth || e.clientY >= doc.clientHeight;
+  }
+
   document.addEventListener("pointerdown", (e) => {
+    if (pointerOverScrollbar(e)) {
+      hideCursor();
+      return;
+    }
     if (e.pointerType === "mouse" || e.pointerType === "pen") {
-      cursor?.classList.add("active");
-      startCursorLoop();
+      lastClickTime = performance.now();
+      showCursor();
+      cursor.classList.add("active");
     } else {
-      cursor?.classList.remove("active");
+      cursor.classList.remove("active");
       stopCursorLoop();
     }
   });
 
   document.addEventListener("pointerup", (e) => {
+    if (pointerOverScrollbar(e)) {
+      hideCursor();
+      return;
+    }
     if (e.pointerType === "mouse" || e.pointerType === "pen") {
-      cursor?.classList.remove("active");
-      stopCursorLoop();
+      lastClickTime = performance.now();
+      cursor.classList.remove("active");
+      // Un frame más para dibujar el scale de vuelta a 1.
+      startCursorLoop();
+      restartIdleTimer();
     }
   });
 
   document.addEventListener("mousemove", (e) => {
+    if (pointerOverScrollbar(e)) {
+      hideCursor();
+      return;
+    }
     mouseX = e.clientX;
     mouseY = e.clientY;
-    startCursorLoop();
+    showCursor();
   });
+
+  window.addEventListener(
+    "wheel",
+    (e) => {
+      if (pointerOverScrollbar(e)) {
+        hideCursor();
+        return;
+      }
+      lastWheelTime = performance.now();
+      // La rueda confirma que el puntero está dentro de la página.
+      showCursor();
+    },
+    { passive: true }
+  );
+
+  // Un scroll sin rueda ni clic reciente viene de la barra de scroll o del
+  // teclado: no hay cursor animado que mostrar.
+  window.addEventListener(
+    "scroll",
+    () => {
+      const now = performance.now();
+      if (now - lastWheelTime < WHEEL_GRACE) return;
+      if (now - lastClickTime < PROGRAMMATIC_SCROLL_GRACE) return;
+      hideCursor();
+    },
+    { passive: true }
+  );
+
+  document.documentElement.addEventListener("mouseleave", hideCursor);
+  window.addEventListener("blur", hideCursor);
 });

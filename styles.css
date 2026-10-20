@@ -1278,15 +1278,24 @@ table tr td {
   background-color: rgba(0, 0, 0, 0.25);
   pointer-events: none;
   z-index: 10000;
-  will-change: outline;
+  opacity: 0;
+  /* Desvanecido lento al ocultarse; el alta usa una transición más corta. */
+  transition: opacity 0.6s ease;
+  will-change: transform, opacity, outline;
   animation: cur 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Solo dispositivos con mouse/lápiz: el círculo sigue al cursor siempre */
+/* Solo dispositivos con mouse/lápiz: el círculo sigue al cursor */
 @media (hover: hover) {
   .cursor-circle {
     display: block;
   }
+}
+
+/* Visible solo cuando el puntero está dentro y activo. */
+.cursor-circle.is-visible {
+  opacity: 1;
+  transition-duration: 0.15s;
 }
 
 .cursor-circle.active {
