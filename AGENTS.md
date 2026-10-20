@@ -31,3 +31,7 @@ At the start of every session, check whether the site's local server is already 
 ## Data Conventions
 
 - `gallery-database.json` drives the gallery. Keep every `category.tags` value lowercase and comma-separated.
+
+## Git and GitHub
+
+- Always push with the `JUANHDA-CX` GitHub account, the repository owner. Before any push, confirm it is active with `gh auth switch --user JUANHDA-CX`; other configured accounts do not have write access to this repository.
