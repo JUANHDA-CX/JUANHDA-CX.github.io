@@ -1856,6 +1856,111 @@ img[alt="www.000webhost.com"] {
   display: none;
 }
 
+/* Gallery tag pills */
+.gallery-tags {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  margin: 0 0 1.75rem;
+  padding: 4px 2rem 4px 10%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery-tags::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-tags__pill {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-height: 40px;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid rgba(0, 0, 0, 0.28);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.gallery-tags__pill:hover {
+  border-color: var(--palette_dark_accent_main);
+  color: var(--palette_dark_accent_main);
+}
+
+.gallery-tags__pill:focus-visible {
+  outline: 2px solid var(--palette_dark_accent_main);
+  outline-offset: 2px;
+}
+
+.gallery-tags__pill[aria-pressed="true"] {
+  background: var(--palette_dark_accent_main);
+  border-color: var(--palette_dark_accent_main);
+  color: #16122a;
+}
+
+body.dark-mode .gallery-tags__pill {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+body.dark-mode .gallery-tags__pill:hover {
+  border-color: var(--palette_dark_accent_main);
+  color: var(--palette_dark_accent_main);
+}
+
+body.dark-mode .gallery-tags__pill[aria-pressed="true"] {
+  border-color: var(--palette_dark_accent_main);
+  color: #16122a;
+}
+
+.grid-container > .hover-wrap.gallery-tag-hidden {
+  display: none;
+}
+
+.gallery-tags-empty {
+  margin: -1rem 0 2rem;
+  padding: 0 10%;
+  font-size: 1rem;
+  opacity: 0.75;
+}
+
+.gallery-tags-empty[hidden] {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .gallery-tags {
+    width: 90%;
+    margin-inline: auto;
+    padding: 4px 0;
+  }
+
+  .gallery-tags-empty {
+    padding: 0;
+  }
+}
+
+@media only screen and (min-width: 2500px) {
+  .gallery-tags {
+    padding-left: 15%;
+  }
+
+  .gallery-tags-empty {
+    padding-left: 15%;
+  }
+}
+
 .grid-itemNO {
   display: none;
 }

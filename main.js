@@ -680,3 +680,305 @@ document.addEventListener("DOMContentLoaded", () => {
   document.documentElement.addEventListener("mouseleave", hideCursor);
   window.addEventListener("blur", hideCursor);
 });
+
+// Gallery tag pills — filtro dinámico por category.tags.
+// Bloque autónomo: solo se activa en la galería y no modifica código existente.
+(() => {
+  const grid = document.querySelector(".grid-container");
+  if (!grid) return;
+
+  const HIDDEN_CLASS = "gallery-tag-hidden";
+  const PENDING_ATTR = "data-src-pending";
+  const ALL_KEY = "__all__";
+
+  // Etiqueta visible por categoría. Para sumar una categoría, agregá una línea
+  // acá. "aliases" hace que variantes del mismo tag caigan en una sola pill.
+  const TAG_LABELS = {
+    archviz: {
+      es: "Arquitectura",
+      en: "Architecture",
+      aliases: ["architecture", "arquitectura"],
+    },
+    furniture: {
+      es: "Mobiliario",
+      en: "Furniture",
+      aliases: ["mobiliario", "muebles"],
+    },
+    product: {
+      es: "Producto",
+      en: "Product",
+      aliases: ["producto", "productos"],
+    },
+    ad: {
+      es: "Publicidad",
+      en: "Advertising",
+      aliases: ["advertising", "publicidad", "anuncios"],
+    },
+    others: {
+      es: "Otros",
+      en: "Others",
+      aliases: ["other", "otros"],
+    },
+  };
+
+  const RESET_LABEL = { es: "Todas", en: "All" };
+  const GROUP_LABEL = { es: "Filtrar por categoría", en: "Filter by category" };
+  const EMPTY_LABEL = {
+    es: "No hay proyectos con esta categoría.",
+    en: "No projects in this category.",
+  };
+
+  // Orden fijo de las pills. Las categorías que no estén acá van al final,
+  // en el orden en que aparecen en el JSON.
+  const CATEGORY_ORDER = ["archviz", "product", "ad", "furniture", "others"];
+
+  const currentLang = () => (document.documentElement.lang === "en" ? "en" : "es");
+  const normalize = (value) => String(value || "").trim().toLowerCase();
+
+  const aliasToCategory = new Map();
+  Object.entries(TAG_LABELS).forEach(([key, entry]) => {
+    aliasToCategory.set(key, key);
+    (entry.aliases || []).forEach((alias) =>
+      aliasToCategory.set(normalize(alias), key)
+    );
+  });
+
+  const resolveCategory = (rawTag) =>
+    aliasToCategory.get(normalize(rawTag)) || normalize(rawTag);
+
+  const labelFor = (categoryKey, rawLabel) => {
+    const entry = TAG_LABELS[categoryKey];
+    return entry ? entry[currentLang()] : rawLabel;
+  };
+
+  const cards = Array.from(
+    document.querySelectorAll(".grid-container > .hover-wrap")
+  )
+    .map((wrapper) => {
+      const img = wrapper.querySelector("img.grid-item[code-id]");
+      if (!img) return null;
+      return {
+        wrapper,
+        img,
+        code: img.getAttribute("code-id"),
+        categories: new Set(),
+      };
+    })
+    .filter(Boolean);
+
+  if (!cards.length) return;
+
+  let categories = [];
+  let activeCategory = null;
+  let row = null;
+  let emptyMessage = null;
+  const buttons = new Map();
+
+  function createButton(categoryKey, text) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "gallery-tags__pill";
+    button.dataset.category = categoryKey;
+    button.textContent = text;
+    button.setAttribute("aria-pressed", "false");
+    button.addEventListener("click", () => selectCategory(categoryKey));
+    buttons.set(categoryKey, button);
+    return button;
+  }
+
+  // Una card oculta que todavía no se cargó pierde data-src: el lazy loader
+  // de gallery.html la salta sin pedir la imagen.
+  function parkCard(img) {
+    if (img.classList.contains("loaded")) return;
+    const pending = img.getAttribute("data-src");
+    if (!pending) return;
+    img.removeAttribute("data-src");
+    img.setAttribute(PENDING_ATTR, pending);
+  }
+
+  function reviveCard(img) {
+    const pending = img.getAttribute(PENDING_ATTR);
+    if (!pending) return;
+    img.removeAttribute(PENDING_ATTR);
+    img.setAttribute("data-src", pending);
+    if (img.classList.contains("loaded")) {
+      img.src = pending;
+      return;
+    }
+    const preload = new Image();
+    preload.decoding = "async";
+    preload.onload = () => {
+      img.src = pending;
+      img.classList.add("loaded");
+    };
+    preload.src = pending;
+  }
+
+  function refreshScroll() {
+    try {
+      if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === "function") {
+        window.ScrollTrigger.refresh();
+      }
+      if (window.ScrollSmoother && typeof window.ScrollSmoother.get === "function") {
+        const smoother = window.ScrollSmoother.get();
+        if (smoother && typeof smoother.refresh === "function") smoother.refresh();
+      }
+    } catch (error) {
+      console.warn("[GalleryTags] No se pudo refrescar el scroll:", error);
+    }
+  }
+
+  function keepPillVisible(button) {
+    if (!row || !button) return;
+    const left = button.offsetLeft;
+    const right = left + button.offsetWidth;
+    if (left < row.scrollLeft) {
+      row.scrollLeft = Math.max(0, left - 8);
+    } else if (right > row.scrollLeft + row.clientWidth) {
+      row.scrollLeft = right - row.clientWidth + 8;
+    }
+  }
+
+  function selectCategory(categoryKey) {
+    const next = categoryKey === ALL_KEY ? null : categoryKey;
+    if (next === activeCategory) return;
+    activeCategory = next;
+
+    buttons.forEach((button, key) => {
+      button.setAttribute(
+        "aria-pressed",
+        String(key === (activeCategory || ALL_KEY))
+      );
+    });
+
+    let visible = 0;
+    cards.forEach((card) => {
+      const matches = !activeCategory || card.categories.has(activeCategory);
+      card.wrapper.classList.toggle(HIDDEN_CLASS, !matches);
+      if (matches) {
+        visible++;
+        reviveCard(card.img);
+      } else {
+        parkCard(card.img);
+      }
+    });
+
+    if (emptyMessage) emptyMessage.hidden = visible > 0;
+    keepPillVisible(buttons.get(activeCategory || ALL_KEY));
+    refreshScroll();
+  }
+
+  function updateLanguage() {
+    if (!row) return;
+    row.setAttribute("aria-label", GROUP_LABEL[currentLang()]);
+    buttons.forEach((button, key) => {
+      if (key === ALL_KEY) {
+        button.textContent = RESET_LABEL[currentLang()];
+        return;
+      }
+      const category = categories.find((item) => item.key === key);
+      button.textContent = labelFor(key, category ? category.raw : key);
+    });
+    if (emptyMessage) emptyMessage.textContent = EMPTY_LABEL[currentLang()];
+    keepPillVisible(buttons.get(activeCategory || ALL_KEY));
+  }
+
+  function buildCategories(data) {
+    const display = new Map();
+    const order = [];
+    const byCode = new Map();
+
+    data.forEach((entry) => {
+      Object.entries(entry).forEach(([code, project]) => {
+        const raw =
+          project && project.category ? project.category.tags : "";
+        const tags = String(raw || "")
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter(Boolean);
+        const keys = [];
+
+        tags.forEach((tag) => {
+          const key = resolveCategory(tag);
+          keys.push(key);
+          if (!display.has(key)) {
+            display.set(key, tag);
+            order.push(key);
+          }
+        });
+
+        byCode.set(code, keys);
+      });
+    });
+
+    return { display, order, byCode };
+  }
+
+  function mount() {
+    row = document.createElement("div");
+    row.className = "gallery-tags";
+    row.setAttribute("role", "group");
+    row.setAttribute("aria-label", GROUP_LABEL[currentLang()]);
+
+    const reset = createButton(ALL_KEY, RESET_LABEL[currentLang()]);
+    reset.setAttribute("aria-pressed", "true");
+    row.appendChild(reset);
+
+    categories.forEach((category) => {
+      row.appendChild(createButton(category.key, labelFor(category.key, category.raw)));
+    });
+
+    emptyMessage = document.createElement("p");
+    emptyMessage.className = "gallery-tags-empty";
+    emptyMessage.setAttribute("role", "status");
+    emptyMessage.textContent = EMPTY_LABEL[currentLang()];
+    emptyMessage.hidden = true;
+
+    grid.before(row);
+    row.after(emptyMessage);
+
+    new MutationObserver(updateLanguage).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["lang"],
+    });
+  }
+
+  fetch("gallery-database.json")
+    .then((response) => {
+      if (!response.ok) throw new Error("HTTP " + response.status);
+      return response.json();
+    })
+    .then((data) => {
+      const { display, order, byCode } = buildCategories(data);
+
+      cards.forEach((card) => {
+        (byCode.get(card.code) || []).forEach((key) =>
+          card.categories.add(key)
+        );
+      });
+
+      if (!order.length) return; // sin tags: la galería queda como está
+
+      const rank = (key) => {
+        const index = CATEGORY_ORDER.indexOf(key);
+        return index === -1 ? CATEGORY_ORDER.length : index;
+      };
+
+      categories = order
+        .map((key, index) => ({
+          key,
+          raw: display.get(key),
+          appearance: index,
+        }))
+        .sort((a, b) => rank(a.key) - rank(b.key) || a.appearance - b.appearance)
+        .map(({ key, raw }) => ({ key, raw }));
+
+      mount();
+    })
+    .catch((error) => {
+      console.warn(
+        "[GalleryTags] No se pudo cargar gallery-database.json:",
+        error
+      );
+    });
+})();

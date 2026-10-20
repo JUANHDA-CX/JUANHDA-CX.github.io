@@ -9,6 +9,9 @@
       },
       "info-t": {
         "title": "Lautaro Condominium"
+      },
+      "category": {
+        "tags": "archviz"
       }
     }
   },
@@ -24,6 +27,9 @@
       },
       "info-t": {
         "title": "Living Space Studio"
+      },
+      "category": {
+        "tags": "archviz"
       }
     }
   },
@@ -39,6 +45,9 @@
       },
       "info-t": {
         "title": "Azure Dawn"
+      },
+      "category": {
+        "tags": "archviz"
       }
     }
   },
@@ -56,6 +65,9 @@
       },
       "info-t": {
         "title": "Oh! Oh! Oreo - POP-UP Stand"
+      },
+      "category": {
+        "tags": "ad"
       }
     }
   },
@@ -73,6 +85,9 @@
       },
       "info-t": {
         "title": "Fractal Alligator Handbag"
+      },
+      "category": {
+        "tags": "product"
       }
     }
   },
@@ -88,6 +103,9 @@
       },
       "info-t": {
         "title": "Eclectic Cuisine"
+      },
+      "category": {
+        "tags": ""
       }
     }
   },
@@ -101,6 +119,9 @@
       },
       "info-t": {
         "title": "Ope Character"
+      },
+      "category": {
+        "tags": "other"
       }
     }
   },
@@ -114,6 +135,9 @@
       },
       "info-t": {
         "title": "KAWA Grape Coralrose"
+      },
+      "category": {
+        "tags": "product"
       }
     }
   },
@@ -129,6 +153,9 @@
       },
       "info-t": {
         "title": "ZAGA SELVAGGIO"
+      },
+      "category": {
+        "tags": "product"
       }
     }
   },
@@ -146,6 +173,9 @@
       },
       "info-t": {
         "title": "Interior Furniture PROPS - VOL.1"
+      },
+      "category": {
+        "tags": "furniture"
       }
     }
   },
@@ -163,6 +193,9 @@
       },
       "info-t": {
         "title": "Silver Clay"
+      },
+      "category": {
+        "tags": "archviz, furniture"
       }
     }
   },
@@ -176,6 +209,9 @@
       },
       "info-t": {
         "title": "Rode Tulp Hotel"
+      },
+      "category": {
+        "tags": ""
       }
     }
   },
@@ -191,6 +227,9 @@
       },
       "info-t": {
         "title": "Keyboard Ichigo Cream"
+      },
+      "category": {
+        "tags": "product"
       }
     }
   },
@@ -204,6 +243,9 @@
       },
       "info-t": {
         "title": "Yureka Mignon Specialita"
+      },
+      "category": {
+        "tags": "product"
       }
     }
   },
@@ -219,6 +261,9 @@
       },
       "info-t": {
         "title": "Woody Snow Bedroom"
+      },
+      "category": {
+        "tags": "archviz, furniture"
       }
     }
   },
@@ -232,6 +277,9 @@
       },
       "info-t": {
         "title": "Kea Charlotte Apartment"
+      },
+      "category": {
+        "tags": "archviz"
       }
     }
   },
@@ -247,6 +295,9 @@
       },
       "info-t": {
         "title": "Pipeline Hammer Handmade"
+      },
+      "category": {
+        "tags": "product"
       }
     }
   },
@@ -262,6 +313,9 @@
       },
       "info-t": {
         "title": "Cosmograph Daytona Mega Edition"
+      },
+      "category": {
+        "tags": "product"
       }
     }
   },
@@ -275,6 +329,9 @@
       },
       "info-t": {
         "title": "Cherry House"
+      },
+      "category": {
+        "tags": "archviz"
       }
     }
   },
@@ -288,6 +345,9 @@
       },
       "info-t": {
         "title": "Fairfield Breeze Wood"
+      },
+      "category": {
+        "tags": "archviz, furniture"
       }
     }
   },
@@ -301,6 +361,9 @@
       },
       "info-t": {
         "title": "Hydrogen Yawarakai Hana"
+      },
+      "category": {
+        "tags": "product"
       }
     }
   },
@@ -314,6 +377,9 @@
       },
       "info-t": {
         "title": "Condensed Stylized Twilight Sea"
+      },
+      "category": {
+        "tags": "other"
       }
     }
   },
@@ -327,6 +393,9 @@
       },
       "info-t": {
         "title": "Counterposition Interior Bedroom"
+      },
+      "category": {
+        "tags": "archviz, furniture"
       }
     }
   },
@@ -340,6 +409,9 @@
       },
       "info-t": {
         "title": "Mégalomanie - AMBRE D’HIVER"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-660": {
@@ -351,6 +423,9 @@
       },
       "info-t": {
         "title": "Bombastic Hug"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-748": {
@@ -362,6 +437,9 @@
       },
       "info-t": {
         "title": "Italian Restaurant, A Culinary Journey"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-986": {
@@ -373,6 +451,9 @@
       },
       "info-t": {
         "title": "Soda Fresh"
+      },
+      "category": {
+        "tags": "product, ad"
       }
     },
     "code-746": {
@@ -386,6 +467,9 @@
       },
       "info-t": {
         "title": "Telescope Mega Star U-01"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-631": {
@@ -397,6 +481,9 @@
       },
       "info-t": {
         "title": "Red Formation"
+      },
+      "category": {
+        "tags": "other"
       }
     }
   },
@@ -410,6 +497,9 @@
       },
       "info-t": {
         "title": "Tree Fallen - [Type: Willow]"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-983": {
@@ -421,6 +511,9 @@
       },
       "info-t": {
         "title": "Aisle in The DEPTHS"
+      },
+      "category": {
+        "tags": "archviz, other"
       }
     },
     "code-851": {
@@ -434,6 +527,9 @@
       },
       "info-t": {
         "title": "House Bluebright"
+      },
+      "category": {
+        "tags": "archviz"
       }
     },
     "code-623": {
@@ -447,6 +543,9 @@
       },
       "info-t": {
         "title": "Fennec Weapon - [KRISS Vector]"
+      },
+      "category": {
+        "tags": "product"
       }
     }
   },
@@ -460,6 +559,9 @@
       },
       "info-t": {
         "title": "Mushroom Iridescence"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-017": {
@@ -471,6 +573,9 @@
       },
       "info-t": {
         "title": "Summer Camp"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-023": {
@@ -484,6 +589,9 @@
       },
       "info-t": {
         "title": "Turntable vintage"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-441": {
@@ -495,6 +603,9 @@
       },
       "info-t": {
         "title": "Kitchen Interior"
+      },
+      "category": {
+        "tags": "archviz, furniture"
       }
     }
   },
@@ -510,6 +621,9 @@
       },
       "info-t": {
         "title": "Ancient armored medieval shield"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-274": {
@@ -521,6 +635,9 @@
       },
       "info-t": {
         "title": "Antique Lamp"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-259": {
@@ -534,6 +651,9 @@
       },
       "info-t": {
         "title": "Warm Audio WA-47 (MCX)"
+      },
+      "category": {
+        "tags": "product"
       }
     }
   },
@@ -547,6 +667,9 @@
       },
       "info-t": {
         "title": "Rebot_003"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-041": {
@@ -558,6 +681,9 @@
       },
       "info-t": {
         "title": "TreeMix"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-003": {
@@ -569,6 +695,9 @@
       },
       "info-t": {
         "title": "Flowery sofa"
+      },
+      "category": {
+        "tags": "furniture, product"
       }
     },
     "code-256": {
@@ -580,6 +709,9 @@
       },
       "info-t": {
         "title": "Ancient ax with a medieval and fantastic style"
+      },
+      "category": {
+        "tags": "product"
       }
     }
   },
@@ -593,6 +725,9 @@
       },
       "info-t": {
         "title": "Electric Guitar Re"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-899": {
@@ -604,6 +739,9 @@
       },
       "info-t": {
         "title": "The Misty Altar"
+      },
+      "category": {
+        "tags": "archviz, other"
       }
     },
     "code-033": {
@@ -615,6 +753,9 @@
       },
       "info-t": {
         "title": "Crystal Snowball 21"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-699": {
@@ -628,6 +769,9 @@
       },
       "info-t": {
         "title": "The Ring of foundation"
+      },
+      "category": {
+        "tags": "other"
       }
     }
   },
@@ -641,6 +785,9 @@
       },
       "info-t": {
         "title": "Ancient golden compass"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-236": {
@@ -654,6 +801,9 @@
       },
       "info-t": {
         "title": "Planet Decima-9"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-452": {
@@ -665,6 +815,9 @@
       },
       "info-t": {
         "title": "Pepper and salt"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-401": {
@@ -676,6 +829,9 @@
       },
       "info-t": {
         "title": "Main Row"
+      },
+      "category": {
+        "tags": "archviz"
       }
     }
   },
@@ -689,6 +845,9 @@
       },
       "info-t": {
         "title": "Droid-12"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-096": {
@@ -700,6 +859,9 @@
       },
       "info-t": {
         "title": "Diamond>"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-091": {
@@ -713,6 +875,9 @@
       },
       "info-t": {
         "title": "Minigun-Machine"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-864": {
@@ -724,6 +889,9 @@
       },
       "info-t": {
         "title": "Christmas Tree"
+      },
+      "category": {
+        "tags": "product, other"
       }
     }
   },
@@ -737,6 +905,9 @@
       },
       "info-t": {
         "title": "Wind Power Plant"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-637": {
@@ -748,6 +919,9 @@
       },
       "info-t": {
         "title": "Miwom Pavilion"
+      },
+      "category": {
+        "tags": "archviz, other"
       }
     },
     "code-054": {
@@ -759,6 +933,9 @@
       },
       "info-t": {
         "title": "Ball Soccer"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-038": {
@@ -770,6 +947,9 @@
       },
       "info-t": {
         "title": "Teddy's playroom"
+      },
+      "category": {
+        "tags": "archviz"
       }
     }
   },
@@ -783,6 +963,9 @@
       },
       "info-t": {
         "title": "Retro Sci-Fi Weapon"
+      },
+      "category": {
+        "tags": "product, other"
       }
     },
     "code-485": {
@@ -794,6 +977,9 @@
       },
       "info-t": {
         "title": "Ship in port"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-141": {
@@ -807,6 +993,9 @@
       },
       "info-t": {
         "title": "A light of hope"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-332": {
@@ -818,6 +1007,9 @@
       },
       "info-t": {
         "title": "Gingerbread House"
+      },
+      "category": {
+        "tags": "other"
       }
     }
   },
@@ -831,6 +1023,9 @@
       },
       "info-t": {
         "title": "Pumpkin in the dark"
+      },
+      "category": {
+        "tags": "other"
       }
     }
   },
@@ -844,6 +1039,9 @@
       },
       "info-t": {
         "title": "Japanese Entrance"
+      },
+      "category": {
+        "tags": "other"
       }
     }
   },
@@ -861,6 +1059,9 @@
       },
       "info-t": {
         "title": "Segment-Camera-CX"
+      },
+      "category": {
+        "tags": "product"
       }
     },
     "code-364": {
@@ -872,6 +1073,9 @@
       },
       "info-t": {
         "title": "Bathroom Gold"
+      },
+      "category": {
+        "tags": "archviz"
       }
     },
     "code-261": {
@@ -883,6 +1087,9 @@
       },
       "info-t": {
         "title": "Environment Cabin Poly"
+      },
+      "category": {
+        "tags": "other"
       }
     }
   },
@@ -896,6 +1103,9 @@
       },
       "info-t": {
         "title": "Skinned Heart"
+      },
+      "category": {
+        "tags": "other"
       }
     },
     "code-922": {
@@ -907,6 +1117,9 @@
       },
       "info-t": {
         "title": "Coffee House at dusk"
+      },
+      "category": {
+        "tags": "other"
       }
     }
   }
