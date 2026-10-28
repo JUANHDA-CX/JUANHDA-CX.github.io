@@ -25,6 +25,7 @@ function myFunction() {
   document.documentElement.classList.toggle("dark-mode", element.classList.contains("dark-mode"));
 
   if (window.updateSnowTheme) window.updateSnowTheme();
+  if (window.updateBatTheme) window.updateBatTheme();
 }
 
 window.onload = function () {
@@ -63,6 +64,7 @@ window.onload = function () {
   document.documentElement.classList.toggle("dark-mode", element.classList.contains("dark-mode"));
 
   if (window.updateSnowTheme) window.updateSnowTheme();
+  if (window.updateBatTheme) window.updateBatTheme();
 };
 
 document.addEventListener("DOMContentLoaded", () => {

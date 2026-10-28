@@ -33,7 +33,7 @@
 - **Flash-free dark mode.** The theme is painted on `<body>` before first paint, so the dark palette never flashes — regardless of connection speed.
 - **A gallery that behaves like an app.** Behance-backed 3D portfolio with a full viewer: exponential wheel zoom anchored to the cursor, Escape/background close, race-safe variant switching and instant second visits via cached images.
 - **Smooth scrolling everywhere.** GSAP ScrollSmoother across the site. The gallery viewer lives *outside* the smooth-scroll wrapper, so fixed positioning works without ever killing or recreating the smoother — no scroll jumps.
-- **Crafted details.** Custom cursor that follows only mouse/pen devices, click sounds that gate navigation, a loader that hides when the page is functional (not when the last image downloads), and a winter snow effect on canvas.
+- **Crafted details.** Custom cursor that follows only mouse/pen devices, click sounds that gate navigation, a loader that hides when the page is functional (not when the last image downloads), and seasonal canvas effects: winter snow and a Halloween bat swarm.
 - **SEO-ready.** Canonical URLs, Open Graph tags, `robots.txt` and `sitemap.xml` for search engines.
 
 ## Why this site exists
@@ -82,6 +82,7 @@ Portfolio work used to live scattered across Behance, with no single place to sh
     ├── anim.js                     # GSAP scroll effects and parallax
     ├── menuMobile.js               # Mobile navigation
     ├── snowflake.js                # Winter canvas snow effect
+    ├── batSwarm.js                 # Halloween canvas bat swarm
     ├── gallery-database.json       # Behance project data for the gallery
     ├── robots.txt / sitemap.xml    # Search engine files
     ├── icons/                      # Brand icons and favicons
