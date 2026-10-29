@@ -4,10 +4,6 @@
 (function () {
   if (document.getElementById("canvas-murcielagos-halloween")) return;
 
-  const prefersReducedMotion =
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   const isMobile = window.innerWidth < 768;
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
@@ -82,15 +78,6 @@
 
   function updateTheme() {
     currentImage = getThemeImage();
-
-    // Reduced motion keeps a single static frame, so a theme change redraws it.
-    if (prefersReducedMotion && bats.length) renderStatic();
-  }
-
-  function renderStatic() {
-    ctx.clearRect(0, 0, cssWidth, cssHeight);
-
-    for (let i = 0; i < bats.length; i++) bats[i].draw();
   }
 
   // Global hook called from the theme toggle in main.js.
@@ -114,8 +101,6 @@
     canvas.width = Math.floor(cssWidth * dpr);
     canvas.height = Math.floor(cssHeight * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    if (prefersReducedMotion && bats.length) renderStatic();
   }
 
   // --- Clase Murciélago ---
@@ -285,8 +270,7 @@
 
   // --- Eventos y Control ---
   function start() {
-    if (running || viewerPaused || prefersReducedMotion || document.hidden)
-      return;
+    if (running || viewerPaused || document.hidden) return;
 
     running = true;
     lastTime = performance.now();
@@ -363,8 +347,7 @@
       { passive: true }
     );
 
-    if (prefersReducedMotion) renderStatic();
-    else start();
+    start();
   }
 
   if (document.readyState === "loading") {
