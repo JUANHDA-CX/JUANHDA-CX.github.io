@@ -51,6 +51,8 @@
 
     // Stacking: 9999 flies above the page like the snow, lower it to fly behind content.
     zIndex: 9999,
+    // The gallery viewer backdrop sits at z-index 3, so the swarm drops behind it.
+    viewerZIndex: 2,
   };
 
   let canvas, ctx, cssWidth, cssHeight;
@@ -66,6 +68,7 @@
   let running = false;
   let rafId = null;
   let resizeTimer = null;
+  let viewerPaused = false;
 
   // --- Gestión de Tema ---
   function getThemeImage() {
@@ -265,20 +268,42 @@
   }
 
   // --- Eventos y Control ---
+  function start() {
+    if (running || viewerPaused || document.hidden) return;
+
+    running = true;
+    lastTime = performance.now();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function stop() {
+    if (!running) return;
+
+    running = false;
+    cancelAnimationFrame(rafId);
+  }
+
   function onResize() {
     if (resizeTimer) clearTimeout(resizeTimer);
     resizeTimer = setTimeout(resize, 200);
   }
 
   function onVisibilityChange() {
-    if (document.hidden) {
-      running = false;
-      cancelAnimationFrame(rafId);
-    } else {
-      running = true;
-      lastTime = performance.now();
-      rafId = requestAnimationFrame(loop);
-    }
+    if (document.hidden) stop();
+    else start();
+  }
+
+  // The gallery viewer dispatches these events when it opens and closes.
+  function onViewerOpen() {
+    viewerPaused = true;
+    if (canvas) canvas.style.zIndex = config.viewerZIndex;
+    stop();
+  }
+
+  function onViewerClose() {
+    viewerPaused = false;
+    if (canvas) canvas.style.zIndex = config.zIndex;
+    start();
   }
 
   // --- Inicialización ---
@@ -310,6 +335,8 @@
     document.addEventListener("visibilitychange", onVisibilityChange, {
       passive: true,
     });
+    document.addEventListener("viewerOpen", onViewerOpen, { passive: true });
+    document.addEventListener("viewerClose", onViewerClose, { passive: true });
 
     window.addEventListener(
       "storage",
@@ -319,9 +346,7 @@
       { passive: true }
     );
 
-    running = true;
-    lastTime = performance.now();
-    rafId = requestAnimationFrame(loop);
+    start();
   }
 
   if (document.readyState === "loading") {
