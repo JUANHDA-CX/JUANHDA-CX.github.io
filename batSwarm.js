@@ -7,7 +7,6 @@
   const prefersReducedMotion =
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReducedMotion) return;
 
   const isMobile = window.innerWidth < 768;
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -72,12 +71,26 @@
 
   // --- Gestión de Tema ---
   function getThemeImage() {
-    const theme = localStorage.getItem("theme") || "light";
-    return theme === "dark" ? imgDark : imgLight;
+    // The dark-mode class is painted before first paint, while localStorage is
+    // only written on window.onload: read the class so a first visit is right.
+    const isDark =
+      document.documentElement.classList.contains("dark-mode") ||
+      (document.body && document.body.classList.contains("dark-mode"));
+
+    return isDark ? imgDark : imgLight;
   }
 
   function updateTheme() {
     currentImage = getThemeImage();
+
+    // Reduced motion keeps a single static frame, so a theme change redraws it.
+    if (prefersReducedMotion && bats.length) renderStatic();
+  }
+
+  function renderStatic() {
+    ctx.clearRect(0, 0, cssWidth, cssHeight);
+
+    for (let i = 0; i < bats.length; i++) bats[i].draw();
   }
 
   // Global hook called from the theme toggle in main.js.
@@ -101,6 +114,8 @@
     canvas.width = Math.floor(cssWidth * dpr);
     canvas.height = Math.floor(cssHeight * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    if (prefersReducedMotion && bats.length) renderStatic();
   }
 
   // --- Clase Murciélago ---
@@ -231,8 +246,9 @@
     }
 
     draw() {
-      if (!currentImage || !currentImage.complete || !currentImage.naturalWidth)
-        return;
+      // WebKit reports naturalWidth 0 for SVG images without intrinsic size,
+      // so completeness is the only portable guard.
+      if (!currentImage || !currentImage.complete) return;
 
       ctx.save();
       ctx.globalAlpha = this.alpha;
@@ -269,7 +285,8 @@
 
   // --- Eventos y Control ---
   function start() {
-    if (running || viewerPaused || document.hidden) return;
+    if (running || viewerPaused || prefersReducedMotion || document.hidden)
+      return;
 
     running = true;
     lastTime = performance.now();
@@ -346,7 +363,8 @@
       { passive: true }
     );
 
-    start();
+    if (prefersReducedMotion) renderStatic();
+    else start();
   }
 
   if (document.readyState === "loading") {
