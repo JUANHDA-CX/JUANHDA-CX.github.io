@@ -32,6 +32,18 @@ At the start of every session, check whether the site's local server is already 
 
 - `gallery-database.json` drives the gallery. Keep every `category.tags` value lowercase and comma-separated.
 
+## Theme and Color Palettes
+
+- The light theme has four palettes, one per page. The palette class lives on `<body>` and defines a base background plus an accent:
+  - `palette_one` → `index.html` — background `#ffe9e9`, accent `#ffd3d3` (`--palette_one`, `--palette_one_accent`).
+  - `palette_two` → `services.html` — background `#dfddff`, accent `#b8b9ff` (`--palette_two`, `--palette_two_accent`).
+  - `palette_three` → `gallery.html` — background `#ddffe4`, accent `#a7ffba` (`--palette_three`, `--palette_three_accent`).
+  - `palette_four` → `contact.html` — background `#fff3be`, accent `#ffdd80` (`--palette_four`, `--palette_four_accent`).
+- The light palette variables are defined in `:root` in `styles.css`. `styles.css` sets the `palette_one` body background; `services.css`, `gallery.css`, and `contact.css` set the body background for their page palette. Use the `--palette_*` variables instead of hardcoding these colors.
+- The accent variables drive page-level accents such as the nav backdrop, mobile menu, theme switch, and footer link hovers.
+- The fifth palette is the dark theme: `--palette_dark`, `--palette_dark_accent_main` (purple accent), `--palette_dark_accent_one`, and `--palette_dark_accent_two`. It is not a page class; `myFunction()` toggles `body.dark-mode` (mirrored on `<html>`) and persists the choice in `localStorage.theme`.
+- Keep each page's `<meta id="theme-color-meta" data-light-color="...">` in sync with its accent; dark mode sets the browser bar to `hsl(250, 25%, 25%)`.
+
 ## Git and GitHub
 
 - Always push with the `JUANHDA-CX` GitHub account, the repository owner. Before any push, confirm it is active with `gh auth switch --user JUANHDA-CX`; other configured accounts do not have write access to this repository.
